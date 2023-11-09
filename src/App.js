@@ -1,13 +1,13 @@
 import React from 'react';
-
 import './translations/i18n';
-
+import Footer from './components/Footer/Footer';
 
 function App() {
-  return (
-    <div>
-    </div>
-  );
+	return (
+		<>
+			<Footer />
+		</>
+	);
 }
 
 export default App;
