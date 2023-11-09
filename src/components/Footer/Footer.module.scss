@@ -1,0 +1,132 @@
+@font-face {
+	font-family: 'Poppins-Regular';
+	src: local('Poppins-Regular'), url('../../assets/fonts/Poppins-Regular.ttf') format('ttf');
+	font-weight: regular;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Poppins-Medium';
+	src: local('Poppins-Medium'), url('../../assets/fonts/Poppins-Medium.ttf') format('ttf');
+	font-weight: medium;
+	font-style: normal;
+}
+
+.footer {
+	position: absolute;
+	bottom: 0;
+	background-color: #f8f9fb;
+	width: 100%;
+	.container {
+		margin: 0 auto;
+		width: 100%;
+		max-width: 1270px;
+		padding: 54px 10px 47px;
+	}
+}
+
+.footer_inner {
+	display: flex;
+	justify-content: space-between;
+	.footer_col_left {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		height: 100%;
+		min-height: 379px;
+	}
+	.footer_col_right {
+		display: flex;
+	}
+}
+
+.footer_title {
+	font-size: 20px;
+	margin-bottom: 16px;
+	color: #03091c;
+	font-family: 'Poppins-Medium', sans-serif;
+	line-height: 32px;
+}
+
+.footer_logo {
+	max-width: 235px;
+	max-height: 95px;
+	margin-top: 10px;
+	img {
+		width: 100%;
+		height: 100%;
+	}
+}
+
+.footer_info {
+	width: 100%;
+	min-width: 410px;
+	padding: 3px;
+	&_nav {
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		&_item a {
+			font-size: 14px;
+			color: #caccd1;
+			&:hover {
+				color: aquamarine;
+			}
+		}
+		&_item {
+			color: #caccd1;
+			font-size: 14px;
+			font-family: 'Poppins-Regular', sans-serif;
+		}
+	}
+}
+
+.footer_menu {
+	margin-right: 17rem;
+	padding: 8px;
+	&_nav {
+		&_item a {
+			color: #0d101d;
+			font-size: 18px;
+			font-family: 'Poppins-Regular', sans-serif;
+			margin-top: 8px;
+			a:hover {
+				color: aquamarine;
+			}
+		}
+	}
+}
+
+.footer_contacts {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: 8px 8px 0;
+	&_nav {
+		&_item {
+			color: #0d101d;
+			font-size: 18px;
+			font-family: 'Poppins-Regular', sans-serif;
+			margin-top: 8px;
+		}
+	}
+}
+
+.footer_contacts {
+	&_socmedia {
+		display: flex;
+		padding: 3px;
+		&_item {
+			width: 24px;
+			height: 24px;
+			margin-right: 16px;
+			&:last-child {
+				margin-right: 0;
+			}
+			img:hover {
+				width: 30px;
+				height: 30px;
+			}
+		}
+	}
+}
