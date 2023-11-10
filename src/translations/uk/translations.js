@@ -1,4 +1,5 @@
 export const TRANSLATIONS_UK = {
+	heading: "Explore advice, ideas, and insights",
 	textFooter: {
 		menu: 'Меню',
 		home: 'Головна',
