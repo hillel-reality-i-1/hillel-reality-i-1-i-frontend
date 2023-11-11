@@ -1,0 +1,82 @@
+// colors
+$color-gray: #fdfeff;
+$color-gray10: #f8f9fb;
+$color-gray20: #eeeeef;
+$color-gray30: #dbdbdd;
+$color-gray40: #caccd1;
+$color-gray50: #47474f;
+$color-gray60: #2e3239;
+$color-gray70: #0d101d;
+$color-gray80: #03091c;
+
+$color-primary: #dee5fe;
+$color-primary10: #a5bcfe;
+$color-primary20: #3989ec;
+$color-primary30base: #126fe1;
+$color-primary40: #094da0;
+$color-primary50: #032e64;
+$color-primary60: #01112d;
+
+$color-secondaryYellow: #ffd100;
+
+$color-systemSuccess: #228326;
+$color-systemError: #b3261e;
+
+// fonts
+@font-face {
+	font-family: 'Poppins-Regular';
+	src: local('Poppins-Regular'), url('../assets/fonts/Poppins-Regular.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Poppins-Medium';
+	src: local('Poppins-Medium'), url('../assets/fonts/Poppins-Medium.woff2') format('woff2');
+	font-weight: 500;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Poppins-SemiBold';
+	src: local('Poppins-SemiBold'), url('../assets/fonts/Poppins-SemiBold.woff2') format('woff2');
+	font-weight: 600;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Poppins-Bold';
+	src: local('Poppins-Bold'), url('../assets/fonts/Poppins-Bold.woff2') format('woff2');
+	font-weight: 700;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Inter-Regular';
+	src: local('Inter-Regular'), url('../assets/fonts/Inter-Regular.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Inter-Medium';
+	src: local('Inter-Medium'), url('../assets/fonts/Inter-Medium.woff2') format('woff2');
+	font-weight: 500;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Inter-SemiBold';
+	src: local('Inter-SemiBold'), url('../assets/fonts/Inter-SemiBold.woff2') format('woff2');
+	font-weight: 600;
+	font-style: normal;
+}
+
+$font-p-regular: 'Poppins-Regular', sans-serif;
+$font-p-medium: 'Poppins-Medium', sans-serif;
+$font-p-semiBold: 'Poppins-SemiBold', sans-serif;
+$font-p-bold: 'Poppins-Bold', sans-serif;
+
+$font-i-regular: 'Inter-Regular', sans-serif;
+$font-i-medium: 'Inter-Medium', sans-serif;
+$font-i-SemiBold: 'Inter-SemiBold', sans-serif;

@@ -1,10 +1,13 @@
 import React from 'react';
+
 import { useTranslation } from 'react-i18next';
-import styles from './Footer.module.scss';
 import '../../translations/i18n';
+
 import instagram from '../../assets/img/icons/icons-footer/instagram.svg';
 import facebook from '../../assets/img/icons/icons-footer/facebook.svg';
 import footer_logo from '../../assets/img/icons/logo/footer_logo.svg';
+
+import styles from './Footer.module.scss';
 
 const Footer = () => {
 	const { t } = useTranslation();
@@ -21,20 +24,18 @@ const Footer = () => {
 								/>
 							</a>
 						</div>
-						<div className={styles.footer_info}>
-							<ul className={styles.footer_info_nav}>
-								<li className={styles.footer_info_nav_item}>
-									<a href='/'>{t('textFooter.terms')}</a>
-								</li>
-								<li className={styles.footer_info_nav_item}>
-									<a href='/'>{t('textFooter.privacy')}</a>
-								</li>
-								<li className={styles.footer_info_nav_item}>
-									<a href='/'>{t('textFooter.help')}</a>
-								</li>
-								<li className={styles.footer_info_nav_item}>&copy; 2023 U-Help</li>
-							</ul>
-						</div>
+						<ul className={styles.footer_info}>
+							<li className={styles.footer_info_item}>
+								<a href='/'>{t('textFooter.terms')}</a>
+							</li>
+							<li className={styles.footer_info_item}>
+								<a href='/'>{t('textFooter.privacy')}</a>
+							</li>
+							<li className={styles.footer_info_item}>
+								<a href='/'>{t('textFooter.help')}</a>
+							</li>
+							<li className={styles.footer_info_item}>&copy; 2023 U-Help</li>
+						</ul>
 					</div>
 					<div className={styles.footer_col_right}>
 						<div className={styles.footer_menu}>
@@ -58,8 +59,12 @@ const Footer = () => {
 							<div>
 								<h5 className={styles.footer_title}>{t('textFooter.contacts')}</h5>
 								<ul className={styles.footer_menu_nav}>
-									<li className={styles.footer_contacts_nav_item}>+3800000000</li>
-									<li className={styles.footer_contacts_nav_item}>uhelp@gmail.com</li>
+									<li className={styles.footer_contacts_nav_item}>
+										<a href='/'>+3800000000</a>
+									</li>
+									<li className={styles.footer_contacts_nav_item}>
+										<a href='/'>uhelp@gmail.com</a>
+									</li>
 								</ul>
 							</div>
 							<ul className={styles.footer_contacts_socmedia}>
