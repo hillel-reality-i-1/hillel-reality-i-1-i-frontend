@@ -1,59 +1,57 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
-import './Header.scss';
-import './reset.scss'
+import '../../translations/i18n';
+import logo from '../../assets/img/icons/logo/header_logo.svg'
+import bellIcon from '../../assets/img/icons/icons-header/bell.svg'
 
-import logo from './logoforheader.svg'
-import bellIcon from './Icon.svg'
+import styles from './Header.module.scss';
 
-function Header() {
-
-  return (
-
-    <header className='header'>
-        <a className="header_logo" href="/">
-            <img src={logo} alt="header logo" />
-        </a>
-        <nav className="header_navigation">
-            <ul className="navigation_menu">
-                <li className="menu_item">
-                    <a className="item_link"  href="/main">
-                        Main
-                    </a>
-                </li>
-                <li className="menu_item">
-                    <a className="item_link"  href="/map">
-                        Map
-                    </a>
-                </li>
-                <li className="menu_item">
-                    <a className="item_link"  href="/events">
-                        Events
-                    </a>
-                </li>
-                <li className="menu_item">
-                    <a className="item_link" href="/faq">
-                        FAQ
-                    </a>
-                </li>
-            </ul>
-            <div className="navigation_button">
-                <a href="/writepost" className="button_link">
-                    Write a post
-                </a>
-            </div>
-            <div className="navigation_account">
-                <div className="account_bell">
-                    <a className="bell_link" href="/bell">
-                        <img className="bell_icon" src={bellIcon} alt="bell icon" />
+export default function Header() {
+    const { t } = useTranslation();
+    return (
+        <header className={styles.header}>
+            <a className={styles.header_logo} href="/">
+                <img src={logo} alt="header logo" />
+            </a>
+            <nav className={styles.header_navigation}>
+                <ul className={styles.navigation_menu}>
+                    <li className={styles.menu_item}>
+                        <a className={styles.item_link} href="/main">
+                            {t('textHeader.main')}
+                        </a>
+                    </li>
+                    <li className={styles.menu_item}>
+                        <a className={styles.item_link} href="/map">
+                            {t('textHeader.map')}
+                        </a>
+                    </li>
+                    <li className={styles.menu_item}>
+                        <a className={styles.item_link} href="/events">
+                            {t('textHeader.events')}
+                        </a>
+                    </li>
+                    <li className={styles.menu_item}>
+                        <a className={styles.item_link} href="/faq">
+                            {t('textHeader.faq')}
+                        </a>
+                    </li>
+                </ul>
+                <div className={styles.navigation_button}>
+                    <a href="/writepost" className={styles.button_link}>
+                        {t('textHeader.write_a_post')}
                     </a>
                 </div>
-                <a className="account_profile" href="/profile">
-                </a>
-            </div>
-      </nav>
-    </header>
-  );
+                <div className={styles.navigation_account}>
+                    <div className={styles.account_bell}>
+                        <a className={styles.bell_link} href="/bell">
+                            <img className={styles.bell_icon} src={bellIcon} alt="bell icon" />
+                        </a>
+                    </div>
+                    <a className={styles.account_profile} href="/profile">
+                    </a>
+                </div>
+            </nav>
+        </header>
+    );
 }
-
-export default Header;
