@@ -5,9 +5,9 @@ import './translations/i18n';
 
 function App() {
   return (
-    <div>
+    <>
       <HomePage/>
-    </div>
+    </>
   );
 }
 
