@@ -1,5 +1,5 @@
 export const TRANSLATIONS_UK = {
-	heading: "Explore advice, ideas, and insights",
+	heading: 'Explore advice, ideas, and insights',
 	textHeader: {
 		main: 'Меню',
 		map: 'Карта',
@@ -17,5 +17,23 @@ export const TRANSLATIONS_UK = {
 		terms: 'Умови',
 		privacy: 'Політика Конфіденційності',
 		help: 'Допомога',
+	},
+	textSignUp: {
+		signUpTo: 'Зареєструватися в',
+		signUpDescription:
+			'Зареєструйтеся, щоб отримати можливість обмінюватися досвідом, спілкуватися з іншими учасниками тощо',
+		signUpWithGoogle: 'Зареєструватися в Google',
+		or: 'або',
+		signUpWithEmail: 'Зареєструватися за Email',
+		warningAgreement: 'Продовжуючи, ви погоджуєтеся з нашими',
+		termsAndPrivacy: 'Умови та Політика конфіденційності',
+		alreadyHaveAnAccount: 'Вже є аккаунт?',
+		signIn: 'Увійти',
+		password: 'Пароль',
+		signUp: 'Зареєструватися',
+		email: 'Пошта',
+		confirmPassword: 'Підтвердити пароль',
+		agree: 'Я згоден з ',
+		conditions: 'положеннями та умовами',
 	},
 };

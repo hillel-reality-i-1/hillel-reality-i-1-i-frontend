@@ -1,0 +1,46 @@
+@import '../../../styles/constans.scss';
+
+:global {
+	.ant-modal-root {
+		.ant-modal {
+			.ant-checkbox + span {
+				display: flex;
+			}
+			&-close {
+				&:hover {
+					background-color: inherit;
+				}
+				top: 40px;
+				right: 40px;
+				svg:hover * {
+					fill: $color-primary20;
+				}
+			}
+			&-content {
+				background-color: $color-gray;
+				border-radius: 24px;
+				padding: 120px 80px 74px;
+
+				.ant-modal-title {
+					font-family: $font-p-semiBold;
+					font-size: 28px;
+					line-height: 130%;
+					text-align: center;
+					color: $color-gray80;
+				}
+			}
+		}
+	}
+}
+
+.description {
+	font-family: $font-p-regular;
+	font-size: 16px;
+	line-height: 160%;
+	color: $color-gray50;
+	text-align: center;
+}
+
+.form {
+	margin-top: 32px;
+}

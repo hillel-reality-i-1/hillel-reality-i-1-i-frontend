@@ -7,6 +7,9 @@ import instagram from '../../assets/img/icons/icons-footer/instagram.svg';
 import facebook from '../../assets/img/icons/icons-footer/facebook.svg';
 import footer_logo from '../../assets/img/icons/logo/footer_logo.svg';
 
+import SignUp from '../Registration/SignUp/SignUp';
+import SignUpForm from '../Registration/SignUpForm/SignUpForm';
+
 import styles from './Footer.module.scss';
 
 const Footer = () => {
@@ -89,6 +92,8 @@ const Footer = () => {
 					</div>
 				</div>
 			</div>
+			<SignUp />
+			<SignUpForm />
 		</footer>
 	);
 };
