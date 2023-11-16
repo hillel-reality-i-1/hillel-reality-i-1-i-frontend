@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 
 import '../../translations/i18n';
 import logo from '../../assets/img/icons/logo/header_logo.svg';
-import bellIcon from '../../assets/img/icons/icons-header/bell.svg';
 
 import styles from './Header.module.scss';
 
@@ -39,15 +38,14 @@ export default function Header() {
                         </li>
                     </ul>
                     <div className={styles.navigation_button}>
-                        <a href="/writepost" className={styles.button_link}>
-                            {t('textHeader.write_a_post')}
+                        <a href="/signin" className={styles.button_link}>
+                            Sign In
                         </a>
-                    </div>
-                    <div className={styles.navigation_account}>
-                        <a className={styles.account_bell} href="/bell">
-                            <img className={styles.bell_icon} src={bellIcon} alt="bell icon" />
+                        <a href="/signup" className={styles.button_link}>
+                            Sign Up
                         </a>
-                        <a className={styles.account_profile} href="/profile">
+                        <a href="/recoverypassword" className={styles.button_link}>
+                            Recovery password
                         </a>
                     </div>
                 </nav>
