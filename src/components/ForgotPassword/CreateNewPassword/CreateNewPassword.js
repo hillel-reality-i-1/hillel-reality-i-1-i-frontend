@@ -38,7 +38,6 @@ export default function CreateNewPassword() {
                         </label>
                         <div className={styles.form_input_wrapper}>
                             <input className={styles.form_input} type="password" id="password" name="password" required />
-                            <img src={eye} alt="Eye icon" />
                         </div>
                     </div>
 

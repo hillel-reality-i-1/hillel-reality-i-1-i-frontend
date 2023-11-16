@@ -1,0 +1,23 @@
+.search {
+    height: 426px;
+
+    background: url('../../assets/img/search-background/searchSectionBanner.webp')  lightgray 50%/cover no-repeat;
+    &__wrapper {
+        display: flex;
+        margin: 0 auto;
+        padding: 0 5px;
+        max-width: 1290px;
+
+    }
+    &__title {
+        margin-top: 89px;
+        max-width: 845px;
+        color: #FDFEFF;
+        font-family: 'Poppins-SemiBold';
+        font-size: 64px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 120%;
+    } 
+
+}

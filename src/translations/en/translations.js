@@ -1,4 +1,5 @@
 export const TRANSLATIONS_EN = {
+	heading: 'Explore advice, ideas, and insights',
 	textHeader: {
 		main: 'Menu',
 		map: 'Map',
