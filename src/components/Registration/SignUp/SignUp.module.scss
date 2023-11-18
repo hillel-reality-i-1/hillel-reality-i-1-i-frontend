@@ -13,6 +13,7 @@
 					fill: $color-primary20;
 				}
 			}
+
 			&-content {
 				background-color: $color-gray;
 				border-radius: 24px;
@@ -48,6 +49,29 @@
 	}
 }
 
+.btn_modal_open {
+	display: block;
+	min-height: 57px;
+	padding: 14px 16px;
+	margin-left: 16px;
+	border-radius: 48px;
+	background: $color-primary30base;
+	color: #fdfeff;
+	font-family: $font-p-medium;
+	font-size: 18px;
+	font-style: normal;
+	line-height: 160%;
+	text-decoration: none;
+
+	&:hover {
+		background: #3989ec;
+	}
+
+	&:active {
+		background: #094da0;
+	}
+}
+
 .description {
 	font-family: $font-p-regular;
 	font-size: 16px;
@@ -61,7 +85,7 @@
 	font-size: 14px;
 	line-height: 160%;
 	color: $color-gray50;
-	margin-top: 24px;
+	margin: 24px 0 24px;
 }
 
 .signUpGoogle {
@@ -69,6 +93,7 @@
 	font-family: $font-p-medium;
 	line-height: 160%;
 	color: $color-gray80;
+
 	.signUpWithGoogle {
 		margin-left: 8px;
 	}
@@ -82,9 +107,11 @@
 	display: flex;
 	margin-top: 10rem;
 	justify-content: center;
+
 	a {
 		color: $color-primary30base;
 		margin-left: 8px;
+
 		&:hover {
 			color: $color-primary20;
 		}

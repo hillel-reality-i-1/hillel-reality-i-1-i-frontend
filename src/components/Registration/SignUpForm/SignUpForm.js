@@ -1,110 +1,46 @@
 import React, { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import '../../../translations/i18n';
-
-import { Modal, Button, Checkbox, Form, Input } from 'antd';
-
-import ButtonPrimary from '../ButtonPrimary/ButtonPrimary';
-
-// import google from '../../../assets/img/icons/icons-SignUp/google.svg';
+import { Modal, Button, Checkbox, Input, Form } from 'antd';
+import { Formik } from 'formik';
 
 import styles from './SignUpForm.module.scss';
 
-const onFinish = (values) => {
-	console.log('Success:', values);
-};
-const onFinishFailed = (errorInfo) => {
-	console.log('Failed:', errorInfo);
-};
-
-// const { Option } = Select;
-// const residences = [
-// 	{
-// 		value: 'zhejiang',
-// 		label: 'Zhejiang',
-// 		children: [
-// 			{
-// 				value: 'hangzhou',
-// 				label: 'Hangzhou',
-// 				children: [
-// 					{
-// 						value: 'xihu',
-// 						label: 'West Lake',
-// 					},
-// 				],
-// 			},
-// 		],
-// 	},
-// 	{
-// 		value: 'jiangsu',
-// 		label: 'Jiangsu',
-// 		children: [
-// 			{
-// 				value: 'nanjing',
-// 				label: 'Nanjing',
-// 				children: [
-// 					{
-// 						value: 'zhonghuamen',
-// 						label: 'Zhong Hua Men',
-// 					},
-// 				],
-// 			},
-// 		],
-// 	},
-// ];
-// const formItemLayout = {
-// 	labelCol: {
-// 		xs: {
-// 			span: 24,
-// 		},
-// 		sm: {
-// 			span: 8,
-// 		},
-// 	},
-// 	wrapperCol: {
-// 		xs: {
-// 			span: 24,
-// 		},
-// 		sm: {
-// 			span: 16,
-// 		},
-// 	},
-// };
 const tailFormItemLayout = {
 	wrapperCol: {
 		xs: {
 			span: 24,
-			// offset: 0,
 		},
-		// sm: {
-		// span: 16,
-		// offset: 8,
-		// },
 	},
 };
 
 const SignUpForm = () => {
 	const { t } = useTranslation();
-
-	// const [loading, setLoading] = useState(false);
+	const navigate = useNavigate();
 	const [open, setOpen] = useState(false);
 
 	const showModal = () => {
 		setOpen(true);
 	};
-	// const handleOk = () => {};
 
 	const handleCancel = () => {
 		setOpen(false);
 	};
+
+	const signUpHandler = () => {
+		setOpen(false);
+		navigate('/verifyInfo');
+	};
+
 	return (
 		<>
 			{' '}
 			<Button
 				type='primary'
-				onClick={showModal}>
-				{t('textSignUp.signUp') + '????two'}
+				onClick={showModal}
+				className={styles.btn_open_modal}>
+				{t('textSignUp.signUpWithEmail')}
 			</Button>
 			<Modal
 				open={open}
@@ -125,100 +61,80 @@ const SignUpForm = () => {
 				width={580}
 				className={styles.modal}
 				title={t('textSignUp.signUpWithEmail')}
-				// onOk={handleOk}
 				onCancel={handleCancel}
 				footer={null}>
 				<p className={styles.description}>{t('textSignUp.signUpDescription')}</p>
 
-				<Form
-					className={styles.form}
-					name='signUp'
-					labelCol={{
-						span: 24,
+				<Formik
+					initialValues={{ email: '', password: '', passwordConfirm: '' }}
+					validate={(values) => {
+						const errors = {};
+						if (!values.email) {
+							errors.email = 'Required';
+						} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+							errors.email = 'Invalid email address';
+						}
+						return errors;
 					}}
-					wrapperCol={{
-						span: 24,
-					}}
-					style={{
-						maxWidth: 420,
-					}}
-					initialValues={{
-						remember: true,
-					}}
-					onFinish={onFinish}
-					onFinishFailed={onFinishFailed}
-					layout='vertical'
-					autoComplete='off'>
-					<Form.Item
-						name='email'
-						label={t('textSignUp.email')}
-						rules={[
-							{
-								type: 'email',
-								message: 'The input is not valid Email!',
-							},
-							{
-								// required: true,
-								message: 'Please input your E-mail!',
-							},
-						]}>
-						<Input />
-					</Form.Item>
-					<Form.Item
-						label={t('textSignUp.password')}
-						name='password'
-						rules={[
-							{
-								// required: true,
-								message: 'Please input your password!',
-							},
-						]}>
-						<Input.Password />
-					</Form.Item>
-					<Form.Item
-						name='confirm'
-						label={t('textSignUp.confirmPassword')}
-						dependencies={['password']}
-						// hasFeedback
-						rules={[
-							{
-								// required: true,
-								message: 'Please confirm your password!',
-							},
-							({ getFieldValue }) => ({
-								validator(_, value) {
-									if (!value || getFieldValue('password') === value) {
-										return Promise.resolve();
-									}
-									return Promise.reject(
-										new Error('The new password that you entered do not match!')
-									);
-								},
-							}),
-						]}>
-						<Input.Password />
-					</Form.Item>
-					<Form.Item
-						name='agreement'
-						valuePropName='checked'
-						className={styles.itemCheckbox}
-						rules={[
-							{
-								validator: (_, value) =>
-									value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement')),
-							},
-						]}
-						{...tailFormItemLayout}>
-						<Checkbox
-							className={styles.checkbox}
-							style={{ dispay: 'flex' }}>
-							{t('textSignUp.agree')} &nbsp; <a href='/'>{t('textSignUp.conditions')}</a>
-						</Checkbox>
-					</Form.Item>
-					<Form.Item>
-						<ButtonPrimary>{t('textSignUp.signUp')}</ButtonPrimary>
-					</Form.Item>
-				</Form>
+					onSubmit={(values) => {
+						console.log(values);
+					}}>
+					{({ errors, touched }) => (
+						<Form
+							className={styles.form}
+							layout='vertical'>
+							<Form.Item
+								className={styles.Form_item}
+								name='email'
+								label={t('textSignUp.email')}>
+								<Input
+									className={`${styles.input} `}
+									name='email'
+									// validate={validateEmail}
+								/>
+								{errors.email && touched.email && <div className={styles.error}></div>}
+							</Form.Item>
+
+							<Form.Item
+								label={t('textSignUp.password')}
+								name='password'>
+								<Input.Password className={styles.input} />
+							</Form.Item>
+							<Form.Item
+								label={t('textSignUp.password')}
+								name='passwordConfirm'>
+								<Input.Password className={styles.input} />
+							</Form.Item>
+							<Form.Item
+								name='agreement'
+								valuePropName='checked'
+								className={styles.itemCheckbox}
+								rules={[
+									{
+										validator: (_, value) =>
+											value
+												? Promise.resolve()
+												: Promise.reject(new Error('Should accept agreement')),
+									},
+								]}
+								{...tailFormItemLayout}>
+								<Checkbox
+									className={styles.checkbox}
+									style={{ dispay: 'flex' }}>
+									{t('textSignUp.agree')} &nbsp; <a href='/'>The Terms and Conditions</a>
+								</Checkbox>
+							</Form.Item>
+							<Form.Item>
+								<button
+									type='submit'
+									className={styles.btn_signup_form}
+									onClick={signUpHandler}>
+									{t('textSignUp.signUp')}
+								</button>
+							</Form.Item>
+						</Form>
+					)}
+				</Formik>
 			</Modal>
 		</>
 	);

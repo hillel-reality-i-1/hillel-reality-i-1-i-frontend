@@ -1,0 +1,22 @@
+<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="circle-flags:european-union" clip-path="url(#clip0_1038_34135)">
+<g id="Mask group">
+<mask id="mask0_1038_34135" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="25">
+<g id="Group">
+<path id="Vector" d="M12 0.5C5.37258 0.5 0 5.87258 0 12.5C0 19.1274 5.37258 24.5 12 24.5C18.6274 24.5 24 19.1274 24 12.5C24 5.87258 18.6274 0.5 12 0.5Z" fill="white"/>
+</g>
+</mask>
+<g mask="url(#mask0_1038_34135)">
+<g id="Group_2">
+<path id="Vector_2" d="M24 24.5L0 24.5L0 0.5L24 0.5L24 24.5Z" fill="#126FE1"/>
+<path id="Vector 1" d="M0 12.5L23.5 12.5H24C24 22.1 16 24.5 12 24.5C3.6 24.1 -0.5 17.5 0 12.5Z" fill="#FFD100"/>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_1038_34135">
+<rect width="24" height="24" fill="white" transform="matrix(-1 0 0 -1 24 24.5)"/>
+</clipPath>
+</defs>
+</svg>

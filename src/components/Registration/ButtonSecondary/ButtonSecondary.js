@@ -2,21 +2,20 @@ import React from 'react';
 
 import { Button } from 'antd';
 
-import styles from './ButtonPrimary.module.scss';
+import styles from './ButtonSecondary.module.scss';
 
-const ButtonPrimary = ({ children }) => {
+const ButtonSecondary = ({ children }) => {
 	return (
 		<>
 			<Button
 				key='email'
-				type='primary'
 				shape='round'
 				size='large'
-				className={styles.signUpPrimary}>
+				className={styles.signUpEmail}>
 				{children}
 			</Button>
 		</>
 	);
 };
 
-export default ButtonPrimary;
+export default ButtonSecondary;

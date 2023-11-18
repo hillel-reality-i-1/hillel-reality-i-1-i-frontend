@@ -1,19 +1,18 @@
 @font-face {
-  font-family: "Poppins600";
-  src: url('./assets/fonts/Poppins/Poppins-SemiBold.woff2') format('woff2');
-  font-style: normal;
+	font-family: 'Poppins600';
+	src: url('./assets/fonts/Poppins/Poppins-SemiBold.woff2') format('woff2');
+	font-style: normal;
 }
 @font-face {
-	font-family: "Poppins500";
+	font-family: 'Poppins500';
 	src: url('./assets/fonts/Poppins/Poppins-Medium.woff2') format('woff2');
 	font-style: normal;
 }
 @font-face {
-	font-family: "Poppins400";
+	font-family: 'Poppins400';
 	src: url('./assets/fonts/Poppins/Poppins-Regular.woff2') format('woff2');
 	font-style: normal;
 }
-
 
 * {
 	box-sizing: border-box;
@@ -42,4 +41,13 @@ a {
 
 img {
 	border-style: none;
+}
+
+button {
+	padding: 0;
+	border: none;
+	font: inherit;
+	color: inherit;
+	background-color: transparent;
+	cursor: pointer;
 }

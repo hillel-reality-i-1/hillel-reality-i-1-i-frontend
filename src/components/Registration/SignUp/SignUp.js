@@ -2,33 +2,31 @@ import React, { useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 import '../../../translations/i18n';
-
 import { Button, Modal } from 'antd';
 
-import ButtonPrimary from '../ButtonPrimary/ButtonPrimary';
 import google from '../../../assets/img/icons/icons-SignUp/google.svg';
+import SignUpForm from '../SignUpForm/SignUpForm';
 
 import styles from './SignUp.module.scss';
 
 const SignUp = () => {
 	const { t } = useTranslation();
-
-	// const [loading, setLoading] = useState(false);
 	const [open, setOpen] = useState(false);
 
-	const showModal = () => {
+	const showModalFirst = () => {
 		setOpen(true);
 	};
-	const handleOk = () => {};
 
-	const handleCancel = () => {
+	const handleCancelFirst = () => {
 		setOpen(false);
 	};
+
 	return (
 		<>
 			<Button
 				type='primary'
-				onClick={showModal}>
+				className={styles.btn_modal_open}
+				onClick={showModalFirst}>
 				{t('textSignUp.signUp')}
 			</Button>
 			<Modal
@@ -50,15 +48,14 @@ const SignUp = () => {
 				width={580}
 				className={styles.modal}
 				title={`${t('textSignUp.signUpTo')} U-Help`}
-				onOk={handleOk}
-				onCancel={handleCancel}
+				onCancel={handleCancelFirst}
 				footer={[
 					<Button
 						key='google'
 						shape='round'
 						size='large'
 						className={styles.signUpGoogle}
-						onClick={handleCancel}>
+						onClick={handleCancelFirst}>
 						{
 							<img
 								src={google}
@@ -68,28 +65,12 @@ const SignUp = () => {
 						<span className={styles.signUpWithGoogle}>{t('textSignUp.signUpWithGoogle')}</span>
 					</Button>,
 					<span className={styles.spanOr}>{t('textSignUp.or')}</span>,
-					<ButtonPrimary>{t('textSignUp.signUpWithEmail')}</ButtonPrimary>,
-					// <Button
-					// 	key='email'
-					// 	type='primary'
-					// 	shape='round'
-					// 	size='large'
-					// 	className={styles.signUpEmail}
-					// 	onClick={handleOk}>
+					<button onClick={handleCancelFirst}>
+						<SignUpForm />
+					</button>,
 
-					// </Button>,
-					// <span className={styles.termsAndPrivacy}>
-					// 	{t('textSignUp.warningAgreement')}{' '}
-					// 	<Button
-					// 		type='link'
-					// 		block
-					// 		className='linkSignIn'>
-					// 		{t('textSignUp.termsAndPrivacy')}
-					// 	</Button>
-					// </span>,
 					<span className={styles.bottomSpan}>
 						{t('textSignUp.alreadyHaveAnAccount')}
-
 						<a
 							href='/'
 							type='link'

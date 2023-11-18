@@ -1,0 +1,54 @@
+@import '../../../styles/constans.scss';
+
+.container {
+	margin: 0 auto;
+	width: 100%;
+	max-width: 410px;
+}
+
+.verify_info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 32px 0;
+
+	.title {
+		font-family: $font-p-semiBold;
+		font-size: 40px;
+		line-height: 120%;
+		text-align: center;
+		color: $color-gray80;
+		margin-top: 48px;
+	}
+
+	.text {
+		font-family: $font-p-regular;
+		font-size: 18px;
+		line-height: 160%;
+		color: $color-gray70;
+		text-align: center;
+		margin-top: 8px;
+	}
+
+	.flex_text {
+		display: flex;
+	}
+
+	.text_link {
+		margin-left: 3px;
+		font-family: $font-p-medium;
+		font-size: 18px;
+		line-height: 160%;
+		color: $color-primary30base;
+		text-align: center;
+		margin-top: 8px;
+	}
+
+	.link_send {
+		margin-bottom: 120px;
+	}
+
+	.margin_bottom {
+		margin-bottom: 64px;
+	}
+}
