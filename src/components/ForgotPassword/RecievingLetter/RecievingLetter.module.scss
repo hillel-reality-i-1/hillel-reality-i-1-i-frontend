@@ -1,0 +1,92 @@
+@import '../../../styles/constans.scss';
+
+.recievingLetterSection {
+    width: 1440px;
+    max-width: 100%;
+
+    .recievingLetterSection_wrapper {
+        width: 386px;
+        max-width: 100%;
+        margin: 116px auto 369px;
+
+        .recievingLetterSection_close {
+            position: absolute;
+            top: 97px;
+            right: 8%;
+            width: 24px;
+            height: 24px;
+        }
+
+        .recievingLetterSection_logo {
+            width: 65.766px;
+            height: 36px;
+            flex-shrink: 0;
+            margin: 0 auto;
+            margin-bottom: 104px;
+        }
+
+        .recievingLetterSection_content {
+            margin-bottom: 74px;
+
+            .content_title {
+                margin-bottom: 96px;
+                text-align: center;
+                font-family: $font-p-semiBold;
+                font-size: 40px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 120%; 
+                color: #1D1B20;
+            }
+
+            .content_firstdescription {
+                margin-bottom: 73px;
+                text-align: center;
+                font-family: $font-p-regular;
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 150%; 
+                color: rgba(29, 27, 32, 0.50);
+            }
+
+            .content_secondarydescription {
+                text-align: center;
+                font-family: $font-p-regular;
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 150%; 
+                color: #1D1B20;
+            }
+        }
+
+        .recievingLetterSection_footer {
+            display: flex;
+            width: 386px;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 8px;
+
+            .footer_text {
+                text-align: center;
+                font-family: $font-p-regular;
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 150%; 
+                color: #1D1B20;
+            }
+
+            .footer_link {
+                text-align: center;
+                font-family: $font-p-medium;
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 150%; 
+                color: #126FE1;
+            }
+        }
+    }
+}

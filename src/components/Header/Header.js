@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { useTranslation } from 'react-i18next';
 
 import '../../translations/i18n';
 import logo from '../../assets/img/icons/logo/header_logo.svg';
-import bellIcon from '../../assets/img/icons/icons-header/bell.svg';
 
 import SignUp from '../Registration/SignUp/SignUp';
 
@@ -56,24 +55,20 @@ export default function Header() {
 					</ul>
 					<div className={styles.navigation_button}>
 						<a
-							href='/writepost'
+							href='/signin'
 							className={styles.button_link}>
-							{t('textHeader.write_a_post')}
-						</a>
-					</div>
-					<div className={styles.navigation_account}>
-						<a
-							className={styles.account_bell}
-							href='/bell'>
-							<img
-								className={styles.bell_icon}
-								src={bellIcon}
-								alt='bell icon'
-							/>
+							Sign In
 						</a>
 						<a
-							className={styles.account_profile}
-							href='/profile'></a>
+							href='/signup'
+							className={styles.button_link}>
+							Sign Up
+						</a>
+						<a
+							href='/recoverypassword'
+							className={styles.button_link}>
+							Recovery password
+						</a>
 					</div>
 					<SignUp />
 				</nav>
