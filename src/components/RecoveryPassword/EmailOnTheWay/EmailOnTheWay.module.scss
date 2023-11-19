@@ -1,0 +1,180 @@
+@import '../../../styles/constans.scss';
+
+.emailOnTheWay {
+    display: flex;
+    width: 1440px;
+    height: 1024px;
+    max-width: 100%;
+    background: #FFF;
+    
+    .emailOnTheWay_main {
+        width: 949px;
+        max-width: 100%;
+
+        .emailOnTheWay_section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 411px;
+            max-width: 100%;
+            margin: 64px auto 297px;
+            
+            .section_logo_wrapper {
+                margin-bottom: 103px;
+
+                .section_logo_text {
+                    text-align: center;
+                    font-style: normal;
+                    font-family: $font-p-semiBold;
+                    font-size: 16.5px;
+                    font-weight: 600;
+                    line-height: 140%; 
+                    color: #031C35;
+                }
+            }
+
+            .section_icon_wrapper {
+                display: inline-flex;
+                flex-direction: column;
+                align-items: flex-start;
+                margin-bottom: 48px;
+                padding: 16px;
+                border-radius: 12px;
+                background: rgba(18, 111, 225, 0.10);
+            }
+            
+            .section_text {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 411px;
+                margin-bottom: 120px;
+                gap: 8px;
+                
+                .section_title {
+                    align-self: stretch;
+                    text-align: center;
+                    font-style: normal;
+                    font-family: $font-p-semiBold;
+                    font-size: 40px;
+                    font-weight: 600;
+                    line-height: 120%;
+                    color: #03091C;
+                }
+
+                .section_description {
+                    align-self: stretch;
+                    text-align: center;
+                    font-style: normal;
+                    font-family: $font-p-regular;
+                    font-size: 18px;
+                    font-weight: 400;
+                    line-height: 150%; 
+                    letter-spacing: 0.36px;
+                    color: #1D1B20;
+                    
+                    .description_email {
+                        font-style: normal;
+                        font-family: $font-p-regular;
+                        font-size: 18px;
+                        font-weight: 500;
+                        line-height: 150%;
+                        letter-spacing: 0.36px;
+                        color: #126FE1;
+                    }
+                }
+            }
+
+            .section_resend {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 411px;
+                margin-bottom: 82px;
+                gap: 8px;
+                
+                .resend_text {
+                    align-self: stretch;
+                    text-align: center;
+                    font-style: normal;
+                    font-family: $font-p-regular;
+                    font-size: 18px;
+                    font-weight: 400;
+                    line-height: 160%; 
+                    color: #03091C;
+                }
+
+                .resend_link_wrapper {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    align-self: stretch;
+
+                    .resend_link {
+                        font-size: 18px;
+                        font-weight: 500;
+                        line-height: 160%;
+                        font-family: $font-p-medium;
+                        font-style: normal;
+                        color: #126FE1;
+
+                        &:hover {
+                            color: #3989EC;
+                        }
+
+                        &:active {
+                            color: #094DA0;
+                        }
+                    }
+                }
+            }
+
+            .section_button {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 193px;
+                height: 56px;
+                padding: 14px 16px;
+                gap: 8px;
+                font-size: 18px;
+                flex-shrink: 0;
+                font-family: $font-p-medium;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 160%; 
+                border-radius: 48px;
+                color: #126FE1;
+                border: 1px solid #126FE1;
+
+                &:hover {
+                    color: #3989EC;
+                }
+
+                &:active {
+                    color: #094DA0;
+                }
+            }
+        }
+    
+    }
+
+    .emailOnTheWay_asideBackground_wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 491px;
+        height: 1024px;
+        flex-shrink: 0;
+        
+        .emailOnTheWay_asideBackground {
+            display: block;
+            width: 100%;
+            height: 100%;
+            background: url('../../../assets/img/icons/icons-forgotPassword/Rectangle_33.png'), lightgray -84.846px 0.757px / 208.554% 100% no-repeat;
+        }
+    }
+    
+}

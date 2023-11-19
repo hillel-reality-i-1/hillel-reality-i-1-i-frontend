@@ -1,17 +1,16 @@
 import React from 'react';
 import HomePage from './pages/HomePage';
 import './translations/i18n';
-import SignIn from './components/SignIn/SignIn';
-import CreateNewPassword from './components/ForgotPassword/CreateNewPassword/CreateNewPassword.js';
-import PasswordUpdated from './components/ForgotPassword/PasswordUpdated/PasswordUpdated.js';
-import RecievingLetter from './components/ForgotPassword/RecievingLetter/RecievingLetter.js';
-import RecoveryPassword from './components/ForgotPassword/RecoveryPassword/RecoveryPassword.js'
-
+// import SignIn from './components/SignIn/SignIn';
+// import ForgotYourPassword from './components/RecoveryPassword/ForgotYourPassword/ForgotYourPassword.js'
+// import EmailLink from './components/RecoveryPassword/EmailOnTheWay/EmailOnTheWay.js';
+// import CreateNewPassword from './components/RecoveryPassword/CreateNewPassword/CreateNewPassword.js';
+// import PasswordUpdated from './components/RecoveryPassword/PasswordUpdated/PasswordUpdated.js';
 
 function App() {
   return (
     <>
-      <HomePage/>
+      <HomePage />
     </>
   );
 }
