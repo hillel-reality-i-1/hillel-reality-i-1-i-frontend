@@ -1,9 +1,12 @@
-@import '../../../styles/constans.scss';
+@import '../../../styles/constants.scss';
 
 :global {
 	.ant-modal-root {
 		.ant-modal {
 			&-close {
+				width: 24px;
+				height: 24px;
+
 				&:hover {
 					background-color: inherit;
 				}
@@ -15,24 +18,18 @@
 			}
 
 			&-content {
+				display: flex;
+				flex-direction: column;
 				background-color: $color-gray;
 				border-radius: 24px;
-				padding: 120px 80px 74px;
-
-				.ant-modal-title {
-					font-family: $font-p-semiBold;
-					font-size: 28px;
-					line-height: 130%;
-					text-align: center;
-					color: $color-gray80;
-				}
+				padding: 33px 80px 108px;
 
 				.ant-modal-footer {
 					display: flex;
 					flex-direction: column;
 					justify-content: center;
 					text-align: center;
-					margin-top: 106px;
+					margin-top: 135px;
 
 					.ant-btn-lg {
 						min-height: 57px;
@@ -46,6 +43,55 @@
 				}
 			}
 		}
+	}
+}
+
+.header_modal_wrapper {
+	width: 100%;
+	max-width: 420px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	.logo {
+		width: 68px;
+		height: 38px;
+
+		text-align: center;
+
+		img {
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	.title {
+		font-family: $font-p-semiBold;
+		font-size: 28px;
+		line-height: 130%;
+		text-align: center;
+		color: $color-gray80;
+		margin-top: 38px;
+	}
+
+	.description {
+		font-family: $font-p-regular;
+		font-size: 16px;
+		line-height: 160%;
+		color: $color-gray50;
+		text-align: center;
+		margin-top: 8px;
+	}
+}
+
+.signUpGoogle {
+	border: 1px solid $color-gray80;
+	font-family: $font-p-medium;
+	line-height: 160%;
+	color: $color-gray80;
+
+	.signUpWithGoogle {
+		margin-left: 8px;
 	}
 }
 
@@ -72,14 +118,6 @@
 	}
 }
 
-.description {
-	font-family: $font-p-regular;
-	font-size: 16px;
-	line-height: 160%;
-	color: $color-gray50;
-	text-align: center;
-}
-
 .spanOr {
 	font-family: $font-p-regular;
 	font-size: 14px;
@@ -88,27 +126,17 @@
 	margin: 24px 0 24px;
 }
 
-.signUpGoogle {
-	border: 1px solid $color-gray80;
-	font-family: $font-p-medium;
-	line-height: 160%;
-	color: $color-gray80;
-
-	.signUpWithGoogle {
-		margin-left: 8px;
-	}
-}
-
 .bottomSpan {
 	font-family: $font-p-regular;
-	font-size: 16px;
+	font-size: 18px;
 	line-height: 160%;
 	color: $color-gray50;
 	display: flex;
-	margin-top: 10rem;
+	margin-top: 136px;
 	justify-content: center;
 
 	a {
+		font-family: $font-p-medium;
 		color: $color-primary30base;
 		margin-left: 8px;
 

@@ -1,4 +1,4 @@
-@import '../../../styles/constans.scss';
+@import '../../../styles/constants.scss';
 
 .container {
 	margin: 0 auto;
@@ -10,7 +10,8 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding: 32px 0;
+	margin-top: 8px;
+
 	.title {
 		font-family: $font-p-semiBold;
 		font-size: 40px;
@@ -30,25 +31,74 @@
 	}
 
 	.form {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
 		margin-top: 32px;
 		width: 100%;
-		&_item {
-			font-size: 23px;
-			margin-bottom: 32px;
-			label {
-				font-family: $font-p-regular;
-				color: $color-gray80;
-				font-size: 16px;
-				line-height: 160%;
-			}
+		gap: 16px;
+		.m_b {
+			margin-bottom: 16px;
+		}
+		.label {
+			color: $color-gray80;
+			font-family: $font-p-regular;
+			font-size: 16px;
+			line-height: 160%;
+			margin-bottom: 8px;
+		}
 
-			.input {
-				font-family: $font-p-medium;
-				font-size: 16px;
-				padding: 14px;
-				border-radius: 12px;
-				line-height: 160%;
+		.label_required {
+			&::after {
+				content: '*';
+				color: $color-systemError;
+				margin-left: 2px;
+			}
+		}
+
+		.input {
+			font-family: $font-p-medium;
+			font-size: 16px;
+			color: $color-gray70;
+			padding: 14px;
+			border-radius: 12px;
+			line-height: 160%;
+			margin-top: 8px;
+			border-color: $color-gray30;
+
+			&.invalid {
+				color: $color-systemError;
+				border-color: $color-systemError;
+				color: $color-systemError;
+			}
+		}
+
+		.btn_submit_step1 {
+			padding: 14px 16px;
+			font-family: $font-p-medium;
+			width: 100%;
+			background-color: $color-primary30base;
+			min-height: 57px;
+			font-size: 18px;
+			border-radius: 48px;
+			display: flex;
+			color: $color-gray20;
+
+			align-items: center;
+			justify-content: center;
+			line-height: 160%;
+			Link {
+				color: red;
 			}
 		}
 	}
+}
+
+.error {
+	margin-top: 8px;
+	display: flex;
+	align-items: center;
+	color: $color-systemError;
+	font-size: 14px;
+	gap: 5px;
 }

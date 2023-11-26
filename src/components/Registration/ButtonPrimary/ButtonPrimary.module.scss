@@ -1,4 +1,10 @@
-@import '../../../styles/constans.scss';
+@import '../../../styles/constants.scss';
+
+:global {
+	.ant-btn.ant-btn-lg {
+		font-size: 18px;
+	}
+}
 
 .signUpPrimary {
 	font-family: $font-p-medium;
@@ -12,8 +18,4 @@
 	align-items: center;
 	justify-content: center;
 	line-height: 160%;
-
-	&:hover {
-		background-color: $color-primary20;
-	}
 }
