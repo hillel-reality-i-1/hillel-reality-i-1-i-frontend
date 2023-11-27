@@ -15,7 +15,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 411px;
+            width: 410px;
             max-width: 100%;
             margin: 64px auto 297px;
             
@@ -90,7 +90,7 @@
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                width: 411px;
+                width: 410px;
                 margin-bottom: 82px;
                 gap: 8px;
                 
@@ -118,35 +118,34 @@
                         font-family: $font-p-medium;
                         font-style: normal;
                         color: #126FE1;
-
-                        &:hover {
-                            color: #3989EC;
-                        }
-
-                        &:active {
-                            color: #094DA0;
-                        }
                     }
                 }
             }
 
-            .section_button {
+            .section_button_wrapper {
                 display: flex;
+                width: 410px;
+                height: 56px;
                 justify-content: center;
                 align-items: center;
-                width: 193px;
-                height: 56px;
-                padding: 14px 16px;
                 gap: 8px;
-                font-size: 18px;
-                flex-shrink: 0;
-                font-family: $font-p-medium;
-                font-style: normal;
-                font-weight: 500;
-                line-height: 160%; 
-                border-radius: 48px;
-                color: #126FE1;
-                border: 1px solid #126FE1;
+
+                .section_button {
+                    border: 1px solid #126FE1;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    width: 100%;
+                    padding: 14px 16px;
+                    border-radius: 48px;
+                    gap: 8px;
+                    color: #126FE1;
+                    font-family: $font-p-medium;
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 160%; 
+                }
 
                 &:hover {
                     color: #3989EC;
@@ -176,5 +175,4 @@
             background: url('../../../assets/img/icons/icons-forgotPassword/Rectangle_33.png'), lightgray -84.846px 0.757px / 208.554% 100% no-repeat;
         }
     }
-    
 }

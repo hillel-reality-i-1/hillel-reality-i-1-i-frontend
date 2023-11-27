@@ -1,10 +1,15 @@
 import React from 'react';
 
-import styles from './PasswordUpdated.module.scss'
+import { useTranslation } from 'react-i18next';
+import '../../../translations/i18n';
 
 import successLogo from '../../../assets/img/icons/icons-forgotPassword/success.svg'
 
+import styles from './PasswordUpdated.module.scss'
+
 export default function PasswordUpdated() {
+
+    const { t } = useTranslation();
    
     return (
         <div className={styles.passwordUpdatedSection}>
@@ -16,16 +21,16 @@ export default function PasswordUpdated() {
 
                 <div className={styles.passwordUpdatedSection_section}>
                     <h1 className={styles.passwordUpdatedSection_title}>
-                        Success!
+                        {t('textPasswordUpdated.success')}
                     </h1>
                     <p className={styles.passwordUpdatedSection_description}>
-                        Your password has been updated. You can Sign In again
+                        {t('textPasswordUpdated.yourPasswordHasBeenUpdated')}
                     </p>
                 </div>
 
                 <div className={styles.passwordUpdatedSection_button_wrapper}>
-                    <a className={styles.passwordUpdatedSection_button} href="/">
-                        Return to Sign In
+                    <a className={styles.passwordUpdatedSection_button} href="/signin">
+                        {t('textPasswordUpdated.returnToSignIn')}
                     </a>
                 </div>
 

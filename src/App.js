@@ -10,7 +10,7 @@ import './translations/i18n';
 function App() {
   return (
     <>
-      <HomePage />
+      <HomePage/>
     </>
   );
 }

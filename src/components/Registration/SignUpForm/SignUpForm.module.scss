@@ -1,0 +1,89 @@
+@import '../../../styles/constans.scss';
+
+:global {
+	.ant-modal-root {
+		.ant-modal {
+			.ant-checkbox + span {
+				display: flex;
+			}
+
+			&-close {
+				&:hover {
+					background-color: inherit;
+				}
+				top: 40px;
+				right: 40px;
+				svg:hover * {
+					fill: $color-primary20;
+				}
+			}
+
+			&-content {
+				background-color: $color-gray;
+				border-radius: 24px;
+				padding: 120px 80px 74px;
+
+				.ant-modal-title {
+					font-family: $font-p-semiBold;
+					font-size: 28px;
+					line-height: 130%;
+					text-align: center;
+					color: $color-gray80;
+				}
+			}
+		}
+	}
+}
+
+.btn_open_modal {
+	border-radius: 48px;
+	min-height: 57px;
+	width: 100%;
+	font-size: 18px;
+}
+
+.description {
+	font-family: $font-p-regular;
+	font-size: 16px;
+	line-height: 160%;
+	color: $color-gray50;
+	text-align: center;
+}
+
+.btn_signup_form {
+	padding: 14px 16px;
+	font-family: $font-p-medium;
+	width: 100%;
+	background-color: $color-primary30base;
+	min-height: 57px;
+	font-size: 18px;
+	border-radius: 48px;
+	display: flex;
+	color: $color-gray20;
+
+	align-items: center;
+	justify-content: center;
+	line-height: 160%;
+
+	&:hover {
+		background-color: $color-primary20;
+	}
+}
+
+.form {
+	margin-top: 32px;
+
+	&_item {
+		display: flex;
+	}
+
+	.input {
+		font-family: $font-p-medium;
+
+		font-size: 16px;
+		color: $color-gray70;
+		padding: 14px;
+		border-radius: 12px;
+		line-height: 160%;
+	}
+}

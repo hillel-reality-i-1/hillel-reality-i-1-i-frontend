@@ -1,0 +1,119 @@
+@import '../../../styles/constans.scss';
+
+:global {
+	.ant-modal-root {
+		.ant-modal {
+			&-close {
+				&:hover {
+					background-color: inherit;
+				}
+				top: 40px;
+				right: 40px;
+				svg:hover * {
+					fill: $color-primary20;
+				}
+			}
+
+			&-content {
+				background-color: $color-gray;
+				border-radius: 24px;
+				padding: 120px 80px 74px;
+
+				.ant-modal-title {
+					font-family: $font-p-semiBold;
+					font-size: 28px;
+					line-height: 130%;
+					text-align: center;
+					color: $color-gray80;
+				}
+
+				.ant-modal-footer {
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					text-align: center;
+					margin-top: 106px;
+
+					.ant-btn-lg {
+						min-height: 57px;
+						font-size: 18px;
+						border-radius: 48px;
+						display: flex;
+						padding: 14px;
+						align-items: center;
+						justify-content: center;
+					}
+				}
+			}
+		}
+	}
+}
+
+.btn_modal_open {
+	display: block;
+	min-height: 57px;
+	padding: 14px 16px;
+	margin-left: 16px;
+	border-radius: 48px;
+	background: $color-primary30base;
+	color: #fdfeff;
+	font-family: $font-p-medium;
+	font-size: 18px;
+	font-style: normal;
+	line-height: 160%;
+	text-decoration: none;
+
+	&:hover {
+		background: #3989ec;
+	}
+
+	&:active {
+		background: #094da0;
+	}
+}
+
+.description {
+	font-family: $font-p-regular;
+	font-size: 16px;
+	line-height: 160%;
+	color: $color-gray50;
+	text-align: center;
+}
+
+.spanOr {
+	font-family: $font-p-regular;
+	font-size: 14px;
+	line-height: 160%;
+	color: $color-gray50;
+	margin: 24px 0 24px;
+}
+
+.signUpGoogle {
+	border: 1px solid $color-gray80;
+	font-family: $font-p-medium;
+	line-height: 160%;
+	color: $color-gray80;
+
+	.signUpWithGoogle {
+		margin-left: 8px;
+	}
+}
+
+.bottomSpan {
+	font-family: $font-p-regular;
+	font-size: 16px;
+	line-height: 160%;
+	color: $color-gray50;
+	display: flex;
+	margin-top: 10rem;
+	justify-content: center;
+
+	a {
+		color: $color-primary30base;
+		margin-left: 8px;
+
+		&:hover {
+			color: $color-primary20;
+		}
+	}
+}
