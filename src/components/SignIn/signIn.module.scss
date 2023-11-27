@@ -1,149 +1,146 @@
-@import '../../styles/constans.scss';
+@import '../../styles/constants.scss';
 
 .shadow {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(3, 9, 28, 0.5);
-    z-index: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(3, 9, 28, 0.5);
+	z-index: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .signIn {
-    margin: auto;
-    width: 580px;
-    padding: 40px 40px 76px 40px;
-    text-align: center;
-    border-radius:  24px;
-    background:  #FDFEFF;
-    &__wrapper {
-        padding: 0 40px;
-
-    }
-    &__icon {
-        display: flex;
-        justify-content: flex-end;
-    }
-    &__title {
-        padding-bottom: 5px;
-        color:  #03091C;
-        font-family: $font-p-semiBold;
-        font-size: 32px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 130%;
-    }
-    &__description {
-        margin-bottom: 48px;
-        color: #0D101D;
-        font-family: $font-p-regular;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 160%; 
-    }
-    &__google {
-        border-radius: 48px;
-        padding: 14px;
-        border: 1px solid #03091C;
-        justify-content: center;
-        color:  #03091C;
-        font-family: $font-p-medium;
-        font-size: 18px;
-        font-style: normal;
-        font-weight: 500;
-         line-height: 160%;
-
-    }
-    &__separator {
-        margin: 24px 0;
-        color: #47474F;
-        text-align: center;
-        font-family: $font-p-regular;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 160%; 
-    }
-    &__form {
-        &__component {
-            padding-bottom: 8px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            label {
-                align-self: start;
-                color: #0D101D;
-                font-family: $font-p-medium;
-                font-size: 16px;
-                font-style: normal;
-                font-weight: 500;
-                line-height: 160%; 
-            }
-        }
-        &__component:nth-child(1) {
-            padding-bottom: 16px;
-        }
-    }
+	margin: auto;
+	width: 580px;
+	padding: 40px 40px 76px 40px;
+	text-align: center;
+	border-radius: 24px;
+	background: #fdfeff;
+	&__wrapper {
+		padding: 0 40px;
+	}
+	&__icon {
+		display: flex;
+		justify-content: flex-end;
+	}
+	&__title {
+		padding-bottom: 5px;
+		color: #03091c;
+		font-family: $font-p-semiBold;
+		font-size: 32px;
+		font-style: normal;
+		font-weight: 600;
+		line-height: 130%;
+	}
+	&__description {
+		margin-bottom: 48px;
+		color: #0d101d;
+		font-family: $font-p-regular;
+		font-size: 16px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 160%;
+	}
+	&__google {
+		border-radius: 48px;
+		padding: 14px;
+		border: 1px solid #03091c;
+		justify-content: center;
+		color: #03091c;
+		font-family: $font-p-medium;
+		font-size: 18px;
+		font-style: normal;
+		font-weight: 500;
+		line-height: 160%;
+	}
+	&__separator {
+		margin: 24px 0;
+		color: #47474f;
+		text-align: center;
+		font-family: $font-p-regular;
+		font-size: 14px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 160%;
+	}
+	&__form {
+		&__component {
+			padding-bottom: 8px;
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+			label {
+				align-self: start;
+				color: #0d101d;
+				font-family: $font-p-medium;
+				font-size: 16px;
+				font-style: normal;
+				font-weight: 500;
+				line-height: 160%;
+			}
+		}
+		&__component:nth-child(1) {
+			padding-bottom: 16px;
+		}
+	}
 }
 
 .form {
-    &__forgotPassword {
-        text-align: left;
-        color: #126FE1;
-        font-family: $font-p-medium;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 160%;
-
-    }
-    &__submit {
-        margin: 24px 0 48px;
-        padding: 14px;
-        border-radius: 48px;
-        background: #CACCD1;
-        font-family: $font-p-medium;
-        color:  #FDFEFF;
-        font-size: 18px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 160%;
-    }
-    &__input {
-        border: 1px solid #DBDBDD;
-        border-radius: 48px;
-        padding: 14px 24px;
-        color:  #47474F;
-        font-family: $font-p-regular;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 160%;
-    }
+	&__forgotPassword {
+		text-align: left;
+		color: #126fe1;
+		font-family: $font-p-medium;
+		font-size: 14px;
+		font-style: normal;
+		font-weight: 500;
+		line-height: 160%;
+	}
+	&__submit {
+		margin: 24px 0 48px;
+		padding: 14px;
+		border-radius: 48px;
+		background: #caccd1;
+		font-family: $font-p-medium;
+		color: #fdfeff;
+		font-size: 18px;
+		font-style: normal;
+		font-weight: 500;
+		line-height: 160%;
+	}
+	&__input {
+		border: 1px solid #dbdbdd;
+		border-radius: 48px;
+		padding: 14px 24px;
+		color: #47474f;
+		font-family: $font-p-regular;
+		font-size: 16px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 160%;
+	}
 }
 .noAccount {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    &__text {
-        color:  #0D101D;
-        font-family: $font-p-regular;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 160%;
-    }
-    &__signUp {
-        color:  #126FE1;
-        font-family:  $font-p-medium;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 160%;
-    }
+	display: flex;
+	justify-content: center;
+	gap: 8px;
+	&__text {
+		color: #0d101d;
+		font-family: $font-p-regular;
+		font-size: 14px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 160%;
+	}
+	&__signUp {
+		color: #126fe1;
+		font-family: $font-p-medium;
+		font-size: 14px;
+		font-style: normal;
+		font-weight: 500;
+		line-height: 160%;
+	}
 }

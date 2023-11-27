@@ -4,14 +4,14 @@ import { Button } from 'antd';
 
 import styles from './ButtonSecondary.module.scss';
 
-const ButtonSecondary = ({ children }) => {
+const ButtonSecondary = ({ children, onClick }) => {
 	return (
 		<>
 			<Button
-				key='email'
+				key='reg'
 				shape='round'
-				size='large'
-				className={styles.signUpEmail}>
+				onClick={onClick}
+				className={styles.buttonSecondary}>
 				{children}
 			</Button>
 		</>

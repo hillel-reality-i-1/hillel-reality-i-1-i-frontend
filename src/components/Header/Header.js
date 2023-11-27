@@ -8,6 +8,7 @@ import logo from '../../assets/img/icons/logo/header_logo.svg';
 import SignUp from '../Registration/SignUp/SignUp';
 
 import styles from './Header.module.scss';
+import SignIn from '../SignIn/SignIn';
 
 export default function Header() {
 	const { t } = useTranslation();
@@ -54,11 +55,10 @@ export default function Header() {
 						</li>
 					</ul>
 					<div className={styles.navigation_button}>
-						<a
-							href='/signin'
-							className={styles.button_link}>
-							Sign In
-						</a>
+						<div >
+							<SignIn/>
+						</div>
+
 						<a
 							href='/signup'
 							className={styles.button_link}>

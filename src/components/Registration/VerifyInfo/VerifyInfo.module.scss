@@ -1,33 +1,47 @@
-@import '../../../styles/constans.scss';
+@import '../../../styles/constants.scss';
 
-.container {
-	margin: 0 auto;
+.container_main {
 	width: 100%;
 	max-width: 410px;
+	margin-right: 25%;
 }
 
 .verify_info {
+	width: 100%;
+	margin: 0 auto;
 	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: 32px 0;
+	justify-content: flex-end;
 
-	.title {
-		font-family: $font-p-semiBold;
-		font-size: 40px;
-		line-height: 120%;
-		text-align: center;
-		color: $color-gray80;
-		margin-top: 48px;
-	}
+	&_main {
+		height: 800px;
+		padding-top: 64px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 
-	.text {
-		font-family: $font-p-regular;
-		font-size: 18px;
-		line-height: 160%;
-		color: $color-gray70;
-		text-align: center;
-		margin-top: 8px;
+		.img_phone {
+			width: 64px;
+			height: 58px;
+			margin-top: 95px;
+		}
+
+		.title {
+			font-family: $font-p-semiBold;
+			font-size: 40px;
+			line-height: 120%;
+			text-align: center;
+			color: $color-gray80;
+			margin-top: 48px;
+			margin-bottom: 8px;
+		}
+
+		.text {
+			font-family: $font-p-regular;
+			font-size: 18px;
+			line-height: 160%;
+			color: $color-gray70;
+			text-align: center;
+		}
 	}
 
 	.flex_text {
@@ -41,7 +55,9 @@
 		line-height: 160%;
 		color: $color-primary30base;
 		text-align: center;
-		margin-top: 8px;
+		&:hover {
+			color: $color-primary20;
+		}
 	}
 
 	.link_send {
@@ -50,5 +66,21 @@
 
 	.margin_bottom {
 		margin-bottom: 64px;
+	}
+}
+
+.aside {
+	width: 100%;
+	max-width: 490px;
+
+	&_bg {
+		width: 100%;
+		height: 100vh;
+		overflow: hidden;
+
+		img {
+			width: 100%;
+			height: 100%;
+		}
 	}
 }

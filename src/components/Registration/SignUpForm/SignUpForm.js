@@ -1,24 +1,116 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import { useTranslation } from 'react-i18next';
 import '../../../translations/i18n';
-import { Modal, Button, Checkbox, Input, Form } from 'antd';
-import { Formik } from 'formik';
+import { Modal, Button, Checkbox, Input, ConfigProvider } from 'antd';
+import { Formik, Form, Field } from 'formik';
+import ButtonPrimary from '../ButtonPrimary/ButtonPrimary';
+import error from '../../../assets/img/icons/icons-SignUp/error.svg';
+import success from '../../../assets/img/icons/icons-SignUp/success.svg';
+import open_eye from '../../../assets/img/icons/icons-SignUp/open_eye.svg';
+import closed_eye from '../../../assets/img/icons/icons-SignUp/closed_eye.svg';
 
 import styles from './SignUpForm.module.scss';
-
-const tailFormItemLayout = {
-	wrapperCol: {
-		xs: {
-			span: 24,
-		},
-	},
-};
 
 const SignUpForm = () => {
 	const { t } = useTranslation();
 	const navigate = useNavigate();
 	const [open, setOpen] = useState(false);
+	const [password, setPassword] = useState('');
+	const [validWarnings, setValidWarnings] = useState([]);
+
+	// validateEmail====================================//
+
+	const validateEmail = (value) => {
+		let error;
+		if (!value) {
+			error = t('textSignUp.error.required');
+		} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
+			error = t('textSignUp.error.email');
+		}
+		return error;
+	};
+
+	// validate Password==========================//
+
+	const validatePasswordLength = (value) => {
+		if (value.length < 8) {
+			return t('textSignUp.error.length');
+		}
+		return null;
+	};
+
+	const validatePasswordSymbol = (value) => {
+		if (!/[0-9!@#$%^&*()_+{}[\]:;<>,.?~\\/-]/.test(value)) {
+			return t('textSignUp.error.symbolNumber');
+		}
+		return null;
+	};
+
+	const validatePasswordCase = (value) => {
+		if (!/[A-Z]/.test(value) || !/[a-z]/.test(value)) {
+			return t('textSignUp.error.register');
+		}
+		return null;
+	};
+
+	const validatePassword = (value) => {
+		setPassword(value);
+		let messages = [];
+
+		// Validate password length
+		const lengthError = validatePasswordLength(value);
+		if (lengthError) {
+			messages.push({ message: lengthError, isWarning: false });
+		} else {
+			messages.push({ message: t('textSignUp.error.length'), isWarning: true });
+		}
+
+		// Validate password symbols
+		const symbolError = validatePasswordSymbol(value);
+		if (symbolError) {
+			messages.push({ message: symbolError, isWarning: false });
+		} else {
+			messages.push({ message: t('textSignUp.error.symbolNumber'), isWarning: true });
+		}
+
+		// Validate password case
+		const caseError = validatePasswordCase(value);
+		if (caseError) {
+			messages.push({ message: caseError, isWarning: false });
+		} else {
+			messages.push({ message: t('textSignUp.error.register'), isWarning: true });
+		}
+
+		// Update the validWarnings state with the array of messages
+		setValidWarnings(messages);
+
+		const errors = messages
+			.filter((msg) => !msg.isWarning && msg.message !== null)
+			.map((msg) => msg.message);
+
+		// Return null when there are no errors
+		return errors.length === 0 ? null : errors;
+	};
+
+	const validateConfirmPassword = (value, password) => {
+		let error;
+		if (!value) {
+			error = t('textSignUp.error.required');
+		} else if (value !== password) {
+			error = t('textSignUp.error.coincidence');
+		}
+		return error;
+	};
+
+	const validateCheckBox = (checked) => {
+		let error;
+		if (!checked) {
+			error = t('textSignUp.error.required');
+		}
+		return error;
+	};
 
 	const showModal = () => {
 		setOpen(true);
@@ -28,7 +120,9 @@ const SignUpForm = () => {
 		setOpen(false);
 	};
 
-	const signUpHandler = () => {
+	const handleSubmit = (values, { setSubmitting }) => {
+		setSubmitting(false);
+		console.log(values);
 		setOpen(false);
 		navigate('/verifyInfo');
 	};
@@ -66,75 +160,217 @@ const SignUpForm = () => {
 				<p className={styles.description}>{t('textSignUp.signUpDescription')}</p>
 
 				<Formik
-					initialValues={{ email: '', password: '', passwordConfirm: '' }}
-					validate={(values) => {
-						const errors = {};
-						if (!values.email) {
-							errors.email = 'Required';
-						} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-							errors.email = 'Invalid email address';
-						}
-						return errors;
+					initialValues={{
+						email: '',
+						password: '',
+						confirmPassword: '',
+						checked: false,
 					}}
-					onSubmit={(values) => {
+					onSubmit={(values, { setSubmitting }) => {
+						navigate('/verifyInfo');
+						setSubmitting(false);
 						console.log(values);
 					}}>
-					{({ errors, touched }) => (
-						<Form
-							className={styles.form}
-							layout='vertical'>
-							<Form.Item
-								className={styles.Form_item}
-								name='email'
-								label={t('textSignUp.email')}>
-								<Input
-									className={`${styles.input} `}
-									name='email'
-									// validate={validateEmail}
-								/>
-								{errors.email && touched.email && <div className={styles.error}></div>}
-							</Form.Item>
+					{({ isSubmitting, errors, isValid, dirty, values, touched }) => (
+						<ConfigProvider
+							theme={{
+								token: {
+									colorBorder: '#126FE1',
+									colorBgContainer: '#FDFEFF',
+								},
+							}}>
+							<Form className={styles.form}>
+								{/* input email------------------------------------------------- */}
+								<div>
+									<label
+										className={styles.label}
+										htmlFor='email'>
+										{t('textSignUp.email')}
+									</label>
+									<Field
+										name='email'
+										validate={validateEmail}>
+										{({ field }) => (
+											<Input
+												{...field}
+												type='email'
+												name='email'
+												autoComplete='off'
+												placeholder='your.email@example.com'
+												className={`${styles.input} ${
+													errors.email && touched.email ? styles.invalid : ''
+												}`}
+											/>
+										)}
+									</Field>
+									{errors.email && touched.email && (
+										<div className={styles.error}>
+											<div className='img_wrapper'>
+												<img
+													className={styles.img_er}
+													style={{ width: '18px' }}
+													src={error}
+													alt='error'
+												/>
+											</div>
+											{errors.email}
+										</div>
+									)}
+								</div>
+								{/* input password------------------------------------------------ */}
+								<div>
+									<label
+										htmlFor='password'
+										className={styles.label}>
+										{t('textSignUp.password')}
+									</label>
+									<Field
+										name='password'
+										validate={(value) => validatePassword(value)}
+										autoComplete='off'>
+										{({ field }) => (
+											<Input.Password
+												{...field}
+												type='password'
+												name='password'
+												autoComplete='off'
+												iconRender={(visible) =>
+													visible ? (
+														<img
+															src={open_eye}
+															alt='eye'
+														/>
+													) : (
+														<img
+															src={closed_eye}
+															alt='eye'
+														/>
+													)
+												}
+												placeholder='&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;'
+												className={`${styles.input} ${
+													errors.password && touched.password ? styles.invalid : ''
+												}`}
+											/>
+										)}
+									</Field>
+									{errors.password && touched.password && (
+										<ul>
+											{validWarnings.map((msg, i) => (
+												<li
+													className={`${styles.error} ${msg.isWarning ? styles.input_success : ''}`}
+													key={i}>
+													<div className='img_wrapper'>
+														<img
+															className={styles.img_er}
+															style={{ width: '18px' }}
+															src={!msg.isWarning ? error : success}
+															alt='error'
+														/>
+													</div>
+													{msg.message}
+												</li>
+											))}
+										</ul>
+									)}
+								</div>
 
-							<Form.Item
-								label={t('textSignUp.password')}
-								name='password'>
-								<Input.Password className={styles.input} />
-							</Form.Item>
-							<Form.Item
-								label={t('textSignUp.password')}
-								name='passwordConfirm'>
-								<Input.Password className={styles.input} />
-							</Form.Item>
-							<Form.Item
-								name='agreement'
-								valuePropName='checked'
-								className={styles.itemCheckbox}
-								rules={[
-									{
-										validator: (_, value) =>
-											value
-												? Promise.resolve()
-												: Promise.reject(new Error('Should accept agreement')),
-									},
-								]}
-								{...tailFormItemLayout}>
-								<Checkbox
-									className={styles.checkbox}
-									style={{ dispay: 'flex' }}>
-									{t('textSignUp.agree')} &nbsp; <a href='/'>The Terms and Conditions</a>
-								</Checkbox>
-							</Form.Item>
-							<Form.Item>
-								<button
-									type='submit'
-									className={styles.btn_signup_form}
-									onClick={signUpHandler}>
-									{t('textSignUp.signUp')}
-								</button>
-							</Form.Item>
-						</Form>
+								{/* input passwordConfirm------------------------------------------------------------ */}
+
+								<div>
+									<label
+										htmlFor='confirmPassword'
+										className={styles.label}>
+										{t('textSignUp.confirmPassword')}
+									</label>
+									<Field
+										name='confirmPassword'
+										validate={(value) => validateConfirmPassword(value, password)}
+										value={values}>
+										{({ field }) => (
+											<Input.Password
+												{...field}
+												type='password'
+												name='confirmPassword'
+												autoComplete='off'
+												iconRender={(visible) =>
+													visible ? (
+														<img
+															src={open_eye}
+															alt='eye'
+														/>
+													) : (
+														<img
+															src={closed_eye}
+															alt='eye'
+														/>
+													)
+												}
+												className={`${styles.input} ${
+													errors.confirmPassword && touched.confirmPassword ? styles.invalid : ''
+												}`}
+												placeholder='&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;'
+											/>
+										)}
+									</Field>
+									{errors.confirmPassword && touched.confirmPassword && (
+										<div className={styles.error}>
+											<div className='img_wrapper'>
+												<img
+													className={styles.img_er}
+													style={{ width: '18px' }}
+													src={error}
+													alt='error'
+												/>
+											</div>
+											{errors.confirmPassword}
+										</div>
+									)}
+								</div>
+
+								{/* checkbox ------------------------------------------ */}
+
+								<label
+									style={{ dispay: 'block' }}
+									className={styles.checkbox_label}>
+									<Field
+										type='checkbox'
+										name='checked'
+										validate={validateCheckBox}
+										checked={values.checked}>
+										{({ field }) => (
+											<Checkbox
+												{...field}
+												checked={values.checked}
+												className={styles.checkbox}
+											/>
+										)}
+									</Field>
+									<span className={styles.shecked_text}>
+										{t('textSignUp.agree')} <a href='/'>The Terms and Conditions</a>
+									</span>
+								</label>
+
+								{/* button submit ----------------------- */}
+
+								<ButtonPrimary
+									htmlType='submit'
+									isDisable={!isValid || !dirty || isSubmitting}
+									onClick={handleSubmit}>
+									<span className={styles.btn_submit_text}>{t('textSignUp.signUp')}</span>
+								</ButtonPrimary>
+							</Form>
+						</ConfigProvider>
 					)}
 				</Formik>
+				<span className={styles.bottomLinkWrapper}>
+					{t('textSignUp.alreadyHaveAnAccount')}
+					<a
+						href='/'
+						type='link'>
+						{t('textSignUp.signIn')}
+					</a>
+				</span>
 			</Modal>
 		</>
 	);

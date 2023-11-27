@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
 import '../../../translations/i18n';
 import { Button, Modal } from 'antd';
 
 import google from '../../../assets/img/icons/icons-SignUp/google.svg';
+import sign_up1_logo from '../../../assets/img/icons/logo/sign_up1_logo.svg';
 import SignUpForm from '../SignUpForm/SignUpForm';
 
 import styles from './SignUp.module.scss';
@@ -29,6 +31,7 @@ const SignUp = () => {
 				onClick={showModalFirst}>
 				{t('textSignUp.signUp')}
 			</Button>
+
 			<Modal
 				open={open}
 				closeIcon={
@@ -47,7 +50,6 @@ const SignUp = () => {
 				centered
 				width={580}
 				className={styles.modal}
-				title={`${t('textSignUp.signUpTo')} U-Help`}
 				onCancel={handleCancelFirst}
 				footer={[
 					<Button
@@ -73,13 +75,23 @@ const SignUp = () => {
 						{t('textSignUp.alreadyHaveAnAccount')}
 						<a
 							href='/'
-							type='link'
-							block>
+							type='link'>
 							{t('textSignUp.signIn')}
 						</a>
 					</span>,
 				]}>
-				<p className={styles.description}>{t('textSignUp.signUpDescription')}</p>
+				<div className={styles.header_modal_wrapper}>
+					<Link
+						to='/'
+						className={styles.logo}>
+						<img
+							src={sign_up1_logo}
+							alt='Logo'
+						/>
+					</Link>
+					<h4 className={styles.title}>{`${t('textSignUp.signUpTo')} U-Help`}</h4>
+					<p className={styles.description}>{t('textSignUp.signUpDescription')}</p>
+				</div>
 			</Modal>
 		</>
 	);
