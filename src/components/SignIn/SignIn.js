@@ -69,7 +69,7 @@ export default function SignIn() {
 
   return (
     <>
-      <p className={styles.signInButton} onClick={openModal}>Sign IN</p>
+      <p className={styles.signInButton} onClick={openModal}>Вхід</p>
       {isOpen && (
         <div className={`${styles.shadow} ${styles.fadeIn}`}>
           <div className={`${styles.signIn} `}>

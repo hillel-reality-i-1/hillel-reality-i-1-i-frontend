@@ -15,7 +15,7 @@
 .signInButton {
     color: $color-primary30base;
     @include customFontStyles (18px, normal, 500);
-    font-family: $font-p-medium;
+    font-family: $semiBold;
     text-transform: uppercase;
     white-space: nowrap;
     line-height: 160%; 
