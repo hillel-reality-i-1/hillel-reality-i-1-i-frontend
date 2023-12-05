@@ -22,6 +22,25 @@ $color-secondaryYellow: #ffd100;
 $color-systemSuccess: #228326;
 $color-systemError: #b3261e;
 
+@font-face {
+	font-family: 'NotoSans SemiBold';
+	src: url('../assets/fonts/Noto_Sans/NotoSans-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'NotoSans Regular';
+	src: url('../assets/fonts/Noto_Sans/NotoSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'NotoSans Medium';
+	src: url('../assets/fonts/Noto_Sans/NotoSans-Medium.ttf') format('truetype');
+}
+
+$semiBold: 'NotoSans SemiBold';
+$regular: 'NotoSans Regular';
+$medium: 'NotoSans Medium';
+
 // fonts
 @font-face {
 	font-family: 'Poppins-Regular';
