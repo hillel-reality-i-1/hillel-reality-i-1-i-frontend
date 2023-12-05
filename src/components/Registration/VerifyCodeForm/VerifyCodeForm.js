@@ -6,24 +6,17 @@ import '../../../translations/i18n';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { Input } from 'antd';
 
-import ButtonPrimary from '../ButtonPrimary/ButtonPrimary';
 import phone from '../../../assets/img/icons/icons-SignUp/phone.svg';
 import arrowLeft from '../../../assets/img/icons/icons-SignUp/arrowLeft.svg';
 import step_logo from '../../../assets/img/icons/logo/step_logo.svg';
 import img_aside_step3 from '../../../assets/img/img-sign-up/img_aside_step3.png';
+import CustomButton from '../../CustomButton/CustomButton';
+import { useValidation } from '../../../helpers/validation';
 
 import styles from './VerifyCodeForm.module.scss';
 
-const validateInput = (value) => {
-	let error;
-	if (!value) {
-		error = 'Required';
-	}
-	return error;
-};
-
 const NumericInput = (props) => {
-	const { value, onChange } = props;
+	const { onChange } = props;
 
 	const handleChange = (e) => {
 		const { value: inputValue } = e.target;
@@ -31,8 +24,6 @@ const NumericInput = (props) => {
 		if (reg.test(inputValue)) {
 			onChange(inputValue);
 		}
-
-		console.log(value);
 	};
 
 	return (
@@ -52,9 +43,9 @@ const VerifyCodeForm = () => {
 	const [value3, setValue3] = useState('');
 	const [value4, setValue4] = useState('');
 
-	const handleSubmit = (value1) => {
-		console.log(value1);
+	const { validateInputRequired } = useValidation();
 
+	const handleSubmit = (value1) => {
 		navigate('/');
 	};
 
@@ -110,16 +101,14 @@ const VerifyCodeForm = () => {
 							}}
 							onSubmit={(values, { setSubmitting }) => {
 								setSubmitting(false);
-								console.log(values);
 							}}>
 							{({ isSubmitting, isValid, dirty }) => (
 								<Form className={styles.form}>
 									<div className={styles.form_input_wrapper}>
 										{/* input 1----------------------------------------------------------------------- */}
-
 										<Field
 											name='code1'
-											validate={validateInput}>
+											validate={(value) => validateInputRequired(value)}>
 											{({ field }) => (
 												<NumericInput
 													{...field}
@@ -136,10 +125,9 @@ const VerifyCodeForm = () => {
 										/>
 
 										{/* input 2 ----------------------------------------------------------------------- */}
-
 										<Field
 											name='code2'
-											validate={validateInput}>
+											validate={(value) => validateInputRequired(value)}>
 											{({ field }) => (
 												<NumericInput
 													{...field}
@@ -156,10 +144,9 @@ const VerifyCodeForm = () => {
 										/>
 
 										{/* input 3----------------------------------------------------------------------- */}
-
 										<Field
 											name='code3'
-											validate={validateInput}>
+											validate={(value) => validateInputRequired(value)}>
 											{({ field }) => (
 												<NumericInput
 													{...field}
@@ -176,10 +163,9 @@ const VerifyCodeForm = () => {
 										/>
 
 										{/* input 4----------------------------------------------------------------------- */}
-
 										<Field
 											name='code4'
-											validate={validateInput}>
+											validate={(value) => validateInputRequired(value)}>
 											{({ field }) => (
 												<NumericInput
 													{...field}
@@ -195,13 +181,14 @@ const VerifyCodeForm = () => {
 											component='div'
 										/>
 									</div>
-									{/* button submit ---------------------------------------------------------- */}
 
-									<ButtonPrimary
+									{/* button submit ---------------------------------------------------------- */}
+									<CustomButton
 										htmlType='submit'
+										type='primary'
 										onClick={handleSubmit}>
 										{t('textSignUp.textVerifyCode.confirmNumber')}
-									</ButtonPrimary>
+									</CustomButton>
 									<div className={styles.form_text_bottom_wrapper}>
 										<span className={`${styles.text} ${styles.margin_right}`}>
 											{t('textSignUp.textVerifyCode.didntReceiveCode')}

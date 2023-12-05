@@ -1,10 +1,9 @@
 import React from 'react';
-
 import { Button, ConfigProvider } from 'antd';
 
-import styles from './ButtonPrimary.module.scss';
+import styles from './CustomButton.module.scss';
 
-const ButtonPrimary = ({ children, htmlType, isDisable }) => {
+const CustomButton = ({ children, onClick, htmlType, isDisable, type }) => {
 	return (
 		<>
 			<ConfigProvider
@@ -17,13 +16,15 @@ const ButtonPrimary = ({ children, htmlType, isDisable }) => {
 					},
 				}}>
 				<Button
-					key='email'
-					type='primary'
-					htmlType='htmlType'
+					type={type}
+					htmlType={htmlType}
 					shape='round'
 					size='large'
+					onClick={onClick}
 					disabled={isDisable}
-					className={styles.signUpPrimary}>
+					className={`${styles.btn}  ${
+						type === 'primary' ? styles.buttonPrimary : styles.buttonSecondary
+					}`}>
 					{children}
 				</Button>
 			</ConfigProvider>
@@ -31,4 +32,4 @@ const ButtonPrimary = ({ children, htmlType, isDisable }) => {
 	);
 };
 
-export default ButtonPrimary;
+export default CustomButton;

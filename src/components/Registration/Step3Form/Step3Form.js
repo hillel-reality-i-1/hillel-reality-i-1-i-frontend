@@ -6,9 +6,8 @@ import '../../../translations/i18n';
 import { Input } from 'antd';
 import { Form, Formik, Field } from 'formik';
 
-import ButtonPrimary from '../ButtonPrimary/ButtonPrimary';
-
 import styles from './Step3Form.module.scss';
+import CustomButton from '../../CustomButton/CustomButton';
 
 const Step3Form = () => {
 	const { t } = useTranslation();
@@ -31,7 +30,6 @@ const Step3Form = () => {
 						onSubmit={(values, { setSubmitting }) => {
 							novigate('/verifyCodeForm');
 							setSubmitting(false);
-							console.log(values);
 						}}>
 						{({ isSubmitting }) => (
 							<Form className={styles.form}>
@@ -53,8 +51,8 @@ const Step3Form = () => {
 											<option value='+34'>+34</option>
 										</Field>
 									</div>
-									{/* input numberPhone ----------------------------------------------------------------------- */}
 
+									{/* input numberPhone ----------------------------------------------------------------------- */}
 									<Field
 										name='numberPhone'
 										autoComplete='off'>
@@ -73,12 +71,13 @@ const Step3Form = () => {
 								</div>
 
 								{/* button submit ---------------------------------------------------------- */}
-								<ButtonPrimary
+								<CustomButton
 									htmlType='submit'
+									type='primary'
 									onClick={handleSubmit}
 									disabled={isSubmitting}>
 									{t('textSignUp.textStep3.getCode')}
-								</ButtonPrimary>
+								</CustomButton>
 								<div className={styles.skip_link}>
 									<Link
 										className={styles.link}

@@ -6,33 +6,24 @@ import { Formik, Form, Field } from 'formik';
 import { Input } from 'antd';
 
 import error from '../../../assets/img/icons/icons-SignUp/error.svg';
-import ButtonPrimary from '../ButtonPrimary/ButtonPrimary';
+import CustomButton from '../../CustomButton/CustomButton';
+import { useValidation } from '../../../helpers/validation';
 
 import styles from './Step1Form.module.scss';
 
 const Step1Form = ({ onNext }) => {
 	const { t } = useTranslation();
 	const [lastName, setLastName] = useState('');
-
-	const validateFirstName = (value) => {
-		let error;
-		if (!value) {
-			error = 'Це поле обов’язкове. Заповніть його';
-		} else if (!/^[A-Za-zА-Яа-яЁёІіЇїЄєҐґ]+$/.test(value)) {
-			error = 'Можна використовувати тільки літери';
-		}
-		return error;
-	};
+	const { validateFirstName } = useValidation();
 
 	const handleChangeLastName = (e) => {
 		const { value } = e.target;
-		// Replace any non-alphabetic characters with an empty string
-		const filteredValue = value.replace(/[^A-Za-zА-Яа-яЁёІіЇїЄєҐґ]/g, '');
-		setLastName(filteredValue); // Set the filtered value in the state
+		const filteredValue = value.replace(/[^A-Za-zА-Яа-яЁёІіЇїЄєҐґ'-]/g, '');
+		const truncatedValue = filteredValue.slice(0, 20);
+		setLastName(truncatedValue);
 	};
 
 	const handleSubmit = (values) => {
-		console.log(values);
 		onNext();
 	};
 
@@ -50,7 +41,6 @@ const Step1Form = ({ onNext }) => {
 						onSubmit={(values, { setSubmitting }) => {
 							setSubmitting(false);
 							onNext();
-							console.log(values);
 						}}>
 						{({ isSubmitting, isValid, dirty, touched, errors }) => (
 							<Form className={styles.form}>
@@ -63,7 +53,7 @@ const Step1Form = ({ onNext }) => {
 									</label>
 									<Field
 										name='firstName'
-										validate={validateFirstName}>
+										validate={(value) => validateFirstName(value)}>
 										{({ field }) => (
 											<Input
 												{...field}
@@ -114,12 +104,13 @@ const Step1Form = ({ onNext }) => {
 								</div>
 
 								{/* button submit ---------------------------------------------------------- */}
-								<ButtonPrimary
+								<CustomButton
 									htmlType='submit'
+									type='primary'
 									isDisable={!isValid || !dirty || isSubmitting}
 									onClick={handleSubmit}>
 									{t('textSignUp.continue')}
-								</ButtonPrimary>
+								</CustomButton>
 							</Form>
 						)}
 					</Formik>

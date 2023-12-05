@@ -31,7 +31,7 @@
 }
 
 .footer_title {
-	font-family: $font-p-medium;
+	font-family: $font-ns-medium;
 	font-size: 20px;
 	line-height: 160%;
 	color: $color-gray80;
@@ -56,7 +56,7 @@
 	margin: 0 -23px;
 
 	&_item {
-		font-family: $font-p-regular;
+		font-family: $font-ns-regular;
 		font-size: 14px;
 		line-height: 160%;
 		color: $color-gray40;
@@ -79,7 +79,7 @@
 
 	&_nav {
 		&_item a {
-			font-family: $font-p-regular;
+			font-family: $font-ns-regular;
 			font-size: 18px;
 			line-height: 160%;
 			color: $color-gray70;
@@ -100,7 +100,7 @@
 
 	&_nav {
 		&_item a {
-			font-family: $font-p-regular;
+			font-family: $font-ns-regular;
 			font-size: 18px;
 			line-height: 160%;
 			color: $color-gray70;

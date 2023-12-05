@@ -1,116 +1,35 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
 import '../../../translations/i18n';
-import { Modal, Button, Checkbox, Input, ConfigProvider } from 'antd';
+import { Modal, Checkbox, Input, ConfigProvider } from 'antd';
 import { Formik, Form, Field } from 'formik';
-import ButtonPrimary from '../ButtonPrimary/ButtonPrimary';
 import error from '../../../assets/img/icons/icons-SignUp/error.svg';
 import success from '../../../assets/img/icons/icons-SignUp/success.svg';
 import open_eye from '../../../assets/img/icons/icons-SignUp/open_eye.svg';
 import closed_eye from '../../../assets/img/icons/icons-SignUp/closed_eye.svg';
+import { fetchRegisterEmail } from '../../../store/slices/authSlice';
+import CustomButton from '../../CustomButton/CustomButton';
+import { useValidation } from '../../../helpers/validation';
 
 import styles from './SignUpForm.module.scss';
 
 const SignUpForm = () => {
 	const { t } = useTranslation();
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
+
 	const [open, setOpen] = useState(false);
-	const [password, setPassword] = useState('');
-	const [validWarnings, setValidWarnings] = useState([]);
 
-	// validateEmail====================================//
-
-	const validateEmail = (value) => {
-		let error;
-		if (!value) {
-			error = t('textSignUp.error.required');
-		} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
-			error = t('textSignUp.error.email');
-		}
-		return error;
-	};
-
-	// validate Password==========================//
-
-	const validatePasswordLength = (value) => {
-		if (value.length < 8) {
-			return t('textSignUp.error.length');
-		}
-		return null;
-	};
-
-	const validatePasswordSymbol = (value) => {
-		if (!/[0-9!@#$%^&*()_+{}[\]:;<>,.?~\\/-]/.test(value)) {
-			return t('textSignUp.error.symbolNumber');
-		}
-		return null;
-	};
-
-	const validatePasswordCase = (value) => {
-		if (!/[A-Z]/.test(value) || !/[a-z]/.test(value)) {
-			return t('textSignUp.error.register');
-		}
-		return null;
-	};
-
-	const validatePassword = (value) => {
-		setPassword(value);
-		let messages = [];
-
-		// Validate password length
-		const lengthError = validatePasswordLength(value);
-		if (lengthError) {
-			messages.push({ message: lengthError, isWarning: false });
-		} else {
-			messages.push({ message: t('textSignUp.error.length'), isWarning: true });
-		}
-
-		// Validate password symbols
-		const symbolError = validatePasswordSymbol(value);
-		if (symbolError) {
-			messages.push({ message: symbolError, isWarning: false });
-		} else {
-			messages.push({ message: t('textSignUp.error.symbolNumber'), isWarning: true });
-		}
-
-		// Validate password case
-		const caseError = validatePasswordCase(value);
-		if (caseError) {
-			messages.push({ message: caseError, isWarning: false });
-		} else {
-			messages.push({ message: t('textSignUp.error.register'), isWarning: true });
-		}
-
-		// Update the validWarnings state with the array of messages
-		setValidWarnings(messages);
-
-		const errors = messages
-			.filter((msg) => !msg.isWarning && msg.message !== null)
-			.map((msg) => msg.message);
-
-		// Return null when there are no errors
-		return errors.length === 0 ? null : errors;
-	};
-
-	const validateConfirmPassword = (value, password) => {
-		let error;
-		if (!value) {
-			error = t('textSignUp.error.required');
-		} else if (value !== password) {
-			error = t('textSignUp.error.coincidence');
-		}
-		return error;
-	};
-
-	const validateCheckBox = (checked) => {
-		let error;
-		if (!checked) {
-			error = t('textSignUp.error.required');
-		}
-		return error;
-	};
+	const {
+		validateEmail,
+		validateCheckBox,
+		validateConfirmPassword,
+		validatePassword,
+		validWarnings,
+	} = useValidation();
 
 	const showModal = () => {
 		setOpen(true);
@@ -119,23 +38,38 @@ const SignUpForm = () => {
 	const handleCancel = () => {
 		setOpen(false);
 	};
-
-	const handleSubmit = (values, { setSubmitting }) => {
-		setSubmitting(false);
-		console.log(values);
-		setOpen(false);
-		navigate('/verifyInfo');
-	};
+	// const handleResend = async () => {
+	// 	try {
+	// 		const data = await axios.post(URL_RESEND_EMAIL, {
+	// 			email: 'boiko.sergey93@gmail.com',
+	// 		});
+	// 		return data.data;
+	// 	} catch (error) {
+	// 		console.error(error.message);
+	// 	}
+	// };
+	// const handleSubmit = async (values) => {
+	// 	const data = await axios.post('http://0.0.0.0:8000/api/v1/auth/registration/', {
+	// 		email: 'boiko.sergey93@gmail.com',
+	// 		password1: 'Y&6hdkU8&',
+	// 		password2: 'Y&6hdkU8&',
+	// 		// email: 'boiko.sergey93@gmail.com',
+	// 	});
+	// 	return data.data;
+	// 	setOpen(false);
+	// 	navigate('/verifyInfo');
+	// };
 
 	return (
 		<>
 			{' '}
-			<Button
+			<CustomButton
 				type='primary'
+				htmlType='button'
 				onClick={showModal}
-				className={styles.btn_open_modal}>
+				isDisable={false}>
 				{t('textSignUp.signUpWithEmail')}
-			</Button>
+			</CustomButton>
 			<Modal
 				open={open}
 				closeIcon={
@@ -161,15 +95,22 @@ const SignUpForm = () => {
 
 				<Formik
 					initialValues={{
-						email: '',
-						password: '',
-						confirmPassword: '',
+						email: 'boiko.sergey93@gmail.com',
+						password: 'tgrtjii7&H',
+						confirmPassword: 'tgrtjii7&H',
 						checked: false,
 					}}
 					onSubmit={(values, { setSubmitting }) => {
-						navigate('/verifyInfo');
+						const user = {
+							email: values.email,
+							password1: values.password,
+							password2: values.password,
+						};
+						console.log(user, values);
+
+						dispatch(fetchRegisterEmail(user));
 						setSubmitting(false);
-						console.log(values);
+						navigate('/verifyInfo');
 					}}>
 					{({ isSubmitting, errors, isValid, dirty, values, touched }) => (
 						<ConfigProvider
@@ -189,7 +130,7 @@ const SignUpForm = () => {
 									</label>
 									<Field
 										name='email'
-										validate={validateEmail}>
+										validate={(values) => validateEmail(values)}>
 										{({ field }) => (
 											<Input
 												{...field}
@@ -274,9 +215,7 @@ const SignUpForm = () => {
 										</ul>
 									)}
 								</div>
-
 								{/* input passwordConfirm------------------------------------------------------------ */}
-
 								<div>
 									<label
 										htmlFor='confirmPassword'
@@ -285,7 +224,7 @@ const SignUpForm = () => {
 									</label>
 									<Field
 										name='confirmPassword'
-										validate={(value) => validateConfirmPassword(value, password)}
+										validate={(value) => validateConfirmPassword(value)}
 										value={values}>
 										{({ field }) => (
 											<Input.Password
@@ -327,16 +266,14 @@ const SignUpForm = () => {
 										</div>
 									)}
 								</div>
-
 								{/* checkbox ------------------------------------------ */}
-
 								<label
 									style={{ dispay: 'block' }}
 									className={styles.checkbox_label}>
 									<Field
 										type='checkbox'
 										name='checked'
-										validate={validateCheckBox}
+										validate={(value) => validateCheckBox(value, t)}
 										checked={values.checked}>
 										{({ field }) => (
 											<Checkbox
@@ -350,15 +287,13 @@ const SignUpForm = () => {
 										{t('textSignUp.agree')} <a href='/'>The Terms and Conditions</a>
 									</span>
 								</label>
-
 								{/* button submit ----------------------- */}
-
-								<ButtonPrimary
+								<CustomButton
 									htmlType='submit'
-									isDisable={!isValid || !dirty || isSubmitting}
-									onClick={handleSubmit}>
+									type='primary'
+									isDisable={!isValid || !dirty || isSubmitting}>
 									<span className={styles.btn_submit_text}>{t('textSignUp.signUp')}</span>
-								</ButtonPrimary>
+								</CustomButton>
 							</Form>
 						</ConfigProvider>
 					)}

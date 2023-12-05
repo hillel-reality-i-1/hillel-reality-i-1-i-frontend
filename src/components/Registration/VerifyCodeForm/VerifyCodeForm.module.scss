@@ -26,7 +26,7 @@
 	}
 
 	.title {
-		font-family: $font-p-semiBold;
+		font-family: $font-ns-semiBold;
 		font-size: 40px;
 		line-height: 120%;
 		text-align: center;
@@ -43,14 +43,14 @@
 	}
 
 	.text {
-		font-family: $font-p-regular;
+		font-family: $font-ns-regular;
 		font-size: 18px;
 		line-height: 160%;
 		color: $color-gray70;
 	}
 
 	.text_link {
-		font-family: $font-p-medium;
+		font-family: $font-ns-medium;
 		font-size: 18px;
 		line-height: 160%;
 		color: $color-primary30base;
@@ -64,7 +64,7 @@
 			display: flex;
 			gap: 24px;
 			.input {
-				font-family: $font-p-medium;
+				font-family: $font-ns-medium;
 				font-size: 28px;
 				text-align: center;
 				width: 85px;
@@ -124,7 +124,7 @@
 		}
 
 		.link_text {
-			font-family: $font-p-medium;
+			font-family: $font-ns-medium;
 			font-size: 18px;
 			line-height: 160%;
 			letter-spacing: 0.36px;
@@ -145,7 +145,7 @@
 	}
 
 	.title {
-		font-family: $font-p-semiBold;
+		font-family: $font-ns-semiBold;
 		font-size: 40px;
 		line-height: 120%;
 		text-align: center;
@@ -162,14 +162,14 @@
 	}
 
 	.text {
-		font-family: $font-p-regular;
+		font-family: $font-ns-regular;
 		font-size: 18px;
 		line-height: 160%;
 		color: $color-gray70;
 	}
 
 	.text_link {
-		font-family: $font-p-medium;
+		font-family: $font-ns-medium;
 		font-size: 18px;
 		line-height: 160%;
 		color: $color-primary30base;
@@ -183,7 +183,7 @@
 			display: flex;
 			gap: 24px;
 			.input {
-				font-family: $font-p-medium;
+				font-family: $font-ns-medium;
 				font-size: 28px;
 				text-align: center;
 				width: 85px;

@@ -18,6 +18,7 @@ import styles from './StepLayout.module.scss';
 
 const StepLayout = () => {
 	const { t } = useTranslation();
+
 	const steps = [
 		{
 			title: t('textSignUp.name'),

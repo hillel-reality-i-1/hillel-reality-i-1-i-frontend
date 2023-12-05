@@ -8,7 +8,7 @@ import VerifyInfo from './components/Registration/VerifyInfo/VerifyInfo';
 import ForgotYourPasswordForm from './components/RecoveryPassword/ForgotYourPassword/ForgotYourPassword';
 import EmailOnTheWay from './components/RecoveryPassword/EmailOnTheWay/EmailOnTheWay';
 import CreateNewPassword from './components/RecoveryPassword/CreateNewPassword/CreateNewPassword';
-import PasswordUpdated from './components/RecoveryPassword/PasswordUpdated/PasswordUpdated'
+import PasswordUpdated from './components/RecoveryPassword/PasswordUpdated/PasswordUpdated';
 
 import StepLayout from './components/Registration/StepLayout/StepLayout';
 
@@ -26,7 +26,7 @@ const router = createBrowserRouter([
 		element: <VerifyCodeForm />,
 	},
 	{
-		path: '/stepLayout',
+		path: '/createUnAccount/:token',
 		element: <StepLayout />,
 	},
 	{
