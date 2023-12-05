@@ -38,27 +38,6 @@ const SignUpForm = () => {
 	const handleCancel = () => {
 		setOpen(false);
 	};
-	// const handleResend = async () => {
-	// 	try {
-	// 		const data = await axios.post(URL_RESEND_EMAIL, {
-	// 			email: 'boiko.sergey93@gmail.com',
-	// 		});
-	// 		return data.data;
-	// 	} catch (error) {
-	// 		console.error(error.message);
-	// 	}
-	// };
-	// const handleSubmit = async (values) => {
-	// 	const data = await axios.post('http://0.0.0.0:8000/api/v1/auth/registration/', {
-	// 		email: 'boiko.sergey93@gmail.com',
-	// 		password1: 'Y&6hdkU8&',
-	// 		password2: 'Y&6hdkU8&',
-	// 		// email: 'boiko.sergey93@gmail.com',
-	// 	});
-	// 	return data.data;
-	// 	setOpen(false);
-	// 	navigate('/verifyInfo');
-	// };
 
 	return (
 		<>
@@ -95,9 +74,9 @@ const SignUpForm = () => {
 
 				<Formik
 					initialValues={{
-						email: 'boiko.sergey93@gmail.com',
-						password: 'tgrtjii7&H',
-						confirmPassword: 'tgrtjii7&H',
+						email: '',
+						password: '',
+						confirmPassword: '',
 						checked: false,
 					}}
 					onSubmit={(values, { setSubmitting }) => {
