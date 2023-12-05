@@ -92,7 +92,7 @@ export const TRANSLATIONS_UK = {
 	textForgotYourPassword: {
 		forgotYourPassword: 'Забули ваш пароль?',
 		createNewPasswordDescription: 'Введіть вашу пошту, і ми надішлемо вам посилання для відновлення пароля',
-		email: 'Електронна пошта:',
+		email: 'Пошта:',
 		recieveTheLink: 'Отримати посилання',
 		dontHaveAnAccount: 'Немає акаунту?',
 		signUp: 'Зареєструватися',
@@ -101,11 +101,13 @@ export const TRANSLATIONS_UK = {
 	},
 	textEmailOnTheWay: {
 		emailOnTheWay: 'Лист вже відправлено!',
-		sentYouPassword: 'Ми надіслали вам посилання для зміни пароля на',
+		sentYouPassword: 'Ми надіслали вам посилання для зміни пароля на ',
 		clickTheLink: 'Натисніть посилання всередині, щоб розпочати!',
 		nothingHasBeenReceived: 'Нічого не прийшло?',
 		resendLink: 'Відправити ще раз',
 		backToSignIn: 'Повернутся до Входу',
+		resendIn: 'Відправити ще раз через',
+		seconds: 'сек'
 	},
 	textCreateNewPassword: {
 		createNewPassword: 'Створення нового паролю',
