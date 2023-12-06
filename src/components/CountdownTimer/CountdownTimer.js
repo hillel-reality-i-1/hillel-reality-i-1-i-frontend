@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
 import { useTranslation } from 'react-i18next';
-import '../../../translations/i18n';
+import '../../../src/translations/i18n';
 
 import styles from './CountdownTimer.module.scss';
 
-const CountdownTimer = ({ onTimerEnd }) => {
+const CountdownTimer = ({ onTimerEnd, style }) => {
 	const { t } = useTranslation();
 	const [seconds, setSeconds] = useState(60);
 	const [showTimer, setShowTimer] = useState(true);
@@ -31,7 +31,9 @@ const CountdownTimer = ({ onTimerEnd }) => {
 	return (
 		<>
 			{showTimer && (
-				<p className={styles.timer}>
+				<p
+					className={styles.timer}
+					style={style}>
 					{t('textSignUp.sandAgain')}
 					{`${minutes < 10 ? `0${minutes}` : minutes}:${
 						remainingSeconds < 10 ? `0${remainingSeconds}` : remainingSeconds

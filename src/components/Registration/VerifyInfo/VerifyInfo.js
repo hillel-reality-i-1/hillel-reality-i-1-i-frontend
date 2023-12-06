@@ -7,10 +7,9 @@ import { useTranslation } from 'react-i18next';
 import '../../../translations/i18n';
 import step_logo from '../../../assets/img/icons/logo/step_logo.svg';
 import envelope from '../../../assets/img/icons/icons-SignUp/envelope.svg';
-import img_aside_info from '../../../assets/img/img-sign-up/img_aside_info.png';
 import arrow_back from '../../../assets/img/icons/icons-SignUp/arrow_back.svg';
 
-import CountdownTimer from '../CountdownTimer/CountdownTimer';
+import CountdownTimer from '../../CountdownTimer/CountdownTimer';
 import { URL_RESEND_EMAIL } from '../../../config/API_url';
 import CustomButton from '../../CustomButton/CustomButton';
 
@@ -79,7 +78,10 @@ const VerifyInfo = () => {
 						<span className={styles.text}>{t('textSignUp.didntNotGetTheEmail')}</span>
 					</div>
 
-					<CountdownTimer onTimerEnd={handleTimerEnd} />
+					<CountdownTimer
+						onTimerEnd={handleTimerEnd}
+						style={{ margin: '0 0 120px 0' }}
+					/>
 					{showButton && (
 						<button
 							onClick={handleResend}
@@ -102,12 +104,7 @@ const VerifyInfo = () => {
 				</div>
 
 				<aside className={styles.aside}>
-					<div className={styles.aside_bg}>
-						<img
-							src={img_aside_info}
-							alt='background'
-						/>
-					</div>
+					<div className={styles.aside_bg}></div>
 				</aside>
 			</div>
 		</>
