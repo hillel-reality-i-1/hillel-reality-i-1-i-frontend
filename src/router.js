@@ -38,8 +38,14 @@ const router = createBrowserRouter([
 		element: <EmailOnTheWay />,
 	},
 	{
-		path: '/createNewPasswordForm',
+		path: '/createNewPasswordForm/:id',
 		element: <CreateNewPassword />,
+		children: [
+			{
+				path: ':token',
+				element: <CreateNewPassword />,
+			},
+		],
 	},
 	{
 		path: '/PasswordUpdated',
