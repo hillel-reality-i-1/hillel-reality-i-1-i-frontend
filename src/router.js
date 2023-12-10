@@ -2,7 +2,9 @@ import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import './translations/i18n';
 
+import Layout from './pages/Layout';
 import HomePage from './pages/HomePage';
+import UserPage from './pages/userPage/UserPage';
 import VerifyCodeForm from './components/Registration/VerifyCodeForm/VerifyCodeForm';
 import VerifyInfo from './components/Registration/VerifyInfo/VerifyInfo';
 import ForgotYourPasswordForm from './components/RecoveryPassword/ForgotYourPassword/ForgotYourPassword';
@@ -15,7 +17,17 @@ import StepLayout from './components/Registration/StepLayout/StepLayout';
 const router = createBrowserRouter([
 	{
 		path: '/',
-		element: <HomePage />,
+		element: <Layout/>,
+		children: [
+			{
+				index: true,
+				element: <HomePage/>
+			},
+			{
+				path: '/user',
+				element: <UserPage/>
+			}
+		]
 	},
 	{
 		path: '/verifyInfo',
