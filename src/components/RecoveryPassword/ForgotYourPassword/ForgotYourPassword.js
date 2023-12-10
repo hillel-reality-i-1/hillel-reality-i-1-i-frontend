@@ -9,8 +9,8 @@ import logo from '../../../assets/img/icons/logo/forgotPassword_logo.svg'
 import error from '../../../assets/img/icons/icons-forgotPassword/error.svg'
 
 import ButtonSignIn from '../Buttons/ButtonSignIn/ButtonSignIn'
-import submitPasswordReset from '../SubmitPasswordReset/submitPasswordReset';
-import EmailValidator from '../EmailValidator/emailValidator';
+import submitPasswordReset from '../../../helpers/submitPasswordReset';
+import emailValidationServer from '../../../helpers/emailValidationServer';
 
 import styles from './ForgotYourPassword.module.scss'
 
@@ -49,7 +49,7 @@ export default function ForgotYourPassword() {
                             email: '',
                         }}
                         validate={(values) => 
-                            EmailValidator(values, setActiveButton, setEmailValue)
+                            emailValidationServer(values, setActiveButton, setEmailValue)
                         }
                         onSubmit={() => {
                             navigate(activeButton

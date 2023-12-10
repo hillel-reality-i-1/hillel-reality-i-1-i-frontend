@@ -1,44 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
 
 import envelopeLogo from '../../../assets/img/icons/icons-forgotPassword/envelope.svg';
 import mainLogo from '../../../assets/img/icons/logo/forgotPassword_logo.svg';
-import submitPasswordReset from '../SubmitPasswordReset/submitPasswordReset';
+import submitPasswordReset from '../../../helpers/submitPasswordReset';
+import CountdownTimer from '../../Registration/CountdownTimer/CountdownTimer';
 
 import ButtonSignIn from '../Buttons/ButtonSignIn/ButtonSignIn';
 import styles from './EmailOnTheWay.module.scss';
 
 export default function EmailOnTheWay() {
-    const [timer, setTimer] = useState(60);
-    const [isTimerRunning, setIsTimerRunning] = useState(true);
+    const [timer, setTimer] = useState(true);
 
     const location = useLocation();
     const emailValue = location.state.emailValue || '';
 
     const { t } = useTranslation();
 
-    useEffect(() => {
-        if (isTimerRunning) {
-            const timerInterval = setInterval(() => {
-                setTimer(prevTimer => prevTimer - 1);
-
-                if (timer === 0) {
-                    setIsTimerRunning(false);
-                    clearInterval(timerInterval);
-                }
-            }, 1000);
-
-            return () => clearInterval(timerInterval);
-        }
-    }, [isTimerRunning, timer]);
+    const handleTimerEnd = () => {
+        setTimer(false)
+    }
 
     const handleResendClick = () => {
-
         submitPasswordReset(emailValue)
-        setTimer(60);
-        setIsTimerRunning(true);
+        setTimer(true)
     };
 
     return (
@@ -80,16 +67,10 @@ export default function EmailOnTheWay() {
                         <p className={styles.resend_text}>
                             {t('textEmailOnTheWay.nothingHasBeenReceived')}
                         </p>
-                        {timer > 0
+                        {timer === true
                             ? (
-                                <div className={styles.resend_timer}>
-                                    <span className={styles.timer_text}>
-                                        {t('textEmailOnTheWay.resendIn')}
-                                        {' '}
-                                        {String(Math.floor(timer / 60)).padStart(2, '0')}:{String(timer % 60).padStart(2, '0')} 
-                                        {' '}
-                                        {t('textEmailOnTheWay.seconds')}
-                                    </span>
+                                <div className={styles.resend_timer_wrapper}>
+                                    <CountdownTimer onTimerEnd={handleTimerEnd}/>
                                 </div>
                             )
                             : (

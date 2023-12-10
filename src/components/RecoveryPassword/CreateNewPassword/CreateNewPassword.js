@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { Input } from 'antd';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Formik, Form, Field } from 'formik';
 import '../../../translations/i18n';
@@ -13,7 +13,7 @@ import trueMaxIcon from '../../../assets/img/icons/icons-forgotPassword/trueMax.
 import wrongMax from '../../../assets/img/icons/icons-forgotPassword/wrongMax.svg'
 import warningLogo from '../../../assets/img/icons/icons-forgotPassword/error.svg';
 
-import validatePassword from '../ValidatePassword/validatePassword';
+import { useValidation } from '../../../helpers/validation';
 import styles from './CreateNewPassword.module.scss'
 
 export default function CreateNewPassword() {
@@ -21,7 +21,52 @@ export default function CreateNewPassword() {
     const [confirmPasswordValue, setConfirmPasswordValue] = useState('')
     const [isButtonActive, setButtonActive] = useState(false);
     const [errorsValue, setErrorsValue] = useState(true)
+    const [id, setId] = useState('');
+    const [token, setToken] = useState('');
     const navigate = useNavigate();
+
+    const { id: paramId, token: paramToken } = useParams();
+    useEffect(() => {
+        setId(paramId);
+        setToken(paramToken);
+    }, [paramId, paramToken]);
+
+    const resetPassword = async (newPassword1, newPassword2, id, token) => {
+        const url = `http://51.20.204.164/api/v1/auth/password/reset/confirm/${id}/${token}/`;
+
+        const data = {
+            new_password1: newPassword1,
+            new_password2: newPassword2,
+            uid: id,
+            token: token,
+        };
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        };
+
+        try {
+            const response = await fetch(url, requestOptions);
+
+            if (!response.ok) {
+                throw new Error(`Failed to reset password. Status: ${response.status}`);
+            }
+
+            const responseData = await response.json();
+            console.log('Password reset successful:', responseData);
+        } catch (error) {
+            console.error('Password reset failed:', error.message);
+        }
+    };
+
+
+    const {
+        validatePasswordForForgotYourPassword,
+    } = useValidation();
 
     const { t } = useTranslation();
 
@@ -65,6 +110,7 @@ export default function CreateNewPassword() {
                             confirmPassword: ""
                         }}
                         onSubmit={() => {
+                            resetPassword(passwordValue, confirmPasswordValue, id, token)
                             navigate(isButtonActive ? '/PasswordUpdated' : null);
                         }}
                     >
@@ -80,7 +126,7 @@ export default function CreateNewPassword() {
                                         name="password"
                                         validate={(value) => {
                                             setPasswordValue(value)
-                                            setErrorsValue(validatePassword(value));
+                                            setErrorsValue(validatePasswordForForgotYourPassword(value));
                                         }}
                                     >
                                         {({ field }) => (

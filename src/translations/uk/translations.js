@@ -39,7 +39,8 @@ export const TRANSLATIONS_UK = {
 		weSentALetter: 'Ми відправили лист на',
 		clickOnTheLink: 'Натисніть на посилання в ньому для того, щоб розпочати!',
 		didntNotGetTheEmail: 'Не отримали лист?',
-		sandAgain: 'Відправити ще раз ',
+		sandAgain: 'Відправити ще раз через ',
+		seconds: 'сек',
 		returnToRegistration: 'Повернутися до Реєстрації',
 		back: 'Повернутися',
 		continue: 'Продовжити',
@@ -81,10 +82,12 @@ export const TRANSLATIONS_UK = {
 			sendAgain: 'Відправити ще раз',
 		},
 		error: {
+			lengthName: 'Довжина має бути від 2 до 20 символів',
+			otherValidName: 'Допустимі тільки кирилиця, латиниця, апостроф і дефіс',
 			required: 'Це обов’язкове поле',
 			email: 'Введіть дійсну пошту (email@example.com)',
 			length: 'Має містити як мінімум 8 символів',
-			symbolNumber: 'Має містити як мінімум 1 цифру або символ',
+			symbolNumber: 'Має містити як мінімум 1 цифру та символ',
 			register: 'Має містити літери верхнього та нижнього регістрів',
 			coincidence: 'Паролі не збігаються',
 		},
@@ -117,13 +120,14 @@ export const TRANSLATIONS_UK = {
 		savePassword: 'Зберігти пароль',
 		mustBeAtLeast8Numbers: 'Має містити як мінімум 8 символів',
 		mustHaveAtLeastOneSymbolOrNumber: 'Має містити як мінімум 1 цифру або символ',
-		mustHaveUpperAndLowerCases: 'Має містити літери верхнього та нижнього регістрів', 
+		mustHaveUpperAndLowerCases: 'Має містити літери верхнього та нижнього регістрів',
 		passwordsDontMatch: 'Паролі не збігаються. Спробуйте ще раз',
 		greatJob: 'Чудовий пароль!',
 	},
 	textPasswordUpdated: {
 		success: 'Успішно!',
-		yourPasswordHasBeenUpdated: 'Ваш пароль було успішно змінено! Ви можете перейти до сторінки Профілю',
+		yourPasswordHasBeenUpdated:
+			'Ваш пароль було успішно змінено! Ви можете перейти до сторінки Профілю',
 		returnToSignIn: 'Перейти у Профіль',
-	}
+	},
 };

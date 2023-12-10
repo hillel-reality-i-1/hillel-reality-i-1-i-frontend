@@ -11,10 +11,42 @@ import SignUpForm from '../SignUpForm/SignUpForm';
 
 import styles from './SignUp.module.scss';
 
+const ModalFooter = ({ handleCancelFirst }) => {
+	const { t } = useTranslation();
+	return (
+		<>
+			<Button
+				key='google'
+				shape='round'
+				size='large'
+				className={styles.signUpGoogle}>
+				{
+					<img
+						src={google}
+						alt='Google'
+					/>
+				}
+				<span className={styles.signUpWithGoogle}>{t('textSignUp.signUpWithGoogle')}</span>
+			</Button>
+			<span className={styles.spanOr}>{t('textSignUp.or')}</span>
+			<button onClick={handleCancelFirst}>
+				<SignUpForm />
+			</button>
+			<span className={styles.bottomSpan}>
+				{t('textSignUp.alreadyHaveAnAccount')}
+				<a
+					href='/'
+					type='link'>
+					{t('textSignUp.signIn')}
+				</a>
+			</span>
+		</>
+	);
+};
+
 const SignUp = () => {
 	const { t } = useTranslation();
 	const [open, setOpen] = useState(false);
-
 	const showModalFirst = () => {
 		setOpen(true);
 	};
@@ -51,35 +83,7 @@ const SignUp = () => {
 				width={580}
 				className={styles.modal}
 				onCancel={handleCancelFirst}
-				footer={[
-					<Button
-						key='google'
-						shape='round'
-						size='large'
-						className={styles.signUpGoogle}
-						onClick={handleCancelFirst}>
-						{
-							<img
-								src={google}
-								alt='Google'
-							/>
-						}
-						<span className={styles.signUpWithGoogle}>{t('textSignUp.signUpWithGoogle')}</span>
-					</Button>,
-					<span className={styles.spanOr}>{t('textSignUp.or')}</span>,
-					<button onClick={handleCancelFirst}>
-						<SignUpForm />
-					</button>,
-
-					<span className={styles.bottomSpan}>
-						{t('textSignUp.alreadyHaveAnAccount')}
-						<a
-							href='/'
-							type='link'>
-							{t('textSignUp.signIn')}
-						</a>
-					</span>,
-				]}>
+				footer={<ModalFooter handleCancelFirst={handleCancelFirst} />}>
 				<div className={styles.header_modal_wrapper}>
 					<Link
 						to='/'

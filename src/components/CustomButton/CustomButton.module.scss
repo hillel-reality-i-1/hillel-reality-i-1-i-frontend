@@ -1,19 +1,27 @@
-@import '../../../styles/constants.scss';
+@import '../../styles/constants.scss';
 
-.buttonSecondary {
-	font-family: $font-p-medium;
+:global {
+	.ant-btn.ant-btn-lg {
+		font-size: 18px;
+	}
+}
+
+.btn {
+	font-family: $font-ns-medium;
 	width: 100%;
 	min-height: 56px;
 	font-size: 18px;
-	border-color: $color-primary30base;
-	color: $color-primary30base;
 	border-radius: 48px;
-	display: flex;
 	padding: 14px 16px;
+	display: flex;
 	align-items: center;
 	justify-content: center;
 	line-height: 160%;
+}
 
+.buttonSecondary {
+	border-color: $color-primary30base;
+	color: $color-primary30base;
 	&:hover {
 		border-color: $color-primary20;
 		color: $color-primary20;
