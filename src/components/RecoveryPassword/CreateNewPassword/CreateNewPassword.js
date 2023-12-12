@@ -14,6 +14,8 @@ import wrongMax from '../../../assets/img/icons/icons-forgotPassword/wrongMax.sv
 import warningLogo from '../../../assets/img/icons/icons-forgotPassword/error.svg';
 
 import { useValidation } from '../../../helpers/validation';
+import resetPasswordConfirm from '../../../api/resetPasswordConfirm';
+
 import styles from './CreateNewPassword.module.scss'
 
 export default function CreateNewPassword() {
@@ -24,6 +26,7 @@ export default function CreateNewPassword() {
     const [id, setId] = useState('');
     const [token, setToken] = useState('');
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     const { id: paramId, token: paramToken } = useParams();
     useEffect(() => {
@@ -31,44 +34,9 @@ export default function CreateNewPassword() {
         setToken(paramToken);
     }, [paramId, paramToken]);
 
-    const resetPassword = async (newPassword1, newPassword2, id, token) => {
-        const url = `http://51.20.204.164/api/v1/auth/password/reset/confirm/${id}/${token}/`;
-
-        const data = {
-            new_password1: newPassword1,
-            new_password2: newPassword2,
-            uid: id,
-            token: token,
-        };
-
-        const requestOptions = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        };
-
-        try {
-            const response = await fetch(url, requestOptions);
-
-            if (!response.ok) {
-                throw new Error(`Failed to reset password. Status: ${response.status}`);
-            }
-
-            const responseData = await response.json();
-            console.log('Password reset successful:', responseData);
-        } catch (error) {
-            console.error('Password reset failed:', error.message);
-        }
-    };
-
-
     const {
         validatePasswordForForgotYourPassword,
     } = useValidation();
-
-    const { t } = useTranslation();
 
     useEffect(() => {
         setButtonActive(
@@ -91,33 +59,27 @@ export default function CreateNewPassword() {
                         UHelp
                     </h2>
                 </div>
-
                 <div className={styles.createNewPassword_section}>
-
                     <div className={styles.section_text}>
                         <h2 className={styles.section_title}>
                             {t('textCreateNewPassword.createNewPassword')}
                         </h2>
-
                         <p className={styles.section_description}>
                             {t('textCreateNewPassword.almostDone')}
                         </p>
                     </div>
-
                     <Formik
                         initialValues={{
                             password: "",
                             confirmPassword: ""
                         }}
                         onSubmit={() => {
-                            resetPassword(passwordValue, confirmPasswordValue, id, token)
+                            resetPasswordConfirm(passwordValue, confirmPasswordValue, id, token)
                             navigate(isButtonActive ? '/PasswordUpdated' : null);
                         }}
                     >
-
                         {() => (
                             <Form className={styles.section_form}>
-
                                 <div className={styles.form_block}>
                                     <label htmlFor="password" className={styles.form_label}>
                                         {t('textCreateNewPassword.password')}
@@ -141,7 +103,6 @@ export default function CreateNewPassword() {
                                         )}
                                     </Field>
                                 </div>
-
                                 {passwordValue
                                     && (<div className={styles.form_warning}>
                                         <div className={styles.warning_item_wrapper}>
@@ -160,7 +121,6 @@ export default function CreateNewPassword() {
                                                 </span>
                                             </p>
                                         </div>
-
                                         <div className={styles.warning_item_wrapper}>
                                             <p className={styles.warning_item}>
                                                 <img className={styles.item_logo}
@@ -177,7 +137,6 @@ export default function CreateNewPassword() {
                                                 </span>
                                             </p>
                                         </div>
-
                                         <div className={styles.warning_item_wrapper}>
                                             <p className={styles.warning_item}>
                                                 <img className={styles.item_logo}
@@ -194,14 +153,11 @@ export default function CreateNewPassword() {
                                                 </span>
                                             </p>
                                         </div>
-
                                     </div>)}
-
                                 <div className={styles.form_block}>
                                     <label htmlFor="confirmPassword" className={styles.form_label}>
                                         {t('textCreateNewPassword.confirmPassword')}:
                                     </label>
-
                                     <Field
                                         name="confirmPassword"
                                         validate={(value) => {
@@ -219,7 +175,6 @@ export default function CreateNewPassword() {
                                         )}
                                     </Field>
                                 </div>
-
                                 {confirmPasswordValue.length > 0
                                     && (errorsValue.length === 0)
                                     && (confirmPasswordValue === passwordValue
@@ -241,7 +196,6 @@ export default function CreateNewPassword() {
                                         </div>
                                     )
                                 }
-
                                 <button type="submit"
                                     disabled={!isButtonActive}
                                     className={isButtonActive
@@ -253,15 +207,12 @@ export default function CreateNewPassword() {
                             </Form>
                         )}
                     </Formik>
-
                 </div>
             </div>
-
             <div className={styles.createNewPassword_asideBackground_wrapper}>
                 <div className={styles.createNewPassword_asideBackground}>
                 </div>
             </div>
-
         </div>
     );
 }

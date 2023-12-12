@@ -1,0 +1,53 @@
+@import '../../styles/constants.scss';
+
+$common-styles: (
+  padding: 24px,
+  background-color: $color-gray10,
+  border-radius: 24px,
+);
+
+@mixin commonStyles () {
+    padding: 24px;
+    background-color: $color-gray10;
+    border-radius: 24px;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    column-gap: 24px;
+    max-width: 1290px;
+    margin: 0 auto;
+    padding: 0 5px; 
+}
+
+.user {
+    display: grid;
+    gap: 24px;
+    &__head {
+        @include commonStyles;
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+        &__avatar {
+            height: 64px;
+            width: 64px;
+            border-radius: 50%;
+            background-color: $color-gray30;
+        }
+        &__edit {
+            margin-left: auto;
+        }
+    }
+    &__about {
+        @include commonStyles;
+    }
+    &__activity {
+        @include commonStyles;
+    }
+}
+
+.aside {
+    @include commonStyles;
+
+}

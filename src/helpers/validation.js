@@ -167,3 +167,24 @@ export const useValidation = () => {
 		validatePasswordForForgotYourPassword,
 	};
 };
+
+
+
+export const validateSignInForm = (values) => {
+
+	const errors = {};
+  
+	if (!values.email) {
+	  errors.email = 'Обов\'язкове поле';
+	} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+	  errors.email = 'Введіть дійсну пошту (email@example.com) ';
+	}
+  
+	if (!values.password) {
+	  errors.password = 'Обов\'язкове поле';
+	} else if (values.password.length < 3) {
+	  errors.password = 'Пароль повинен містити не менше 8 символів.';
+	}
+  
+	return errors;
+};

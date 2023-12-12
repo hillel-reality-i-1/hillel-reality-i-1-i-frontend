@@ -8,9 +8,9 @@ import '../../../translations/i18n';
 import logo from '../../../assets/img/icons/logo/forgotPassword_logo.svg'
 import error from '../../../assets/img/icons/icons-forgotPassword/error.svg'
 
-import ButtonSignIn from '../Buttons/ButtonSignIn/ButtonSignIn'
-import submitPasswordReset from '../../../helpers/submitPasswordReset';
-import emailValidationServer from '../../../helpers/emailValidationServer';
+import ButtonSignIn from '../../buttons/buttonSignIn/ButtonSignIn';
+import passwordReset from '../../../api/passwordReset';
+import emailValidationServer from '../../../api/emailValidationServer';
 
 import styles from './ForgotYourPassword.module.scss'
 
@@ -18,11 +18,9 @@ export default function ForgotYourPassword() {
     const [activeButton, setActiveButton] = useState('');
     const [emailValue, setEmailValue] = useState('');
     const navigate = useNavigate();
-
     const { t } = useTranslation();
 
     return (
-
         <div className={styles.forgotYourPassword}>
             <div className={styles.forgotYourPassword_main}>
                 <div className={styles.main_logo_wrapper}>
@@ -55,7 +53,7 @@ export default function ForgotYourPassword() {
                             navigate(activeButton
                                 ? '/emailOnTheWay'
                                 : null, { state: { emailValue } });
-                            submitPasswordReset(emailValue)
+                                passwordReset(emailValue)
                         }}
                     >
                         {({ touched, errors }) => (

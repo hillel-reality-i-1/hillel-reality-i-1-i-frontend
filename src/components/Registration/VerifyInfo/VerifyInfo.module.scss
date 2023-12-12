@@ -13,7 +13,6 @@
 	justify-content: flex-end;
 
 	&_main {
-		height: 800px;
 		padding-top: 64px;
 		display: flex;
 		flex-direction: column;
@@ -78,15 +77,12 @@
 .aside {
 	width: 100%;
 	max-width: 490px;
+	height: 100vh;
 
 	&_bg {
 		width: 100%;
-		height: 100vh;
+		height: 100%;
 		overflow: hidden;
-
-		img {
-			width: 100%;
-			height: 100%;
-		}
+		background-image: url('../../../assets/img/img-sign-up/img_aside_info.png');
 	}
 }

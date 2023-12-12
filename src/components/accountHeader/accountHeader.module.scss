@@ -1,0 +1,11 @@
+@import '../../styles/constants.scss';
+
+.account {
+    display: flex;
+    flex-direction: row;
+    &__notification {
+        height: 48px;
+        width: 48px;
+        background-color: $color-gray10;
+    }
+}

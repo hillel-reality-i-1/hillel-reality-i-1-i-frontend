@@ -5,18 +5,16 @@ import { useTranslation } from 'react-i18next';
 
 import envelopeLogo from '../../../assets/img/icons/icons-forgotPassword/envelope.svg';
 import mainLogo from '../../../assets/img/icons/logo/forgotPassword_logo.svg';
-import submitPasswordReset from '../../../helpers/submitPasswordReset';
-import CountdownTimer from '../../Registration/CountdownTimer/CountdownTimer';
+import passwordReset from '../../../api/passwordReset';
+import CountdownTimer from '../../CountdownTimer/CountdownTimer';
 
-import ButtonSignIn from '../Buttons/ButtonSignIn/ButtonSignIn';
+import ButtonSignIn from '../../buttons/buttonSignIn/ButtonSignIn';
 import styles from './EmailOnTheWay.module.scss';
 
 export default function EmailOnTheWay() {
     const [timer, setTimer] = useState(true);
-
     const location = useLocation();
     const emailValue = location.state.emailValue || '';
-
     const { t } = useTranslation();
 
     const handleTimerEnd = () => {
@@ -24,12 +22,11 @@ export default function EmailOnTheWay() {
     }
 
     const handleResendClick = () => {
-        submitPasswordReset(emailValue)
+        passwordReset(emailValue)
         setTimer(true)
     };
 
     return (
-
         <div className={styles.emailOnTheWay}>
             <div className={styles.emailOnTheWay_main}>
                 <div className={styles.emailOnTheWay_section}>

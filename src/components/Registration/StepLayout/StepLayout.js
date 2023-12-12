@@ -97,12 +97,7 @@ const StepLayout = () => {
 					</div>
 				</div>
 				<aside className={styles.aside}>
-					<div className={styles.aside_bg}>
-						<img
-							src={steps[current].asideImage}
-							alt='background'
-						/>
-					</div>
+					<div className={styles.aside_bg}></div>
 				</aside>
 			</div>
 		</>

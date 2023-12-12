@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
+// import { usePhoneInput } from 'react-international-phone';
 import { useTranslation } from 'react-i18next';
 import '../../../translations/i18n';
-import { Input } from 'antd';
+
 import { Form, Formik, Field } from 'formik';
+import { PhoneInput } from 'react-international-phone';
+import 'react-international-phone/style.css';
 
 import styles from './Step3Form.module.scss';
 import CustomButton from '../../CustomButton/CustomButton';
@@ -12,6 +15,7 @@ import CustomButton from '../../CustomButton/CustomButton';
 const Step3Form = () => {
 	const { t } = useTranslation();
 	const novigate = useNavigate();
+	const [phone, setPhone] = useState('');
 
 	const handleSubmit = () => {};
 
@@ -24,7 +28,7 @@ const Step3Form = () => {
 					<span className={styles.text}>{t('textSignUp.textStep3.description')}</span>
 					<Formik
 						initialValues={{
-							codeCountry: '',
+							countrySelect: '',
 							numberPhone: '',
 						}}
 						onSubmit={(values, { setSubmitting }) => {
@@ -33,44 +37,24 @@ const Step3Form = () => {
 						}}>
 						{({ isSubmitting }) => (
 							<Form className={styles.form}>
-								{/* select codeCountry----------------------------------------------------------------------- */}
 								<label
 									htmlFor='span'
 									className={styles.label}>
 									{t('textSignUp.textStep3.phoneNumber')}
 								</label>
-
-								<div className={styles.form_input_wrapper}>
-									<div className={styles.select_wrapper}>
-										<Field
-											as='select'
-											name='codeCountry'
-											className={styles.select}>
-											<option value='+38'>+38</option>
-											<option value='+23'>+23</option>
-											<option value='+34'>+34</option>
-										</Field>
-									</div>
-
-									{/* input numberPhone ----------------------------------------------------------------------- */}
-									<Field
-										name='numberPhone'
-										autoComplete='off'>
-										{({ field }) => (
-											<Input
-												{...field}
-												type='text'
-												name='numberPhone'
-												placeholder='000 000 00 00'
-												maxLength={8}
-												autoComplete='off'
-												className={styles.phone_input}
-											/>
-										)}
-									</Field>
-								</div>
-
-								{/* button submit ---------------------------------------------------------- */}
+								<div style={{ display: 'flex', alignItems: 'center' }}></div>
+								<Field
+									name='numberPhone'
+									autoComplete='off'>
+									{({ field }) => (
+										<PhoneInput
+											defaultCountry='ua'
+											value={phone}
+											className={styles.phone_input}
+											onChange={(phone) => setPhone(phone)}
+										/>
+									)}
+								</Field>
 								<CustomButton
 									htmlType='submit'
 									type='primary'
