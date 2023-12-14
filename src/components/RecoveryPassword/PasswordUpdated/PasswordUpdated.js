@@ -14,11 +14,9 @@ export default function PasswordUpdated() {
     return (
         <div className={styles.passwordUpdatedSection}>
             <div className={styles.passwordUpdatedSection_wrapper}>
-
                 <div className={styles.passwordUpdatedSection_logo_wrapper}>
                     <img className={styles.passwordUpdatedSection_logo} src={successLogo} alt="success logo" />
                 </div>
-
                 <div className={styles.passwordUpdatedSection_section}>
                     <h1 className={styles.passwordUpdatedSection_title}>
                         {t('textPasswordUpdated.success')}
@@ -27,13 +25,11 @@ export default function PasswordUpdated() {
                         {t('textPasswordUpdated.yourPasswordHasBeenUpdated')}
                     </p>
                 </div>
-
                 <div className={styles.passwordUpdatedSection_button_wrapper}>
                     <a className={styles.passwordUpdatedSection_button} href="/signin">
                         {t('textPasswordUpdated.returnToSignIn')}
                     </a>
                 </div>
-
             </div>
         </div>
     );

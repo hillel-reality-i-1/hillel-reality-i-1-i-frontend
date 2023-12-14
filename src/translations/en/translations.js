@@ -49,6 +49,8 @@ export const TRANSLATIONS_EN = {
 		nothingHasBeenReceived: 'Nothing has been received?',
 		resendLink: 'Resend link',
 		backToSignIn: 'Back to Sign In',
+		resendIn: 'Resend in',
+		seconds: 'seconds'
 	},
 	textCreateNewPassword: {
 		createNewPassword: 'Create new password',

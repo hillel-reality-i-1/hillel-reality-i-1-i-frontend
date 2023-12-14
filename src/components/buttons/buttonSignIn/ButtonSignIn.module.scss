@@ -1,0 +1,37 @@
+@import '../../../styles/constants.scss';
+
+.button_wrapper {
+    display: flex;
+    width: 410px;
+    height: 56px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+    .button {
+        border: 1px solid $color-primary30base;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+        padding: 14px 16px;
+        border-radius: 48px;
+        gap: 8px;
+        color: $color-primary30base;
+        font-family: $font-p-medium;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 160%;
+
+        &:hover {
+            color: $color-primary20;
+            border: 1px solid $color-primary20;
+        }
+
+        &:active {
+            color: $color-primary40;
+            border: 1px solid $color-primary40;
+        }
+    }
+}

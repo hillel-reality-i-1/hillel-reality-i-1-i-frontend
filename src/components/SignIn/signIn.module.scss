@@ -20,9 +20,17 @@
     white-space: nowrap;
     line-height: 160%; 
     letter-spacing: 0.18px;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
 }
-
+.signInButton:hover {
+    color: $color-primary20; 
+}
+.signInButtont:active {
+    color: $color-primary40; 
+}
 .shadow {
+    overflow-y: scroll;
     position: fixed;
     padding: 8px;
     top: 0;
@@ -70,14 +78,14 @@
     &__title {
         padding-bottom: 8px;
         color:  #03091C;
-        font-family: $font-p-semiBold;
+        font-family: $semiBold;
         @include customFontStyles(32px, normal, 600);
         line-height: 130%;
     }
     &__description {
         margin-bottom: 32px;
         color: #0D101D;
-        font-family: $font-p-regular;
+        font-family: $regular;
         @include fontSize16Normal(400);
         line-height: 160%; 
     }
@@ -90,7 +98,7 @@
         border: 1px solid #03091C;
         justify-content: center;
         color:  #03091C;
-        font-family: $font-p-medium;
+        font-family: $medium;
         @include customFontStyles(18px, normal, 500);
         line-height: 160%;
 
@@ -99,7 +107,7 @@
         margin: 24px 0;
         color: #47474F;
         text-align: center;
-        font-family: $font-p-regular;
+        font-family: $regular;
         @include fontSize16Normal(400);
         line-height: 160%; 
     }
@@ -112,7 +120,7 @@
             label {
                 align-self: start;
                 color: #0D101D;
-                font-family: $font-p-medium;
+                font-family: $medium;
                 @include fontSize16Normal(500);
                 line-height: 160%; 
             }
@@ -173,7 +181,7 @@
     &__forgotPassword {
         text-align: left;
         color: #126FE1;
-        font-family: $font-p-medium;
+        font-family: $medium;
         @include fontSize16Normal(500);
         line-height: 160%;
         @media (max-width: 435px) {
@@ -187,11 +195,14 @@
         padding: 14px;
         border-radius: 48px;
         background: #CACCD1;
-        font-family: $font-p-medium;
+        font-family: $medium;
         color:  #FDFEFF;
         &.validSubmit {
             background: #126FE1; 
-			transition: background-color 0.3s ease;
+			transition: background-color 0.3s ease-in-out;
+        }
+        &.validSubmit:hover {
+            background: #3989EC; 
         }
 		&.validSubmit:active {
             background: #094DA0; 
@@ -207,7 +218,7 @@
         border-radius: 12px;
         padding: 14px 24px;
         color:  #47474F;
-        font-family: $font-p-regular;
+        font-family: $regular;
         @include fontSize16Normal(400);
         line-height: 160%;
     }
@@ -216,7 +227,7 @@
         align-items: center;
         gap: 8px;
         color:  #B3261E;
-        font-family: $font-p-regular;
+        font-family: $regular;
         @include fontSize16Normal(400);
         line-height: 160%;
         img {
@@ -239,13 +250,13 @@
     gap: 8px;
     &__text {
         color:  #0D101D;
-        font-family: $font-p-regular;
+        font-family: $regular;
         @include customFontStyles(18px, normal, 400);
         line-height: 160%;
     }
     &__signUp {
         color:  #126FE1;
-        font-family:  $font-p-medium;
+        font-family: $medium;
         @include customFontStyles(18px, normal, 500);
         line-height: 160%;
     }

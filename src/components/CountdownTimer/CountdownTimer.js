@@ -24,7 +24,7 @@ const CountdownTimer = ({ onTimerEnd, style }) => {
 		}
 
 		return () => clearInterval(interval);
-	}, [showTimer, seconds, onTimerEnd]);
+	}, [showTimer, seconds]);
 
 	const minutes = Math.floor(seconds / 60);
 	const remainingSeconds = seconds % 60;

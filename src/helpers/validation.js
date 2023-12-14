@@ -49,6 +49,24 @@ export const useValidation = () => {
 		return null;
 	};
 
+	const validatePasswordForForgotYourPassword = (value) => {
+		const errors = [];
+	
+		if (value.length < 8) {
+			errors.push('mustBeAtLeast8Numbers');
+		}
+	
+		if (!/[0-9!@#$%^&*()_+={}[\]:;<>,±"'|.?~\\/-]/.test(value)) {
+			errors.push('mustHaveAtLeastOneSymbolOrNumber');
+		}
+	
+		if (!/[A-Z]/.test(value) || !/[a-z]/.test(value)) {
+			errors.push('mustHaveUpperAndLowerCases');
+		}
+	
+		return errors;
+	};
+
 	const validatePassword = (value) => {
 		setPassword(value);
 		let messages = [];
@@ -146,5 +164,27 @@ export const useValidation = () => {
 		validateCheckBox,
 		validateInputRequired,
 		validateFirstName,
+		validatePasswordForForgotYourPassword,
 	};
+};
+
+
+
+export const validateSignInForm = (values) => {
+
+	const errors = {};
+  
+	if (!values.email) {
+	  errors.email = 'Обов\'язкове поле';
+	} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+	  errors.email = 'Введіть дійсну пошту (email@example.com) ';
+	}
+  
+	if (!values.password) {
+	  errors.password = 'Обов\'язкове поле';
+	} else if (values.password.length < 3) {
+	  errors.password = 'Пароль повинен містити не менше 8 символів.';
+	}
+  
+	return errors;
 };
