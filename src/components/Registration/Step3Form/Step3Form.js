@@ -1,23 +1,29 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 
-// import { usePhoneInput } from 'react-international-phone';
 import { useTranslation } from 'react-i18next';
 import '../../../translations/i18n';
 
 import { Form, Formik, Field } from 'formik';
+import { PhoneNumberUtil } from 'google-libphonenumber';
 import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
 
 import styles from './Step3Form.module.scss';
 import CustomButton from '../../CustomButton/CustomButton';
 
-const Step3Form = () => {
-	const { t } = useTranslation();
-	const novigate = useNavigate();
-	const [phone, setPhone] = useState('');
+const phoneUtil = PhoneNumberUtil.getInstance();
+const isPhoneValid = (phone) => {
+	try {
+		return phoneUtil.isValidNumber(phoneUtil.parseAndKeepRawInput(phone));
+	} catch (error) {
+		return false;
+	}
+};
 
-	const handleSubmit = () => {};
+const Step3Form = ({ onNext, onPhoneChange }) => {
+	const { t } = useTranslation();
+	const [phone, setPhone] = useState('');
+	const isValid = isPhoneValid(phone);
 
 	return (
 		<>
@@ -32,7 +38,12 @@ const Step3Form = () => {
 							numberPhone: '',
 						}}
 						onSubmit={(values, { setSubmitting }) => {
-							novigate('/verifyCodeForm');
+							const data = {
+								phone_number: phone,
+							};
+							onPhoneChange(phone);
+							onNext(data);
+							// novigate('/verifyCodeForm');
 							setSubmitting(false);
 						}}>
 						{({ isSubmitting }) => (
@@ -58,16 +69,15 @@ const Step3Form = () => {
 								<CustomButton
 									htmlType='submit'
 									type='primary'
-									onClick={handleSubmit}
-									disabled={isSubmitting}>
+									isDisable={!isValid}>
 									{t('textSignUp.textStep3.getCode')}
 								</CustomButton>
 								<div className={styles.skip_link}>
-									<Link
-										className={styles.link}
-										to='/verifyCodeForm'>
+									<button
+										type='submit'
+										className={styles.link}>
 										{t('textSignUp.skipNow')}
-									</Link>
+									</button>
 								</div>
 							</Form>
 						)}

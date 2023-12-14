@@ -20,6 +20,10 @@
 	margin: 0 240px auto;
 	margin-right: 25%;
 
+	@media (max-width: 1439px) {
+		margin: 0 auto auto;
+	}
+
 	.img_phone {
 		width: 58px;
 		height: 58px;
@@ -182,6 +186,7 @@
 			margin-bottom: 48px;
 			display: flex;
 			gap: 24px;
+
 			.input {
 				font-family: $font-ns-medium;
 				font-size: 28px;
@@ -216,6 +221,10 @@
 
 .aside {
 	max-width: 490px;
+
+	@media (max-width: 1300px) {
+		display: none;
+	}
 
 	&_bg {
 		width: 100%;

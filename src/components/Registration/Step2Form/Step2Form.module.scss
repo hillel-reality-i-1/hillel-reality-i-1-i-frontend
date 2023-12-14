@@ -78,7 +78,7 @@
 		}
 
 		.label {
-			font-family: $font-ns-regular;
+			font-family: $font-ns-medium;
 			color: $color-gray80;
 			font-size: 16px;
 			line-height: 160%;
@@ -96,7 +96,7 @@
 			background-size: 24px;
 			background-repeat: no-repeat;
 			background-position: 96%;
-			font-family: $font-ns-medium;
+			font-family: $font-ns-regular;
 			font-size: 16px;
 			padding: 14px;
 			border-radius: 12px;
@@ -109,6 +109,7 @@
 			background-color: #fff;
 			box-shadow: none;
 			cursor: pointer;
+			margin-top: 8px;
 
 			&_disabled {
 				background-image: url('../../../assets/img/icons/icons-SignUp/arrow_down_disabled.svg');
@@ -135,7 +136,7 @@
 	}
 
 	.skip_link {
-		font-family: $font-ns-regular;
+		font-family: $font-ns-medium;
 		font-size: 16px;
 		line-height: 160%;
 		color: $color-gray50;

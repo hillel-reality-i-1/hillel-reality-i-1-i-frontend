@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { useTranslation } from 'react-i18next';
 import '../../../translations/i18n';
@@ -8,11 +9,15 @@ import { Input } from 'antd';
 import error from '../../../assets/img/icons/icons-SignUp/error.svg';
 import CustomButton from '../../CustomButton/CustomButton';
 import { useValidation } from '../../../helpers/validation';
+import { fetchUpdateName } from '../../../store/slices/authSlice';
 
 import styles from './Step1Form.module.scss';
 
 const Step1Form = ({ onNext }) => {
 	const { t } = useTranslation();
+	const dispatch = useDispatch();
+
+	const user = useSelector((state) => state.auth?.user);
 	const [lastName, setLastName] = useState('');
 	const { validateFirstName } = useValidation();
 
@@ -21,10 +26,6 @@ const Step1Form = ({ onNext }) => {
 		const filteredValue = value.replace(/[^A-Za-zА-Яа-яЁёІіЇїЄєҐґ'-]/g, '');
 		const truncatedValue = filteredValue.slice(0, 20);
 		setLastName(truncatedValue);
-	};
-
-	const handleSubmit = (values) => {
-		onNext();
 	};
 
 	return (
@@ -38,14 +39,25 @@ const Step1Form = ({ onNext }) => {
 							firstName: '',
 							lastName: '',
 						}}
-						onSubmit={(values, { setSubmitting }) => {
+						onSubmit={async (values, { setSubmitting }) => {
 							setSubmitting(false);
-							onNext();
+							try {
+								await dispatch(
+									fetchUpdateName({
+										id: user?.id,
+										first_name: values?.firstName,
+										last_name: lastName,
+									})
+								);
+								onNext();
+							} catch (error) {
+								console.error('Error updating user data:', error);
+							}
 						}}>
 						{({ isSubmitting, isValid, dirty, touched, errors }) => (
 							<Form className={styles.form}>
 								{/* input first name----------------------------------------------------------------------- */}
-								<div>
+								<div className={styles.firstNameWrapper}>
 									<label
 										htmlFor='span'
 										className={`${styles.label} ${styles.label_required}`}>
@@ -60,6 +72,7 @@ const Step1Form = ({ onNext }) => {
 												type='text'
 												name='firstName'
 												autoComplete='off'
+												placeholder={t('textSignUp.textStep1.enterYourName')}
 												status={errors.firstName ? 'error' : ''}
 												className={`${styles.input} ${errors.firstName ? styles.invalid : ''}`}
 											/>
@@ -67,10 +80,10 @@ const Step1Form = ({ onNext }) => {
 									</Field>
 									{errors.firstName && touched.firstName && (
 										<div className={styles.error}>
-											<div className='img_wrapper'>
+											<div className={styles.img_wrapper}>
 												<img
 													className={styles.img_er}
-													style={{ width: '20px' }}
+													style={{ width: '16px', display: 'block' }}
 													src={error}
 													alt='error'
 												/>
@@ -78,6 +91,9 @@ const Step1Form = ({ onNext }) => {
 											{errors.firstName}
 										</div>
 									)}
+									<span className={styles.infoFirstName}>
+										{t('textSignUp.textStep1.infoFirstname')}
+									</span>
 								</div>
 
 								{/* input last name ----------------------------------------------------------------------- */}
@@ -107,8 +123,7 @@ const Step1Form = ({ onNext }) => {
 								<CustomButton
 									htmlType='submit'
 									type='primary'
-									isDisable={!isValid || !dirty || isSubmitting}
-									onClick={handleSubmit}>
+									isDisable={!isValid || !dirty || isSubmitting}>
 									{t('textSignUp.continue')}
 								</CustomButton>
 							</Form>

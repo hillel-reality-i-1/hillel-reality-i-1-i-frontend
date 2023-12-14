@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import axios from 'axios';
+import axios from '../../../config/axios/axios';
 import { useTranslation } from 'react-i18next';
 import '../../../translations/i18n';
 import { Formik, Form, Field } from 'formik';
 import { Button, Spin } from 'antd';
-
 import location from '../../../assets/img/icons/icons-SignUp/location.svg';
 import { URL_COUNTRY_LIST, URL_CITY_LIST } from '../../../config/API_url';
 
@@ -20,44 +19,31 @@ const Step2Form = ({ onNext }) => {
 	const [countries, setCountries] = useState(null);
 	const [cities, setCities] = useState(null);
 	const [selectedCountryId, setSelectedCountryId] = useState(null);
-	const [cachedCities, setCachedCities] = useState({});
+	const [selectedCityId, setSelectedCityId] = useState(null);
 
 	const getAllCountries = async () => {
 		try {
 			const data = await axios.get(URL_COUNTRY_LIST);
-			return data.data;
+			return data;
 		} catch (error) {
 			return console.log(error.message);
 		}
 	};
 
-	const getAllCities = async (url) => {
-		let accumulator = [];
-
+	const getAllCities = async () => {
 		try {
-			let nextUrl = url;
-
-			while (nextUrl) {
-				const response = await axios.get(nextUrl);
-				const newData = response.data.results;
-				accumulator = [...accumulator, ...newData];
-
-				nextUrl = response.data.next;
-			}
-
-			return accumulator;
+			const data = await axios.get(URL_CITY_LIST);
+			return data;
 		} catch (error) {
-			console.error(error);
-			throw error;
+			return console.log(error.message);
 		}
 	};
 
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const [countriesData] = await Promise.all([getAllCountries()]);
-
-				setCountries(countriesData);
+				const countriesData = await getAllCountries();
+				getAllCountries && setCountries(countriesData);
 			} catch (error) {
 				console.error(error.message);
 			} finally {
@@ -72,26 +58,11 @@ const Step2Form = ({ onNext }) => {
 		const fetchCitiesData = async () => {
 			try {
 				setLoadingCities(true);
+				const citiesData = await getAllCities(URL_CITY_LIST);
 
 				if (selectedCountryId) {
-					// Check if cities for the selected country are already cached
-					if (cachedCities[selectedCountryId]) {
-						setCities(cachedCities[selectedCountryId]);
-					} else {
-						const citiesData = await getAllCities(URL_CITY_LIST);
-						// setAllCities(citiesData.flat(2));
-
-						const filteredCities = citiesData
-							.flat(2)
-							.filter((city) => city.country === +selectedCountryId);
-						setCities(filteredCities);
-
-						// Cache the cities for the selected country
-						setCachedCities((prevCachedCities) => ({
-							...prevCachedCities,
-							[selectedCountryId]: filteredCities,
-						}));
-					}
+					const filteredCities = citiesData.filter((city) => city.country === +selectedCountryId);
+					setCities(filteredCities);
 				}
 			} catch (error) {
 				console.error(error.message);
@@ -101,11 +72,16 @@ const Step2Form = ({ onNext }) => {
 		};
 
 		fetchCitiesData();
-	}, [cachedCities, selectedCountryId]);
+	}, [selectedCountryId]);
 
 	const handleCountryChange = (event) => {
 		const selectedId = event.target.value;
 		setSelectedCountryId(selectedId);
+	};
+
+	const handleCityChange = (event) => {
+		const selectedId = event.target.value;
+		setSelectedCityId(selectedId);
 	};
 
 	return (
@@ -135,9 +111,13 @@ const Step2Form = ({ onNext }) => {
 							country: '',
 							city: '',
 						}}
-						onSubmit={(values, actions) => {
-							onNext();
-							actions.setSubmitting(false);
+						onSubmit={(values, { setSubmitting }) => {
+							const data = {
+								country_id: +selectedCountryId,
+								city_id: +selectedCityId,
+							};
+							onNext(data);
+							setSubmitting(false);
 						}}>
 						{({ isSubmitting, setFieldValue }) => (
 							<Form className={styles.form}>
@@ -164,7 +144,8 @@ const Step2Form = ({ onNext }) => {
 											{loadingCountries ? (
 												<Spin />
 											) : (
-												countries?.map(({ id, name }) => (
+												countries &&
+												countries.map(({ id, name }) => (
 													<option
 														key={id}
 														value={id}>
@@ -189,6 +170,8 @@ const Step2Form = ({ onNext }) => {
 									<Field
 										as='select'
 										name='city'
+										onChange={handleCityChange}
+										value={selectedCityId || ''}
 										disabled={!selectedCountryId}
 										className={`${styles.select} ${!selectedCountryId && styles.select_disabled}`}>
 										<option
@@ -201,7 +184,13 @@ const Step2Form = ({ onNext }) => {
 												<div className={styles.spin_wrapper}>Loading...</div>
 											</option>
 										) : (
-											cities?.map(({ id, name }) => <option key={id}>{name}</option>)
+											cities?.map(({ id, name }) => (
+												<option
+													key={id}
+													value={id}>
+													{name}
+												</option>
+											))
 										)}
 									</Field>
 								</div>
@@ -214,8 +203,8 @@ const Step2Form = ({ onNext }) => {
 								</CustomButton>
 								<div className={styles.skip_link}>
 									<Link
-										className={styles.link}
-										to='/step3Form'>
+										onClick={onNext}
+										className={styles.link}>
 										{t('textSignUp.skipNow')}
 									</Link>
 								</div>

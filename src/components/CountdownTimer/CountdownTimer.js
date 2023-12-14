@@ -11,19 +11,20 @@ const CountdownTimer = ({ onTimerEnd, style }) => {
 	const [showTimer, setShowTimer] = useState(true);
 
 	useEffect(() => {
-		const timer = setInterval(() => {
-			setSeconds((prevSeconds) => {
-				if (prevSeconds === 0) {
-					setShowTimer(false);
-					clearInterval(timer);
-					onTimerEnd(); // call the function when the timer ends
-				}
-				return prevSeconds - 1;
-			});
-		}, 1000);
+		let interval;
 
-		return () => clearInterval(timer);
-	}, [onTimerEnd]);
+		if (showTimer && seconds > 0) {
+			interval = setInterval(() => {
+				setSeconds((prevSeconds) => prevSeconds - 1);
+			}, 1000);
+		} else {
+			clearInterval(interval);
+			setShowTimer(false);
+			onTimerEnd();
+		}
+
+		return () => clearInterval(interval);
+	}, [showTimer, seconds, onTimerEnd]);
 
 	const minutes = Math.floor(seconds / 60);
 	const remainingSeconds = seconds % 60;

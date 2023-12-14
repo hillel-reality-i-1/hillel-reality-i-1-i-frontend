@@ -56,6 +56,7 @@ export const TRANSLATIONS_UK = {
 			enterYourName: 'Введіть своє ім’я',
 			lastName: 'Прізвище',
 			enterLastName: 'Введіть своє прізвище',
+			infoFirstname: "Ім'я можна змінювати раз на 90 днів",
 		},
 		textStep2: {
 			titleH2: 'Де ви зараз?',

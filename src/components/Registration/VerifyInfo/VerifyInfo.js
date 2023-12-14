@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import axios from 'axios';
+import axios from '../../../config/axios/axios';
 import { useTranslation } from 'react-i18next';
 import '../../../translations/i18n';
 import step_logo from '../../../assets/img/icons/logo/step_logo.svg';
@@ -14,15 +14,16 @@ import { URL_RESEND_EMAIL } from '../../../config/API_url';
 import CustomButton from '../../CustomButton/CustomButton';
 
 import styles from './VerifyInfo.module.scss';
+import SignUpForm from '../SignUpForm/SignUpForm';
 
 const VerifyInfo = () => {
 	const { t } = useTranslation();
-	const navigate = useNavigate();
-
 	const [showButton, setShowButton] = useState(false);
 	const [timerFinished, setTimerFinished] = useState(false);
 
-	const email = useSelector((state) => state.auth.user?.email);
+	const user = useSelector((state) => state.auth?.user);
+
+	user && localStorage.setItem('userData', JSON.stringify(user));
 
 	const handleTimerEnd = () => {
 		setTimerFinished(true);
@@ -37,9 +38,9 @@ const VerifyInfo = () => {
 	const handleResend = async () => {
 		try {
 			const data = await axios.post(URL_RESEND_EMAIL, {
-				email: 'boiko.sergey93@gmail.com',
+				email: user.email,
 			});
-			return data.data;
+			return data;
 		} catch (error) {
 			console.error(error.message);
 		}
@@ -65,11 +66,7 @@ const VerifyInfo = () => {
 					<h2 className={styles.title}>{t('textSignUp.h2VerifyInfo')}</h2>
 					<div className={styles.flex_text}>
 						<span className={styles.text}>{t('textSignUp.weSentALetter')}</span>
-						<Link
-							to={`mailto:${email}`}
-							className={styles.text_link}>
-							{email}
-						</Link>
+						<Link className={styles.text_link}>{user?.email}</Link>
 					</div>
 					<span className={`${styles.text} ${styles.margin_bottom}`}>
 						{t('textSignUp.clickOnTheLink')}
@@ -94,7 +91,7 @@ const VerifyInfo = () => {
 						htmlType='button'
 						type='secondary'
 						isDisable={false}
-						onClick={() => navigate('/')}>
+						onClick={<SignUpForm />}>
 						<img
 							src={arrow_back}
 							alt='back'

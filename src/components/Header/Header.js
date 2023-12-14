@@ -55,8 +55,8 @@ export default function Header() {
 						</li>
 					</ul>
 					<div className={styles.navigation_button}>
-						<div >
-							<SignIn/>
+						<div>
+							<SignIn />
 						</div>
 
 						<a

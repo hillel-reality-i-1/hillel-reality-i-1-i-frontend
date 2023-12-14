@@ -129,9 +129,9 @@ export const useValidation = () => {
 		}
 
 		if (value.length < 2 || value.length > 20) {
-			error = t('textSignUp.error.lengthName');
+			return (error = t('textSignUp.error.lengthName'));
 		} else if (!/^[а-яА-Яa-zA-Z'-]+$/u.test(value)) {
-			error = t('textSignUp.error.otherValidName');
+			return (error = t('textSignUp.error.otherValidName'));
 		}
 
 		return error;

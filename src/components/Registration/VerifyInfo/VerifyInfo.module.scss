@@ -4,6 +4,10 @@
 	width: 100%;
 	max-width: 410px;
 	margin-right: 25%;
+
+	@media (max-width: 1439px) {
+		margin: 0 auto auto;
+	}
 }
 
 .verify_info {
@@ -77,7 +81,11 @@
 .aside {
 	width: 100%;
 	max-width: 490px;
-	height: 100vh;
+	min-height: 100vh;
+
+	@media (max-width: 1300px) {
+		display: none;
+	}
 
 	&_bg {
 		width: 100%;

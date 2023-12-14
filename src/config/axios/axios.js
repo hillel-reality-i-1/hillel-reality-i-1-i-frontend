@@ -1,16 +1,23 @@
-// import axios from 'axios';
+import axios from 'axios';
 
 // const instance = axios.create({
-// 	baseURL: 'http://0.0.0.0:8000',
+// 	baseURL: 'http://51.20.204.164/',
 // });
 
-// instance.interceptors.request.use((config) => {
-// 	config.headers.Authorization = window.localStorage.getItem('token');
-// 	return config;
-// });
+const instance = axios.create({
+	baseURL: 'http://0.0.0.0:8000/',
+});
 
-// instance.interceptors.response.use(function (response) {
-// 	return response.data;
-// });
+instance.interceptors.request.use((config) => {
+	const token = window.localStorage.getItem('token');
+	if (token) {
+		config.headers.Authorization = `Token ${token}`;
+	}
+	return config;
+});
 
-// export default instance;
+instance.interceptors.response.use(function (response) {
+	return response.data;
+});
+
+export default instance;

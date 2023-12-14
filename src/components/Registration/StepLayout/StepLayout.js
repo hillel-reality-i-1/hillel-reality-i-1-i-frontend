@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import axios from '../../../config/axios/axios';
 import { Steps, ConfigProvider } from 'antd';
 import { useTranslation } from 'react-i18next';
 import '../../../translations/i18n';
@@ -10,14 +11,84 @@ import img_aside_step1 from '../../../assets/img/img-sign-up/img_aside_step1.png
 import img_aside_step2 from '../../../assets/img/img-sign-up/img_aside_step2.png';
 import img_aside_step3 from '../../../assets/img/img-sign-up/img_aside_step3.png';
 import arrowLeft from '../../../assets/img/icons/icons-SignUp/arrowLeft.svg';
+import { fetchAddDataProfile } from '../../../store/slices/authSlice';
 import StepForm1 from '../Step1Form/Step1Form';
 import StepForm2 from '../Step2Form/Step2Form';
 import StepForm3 from '../Step3Form/Step3Form';
+import { URL_CONFIRM_EMAIL, URL_SEND_VERIFICATION_CODE } from '../../../config/API_url';
 
 import styles from './StepLayout.module.scss';
 
 const StepLayout = () => {
 	const { t } = useTranslation();
+	const novigate = useNavigate();
+	const dispatch = useDispatch();
+
+	const [current, setCurrent] = useState(0);
+	const [formData2, setFormData2] = useState({});
+	const [formData3, setFormData3] = useState({});
+	const [phone, setPhone] = useState('');
+
+	const { token } = useParams();
+
+	useEffect(() => {
+		const fetchKey = async () => {
+			const storedToken = localStorage.getItem('token');
+			if (!storedToken) {
+				try {
+					const userToken = await axios.post(URL_CONFIRM_EMAIL, {
+						key: token,
+					});
+					localStorage.setItem('token', userToken?.token);
+				} catch (error) {
+					console.error(error.message);
+				}
+			}
+		};
+
+		fetchKey();
+	}, [token]);
+
+	const handleForm2Submit = async (data) => {
+		setFormData2(data);
+		next();
+	};
+
+	const handleForm3Submit = async (data) => {
+		setFormData3(data);
+	};
+
+	const sendVerificationCode = async () => {
+		try {
+			await axios.post(URL_SEND_VERIFICATION_CODE);
+			// novigate('/verifyCodeForm');
+		} catch (error) {
+			console.error(error.message);
+		}
+	};
+
+	useEffect(() => {
+		if (phone && current === steps.length - 1) {
+			sendRequestToServer();
+		}
+	}, [phone, current]);
+
+	const sendRequestToServer = async () => {
+		try {
+			const combinedData = {
+				...formData2,
+				phone_number: phone,
+			};
+			await dispatch(fetchAddDataProfile(combinedData));
+
+			if (phone) {
+				sendVerificationCode();
+				novigate('/verifyCodeForm');
+			}
+		} catch (error) {
+			console.error('Error:', error.message);
+		}
+	};
 
 	const steps = [
 		{
@@ -27,17 +98,20 @@ const StepLayout = () => {
 		},
 		{
 			title: t('textSignUp.country'),
-			content: <StepForm2 onNext={() => next()} />,
+			content: <StepForm2 onNext={handleForm2Submit} />,
 			asideImage: img_aside_step2,
 		},
 		{
 			title: t('textSignUp.phone'),
-			content: <StepForm3 onNext={() => next()} />,
+			content: (
+				<StepForm3
+					onNext={handleForm3Submit}
+					onPhoneChange={(newPhone) => setPhone(newPhone)}
+				/>
+			),
 			asideImage: img_aside_step3,
 		},
 	];
-
-	const [current, setCurrent] = useState(0);
 
 	const next = () => {
 		setCurrent(current + 1);

@@ -18,6 +18,7 @@
 
 	.ant-steps {
 		width: 100%;
+		font-family: $font-ns-regular;
 		.ant-steps-item-tail {
 			top: 22px;
 			&::after {
@@ -30,6 +31,8 @@
 		}
 		.ant-steps-item-icon {
 			margin-inline-start: 0;
+			font-family: $font-ns-regular;
+			line-height: 37px;
 		}
 
 		.ant-steps-item-process {
@@ -88,12 +91,16 @@
 	max-width: 410px;
 	margin: 0 240px auto;
 	margin-right: 25%;
-	height: 100vh;
+	height: 100%;
+
+	@media (max-width: 1439px) {
+		margin: 0 auto auto;
+	}
 }
 
 .step_layout {
 	width: 100%;
-	height: 100%;
+	min-height: 100vh;
 	margin: 0 auto;
 	display: flex;
 	justify-content: flex-end;
@@ -108,7 +115,7 @@
 		.step_header {
 			.step_logo {
 				text-align: center;
-				margin-bottom: 24px;
+				margin-bottom: 96px;
 			}
 		}
 	}
@@ -119,11 +126,22 @@
 	max-width: 490px;
 	width: 100%;
 
+	@media (max-width: 1300px) {
+		display: none;
+	}
+
 	&_bg {
 		width: 100%;
 		height: 100%;
+		object-fit: cover;
 		overflow: hidden;
 		background-image: url('../../../assets/img/img-sign-up/img_aside_info.png');
+
+		@media (max-width: 1439px) {
+			max-width: auto;
+			max-height: auto;
+			object-fit: contain;
+		}
 	}
 }
 

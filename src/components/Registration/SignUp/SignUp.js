@@ -86,7 +86,7 @@ const SignUp = () => {
 				footer={<ModalFooter handleCancelFirst={handleCancelFirst} />}>
 				<div className={styles.header_modal_wrapper}>
 					<Link
-						to='/'
+						to={'/signIn'}
 						className={styles.logo}>
 						<img
 							src={sign_up1_logo}

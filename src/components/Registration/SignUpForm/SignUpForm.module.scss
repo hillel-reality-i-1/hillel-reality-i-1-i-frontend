@@ -20,7 +20,7 @@
 				flex-direction: column;
 				background-color: $color-gray;
 				border-radius: 24px;
-				padding: 54px 80px 118px;
+				padding: 54px 80px 46px;
 
 				.ant-modal-title {
 					font-family: $font-ns-semiBold;
@@ -30,6 +30,18 @@
 					text-align: center;
 					color: $color-gray70;
 				}
+			}
+		}
+	}
+
+	.ant-checkbox {
+		.ant-checkbox-inner {
+			width: 24px;
+			height: 24px;
+
+			&::after {
+				left: 31%;
+				height: 12px;
 			}
 		}
 	}
@@ -43,10 +55,16 @@
 }
 
 .error {
+	font-family: $font-ns-regular;
 	display: flex;
 	color: $color-systemError;
 	font-size: 14px;
 	gap: 5px;
+
+	.img_wrapper {
+		display: flex;
+		text-align: center;
+	}
 }
 
 .input_success {
@@ -88,8 +106,18 @@
 		padding: 14px;
 		border-radius: 12px;
 		line-height: 160%;
-		margin-bottom: 16px;
-		margin-top: 8px;
+		margin: 8px 0;
+		border-color: $color-gray30;
+
+		&:focus {
+			box-shadow: none;
+			border-color: #a7a7b2;
+		}
+
+		&:focus-within {
+			box-shadow: none;
+			border-color: #a7a7b2;
+		}
 
 		&.invalid {
 			border-color: $color-systemError;
@@ -125,6 +153,10 @@
 			}
 		}
 	}
+}
+
+.inputWrapper {
+	margin-top: 16px;
 }
 
 .bottomLinkWrapper {

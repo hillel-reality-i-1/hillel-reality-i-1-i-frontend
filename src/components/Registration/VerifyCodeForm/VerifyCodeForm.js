@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import axios from '../../../config/axios/axios';
 
 import { useTranslation } from 'react-i18next';
 import '../../../translations/i18n';
@@ -12,6 +14,7 @@ import step_logo from '../../../assets/img/icons/logo/step_logo.svg';
 import img_aside_step3 from '../../../assets/img/img-sign-up/img_aside_step3.png';
 import CustomButton from '../../CustomButton/CustomButton';
 import { useValidation } from '../../../helpers/validation';
+import { URL_CHECK_VERIFICATION_CODE } from '../../../config/API_url';
 
 import styles from './VerifyCodeForm.module.scss';
 
@@ -38,6 +41,7 @@ const NumericInput = (props) => {
 const VerifyCodeForm = () => {
 	const { t } = useTranslation();
 	const navigate = useNavigate();
+	const { phone_number } = useSelector((state) => state.auth?.profile);
 	const [value1, setValue1] = useState('');
 	const [value2, setValue2] = useState('');
 	const [value3, setValue3] = useState('');
@@ -45,8 +49,16 @@ const VerifyCodeForm = () => {
 
 	const { validateInputRequired } = useValidation();
 
-	const handleSubmit = (value1) => {
-		navigate('/');
+	const handleSubmit = async () => {
+		const codePhone = +`${value1}${value2}${value3}${value4}`;
+		try {
+			const response = await axios.post(URL_CHECK_VERIFICATION_CODE, {
+				verification_code: codePhone,
+			});
+			const status = response.status;
+		} catch (error) {
+			console.error(error.message);
+		}
 	};
 
 	return (
@@ -86,9 +98,7 @@ const VerifyCodeForm = () => {
 						<div className={styles.description}>
 							<span className={styles.text}>{t('textSignUp.textVerifyCode.weSentCode')}</span>
 							<div className={styles.description_bottom}>
-								<a href='/'>
-									<span className={styles.text_link}>{'+380 000000'}</span>
-								</a>
+								<span className={styles.text_link}>{phone_number}</span>
 								<span className={styles.text}>{t('textSignUp.textVerifyCode.enterCode')}</span>
 							</div>
 						</div>
@@ -100,6 +110,7 @@ const VerifyCodeForm = () => {
 								code4: '',
 							}}
 							onSubmit={(values, { setSubmitting }) => {
+								handleSubmit();
 								setSubmitting(false);
 							}}>
 							{({ isSubmitting, isValid, dirty }) => (
@@ -185,8 +196,7 @@ const VerifyCodeForm = () => {
 									{/* button submit ---------------------------------------------------------- */}
 									<CustomButton
 										htmlType='submit'
-										type='primary'
-										onClick={handleSubmit}>
+										type='primary'>
 										{t('textSignUp.textVerifyCode.confirmNumber')}
 									</CustomButton>
 									<div className={styles.form_text_bottom_wrapper}>

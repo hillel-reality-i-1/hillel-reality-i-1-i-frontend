@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
@@ -80,15 +80,14 @@ const SignUpForm = () => {
 						checked: false,
 					}}
 					onSubmit={(values, { setSubmitting }) => {
+						setSubmitting(false);
 						const user = {
 							email: values.email,
 							password1: values.password,
-							password2: values.password,
+							password2: values.confirmPassword,
 						};
-						console.log(user, values);
-
 						dispatch(fetchRegisterEmail(user));
-						setSubmitting(false);
+
 						navigate('/verifyInfo');
 					}}>
 					{({ isSubmitting, errors, isValid, dirty, values, touched }) => (
@@ -101,7 +100,7 @@ const SignUpForm = () => {
 							}}>
 							<Form className={styles.form}>
 								{/* input email------------------------------------------------- */}
-								<div>
+								<div className={styles.inputWrapper}>
 									<label
 										className={styles.label}
 										htmlFor='email'>
@@ -125,10 +124,10 @@ const SignUpForm = () => {
 									</Field>
 									{errors.email && touched.email && (
 										<div className={styles.error}>
-											<div className='img_wrapper'>
+											<div className={styles.img_wrapper}>
 												<img
 													className={styles.img_er}
-													style={{ width: '18px' }}
+													style={{ width: '16px', display: 'block' }}
 													src={error}
 													alt='error'
 												/>
@@ -138,7 +137,7 @@ const SignUpForm = () => {
 									)}
 								</div>
 								{/* input password------------------------------------------------ */}
-								<div>
+								<div className={styles.inputWrapper}>
 									<label
 										htmlFor='password'
 										className={styles.label}>
@@ -180,10 +179,10 @@ const SignUpForm = () => {
 												<li
 													className={`${styles.error} ${msg.isWarning ? styles.input_success : ''}`}
 													key={i}>
-													<div className='img_wrapper'>
+													<div className={styles.img_wrapper}>
 														<img
 															className={styles.img_er}
-															style={{ width: '18px' }}
+															style={{ width: '16px', display: 'block' }}
 															src={!msg.isWarning ? error : success}
 															alt='error'
 														/>
@@ -195,7 +194,7 @@ const SignUpForm = () => {
 									)}
 								</div>
 								{/* input passwordConfirm------------------------------------------------------------ */}
-								<div>
+								<div className={styles.inputWrapper}>
 									<label
 										htmlFor='confirmPassword'
 										className={styles.label}>
@@ -233,10 +232,10 @@ const SignUpForm = () => {
 									</Field>
 									{errors.confirmPassword && touched.confirmPassword && (
 										<div className={styles.error}>
-											<div className='img_wrapper'>
+											<div className={styles.img_wrapper}>
 												<img
 													className={styles.img_er}
-													style={{ width: '18px' }}
+													style={{ width: '16px', display: 'block' }}
 													src={error}
 													alt='error'
 												/>
