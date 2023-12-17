@@ -42,7 +42,7 @@ const VerifyInfo = () => {
 			});
 			return data;
 		} catch (error) {
-			console.error(error.message);
+			return error.message;
 		}
 	};
 

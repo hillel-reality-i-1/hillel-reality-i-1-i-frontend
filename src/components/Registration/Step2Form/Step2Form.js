@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import axios from '../../../config/axios/axios';
 import { useTranslation } from 'react-i18next';
 import '../../../translations/i18n';
+
 import { Formik, Form, Field } from 'formik';
 import { Button, Spin } from 'antd';
 import location from '../../../assets/img/icons/icons-SignUp/location.svg';
@@ -26,7 +27,7 @@ const Step2Form = ({ onNext }) => {
 			const data = await axios.get(URL_COUNTRY_LIST);
 			return data;
 		} catch (error) {
-			return console.log(error.message);
+			return error.message;
 		}
 	};
 
@@ -35,7 +36,7 @@ const Step2Form = ({ onNext }) => {
 			const data = await axios.get(URL_CITY_LIST);
 			return data;
 		} catch (error) {
-			return console.log(error.message);
+			return error.message;
 		}
 	};
 
@@ -45,7 +46,7 @@ const Step2Form = ({ onNext }) => {
 				const countriesData = await getAllCountries();
 				getAllCountries && setCountries(countriesData);
 			} catch (error) {
-				console.error(error.message);
+				return error.message;
 			} finally {
 				setLoadingCountries(false);
 			}
@@ -65,7 +66,7 @@ const Step2Form = ({ onNext }) => {
 					setCities(filteredCities);
 				}
 			} catch (error) {
-				console.error(error.message);
+				return error.message;
 			} finally {
 				setLoadingCities(false);
 			}
@@ -137,12 +138,15 @@ const Step2Form = ({ onNext }) => {
 											className={styles.select}>
 											<option
 												disabled
-												selected
 												value=''>
 												Обрати країну
 											</option>
 											{loadingCountries ? (
-												<Spin />
+												<option
+													value=''
+													disabled>
+													Loading...
+												</option>
 											) : (
 												countries &&
 												countries.map(({ id, name }) => (
@@ -174,14 +178,12 @@ const Step2Form = ({ onNext }) => {
 										value={selectedCityId || ''}
 										disabled={!selectedCountryId}
 										className={`${styles.select} ${!selectedCountryId && styles.select_disabled}`}>
-										<option
-											selected
-											value=''>
-											Обрати місто
-										</option>
+										<option value=''>Обрати місто</option>
 										{loadingCities ? (
-											<option disabled>
-												<div className={styles.spin_wrapper}>Loading...</div>
+											<option
+												value=''
+												disabled>
+												Loading...
 											</option>
 										) : (
 											cities?.map(({ id, name }) => (
@@ -202,11 +204,7 @@ const Step2Form = ({ onNext }) => {
 									{t('textSignUp.continue')}
 								</CustomButton>
 								<div className={styles.skip_link}>
-									<Link
-										onClick={onNext}
-										className={styles.link}>
-										{t('textSignUp.skipNow')}
-									</Link>
+									<button className={styles.link}>{t('textSignUp.skipNow')}</button>
 								</div>
 							</Form>
 						)}

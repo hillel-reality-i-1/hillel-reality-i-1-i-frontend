@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import axios from '../../../config/axios/axios';
@@ -15,6 +15,7 @@ import img_aside_step3 from '../../../assets/img/img-sign-up/img_aside_step3.png
 import CustomButton from '../../CustomButton/CustomButton';
 import { useValidation } from '../../../helpers/validation';
 import { URL_CHECK_VERIFICATION_CODE } from '../../../config/API_url';
+import CountdownTimer from '../../CountdownTimer/CountdownTimer';
 
 import styles from './VerifyCodeForm.module.scss';
 
@@ -46,8 +47,33 @@ const VerifyCodeForm = () => {
 	const [value2, setValue2] = useState('');
 	const [value3, setValue3] = useState('');
 	const [value4, setValue4] = useState('');
+	const [showButton, setShowButton] = useState(false);
+	const [timerFinished, setTimerFinished] = useState(false);
 
 	const { validateInputRequired } = useValidation();
+
+	const handleTimerEnd = () => {
+		setTimerFinished(true);
+	};
+
+	useEffect(() => {
+		if (timerFinished) {
+			setShowButton(true);
+		}
+	}, [timerFinished]);
+
+	const handleResend = async () => {
+		const codePhone = +`${value1}${value2}${value3}${value4}`;
+		try {
+			const response = await axios.post(URL_CHECK_VERIFICATION_CODE, {
+				verification_code: codePhone,
+			});
+			const status = response.status;
+			return status;
+		} catch (error) {
+			return error.message;
+		}
+	};
 
 	const handleSubmit = async () => {
 		const codePhone = +`${value1}${value2}${value3}${value4}`;
@@ -56,8 +82,9 @@ const VerifyCodeForm = () => {
 				verification_code: codePhone,
 			});
 			const status = response.status;
+			return status;
 		} catch (error) {
-			console.error(error.message);
+			return error.message;
 		}
 	};
 
@@ -196,18 +223,25 @@ const VerifyCodeForm = () => {
 									{/* button submit ---------------------------------------------------------- */}
 									<CustomButton
 										htmlType='submit'
-										type='primary'>
+										type='primary'
+										isDisable={!value1 || !value2 || !value3 || !value4}>
 										{t('textSignUp.textVerifyCode.confirmNumber')}
 									</CustomButton>
 									<div className={styles.form_text_bottom_wrapper}>
 										<span className={`${styles.text} ${styles.margin_right}`}>
 											{t('textSignUp.textVerifyCode.didntReceiveCode')}
 										</span>
-										<a
-											href='/'
-											className={styles.text_link}>
-											{t('textSignUp.textVerifyCode.sendAgain')}
-										</a>
+										<CountdownTimer
+											onTimerEnd={handleTimerEnd}
+											style={{ margin: '0 0 120px 0' }}
+										/>
+										{showButton && (
+											<button
+												onClick={handleResend}
+												className={`${styles.text_link} ${styles.link_send}`}>
+												{t('textSignUp.sandAgain')}
+											</button>
+										)}
 									</div>
 								</Form>
 							)}

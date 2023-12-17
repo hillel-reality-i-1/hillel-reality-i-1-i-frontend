@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 import '../../../translations/i18n';
-
 import { Form, Formik, Field } from 'formik';
 import { PhoneNumberUtil } from 'google-libphonenumber';
 import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
+import CustomButton from '../../CustomButton/CustomButton';
 
 import styles from './Step3Form.module.scss';
-import CustomButton from '../../CustomButton/CustomButton';
 
 const phoneUtil = PhoneNumberUtil.getInstance();
 const isPhoneValid = (phone) => {
@@ -43,7 +42,6 @@ const Step3Form = ({ onNext, onPhoneChange }) => {
 							};
 							onPhoneChange(phone);
 							onNext(data);
-							// novigate('/verifyCodeForm');
 							setSubmitting(false);
 						}}>
 						{({ isSubmitting }) => (

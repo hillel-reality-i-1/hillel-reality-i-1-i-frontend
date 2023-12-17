@@ -26,7 +26,7 @@ const StepLayout = () => {
 
 	const [current, setCurrent] = useState(0);
 	const [formData2, setFormData2] = useState({});
-	const [formData3, setFormData3] = useState({});
+	const [setFormData3] = useState({});
 	const [phone, setPhone] = useState('');
 
 	const { token } = useParams();
@@ -41,7 +41,7 @@ const StepLayout = () => {
 					});
 					localStorage.setItem('token', userToken?.token);
 				} catch (error) {
-					console.error(error.message);
+					return error.message;
 				}
 			}
 		};
@@ -50,6 +50,10 @@ const StepLayout = () => {
 	}, [token]);
 
 	const handleForm2Submit = async (data) => {
+		if (data.country_id === 0 && data.city_id === 0) {
+			data.country_id = null;
+			data.city_id = null;
+		}
 		setFormData2(data);
 		next();
 	};
@@ -61,32 +65,8 @@ const StepLayout = () => {
 	const sendVerificationCode = async () => {
 		try {
 			await axios.post(URL_SEND_VERIFICATION_CODE);
-			// novigate('/verifyCodeForm');
 		} catch (error) {
-			console.error(error.message);
-		}
-	};
-
-	useEffect(() => {
-		if (phone && current === steps.length - 1) {
-			sendRequestToServer();
-		}
-	}, [phone, current]);
-
-	const sendRequestToServer = async () => {
-		try {
-			const combinedData = {
-				...formData2,
-				phone_number: phone,
-			};
-			await dispatch(fetchAddDataProfile(combinedData));
-
-			if (phone) {
-				sendVerificationCode();
-				novigate('/verifyCodeForm');
-			}
-		} catch (error) {
-			console.error('Error:', error.message);
+			return error.message;
 		}
 	};
 
@@ -112,6 +92,32 @@ const StepLayout = () => {
 			asideImage: img_aside_step3,
 		},
 	];
+
+	const sendRequestToServer = async () => {
+		const phoneData = phone.length > 4 ? phone : '';
+
+		try {
+			const combinedData = {
+				...formData2,
+				phone_number: phoneData,
+			};
+			await dispatch(fetchAddDataProfile(combinedData));
+			if (phoneData.length > 1) {
+				await sendVerificationCode();
+				novigate('/verifyCodeForm');
+			} else {
+				novigate('/');
+			}
+		} catch (error) {
+			return error.message;
+		}
+	};
+
+	useEffect(() => {
+		if (phone && current === steps.length - 1) {
+			sendRequestToServer();
+		}
+	}, [phone, current]);
 
 	const next = () => {
 		setCurrent(current + 1);

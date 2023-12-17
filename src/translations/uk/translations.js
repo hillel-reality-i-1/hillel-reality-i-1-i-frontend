@@ -82,6 +82,9 @@ export const TRANSLATIONS_UK = {
 			didntReceiveCode: 'Не отримали код?',
 			sendAgain: 'Відправити ще раз',
 		},
+		success: {
+			userSuccessfullyRegistered: 'користувач успішно зареєстрований',
+		},
 		error: {
 			lengthName: 'Довжина має бути від 2 до 20 символів',
 			otherValidName: 'Допустимі тільки кирилиця, латиниця, апостроф і дефіс',
@@ -91,11 +94,14 @@ export const TRANSLATIONS_UK = {
 			symbolNumber: 'Має містити як мінімум 1 цифру та символ',
 			register: 'Має містити літери верхнього та нижнього регістрів',
 			coincidence: 'Паролі не збігаються',
+			thisEmailIsAlreadyInUse:
+				'Ця електронна адреса вже використовується. Будь ласка, використовуйте інший або увійдіть',
 		},
 	},
 	textForgotYourPassword: {
 		forgotYourPassword: 'Забули ваш пароль?',
-		createNewPasswordDescription: 'Введіть вашу пошту, і ми надішлемо вам посилання для відновлення пароля',
+		createNewPasswordDescription:
+			'Введіть вашу пошту, і ми надішлемо вам посилання для відновлення пароля',
 		email: 'Пошта:',
 		recieveTheLink: 'Отримати посилання',
 		dontHaveAnAccount: 'Немає акаунту?',
@@ -111,7 +117,7 @@ export const TRANSLATIONS_UK = {
 		resendLink: 'Відправити ще раз',
 		backToSignIn: 'Повернутся до Входу',
 		resendIn: 'Відправити ще раз через',
-		seconds: 'сек'
+		seconds: 'сек',
 	},
 	textCreateNewPassword: {
 		createNewPassword: 'Створення нового паролю',

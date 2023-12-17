@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
 import '../../../translations/i18n';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Modal, Checkbox, Input, ConfigProvider } from 'antd';
 import { Formik, Form, Field } from 'formik';
 import error from '../../../assets/img/icons/icons-SignUp/error.svg';
@@ -79,16 +81,25 @@ const SignUpForm = () => {
 						confirmPassword: '',
 						checked: false,
 					}}
-					onSubmit={(values, { setSubmitting }) => {
-						setSubmitting(false);
-						const user = {
-							email: values.email,
-							password1: values.password,
-							password2: values.confirmPassword,
-						};
-						dispatch(fetchRegisterEmail(user));
+					onSubmit={async (values, { setSubmitting }) => {
+						try {
+							// Sending a request to the server
+							const user = {
+								email: values.email,
+								password1: values.password,
+								password2: values.confirmPassword,
+							};
+							const response = await dispatch(fetchRegisterEmail(user));
 
-						navigate('/verifyInfo');
+							if (fetchRegisterEmail.fulfilled.match(response)) {
+								navigate('/verifyInfo');
+							}
+							// If there are errors, they will be handled in the fetchRegisterEmail thunk
+						} catch (error) {
+							toast.error(error.response.data.email[0] || 'Error');
+						} finally {
+							setSubmitting(false);
+						}
 					}}>
 					{({ isSubmitting, errors, isValid, dirty, values, touched }) => (
 						<ConfigProvider
@@ -99,6 +110,8 @@ const SignUpForm = () => {
 								},
 							}}>
 							<Form className={styles.form}>
+								<ToastContainer />
+
 								{/* input email------------------------------------------------- */}
 								<div className={styles.inputWrapper}>
 									<label

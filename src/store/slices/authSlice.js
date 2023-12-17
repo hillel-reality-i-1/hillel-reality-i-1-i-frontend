@@ -1,47 +1,57 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from '../../config/axios/axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { URL_REGISTRATION_EMAIL, URL_UPDATE_USER, URL_CREATE_PROFILE } from '../../config/API_url';
 
-export const fetchRegisterEmail = createAsyncThunk('fetchRegisterEmail', async (user) => {
-	try {
-		const data = await axios.post(URL_REGISTRATION_EMAIL, user);
-		console.log(data);
-		return data;
-	} catch (error) {
-		return console.log(error.message);
+export const fetchRegisterEmail = createAsyncThunk(
+	'fetchRegisterEmail',
+	async (user, { rejectWithValue }) => {
+		try {
+			const data = await axios.post(URL_REGISTRATION_EMAIL, user);
+			return data;
+		} catch (error) {
+			// Sending an error as a notification
+			toast.error(error.response.data.email[0] || 'Error');
+			// Sending an error to thunk and using rejectWithValue to store the error in state
+			return rejectWithValue(error.response.data);
+		}
 	}
-});
+);
 
 export const fetchUpdateName = createAsyncThunk(
 	'fetchUpdateName',
-	async ({ id, first_name, last_name }) => {
+	async ({ id, first_name, last_name }, { rejectWithValue }) => {
 		try {
 			const data = await axios.patch(`${URL_UPDATE_USER}${id}/`, {
 				first_name: first_name,
 				last_name: last_name,
 			});
-
-			// console.log(data);
 			return data;
 		} catch (error) {
-			return console.log(error.message);
+			// Sending an error as a notification
+			toast.error(error.response.data.email[0] || 'Error');
+			// Sending an error to thunk and using rejectWithValue to store the error in state
+			return rejectWithValue(error.response.data);
 		}
 	}
 );
 
 export const fetchAddDataProfile = createAsyncThunk(
 	'fetchAddDataProfile',
-	async ({ country_id, city_id, phone_number }) => {
+	async ({ country_id, city_id, phone_number }, { rejectWithValue }) => {
 		try {
 			const data = await axios.post(URL_CREATE_PROFILE, {
 				country_id: country_id,
 				city_id: city_id,
 				phone_number: phone_number,
 			});
-			console.log(data);
 			return data;
 		} catch (error) {
-			return console.log(error.message);
+			// Sending an error as a notification
+			toast.error(error.response.data.email[0] || 'Error');
+			// Sending an error to thunk and using rejectWithValue to store the error in state
+			return rejectWithValue(error.response.data);
 		}
 	}
 );
@@ -51,7 +61,6 @@ const initialUserData = storedUserData ? JSON.parse(storedUserData) : null;
 
 const initialState = {
 	user: initialUserData,
-	// user: null,
 	profile: null,
 	status: 'loading',
 };
