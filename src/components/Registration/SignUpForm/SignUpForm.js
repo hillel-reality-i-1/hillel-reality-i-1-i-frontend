@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -18,11 +18,10 @@ import { useValidation } from '../../../helpers/validation';
 
 import styles from './SignUpForm.module.scss';
 
-const SignUpForm = () => {
+const SignUpForm = ({ isOpen, onClose }) => {
 	const { t } = useTranslation();
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-
 	const [open, setOpen] = useState(false);
 
 	const {
@@ -33,24 +32,17 @@ const SignUpForm = () => {
 		validWarnings,
 	} = useValidation();
 
-	const showModal = () => {
-		setOpen(true);
-	};
+	useEffect(() => {
+		setOpen(isOpen);
+	}, [isOpen]);
 
 	const handleCancel = () => {
 		setOpen(false);
+		onClose(); // Call the onClose callback to notify the parent component
 	};
 
 	return (
 		<>
-			{' '}
-			<CustomButton
-				type='primary'
-				htmlType='button'
-				onClick={showModal}
-				isDisable={false}>
-				{t('textSignUp.signUpWithEmail')}
-			</CustomButton>
 			<Modal
 				open={open}
 				closeIcon={

@@ -20,6 +20,7 @@ const VerifyInfo = () => {
 	const { t } = useTranslation();
 	const [showButton, setShowButton] = useState(false);
 	const [timerFinished, setTimerFinished] = useState(false);
+	const [isModalOpen, setModalOpen] = useState(false);
 
 	const user = useSelector((state) => state.auth?.user);
 
@@ -44,6 +45,13 @@ const VerifyInfo = () => {
 		} catch (error) {
 			return error.message;
 		}
+	};
+	const openModal = () => {
+		setModalOpen(true);
+	};
+
+	const closeModal = () => {
+		setModalOpen(false);
 	};
 
 	return (
@@ -91,13 +99,17 @@ const VerifyInfo = () => {
 						htmlType='button'
 						type='secondary'
 						isDisable={false}
-						onClick={<SignUpForm />}>
+						onClick={openModal}>
 						<img
 							src={arrow_back}
 							alt='back'
 						/>
 						<span className={styles.btn_back}>{t('textSignUp.returnToRegistration')}</span>
 					</CustomButton>
+					<SignUpForm
+						isOpen={isModalOpen}
+						onClose={closeModal}
+					/>
 				</div>
 
 				<aside className={styles.aside}>

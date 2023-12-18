@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import axios from '../../../config/axios/axios';
@@ -26,7 +26,6 @@ const StepLayout = () => {
 
 	const [current, setCurrent] = useState(0);
 	const [formData2, setFormData2] = useState({});
-	const [setFormData3] = useState({});
 	const [phone, setPhone] = useState('');
 
 	const { token } = useParams();
@@ -59,16 +58,16 @@ const StepLayout = () => {
 	};
 
 	const handleForm3Submit = async (data) => {
-		setFormData3(data);
+		return data;
 	};
 
-	const sendVerificationCode = async () => {
+	const sendVerificationCode = useCallback(async () => {
 		try {
 			await axios.post(URL_SEND_VERIFICATION_CODE);
 		} catch (error) {
 			return error.message;
 		}
-	};
+	}, []);
 
 	const steps = [
 		{
@@ -93,7 +92,7 @@ const StepLayout = () => {
 		},
 	];
 
-	const sendRequestToServer = async () => {
+	const sendRequestToServer = useCallback(async () => {
 		const phoneData = phone.length > 4 ? phone : '';
 
 		try {
@@ -111,13 +110,13 @@ const StepLayout = () => {
 		} catch (error) {
 			return error.message;
 		}
-	};
+	}, [phone, formData2, dispatch, sendVerificationCode, novigate]);
 
 	useEffect(() => {
 		if (phone && current === steps.length - 1) {
 			sendRequestToServer();
 		}
-	}, [phone, current]);
+	}, [phone, current, steps.length, sendRequestToServer]);
 
 	const next = () => {
 		setCurrent(current + 1);

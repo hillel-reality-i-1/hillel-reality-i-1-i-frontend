@@ -8,11 +8,22 @@ import { Button, Modal } from 'antd';
 import google from '../../../assets/img/icons/icons-SignUp/google.svg';
 import sign_up1_logo from '../../../assets/img/icons/logo/sign_up1_logo.svg';
 import SignUpForm from '../SignUpForm/SignUpForm';
-
+import CustomButton from '../../CustomButton/CustomButton';
+// import SignIn from '../../SignIn/SignIn';
 import styles from './SignUp.module.scss';
 
 const ModalFooter = ({ handleCancelFirst }) => {
 	const { t } = useTranslation();
+	const [isModalOpen, setModalOpen] = useState(false);
+
+	const openModal = () => {
+		handleCancelFirst();
+		setModalOpen(true);
+	};
+
+	const closeModal = () => {
+		setModalOpen(false);
+	};
 	return (
 		<>
 			<Button
@@ -29,9 +40,17 @@ const ModalFooter = ({ handleCancelFirst }) => {
 				<span className={styles.signUpWithGoogle}>{t('textSignUp.signUpWithGoogle')}</span>
 			</Button>
 			<span className={styles.spanOr}>{t('textSignUp.or')}</span>
-			<button onClick={handleCancelFirst}>
-				<SignUpForm />
-			</button>
+			<CustomButton
+				type='primary'
+				htmlType='button'
+				onClick={openModal}>
+				{t('textSignUp.signUpWithEmail')}
+			</CustomButton>
+
+			<SignUpForm
+				isOpen={isModalOpen}
+				onClose={closeModal}
+			/>
 			<span className={styles.bottomSpan}>
 				{t('textSignUp.alreadyHaveAnAccount')}
 				<a
@@ -39,6 +58,7 @@ const ModalFooter = ({ handleCancelFirst }) => {
 					type='link'>
 					{t('textSignUp.signIn')}
 				</a>
+				{/* <SignIn /> */}
 			</span>
 		</>
 	);
