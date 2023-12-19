@@ -9,6 +9,7 @@ import SignUp from '../Registration/SignUp/SignUp';
 
 import styles from './Header.module.scss';
 import SignIn from '../SignIn/SignIn';
+import AuthenticationWrapper from '../AuthenticationWrapper/AuthenticationWrapper';
 
 export default function Header() {
 	const { t } = useTranslation();
@@ -55,8 +56,8 @@ export default function Header() {
 						</li>
 					</ul>
 					<div className={styles.navigation_button}>
-						<div>
-							<SignIn />
+						<div  style={{ display: 'flex', alignItems: 'center'  }}>
+							<AuthenticationWrapper />
 						</div>
 
 						<a

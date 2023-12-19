@@ -1,9 +1,9 @@
 import { useGoogleLogin } from '@react-oauth/google';
 
-export default function GoogleSignIn() {
+export default function GoogleSignIn({changeGoogleAuthToken}) {
 
     const login = useGoogleLogin({
-        onSuccess: tokenResponse => console.log(tokenResponse),
+        onSuccess: tokenResponse => changeGoogleAuthToken(tokenResponse.access_token),
     });
 
     return (

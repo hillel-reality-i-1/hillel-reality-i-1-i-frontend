@@ -2,10 +2,48 @@
 
 .account {
     display: flex;
+    align-items: center;
     flex-direction: row;
     &__notification {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 24px;
         height: 48px;
         width: 48px;
+        border-radius: 50%;
         background-color: $color-gray10;
     }
+
+    &__user {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        &__name {
+            color: $color-gray80;
+            font-family: $semiBold;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+        }
+        &__avatar {
+            position: relative;
+            height: 56px;
+            width: 56px;
+            border-radius: 50%;
+            background-color: $color-gray30;
+        }
+    }
+}
+
+
+.dropdown__item {
+    padding: 9px 2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: $regular;
+    color: $color-gray70;
+    font-size: 18px;
+    line-height: 160%; 
 }

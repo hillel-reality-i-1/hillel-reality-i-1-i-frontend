@@ -2,6 +2,7 @@ import { Tabs } from 'antd';
 
 import styles from './userPage.module.scss'
 import AboutMe from '../../components/AboutMe/AboutMe';
+import UserHead from '../../components/UserHead/UserHead';
 
 export default function UserPage() {
 
@@ -38,17 +39,7 @@ export default function UserPage() {
 
         <div className={styles.user}>
             <div className={styles.user__head}>
-                <div className={styles.user__head__avatar}>
-                    <img/>
-                </div>
-                <div>
-                    <p>userName</p>
-                    <p>+ Add location</p>
-                </div>
-                <div className={styles.user__head__edit}>
-                    <p>edit</p>
-                </div>
-
+                <UserHead />
             </div>
             
             <AboutMe/>

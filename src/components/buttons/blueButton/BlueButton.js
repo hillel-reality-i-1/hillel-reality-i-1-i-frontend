@@ -1,12 +1,12 @@
 import styles from './blueButton.module.scss'
 
-export default function BlueButton({text}) {
+export default function BlueButton({text, additionalStyles, onClick }) {
 
   return (
     <>
-      <button className={styles.button}>
+      <button className={`${styles.button} ${additionalStyles}`} onClick={onClick}>
         {text}
-      </button> 
+      </button>
     </>
   )
 }
