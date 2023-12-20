@@ -32,13 +32,13 @@ const StepLayout = () => {
 
 	useEffect(() => {
 		const fetchKey = async () => {
-			const storedToken = localStorage.getItem('token');
+			const storedToken = localStorage.getItem('authTokenUHelp');
 			if (!storedToken) {
 				try {
 					const userToken = await axios.post(URL_CONFIRM_EMAIL, {
 						key: token,
 					});
-					localStorage.setItem('token', userToken?.token);
+					localStorage.setItem('authTokenUHelp', userToken?.token);
 				} catch (error) {
 					return error.message;
 				}

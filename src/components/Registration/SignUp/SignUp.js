@@ -1,20 +1,30 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 import { useTranslation } from 'react-i18next';
 import '../../../translations/i18n';
 import { Button, Modal } from 'antd';
-
 import google from '../../../assets/img/icons/icons-SignUp/google.svg';
 import sign_up1_logo from '../../../assets/img/icons/logo/sign_up1_logo.svg';
 import SignUpForm from '../SignUpForm/SignUpForm';
 import CustomButton from '../../CustomButton/CustomButton';
+import GoogleSignIn from '../../SignIn/googleSignIn/GoogleSignIn';
 
 import styles from './SignUp.module.scss';
+import { setGoogleAuthToken } from '../../../store/slices/signInSlice';
 
 const ModalFooter = ({ handleCancelFirst, toggleSignInModal }) => {
 	const { t } = useTranslation();
+	const dispatch = useDispatch();
 	const [isModalOpen, setModalOpen] = useState(false);
+	const changeGoogleAuthToken = (authToken) => {
+		dispatch(setGoogleAuthToken(authToken));
+		// closeModal();
+		// setLoginError(null);
+		// setIsAuthenticated(true);
+	};
 
 	const openModal = () => {
 		handleCancelFirst();
@@ -36,6 +46,10 @@ const ModalFooter = ({ handleCancelFirst, toggleSignInModal }) => {
 
 	return (
 		<>
+			<GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
+				<GoogleSignIn changeGoogleAuthToken={changeGoogleAuthToken} />
+			</GoogleOAuthProvider>
+
 			<Button
 				key='google'
 				shape='round'
