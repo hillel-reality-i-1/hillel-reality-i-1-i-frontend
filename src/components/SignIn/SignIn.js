@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext  } from 'react';
 import { useFormik } from 'formik';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,8 +14,11 @@ import { API_URL_SIGN_IN } from '../../config/API_url';
 import { clearAuthToken, setAuthToken, setGoogleAuthToken } from '../../store/slices/signInSlice';
 
 import styles from './signIn.module.scss';
+import { useAuthModal } from '../AuthModalContext/AuthModalContext';
+import SignUp from '../Registration/SignUp/SignUp';
 
-export default function SignIn() {
+
+export default function SignIn({signInModalOpen, toggleSignInModal,  toggleSignUpModal}) {
 
   const [isOpen, setIsOpen] = useState(false);
   const [loginError, setLoginError] = useState(null);
@@ -31,7 +34,7 @@ export default function SignIn() {
   const changeGoogleAuthToken = (authToken) => {
 
     dispatch(setGoogleAuthToken(authToken));
-    closeModal();
+    toggleSignInModal()
     setLoginError(null); 
     setIsAuthenticated(true)
   };
@@ -49,6 +52,10 @@ export default function SignIn() {
     setIsOpen(false);
   };
 
+  const openSignUp = () => {
+    toggleSignInModal()
+    toggleSignUpModal()
+  }
   const handleSignIn = async (values) => {
     try {
       const response = await axios.post('http://127.0.0.1:8000/api/v1/auth/login/', values);
@@ -77,16 +84,17 @@ export default function SignIn() {
 
   return (
     <>
+    {/* <p>signInModalOpen: {signInModalOpen ? 'Open' : 'Closed'}</p> */}
       {!isAuthenticated && (
-        <p className={styles.signInButton} onClick={openModal}>
+        <p className={styles.signInButton} onClick={toggleSignInModal}>
           Увійти
         </p>
       )}
 
-      {isOpen && (
+      {signInModalOpen && (
         <div className={`${styles.shadow} ${styles.fadeIn}`}>
           <div className={`${styles.signIn} `}>
-            <div className={styles.signIn__icon} onClick={closeModal}>
+            <div className={styles.signIn__icon} onClick={toggleSignInModal}>
               <div className={styles.signIn__icon__helper}></div>
               <img className={styles.signIn__icon__logo}  src={miniLogo} alt='UHelp logo'/>
               <CloseIcon className={styles.signIn__icon__close}/>
@@ -110,9 +118,9 @@ export default function SignIn() {
 
               <div className={styles.noAccount}>
                 <p className={styles.noAccount__text}>Немає аккаунту?</p>
-                <a href='/' className={styles.noAccount__signUp}>
-                  Зареєструватися
-                </a>
+                <p className={styles.noAccount__signUp} onClick={openSignUp}>
+                  Зареєструватися    
+                </p>
               </div>
             </div>
           </div>

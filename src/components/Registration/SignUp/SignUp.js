@@ -12,7 +12,7 @@ import CustomButton from '../../CustomButton/CustomButton';
 
 import styles from './SignUp.module.scss';
 
-const ModalFooter = ({ handleCancelFirst }) => {
+const ModalFooter = ({ handleCancelFirst, toggleSignInModal }) => {
 	const { t } = useTranslation();
 	const [isModalOpen, setModalOpen] = useState(false);
 
@@ -24,6 +24,16 @@ const ModalFooter = ({ handleCancelFirst }) => {
 	const closeModal = () => {
 		setModalOpen(false);
 	};
+
+	///// New Func
+
+	const openSinIn = () => {
+		handleCancelFirst()
+		toggleSignInModal()
+	}
+
+
+
 	return (
 		<>
 			<Button
@@ -54,16 +64,18 @@ const ModalFooter = ({ handleCancelFirst }) => {
 			<span className={styles.bottomSpan}>
 				{t('textSignUp.alreadyHaveAnAccount')}
 				<a
-					href='/'
-					type='link'>
-					{t('textSignUp.signIn')}
+					// href='/'
+					// type='link'
+					onClick={openSinIn}
+					>
+					{t('textSignUp.signIn')}  
 				</a>
 			</span>
 		</>
 	);
 };
 
-const SignUp = () => {
+const SignUp = ({signUpModalOpen, toggleSignUpModal, toggleSignInModal}) => {
 	const { t } = useTranslation();
 	const [open, setOpen] = useState(false);
 	const showModalFirst = () => {
@@ -79,12 +91,12 @@ const SignUp = () => {
 			<Button
 				type='primary'
 				className={styles.btn_modal_open}
-				onClick={showModalFirst}>
+				onClick={toggleSignUpModal}>
 				{t('textSignUp.signUp')}
 			</Button>
 
 			<Modal
-				open={open}
+				open={signUpModalOpen}
 				closeIcon={
 					<svg
 						width='24'
@@ -101,8 +113,8 @@ const SignUp = () => {
 				centered
 				width={580}
 				className={styles.modal}
-				onCancel={handleCancelFirst}
-				footer={<ModalFooter handleCancelFirst={handleCancelFirst} />}>
+				onCancel={toggleSignUpModal}
+				footer={<ModalFooter handleCancelFirst={toggleSignUpModal} toggleSignInModal={toggleSignInModal}/>}>
 				<div className={styles.header_modal_wrapper}>
 					<Link
 						to={'/signIn'}
