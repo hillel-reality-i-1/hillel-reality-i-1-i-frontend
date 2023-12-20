@@ -21,7 +21,7 @@ export const TRANSLATIONS_UK = {
 	textSignUp: {
 		signUpTo: 'Зареєструватися в',
 		signUpDescription:
-			'Зареєструйтеся, щоб отримати можливість обмінюватися досвідом, спілкуватися з іншими учасниками тощо',
+			'Зареєструйтеся, щоб мати можливість обмінюватися досвідом і спілкуватися з іншими учасниками',
 		signUpWithGoogle: 'Зареєструватися в Google',
 		or: 'або',
 		signUpWithEmail: 'Зареєструватися через електронну пошту',
@@ -51,12 +51,12 @@ export const TRANSLATIONS_UK = {
 
 		textStep1: {
 			titleH2: 'Як вас звати?',
+			fullName: 'Повне ім’я',
 			description: 'Введіть ваше ім’я для того, щоб інші учасники U-Help могли вас впізнати',
-			name: 'Ім’я',
-			enterYourName: 'Введіть своє ім’я',
-			lastName: 'Прізвище',
-			enterLastName: 'Введіть своє прізвище',
-			infoFirstname: "Ім'я можна змінювати раз на 90 днів",
+			enterUserName: 'Введіть свій username',
+			enterFullName: 'Введіть своє повне ім’я',
+			infoUserName: "Username - це ваше унікальне ім'я у нашій системі",
+			infoFullName: "Ім'я можна змінювати раз на 90 днів",
 		},
 		textStep2: {
 			titleH2: 'Де ви зараз?',
@@ -86,8 +86,13 @@ export const TRANSLATIONS_UK = {
 			userSuccessfullyRegistered: 'користувач успішно зареєстрований',
 		},
 		error: {
-			lengthName: 'Довжина має бути від 2 до 20 символів',
-			otherValidName: 'Допустимі тільки кирилиця, латиниця, апостроф і дефіс',
+			lengthUserName: 'Довжина має бути від 2 до 32 символів. Будь ласка, заповніть його',
+			lengthFullName: 'Поле має містити від 2 до 50 символів. Будь ласка, заповніть його',
+			otherValidUserName:
+				'Поле може містити лише латинські літери (A-Z), цифри (0-9) та символ підкреслення («_»)',
+			startWithDigit: 'Не можна починати з цифри',
+			noSpaces: 'Поле не може містити пробіли',
+			otherValidFullName: "Введеть коректні ім'я та призвіще",
 			required: 'Це обов’язкове поле',
 			email: 'Введіть дійсну пошту (email@example.com)',
 			length: 'Має містити як мінімум 8 символів',
@@ -96,6 +101,7 @@ export const TRANSLATIONS_UK = {
 			coincidence: 'Паролі не збігаються',
 			thisEmailIsAlreadyInUse:
 				'Ця електронна адреса вже використовується. Будь ласка, використовуйте інший або увійдіть',
+			errorCode: 'Не вірний код, спробуйте ще раз',
 		},
 	},
 	textForgotYourPassword: {

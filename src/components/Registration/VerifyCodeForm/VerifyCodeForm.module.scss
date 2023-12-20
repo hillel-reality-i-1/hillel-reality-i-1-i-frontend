@@ -23,80 +23,6 @@
 	@media (max-width: 1439px) {
 		margin: 0 auto auto;
 	}
-
-	.img_phone {
-		width: 58px;
-		height: 58px;
-	}
-
-	.title {
-		font-family: $font-ns-semiBold;
-		font-size: 40px;
-		line-height: 120%;
-		text-align: center;
-		color: $color-gray80;
-		margin-top: 48px;
-	}
-
-	.description {
-		margin-top: 8px;
-
-		&_bottom {
-			display: flex;
-		}
-	}
-
-	.text {
-		font-family: $font-ns-regular;
-		font-size: 18px;
-		line-height: 160%;
-		color: $color-gray70;
-	}
-
-	.text_link {
-		font-family: $font-ns-medium;
-		font-size: 18px;
-		line-height: 160%;
-		color: $color-primary30base;
-	}
-
-	.form {
-		margin-top: 48px;
-
-		&_input_wrapper {
-			margin-bottom: 48px;
-			display: flex;
-			gap: 24px;
-			.input {
-				font-family: $font-ns-medium;
-				font-size: 28px;
-				text-align: center;
-				width: 85px;
-				height: 102px;
-				border-radius: 12px;
-				padding: 12px 14px;
-				border: 1px solid $color-primary10;
-				color: $color-gray80;
-
-				&:hover {
-					border-color: $color-primary30base;
-					cursor: text;
-				}
-			}
-		}
-
-		.button_text {
-			font-size: 18px;
-			color: $color-gray;
-		}
-
-		&_text_bottom_wrapper {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			margin-top: 64px;
-		}
-	}
 }
 
 .container_novigation {
@@ -183,7 +109,6 @@
 		margin-top: 48px;
 
 		&_input_wrapper {
-			margin-bottom: 48px;
 			display: flex;
 			gap: 24px;
 
@@ -198,11 +123,25 @@
 				border: 1px solid $color-primary10;
 				color: $color-gray80;
 
+				&.invalid {
+					border-color: $color-systemError;
+					background-color: rgba(179, 38, 30, 0.1);
+					color: $color-systemError;
+				}
+
 				&:hover {
 					border-color: $color-primary30base;
 					cursor: text;
 				}
 			}
+		}
+
+		.errorMessage {
+			font-family: $font-ns-regular;
+			font-size: 18px;
+			color: $color-systemError;
+			text-align: center;
+			margin: 14px 0 32px;
 		}
 
 		.button_text {

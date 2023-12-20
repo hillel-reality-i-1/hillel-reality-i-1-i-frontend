@@ -105,7 +105,7 @@ const StepLayout = () => {
 				await sendVerificationCode();
 				novigate('/verifyCodeForm');
 			} else {
-				novigate('/');
+				novigate('/user');
 			}
 		} catch (error) {
 			return error.message;

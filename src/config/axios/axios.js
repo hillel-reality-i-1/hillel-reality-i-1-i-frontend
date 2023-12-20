@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-// const instance = axios.create({
-// 	baseURL: 'http://51.20.204.164/',
-// });
-
 const instance = axios.create({
-	baseURL: 'http://0.0.0.0:8000/',
+	baseURL: 'http://195.189.226.99',
 });
+
+// const instance = axios.create({
+// 	baseURL: 'http://0.0.0.0:8000/',
+// });
 
 instance.interceptors.request.use((config) => {
 	const token = window.localStorage.getItem('token');

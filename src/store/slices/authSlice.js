@@ -21,11 +21,11 @@ export const fetchRegisterEmail = createAsyncThunk(
 
 export const fetchUpdateName = createAsyncThunk(
 	'fetchUpdateName',
-	async ({ id, first_name, last_name }, { rejectWithValue }) => {
+	async ({ id, user_name, full_name }, { rejectWithValue }) => {
 		try {
 			const data = await axios.patch(`${URL_UPDATE_USER}${id}/`, {
-				first_name: first_name,
-				last_name: last_name,
+				username: user_name,
+				full_name: full_name,
 			});
 			return data;
 		} catch (error) {

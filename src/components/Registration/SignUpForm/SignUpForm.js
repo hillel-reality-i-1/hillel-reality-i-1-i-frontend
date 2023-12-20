@@ -172,6 +172,7 @@ const SignUpForm = ({ isOpen, onClose }) => {
 													)
 												}
 												placeholder='&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;'
+												style={{ color: errors.password && '#a7a7b2' }}
 												className={`${styles.input} ${
 													errors.password && touched.password ? styles.invalid : ''
 												}`}

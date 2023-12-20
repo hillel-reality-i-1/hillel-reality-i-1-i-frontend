@@ -51,19 +51,19 @@ export const useValidation = () => {
 
 	const validatePasswordForForgotYourPassword = (value) => {
 		const errors = [];
-	
+
 		if (value.length < 8) {
 			errors.push('mustBeAtLeast8Numbers');
 		}
-	
+
 		if (!/[0-9!@#$%^&*()_+={}[\]:;<>,±"'|.?~\\/-]/.test(value)) {
 			errors.push('mustHaveAtLeastOneSymbolOrNumber');
 		}
-	
+
 		if (!/[A-Z]/.test(value) || !/[a-z]/.test(value)) {
 			errors.push('mustHaveUpperAndLowerCases');
 		}
-	
+
 		return errors;
 	};
 
@@ -138,18 +138,43 @@ export const useValidation = () => {
 		return error;
 	};
 
-	// validate validateFirstName==========================//
+	// validate validateUserName==========================//
 
-	const validateFirstName = (value) => {
+	const validateUserName = (value) => {
+		let error;
+		if (!value) {
+			error = t('textSignUp.error.required');
+		}
+		// if (value.length < 2 || value.length > 32) {
+		// 	return (error = t('textSignUp.error.lengthUserName'));
+		// } else if (!/^[a-zA-Z_][a-zA-Z0-9_-]*$/u.test(value)) {
+		// 	return (error = t('textSignUp.error.otherValidUserName'));
+		// }
+		if (value.length < 2 || value.length > 32) {
+			return (error = t('textSignUp.error.lengthUserName'));
+		} else if (/^\d/.test(value)) {
+			return (error = t('textSignUp.error.startWithDigit'));
+		} else if (!/^[a-zA-Z][a-zA-Z0-9_]{0,31}$/u.test(value)) {
+			return (error = t('textSignUp.error.otherValidUserName'));
+		} else if (/\s/.test(value)) {
+			return (error = t('textSignUp.error.noSpaces'));
+		}
+
+		return error;
+	};
+
+	// validate validateFullName==========================//
+
+	const validateFullName = (value) => {
 		let error;
 		if (!value) {
 			error = t('textSignUp.error.required');
 		}
 
-		if (value.length < 2 || value.length > 20) {
-			return (error = t('textSignUp.error.lengthName'));
-		} else if (!/^[а-яА-Яa-zA-Z'-]+$/u.test(value)) {
-			return (error = t('textSignUp.error.otherValidName'));
+		if (value.length < 2 || value.length > 50) {
+			return (error = t('textSignUp.error.lengthFullName'));
+		} else if (!/^[а-яА-Яa-zA-Z][а-яА-Яa-zA-Z\s'-]*[а-яА-Яa-zA-Z]$/u.test(value)) {
+			return (error = t('textSignUp.error.otherValidFullName'));
 		}
 
 		return error;
@@ -163,28 +188,26 @@ export const useValidation = () => {
 		setValidWarnings,
 		validateCheckBox,
 		validateInputRequired,
-		validateFirstName,
+		validateUserName,
+		validateFullName,
 		validatePasswordForForgotYourPassword,
 	};
 };
 
-
-
 export const validateSignInForm = (values) => {
-
 	const errors = {};
-  
+
 	if (!values.email) {
-	  errors.email = 'Обов\'язкове поле';
+		errors.email = "Обов'язкове поле";
 	} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-	  errors.email = 'Введіть дійсну пошту (email@example.com) ';
+		errors.email = 'Введіть дійсну пошту (email@example.com) ';
 	}
-  
+
 	if (!values.password) {
-	  errors.password = 'Обов\'язкове поле';
+		errors.password = "Обов'язкове поле";
 	} else if (values.password.length < 3) {
-	  errors.password = 'Пароль повинен містити не менше 8 символів.';
+		errors.password = 'Пароль повинен містити не менше 8 символів.';
 	}
-  
+
 	return errors;
 };

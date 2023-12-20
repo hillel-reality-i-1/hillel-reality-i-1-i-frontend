@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useTranslation } from 'react-i18next';
@@ -18,15 +18,8 @@ const Step1Form = ({ onNext }) => {
 	const dispatch = useDispatch();
 
 	const user = useSelector((state) => state.auth?.user);
-	const [lastName, setLastName] = useState('');
-	const { validateFirstName } = useValidation();
-
-	const handleChangeLastName = (e) => {
-		const { value } = e.target;
-		const filteredValue = value.replace(/[^A-Za-zА-Яа-яЁёІіЇїЄєҐґ'-]/g, '');
-		const truncatedValue = filteredValue.slice(0, 20);
-		setLastName(truncatedValue);
-	};
+	const { validateUserName } = useValidation();
+	const { validateFullName } = useValidation();
 
 	return (
 		<>
@@ -36,8 +29,8 @@ const Step1Form = ({ onNext }) => {
 					<p className={styles.text}>{t('textSignUp.textStep1.description')}</p>
 					<Formik
 						initialValues={{
-							firstName: '',
-							lastName: '',
+							userName: '',
+							fullName: '',
 						}}
 						onSubmit={async (values, { setSubmitting }) => {
 							setSubmitting(false);
@@ -45,8 +38,8 @@ const Step1Form = ({ onNext }) => {
 								await dispatch(
 									fetchUpdateName({
 										id: user?.id,
-										first_name: values?.firstName,
-										last_name: lastName,
+										user_name: values?.userName,
+										full_name: values?.fullName,
 									})
 								);
 								onNext();
@@ -56,29 +49,29 @@ const Step1Form = ({ onNext }) => {
 						}}>
 						{({ isSubmitting, isValid, dirty, touched, errors }) => (
 							<Form className={styles.form}>
-								{/* input first name----------------------------------------------------------------------- */}
-								<div className={styles.firstNameWrapper}>
+								{/* input user name----------------------------------------------------------------------- */}
+								<div className={styles.userNameWrapper}>
 									<label
 										htmlFor='span'
-										className={`${styles.label} ${styles.label_required}`}>
-										{t('textSignUp.textStep1.name')}
+										className={styles.label}>
+										Username
 									</label>
 									<Field
-										name='firstName'
-										validate={(value) => validateFirstName(value)}>
+										name='userName'
+										validate={(value) => validateUserName(value)}>
 										{({ field }) => (
 											<Input
 												{...field}
 												type='text'
-												name='firstName'
+												name='userName'
 												autoComplete='off'
-												placeholder={t('textSignUp.textStep1.enterYourName')}
-												status={errors.firstName ? 'error' : ''}
-												className={`${styles.input} ${errors.firstName ? styles.invalid : ''}`}
+												placeholder={t('textSignUp.textStep1.enterUserName')}
+												status={errors.userName ? 'error' : ''}
+												className={`${styles.input} ${errors.userName ? styles.invalid : ''}`}
 											/>
 										)}
 									</Field>
-									{errors.firstName && touched.firstName && (
+									{errors.userName && touched.userName && (
 										<div className={styles.error}>
 											<div className={styles.img_wrapper}>
 												<img
@@ -88,35 +81,48 @@ const Step1Form = ({ onNext }) => {
 													alt='error'
 												/>
 											</div>
-											{errors.firstName}
+											{errors.userName}
 										</div>
 									)}
-									<span className={styles.infoFirstName}>
-										{t('textSignUp.textStep1.infoFirstname')}
-									</span>
+									<span className={styles.info}>{t('textSignUp.textStep1.infoUserName')}</span>
 								</div>
 
-								{/* input last name ----------------------------------------------------------------------- */}
-								<div className={styles.m_b}>
+								{/* input full name ----------------------------------------------------------------------- */}
+								<div className={styles.fullNameWrapper}>
 									<label
 										htmlFor='span'
 										className={styles.label}>
-										{t('textSignUp.textStep1.lastName')}
+										{t('textSignUp.textStep1.fullName')}
 									</label>
-									<Field name='lastName'>
+									<Field
+										name='fullName'
+										validate={(value) => validateFullName(value)}>
 										{({ field }) => (
 											<Input
 												{...field}
 												type='text'
-												name='lastName'
-												onChange={handleChangeLastName}
-												value={lastName}
+												name='fullName'
 												autoComplete='off'
-												placeholder={t('textSignUp.textStep1.enterLastName')}
-												className={styles.input}
+												placeholder={t('textSignUp.textStep1.enterFullName')}
+												status={errors.fullName ? 'error' : ''}
+												className={`${styles.input} ${errors.fullName ? styles.invalid : ''}`}
 											/>
 										)}
 									</Field>
+									{errors.fullName && touched.fullName && (
+										<div className={styles.error}>
+											<div className={styles.img_wrapper}>
+												<img
+													className={styles.img_er}
+													style={{ width: '16px', display: 'block' }}
+													src={error}
+													alt='error'
+												/>
+											</div>
+											{errors.fullName}
+										</div>
+									)}
+									<span className={styles.info}>{t('textSignUp.textStep1.infoFullName')}</span>
 								</div>
 
 								{/* button submit ---------------------------------------------------------- */}

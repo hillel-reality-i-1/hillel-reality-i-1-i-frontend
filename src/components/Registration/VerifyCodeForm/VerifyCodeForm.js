@@ -5,7 +5,7 @@ import axios from '../../../config/axios/axios';
 
 import { useTranslation } from 'react-i18next';
 import '../../../translations/i18n';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import { Input } from 'antd';
 
 import phone from '../../../assets/img/icons/icons-SignUp/phone.svg';
@@ -14,9 +14,8 @@ import step_logo from '../../../assets/img/icons/logo/step_logo.svg';
 import img_aside_step3 from '../../../assets/img/img-sign-up/img_aside_step3.png';
 import CustomButton from '../../CustomButton/CustomButton';
 import { useValidation } from '../../../helpers/validation';
-import { URL_CHECK_VERIFICATION_CODE } from '../../../config/API_url';
+import { URL_CHECK_VERIFICATION_CODE, URL_SEND_VERIFICATION_CODE } from '../../../config/API_url';
 import CountdownTimer from '../../CountdownTimer/CountdownTimer';
-
 import styles from './VerifyCodeForm.module.scss';
 
 const NumericInput = (props) => {
@@ -49,6 +48,7 @@ const VerifyCodeForm = () => {
 	const [value4, setValue4] = useState('');
 	const [showButton, setShowButton] = useState(false);
 	const [timerFinished, setTimerFinished] = useState(false);
+	const [error, setError] = useState(null);
 
 	const { validateInputRequired } = useValidation();
 
@@ -63,27 +63,23 @@ const VerifyCodeForm = () => {
 	}, [timerFinished]);
 
 	const handleResend = async () => {
-		const codePhone = +`${value1}${value2}${value3}${value4}`;
 		try {
-			const response = await axios.post(URL_CHECK_VERIFICATION_CODE, {
-				verification_code: codePhone,
-			});
-			const status = response.status;
-			return status;
+			await axios.post(URL_SEND_VERIFICATION_CODE);
 		} catch (error) {
 			return error.message;
 		}
 	};
 
 	const handleSubmit = async () => {
-		const codePhone = +`${value1}${value2}${value3}${value4}`;
+		const codePhone = `${value1}${value2}${value3}${value4}`;
+
 		try {
-			const response = await axios.post(URL_CHECK_VERIFICATION_CODE, {
+			await axios.post(URL_CHECK_VERIFICATION_CODE, {
 				verification_code: codePhone,
 			});
-			const status = response.status;
-			return status;
+			navigate('/user');
 		} catch (error) {
+			error && setError(error);
 			return error.message;
 		}
 	};
@@ -142,7 +138,9 @@ const VerifyCodeForm = () => {
 							}}>
 							{({ isSubmitting, isValid, dirty }) => (
 								<Form className={styles.form}>
-									<div className={styles.form_input_wrapper}>
+									<div
+										className={styles.form_input_wrapper}
+										style={{ marginBottom: !error && '48px' }}>
 										{/* input 1----------------------------------------------------------------------- */}
 										<Field
 											name='code1'
@@ -150,17 +148,13 @@ const VerifyCodeForm = () => {
 											{({ field }) => (
 												<NumericInput
 													{...field}
-													className={styles.input}
+													className={`${styles.input} ${error ? styles.invalid : ''}`}
 													value={value1}
 													onChange={setValue1}
 													autoComplete='off'
 												/>
 											)}
 										</Field>
-										<ErrorMessage
-											name='email'
-											component='div'
-										/>
 
 										{/* input 2 ----------------------------------------------------------------------- */}
 										<Field
@@ -169,17 +163,13 @@ const VerifyCodeForm = () => {
 											{({ field }) => (
 												<NumericInput
 													{...field}
-													className={styles.input}
+													className={`${styles.input} ${error ? styles.invalid : ''}`}
 													value={value2}
 													onChange={setValue2}
 													autoComplete='off'
 												/>
 											)}
 										</Field>
-										<ErrorMessage
-											name='email'
-											component='div'
-										/>
 
 										{/* input 3----------------------------------------------------------------------- */}
 										<Field
@@ -188,17 +178,13 @@ const VerifyCodeForm = () => {
 											{({ field }) => (
 												<NumericInput
 													{...field}
-													className={styles.input}
+													className={`${styles.input} ${error ? styles.invalid : ''}`}
 													value={value3}
 													onChange={setValue3}
 													autoComplete='off'
 												/>
 											)}
 										</Field>
-										<ErrorMessage
-											name='email'
-											component='div'
-										/>
 
 										{/* input 4----------------------------------------------------------------------- */}
 										<Field
@@ -207,22 +193,21 @@ const VerifyCodeForm = () => {
 											{({ field }) => (
 												<NumericInput
 													{...field}
-													className={styles.input}
+													className={`${styles.input} ${error ? styles.invalid : ''}`}
 													value={value4}
 													onChange={setValue4}
 													autoComplete='off'
 												/>
 											)}
 										</Field>
-										<ErrorMessage
-											name='email'
-											component='div'
-										/>
 									</div>
-
+									{error && (
+										<div className={styles.errorMessage}>{t('textSignUp.error.errorCode')}</div>
+									)}
 									{/* button submit ---------------------------------------------------------- */}
 									<CustomButton
 										htmlType='submit'
+										onClick={handleSubmit}
 										type='primary'
 										isDisable={!value1 || !value2 || !value3 || !value4}>
 										{t('textSignUp.textVerifyCode.confirmNumber')}

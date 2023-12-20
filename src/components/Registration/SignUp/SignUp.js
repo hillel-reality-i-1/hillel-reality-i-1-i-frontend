@@ -9,7 +9,7 @@ import google from '../../../assets/img/icons/icons-SignUp/google.svg';
 import sign_up1_logo from '../../../assets/img/icons/logo/sign_up1_logo.svg';
 import SignUpForm from '../SignUpForm/SignUpForm';
 import CustomButton from '../../CustomButton/CustomButton';
-// import SignIn from '../../SignIn/SignIn';
+
 import styles from './SignUp.module.scss';
 
 const ModalFooter = ({ handleCancelFirst }) => {
@@ -58,7 +58,6 @@ const ModalFooter = ({ handleCancelFirst }) => {
 					type='link'>
 					{t('textSignUp.signIn')}
 				</a>
-				{/* <SignIn /> */}
 			</span>
 		</>
 	);

@@ -41,8 +41,20 @@
 			margin-bottom: 16px;
 		}
 
-		.firstNameWrapper {
-			.infoFirstName {
+		.userNameWrapper {
+			.info {
+				color: $color-gray70;
+				font-family: $font-ns-regular;
+				font-size: 16px;
+				line-height: 160%;
+				margin-top: 8px;
+				display: inline-block;
+			}
+		}
+
+		.fullNameWrapper {
+			margin-bottom: 16px;
+			.info {
 				color: $color-gray70;
 				font-family: $font-ns-regular;
 				font-size: 16px;
@@ -60,13 +72,13 @@
 			margin-bottom: 8px;
 		}
 
-		.label_required {
-			&::after {
-				content: '*';
-				color: $color-systemError;
-				margin-left: 2px;
-			}
-		}
+		// .label_required {
+		// 	&::after {
+		// 		content: '*';
+		// 		color: $color-systemError;
+		// 		margin-left: 2px;
+		// 	}
+		// }
 
 		.input {
 			font-family: $font-ns-medium;
@@ -81,6 +93,7 @@
 			&::placeholder {
 				font-family: $font-ns-regular;
 				color: $color-gray50;
+				font-family: $font-ns-regular;
 			}
 
 			&:focus {
@@ -126,7 +139,7 @@
 	font-family: $font-ns-regular;
 	display: flex;
 	color: $color-systemError;
-	font-size: 14px;
+	font-size: 16px;
 	gap: 5px;
 
 	.img_wrapper {

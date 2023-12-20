@@ -40,8 +40,12 @@
 			height: 24px;
 
 			&::after {
-				left: 31%;
-				height: 12px;
+				content: url('../../../assets/img/icons/icons-SignUp/checked.svg');
+				display: inline-block;
+				transform: rotate(0deg);
+				top: 0;
+				left: 0;
+				border: none;
 			}
 		}
 	}
@@ -121,6 +125,7 @@
 
 		&.invalid {
 			border-color: $color-systemError;
+			color: $color-systemError;
 		}
 	}
 
@@ -140,7 +145,7 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			margin-left: 4px;
+			margin-left: 8px;
 
 			a {
 				font-family: $font-ns-medium;
