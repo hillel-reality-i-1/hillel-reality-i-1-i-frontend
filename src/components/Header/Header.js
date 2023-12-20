@@ -56,7 +56,7 @@ export default function Header() {
 						</li>
 					</ul>
 					<div className={styles.navigation_button}>
-						<div  style={{ display: 'flex', alignItems: 'center'  }}>
+						<div style={{ display: 'flex', alignItems: 'center' }}>
 							<AuthenticationWrapper />
 						</div>
 
@@ -71,7 +71,7 @@ export default function Header() {
 							Recovery password
 						</a>
 					</div>
-					<SignUp />
+					{/* <SignUp /> */}
 				</nav>
 			</header>
 		</div>

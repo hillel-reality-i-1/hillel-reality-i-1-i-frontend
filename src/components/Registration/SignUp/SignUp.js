@@ -35,14 +35,10 @@ const ModalFooter = ({ handleCancelFirst, toggleSignInModal }) => {
 		setModalOpen(false);
 	};
 
-	///// New Func
-
 	const openSinIn = () => {
-		handleCancelFirst()
-		toggleSignInModal()
-	}
-
-
+		handleCancelFirst();
+		toggleSignInModal();
+	};
 
 	return (
 		<>
@@ -77,19 +73,19 @@ const ModalFooter = ({ handleCancelFirst, toggleSignInModal }) => {
 			/>
 			<span className={styles.bottomSpan}>
 				{t('textSignUp.alreadyHaveAnAccount')}
-				<a
+				{/* <a
 					// href='/'
 					// type='link'
 					onClick={openSinIn}
 					>
 					{t('textSignUp.signIn')}  
-				</a>
+				</a> */}
 			</span>
 		</>
 	);
 };
 
-const SignUp = ({signUpModalOpen, toggleSignUpModal, toggleSignInModal}) => {
+const SignUp = ({ signUpModalOpen, toggleSignUpModal, toggleSignInModal }) => {
 	const { t } = useTranslation();
 	const [open, setOpen] = useState(false);
 	const showModalFirst = () => {
@@ -128,7 +124,12 @@ const SignUp = ({signUpModalOpen, toggleSignUpModal, toggleSignInModal}) => {
 				width={580}
 				className={styles.modal}
 				onCancel={toggleSignUpModal}
-				footer={<ModalFooter handleCancelFirst={toggleSignUpModal} toggleSignInModal={toggleSignInModal}/>}>
+				footer={
+					<ModalFooter
+						handleCancelFirst={toggleSignUpModal}
+						toggleSignInModal={toggleSignInModal}
+					/>
+				}>
 				<div className={styles.header_modal_wrapper}>
 					<Link
 						to={'/signIn'}
