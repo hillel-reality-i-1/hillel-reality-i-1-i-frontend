@@ -74,7 +74,7 @@ const VerifyInfo = () => {
 					<h2 className={styles.title}>{t('textSignUp.h2VerifyInfo')}</h2>
 					<div className={styles.flex_text}>
 						<span className={styles.text}>{t('textSignUp.weSentALetter')}</span>
-						<Link className={styles.text_link}>{user?.email}</Link>
+						<span className={styles.text_link}>{user?.email}</span>
 					</div>
 					<span className={`${styles.text} ${styles.margin_bottom}`}>
 						{t('textSignUp.clickOnTheLink')}
@@ -99,6 +99,7 @@ const VerifyInfo = () => {
 						htmlType='button'
 						type='secondary'
 						isDisable={false}
+						style={{ height: '57px' }}
 						onClick={openModal}>
 						<img
 							src={arrow_back}

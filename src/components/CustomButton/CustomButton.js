@@ -3,7 +3,7 @@ import { Button, ConfigProvider } from 'antd';
 
 import styles from './CustomButton.module.scss';
 
-const CustomButton = ({ children, onClick, htmlType, isDisable, type }) => {
+const CustomButton = ({ children, onClick, htmlType, isDisable, type, style }) => {
 	return (
 		<>
 			<ConfigProvider
@@ -22,6 +22,7 @@ const CustomButton = ({ children, onClick, htmlType, isDisable, type }) => {
 					size='large'
 					onClick={onClick}
 					disabled={isDisable}
+					style={style}
 					className={`${styles.btn}  ${
 						type === 'primary' ? styles.buttonPrimary : styles.buttonSecondary
 					}`}>

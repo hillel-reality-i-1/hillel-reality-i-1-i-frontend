@@ -1,0 +1,25 @@
+@import '../../../styles/constants.scss';
+
+.activity_wrapper {
+	width: 100%;
+	margin: 0 auto;
+	border-radius: 24px;
+	padding: 24px;
+	background-color: $color-gray10;
+}
+
+.header_activity {
+	display: flex;
+	justify-content: space-between;
+
+	&_title {
+		font-family: $font-ns-semiBold;
+		font-size: 28px;
+		color: $color-gray80;
+		line-height: 130%;
+	}
+
+	.text_button {
+		font-size: 16px;
+	}
+}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
 import '../../../translations/i18n';
@@ -15,14 +15,22 @@ import closed_eye from '../../../assets/img/icons/icons-SignUp/closed_eye.svg';
 import { fetchRegisterEmail } from '../../../store/slices/authSlice';
 import CustomButton from '../../CustomButton/CustomButton';
 import { useValidation } from '../../../helpers/validation';
+import SignIn from '../../SignIn/SignIn';
 
 import styles from './SignUpForm.module.scss';
 
-const SignUpForm = ({ isOpen, onClose }) => {
+const SignUpForm = ({
+	// isOpen,
+	onClose,
+	signUpFormModalOpen,
+	toggleSignUpFormModal,
+	toggleSignInModal,
+}) => {
 	const { t } = useTranslation();
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const [open, setOpen] = useState(false);
+	const [signInOpen, setSignInOpen] = useState(false);
 
 	const {
 		validateEmail,
@@ -32,19 +40,31 @@ const SignUpForm = ({ isOpen, onClose }) => {
 		validWarnings,
 	} = useValidation();
 
-	useEffect(() => {
-		setOpen(isOpen);
-	}, [isOpen]);
+	// const openSignIn = () => {
+	// 	handleCancel();
+	// 	setSignInOpen(true);
+	// };
+
+	// useEffect(() => {
+	// 	isOpen ? setOpen(isOpen) : setOpen(signUpFormModalOpen);
+	// }, [isOpen, signUpFormModalOpen]);
 
 	const handleCancel = () => {
 		setOpen(false);
 		onClose(); // Call the onClose callback to notify the parent component
 	};
+	const openSignIn = () => {
+		// console.log('toggleSignUpFormModal:', toggleSignUpFormModal);
+		console.log('toggleSignInModal:', toggleSignInModal);
+		// toggleSignUpFormModal();
+		toggleSignInModal();
+	};
 
 	return (
 		<>
 			<Modal
-				open={open}
+				// open={open}
+				open={signUpFormModalOpen}
 				closeIcon={
 					<svg
 						width='24'
@@ -63,6 +83,7 @@ const SignUpForm = ({ isOpen, onClose }) => {
 				className={styles.modal}
 				title={t('textSignUp.signUpWithEmail')}
 				onCancel={handleCancel}
+				// onCancel={toggleSignUpFormModal}
 				footer={null}>
 				<p className={styles.description}>{t('textSignUp.signUpDescription')}</p>
 
@@ -275,6 +296,7 @@ const SignUpForm = ({ isOpen, onClose }) => {
 								<CustomButton
 									htmlType='submit'
 									type='primary'
+									style={{ height: '57px' }}
 									isDisable={!isValid || !dirty || isSubmitting}>
 									<span className={styles.btn_submit_text}>{t('textSignUp.signUp')}</span>
 								</CustomButton>
@@ -284,11 +306,15 @@ const SignUpForm = ({ isOpen, onClose }) => {
 				</Formik>
 				<span className={styles.bottomLinkWrapper}>
 					{t('textSignUp.alreadyHaveAnAccount')}
-					<a
-						href='/'
-						type='link'>
+					<SignIn
+					// signInModalOpen={signInOpen}
+					// onClose={closeModal}
+					/>
+					{/* <button
+						type='link'
+						onClick={openSignIn}>
 						{t('textSignUp.signIn')}
-					</a>
+					</button> */}
 				</span>
 			</Modal>
 		</>

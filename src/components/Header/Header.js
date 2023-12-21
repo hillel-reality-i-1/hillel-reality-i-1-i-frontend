@@ -60,7 +60,7 @@ export default function Header() {
 							<AuthenticationWrapper />
 						</div>
 
-						<a
+						{/* <a
 							href='/signup'
 							className={styles.button_link}>
 							Sign Up
@@ -69,7 +69,7 @@ export default function Header() {
 							href='/forgotYourPasswordForm'
 							className={styles.button_link}>
 							Recovery password
-						</a>
+						</a> */}
 					</div>
 					{/* <SignUp /> */}
 				</nav>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
 import { useTranslation } from 'react-i18next';
@@ -36,6 +36,8 @@ const ModalFooter = ({ handleCancelFirst, toggleSignInModal }) => {
 	};
 
 	const openSinIn = () => {
+		// console.log('toggleSignUpModal:', toggleSignUpModal);
+		console.log('toggleSignInModal:', toggleSignInModal);
 		handleCancelFirst();
 		toggleSignInModal();
 	};
@@ -43,43 +45,35 @@ const ModalFooter = ({ handleCancelFirst, toggleSignInModal }) => {
 	return (
 		<>
 			<GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
-				<GoogleSignIn changeGoogleAuthToken={changeGoogleAuthToken} />
-			</GoogleOAuthProvider>
-
-			<Button
-				key='google'
-				shape='round'
-				size='large'
-				className={styles.signUpGoogle}>
-				{
+				<div className={styles.signUpGoogle}>
 					<img
 						src={google}
-						alt='Google'
+						alt='google logo'
 					/>
-				}
-				<span className={styles.signUpWithGoogle}>{t('textSignUp.signUpWithGoogle')}</span>
-			</Button>
+					<GoogleSignIn changeGoogleAuthToken={changeGoogleAuthToken} />
+				</div>
+			</GoogleOAuthProvider>
 			<span className={styles.spanOr}>{t('textSignUp.or')}</span>
 			<CustomButton
 				type='primary'
 				htmlType='button'
+				style={{ height: '57px' }}
 				onClick={openModal}>
 				{t('textSignUp.signUpWithEmail')}
 			</CustomButton>
 
 			<SignUpForm
-				isOpen={isModalOpen}
+				// isOpen={isModalOpen}
+				signUpFormModalOpen={isModalOpen}
 				onClose={closeModal}
 			/>
 			<span className={styles.bottomSpan}>
 				{t('textSignUp.alreadyHaveAnAccount')}
-				{/* <a
-					// href='/'
-					// type='link'
-					onClick={openSinIn}
-					>
-					{t('textSignUp.signIn')}  
-				</a> */}
+				<Link
+					type='link'
+					onClick={openSinIn}>
+					{t('textSignUp.signIn')}
+				</Link>
 			</span>
 		</>
 	);
@@ -87,14 +81,14 @@ const ModalFooter = ({ handleCancelFirst, toggleSignInModal }) => {
 
 const SignUp = ({ signUpModalOpen, toggleSignUpModal, toggleSignInModal }) => {
 	const { t } = useTranslation();
-	const [open, setOpen] = useState(false);
-	const showModalFirst = () => {
-		setOpen(true);
-	};
+	// const [open, setOpen] = useState(false);
+	// const showModalFirst = () => {
+	// 	setOpen(true);
+	// };
 
-	const handleCancelFirst = () => {
-		setOpen(false);
-	};
+	// const handleCancelFirst = () => {
+	// 	setOpen(false);
+	// };
 
 	return (
 		<>
@@ -132,7 +126,7 @@ const SignUp = ({ signUpModalOpen, toggleSignUpModal, toggleSignInModal }) => {
 				}>
 				<div className={styles.header_modal_wrapper}>
 					<Link
-						to={'/signIn'}
+						to={'/'}
 						className={styles.logo}>
 						<img
 							src={sign_up1_logo}

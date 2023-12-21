@@ -87,11 +87,20 @@
 .signUpGoogle {
 	border: 1px solid $color-gray80;
 	font-family: $font-ns-medium;
-	line-height: 160%;
 	color: $color-gray80;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 18px;
+	border-radius: 48px;
+	padding: 14px;
+	justify-content: center;
+	// color: #03091c;
+	line-height: 160%;
 
-	.signUpWithGoogle {
-		margin-left: 8px;
+	&:hover {
+		border-color: #a7a7b2;
+		cursor: pointer;
 	}
 }
 
@@ -99,7 +108,7 @@
 	display: block;
 	min-height: 57px;
 	padding: 14px 16px;
-	margin-left: 16px;
+	margin-left: 38px;
 	border-radius: 48px;
 	background: $color-primary30base;
 	color: #fdfeff;
