@@ -271,7 +271,6 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 								<CustomButton
 									htmlType='submit'
 									type='primary'
-									style={{ height: '57px' }}
 									isDisable={!isValid || !dirty || isSubmitting}>
 									<span className={styles.btn_submit_text}>{t('textSignUp.signUp')}</span>
 								</CustomButton>

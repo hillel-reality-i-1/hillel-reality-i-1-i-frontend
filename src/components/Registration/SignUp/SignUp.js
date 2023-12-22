@@ -47,7 +47,6 @@ const ModalFooter = ({ toggleSignUpModal, toggleSignInModal, toggleSignUpFormMod
 			<CustomButton
 				type='primary'
 				htmlType='button'
-				style={{ height: '57px' }}
 				onClick={openSinUpForm}>
 				{t('textSignUp.signUpWithEmail')}
 			</CustomButton>

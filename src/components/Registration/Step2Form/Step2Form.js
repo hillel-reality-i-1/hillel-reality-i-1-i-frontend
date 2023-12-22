@@ -200,7 +200,6 @@ const Step2Form = ({ onNext }) => {
 								<CustomButton
 									htmlType='submit'
 									type='primary'>
-									style={{ height: '57px' }}
 									{t('textSignUp.continue')}
 								</CustomButton>
 								<div className={styles.skip_link}>

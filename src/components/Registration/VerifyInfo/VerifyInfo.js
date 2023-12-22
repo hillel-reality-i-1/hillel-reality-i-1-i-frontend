@@ -95,7 +95,6 @@ const VerifyInfo = () => {
 						htmlType='button'
 						type='secondary'
 						isDisable={false}
-						style={{ height: '57px' }}
 						onClick={openModalSignUp}>
 						<img
 							src={arrow_back}

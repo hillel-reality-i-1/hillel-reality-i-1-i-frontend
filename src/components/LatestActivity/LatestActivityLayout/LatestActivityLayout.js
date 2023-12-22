@@ -11,7 +11,6 @@ const LatestActivityLayout = () => {
 				<CustomButton
 					type='primary'
 					htmlType='button'
-					// style={{ padding: '12px 14px', height: '52px', width: 'auto' }}
 					isDisable='true'>
 					<span className={styles.children_button}>Write a post</span>
 				</CustomButton>

@@ -129,7 +129,6 @@ const Step1Form = ({ onNext }) => {
 								<CustomButton
 									htmlType='submit'
 									type='primary'
-									style={{ height: '57px' }}
 									isDisable={!isValid || !dirty || isSubmitting}>
 									{t('textSignUp.continue')}
 								</CustomButton>
