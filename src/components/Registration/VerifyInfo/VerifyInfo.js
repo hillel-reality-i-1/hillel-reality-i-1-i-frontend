@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import axios from '../../../config/axios/axios';
@@ -14,13 +14,12 @@ import { URL_RESEND_EMAIL } from '../../../config/API_url';
 import CustomButton from '../../CustomButton/CustomButton';
 
 import styles from './VerifyInfo.module.scss';
-import SignUp from '../SignUp/SignUp';
 
 const VerifyInfo = () => {
 	const { t } = useTranslation();
+	const navigate = useNavigate();
 	const [showButton, setShowButton] = useState(false);
 	const [timerFinished, setTimerFinished] = useState(false);
-	const [isModalOpen, setModalOpen] = useState(false);
 
 	const user = useSelector((state) => state.auth?.user);
 
@@ -46,12 +45,9 @@ const VerifyInfo = () => {
 			return error.message;
 		}
 	};
-	const openModal = () => {
-		setModalOpen(true);
-	};
 
-	const closeModal = () => {
-		setModalOpen(false);
+	const openModalSignUp = () => {
+		navigate('/');
 	};
 
 	return (
@@ -99,18 +95,14 @@ const VerifyInfo = () => {
 						htmlType='button'
 						type='secondary'
 						isDisable={false}
-						// style={{ height: '57px' }}
-						onClick={openModal}>
+						style={{ height: '57px' }}
+						onClick={openModalSignUp}>
 						<img
 							src={arrow_back}
 							alt='back'
 						/>
 						<span className={styles.btn_back}>{t('textSignUp.returnToRegistration')}</span>
 					</CustomButton>
-					{/* <SignUp
-						signUpModalOpen={isModalOpen}
-						// onClose={closeModal}
-					/> */}
 				</div>
 
 				<aside className={styles.aside}>

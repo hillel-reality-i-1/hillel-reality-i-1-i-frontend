@@ -209,7 +209,7 @@ const VerifyCodeForm = () => {
 										htmlType='submit'
 										onClick={handleSubmit}
 										type='primary'
-										// style={{ height: '57px' }}
+										style={{ height: '57px' }}
 										isDisable={!value1 || !value2 || !value3 || !value4}>
 										{t('textSignUp.textVerifyCode.confirmNumber')}
 									</CustomButton>

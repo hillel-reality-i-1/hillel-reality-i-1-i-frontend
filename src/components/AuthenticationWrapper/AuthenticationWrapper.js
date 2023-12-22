@@ -1,10 +1,9 @@
 import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setAuthToken, clearAuthToken } from '../../store/slices/signInSlice';
+// import { setAuthToken, clearAuthToken } from '../../store/slices/signInSlice';
 import SignIn from '../SignIn/SignIn';
 import AccountHeader from '../accountHeader/AccountHeader';
-import CustomModal from '../modals/CustomModal';
 import SignUp from '../Registration/SignUp/SignUp';
 import SignUpForm from '../Registration/SignUpForm/SignUpForm';
 
@@ -45,14 +44,15 @@ export default function AuthenticationWrapper() {
 						signUpModalOpen={signUpModalOpen}
 						toggleSignUpModal={toggleSignUpModal}
 						toggleSignInModal={toggleSignInModal}
+						toggleSignUpFormModal={toggleSignUpFormModal}
 					/>
 				</div>
 			)}
-			{/* <SignUpForm
+			<SignUpForm
 				signUpFormModalOpen={signUpFormModalOpen}
 				toggleSignUpFormModal={toggleSignUpFormModal}
 				toggleSignInModal={toggleSignInModal}
-			/> */}
+			/>
 		</div>
 	);
 }

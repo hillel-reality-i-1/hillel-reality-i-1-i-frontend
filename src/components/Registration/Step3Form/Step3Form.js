@@ -68,7 +68,7 @@ const Step3Form = ({ onNext, onPhoneChange }) => {
 									htmlType='submit'
 									type='primary'
 									isDisable={!isValid}>
-									{/* style={{ height: '57px' }} */}
+									style={{ height: '57px' }}
 									{t('textSignUp.textStep3.getCode')}
 								</CustomButton>
 								<div className={styles.skip_link}>

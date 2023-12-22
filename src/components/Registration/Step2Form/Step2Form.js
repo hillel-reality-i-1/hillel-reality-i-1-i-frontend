@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 
 import axios from '../../../config/axios/axios';
 import { useTranslation } from 'react-i18next';
@@ -201,7 +200,7 @@ const Step2Form = ({ onNext }) => {
 								<CustomButton
 									htmlType='submit'
 									type='primary'>
-									{/* style={{ height: '57px' }} */}
+									style={{ height: '57px' }}
 									{t('textSignUp.continue')}
 								</CustomButton>
 								<div className={styles.skip_link}>

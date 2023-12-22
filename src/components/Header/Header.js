@@ -1,15 +1,11 @@
 import React from 'react';
 
 import { useTranslation } from 'react-i18next';
-
 import '../../translations/i18n';
 import logo from '../../assets/img/icons/logo/header_logo.svg';
-
-import SignUp from '../Registration/SignUp/SignUp';
+import AuthenticationWrapper from '../AuthenticationWrapper/AuthenticationWrapper';
 
 import styles from './Header.module.scss';
-import SignIn from '../SignIn/SignIn';
-import AuthenticationWrapper from '../AuthenticationWrapper/AuthenticationWrapper';
 
 export default function Header() {
 	const { t } = useTranslation();
@@ -59,19 +55,13 @@ export default function Header() {
 						<div style={{ display: 'flex', alignItems: 'center' }}>
 							<AuthenticationWrapper />
 						</div>
-
-						{/* <a
-							href='/signup'
-							className={styles.button_link}>
-							Sign Up
-						</a>
+						{/*
 						<a
 							href='/forgotYourPasswordForm'
 							className={styles.button_link}>
 							Recovery password
 						</a> */}
 					</div>
-					{/* <SignUp /> */}
 				</nav>
 			</header>
 		</div>

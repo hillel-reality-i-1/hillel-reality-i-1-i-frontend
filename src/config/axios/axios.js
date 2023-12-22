@@ -1,11 +1,11 @@
 import axios from 'axios';
 
 const instance = axios.create({
-	baseURL: 'http://195.189.226.99',
+	baseURL: ' http://dmytromigirov.space',
 });
 
 // const instance = axios.create({
-// 	baseURL: 'http://0.0.0.0:8000/',
+// 	baseURL: 'http://0.0.0.0:8000',
 // });
 
 instance.interceptors.request.use((config) => {

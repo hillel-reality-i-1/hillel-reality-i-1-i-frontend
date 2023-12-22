@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { GoogleOAuthProvider } from '@react-oauth/google';
@@ -8,37 +8,27 @@ import '../../../translations/i18n';
 import { Button, Modal } from 'antd';
 import google from '../../../assets/img/icons/icons-SignUp/google.svg';
 import sign_up1_logo from '../../../assets/img/icons/logo/sign_up1_logo.svg';
-import SignUpForm from '../SignUpForm/SignUpForm';
 import CustomButton from '../../CustomButton/CustomButton';
 import GoogleSignIn from '../../SignIn/googleSignIn/GoogleSignIn';
 
 import styles from './SignUp.module.scss';
 import { setGoogleAuthToken } from '../../../store/slices/signInSlice';
 
-const ModalFooter = ({ handleCancelFirst, toggleSignInModal }) => {
+const ModalFooter = ({ toggleSignUpModal, toggleSignInModal, toggleSignUpFormModal }) => {
 	const { t } = useTranslation();
 	const dispatch = useDispatch();
-	const [isModalOpen, setModalOpen] = useState(false);
+
 	const changeGoogleAuthToken = (authToken) => {
 		dispatch(setGoogleAuthToken(authToken));
-		// closeModal();
-		// setLoginError(null);
-		// setIsAuthenticated(true);
 	};
 
-	const openModal = () => {
-		handleCancelFirst();
-		setModalOpen(true);
-	};
-
-	const closeModal = () => {
-		setModalOpen(false);
+	const openSinUpForm = () => {
+		toggleSignUpModal();
+		toggleSignUpFormModal();
 	};
 
 	const openSinIn = () => {
-		// console.log('toggleSignUpModal:', toggleSignUpModal);
-		console.log('toggleSignInModal:', toggleSignInModal);
-		handleCancelFirst();
+		toggleSignUpModal();
 		toggleSignInModal();
 	};
 
@@ -57,17 +47,10 @@ const ModalFooter = ({ handleCancelFirst, toggleSignInModal }) => {
 			<CustomButton
 				type='primary'
 				htmlType='button'
-				// style={{ height: '57px' }}
-				onClick={openModal}>
+				style={{ height: '57px' }}
+				onClick={openSinUpForm}>
 				{t('textSignUp.signUpWithEmail')}
 			</CustomButton>
-
-			<SignUpForm
-				// isOpen={isModalOpen}
-				signUpFormModalOpen={isModalOpen}
-				onClose={closeModal}
-				toggleSignInModal={toggleSignInModal}
-			/>
 			<span className={styles.bottomSpan}>
 				{t('textSignUp.alreadyHaveAnAccount')}
 				<Link
@@ -80,16 +63,13 @@ const ModalFooter = ({ handleCancelFirst, toggleSignInModal }) => {
 	);
 };
 
-const SignUp = ({ signUpModalOpen, toggleSignUpModal, toggleSignInModal }) => {
+const SignUp = ({
+	signUpModalOpen,
+	toggleSignUpModal,
+	toggleSignUpFormModal,
+	toggleSignInModal,
+}) => {
 	const { t } = useTranslation();
-	// const [open, setOpen] = useState(false);
-	// const showModalFirst = () => {
-	// 	setOpen(true);
-	// };
-
-	// const handleCancelFirst = () => {
-	// 	setOpen(false);
-	// };
 
 	return (
 		<>
@@ -121,8 +101,9 @@ const SignUp = ({ signUpModalOpen, toggleSignUpModal, toggleSignInModal }) => {
 				onCancel={toggleSignUpModal}
 				footer={
 					<ModalFooter
-						handleCancelFirst={toggleSignUpModal}
+						toggleSignUpModal={toggleSignUpModal}
 						toggleSignInModal={toggleSignInModal}
+						toggleSignUpFormModal={toggleSignUpFormModal}
 					/>
 				}>
 				<div className={styles.header_modal_wrapper}>

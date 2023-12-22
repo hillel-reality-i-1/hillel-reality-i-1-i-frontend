@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -15,22 +15,13 @@ import closed_eye from '../../../assets/img/icons/icons-SignUp/closed_eye.svg';
 import { fetchRegisterEmail } from '../../../store/slices/authSlice';
 import CustomButton from '../../CustomButton/CustomButton';
 import { useValidation } from '../../../helpers/validation';
-import SignIn from '../../SignIn/SignIn';
 
 import styles from './SignUpForm.module.scss';
 
-const SignUpForm = ({
-	// isOpen,
-	onClose,
-	signUpFormModalOpen,
-	toggleSignUpFormModal,
-	toggleSignInModal,
-}) => {
+const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInModal }) => {
 	const { t } = useTranslation();
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const [open, setOpen] = useState(false);
-	const [signInOpen, setSignInOpen] = useState(false);
 
 	const {
 		validateEmail,
@@ -40,22 +31,7 @@ const SignUpForm = ({
 		validWarnings,
 	} = useValidation();
 
-	// const openSignIn = () => {
-	// 	handleCancel();
-	// 	setSignInOpen(true);
-	// };
-
-	// useEffect(() => {
-	// 	isOpen ? setOpen(isOpen) : setOpen(signUpFormModalOpen);
-	// }, [isOpen, signUpFormModalOpen]);
-
-	const handleCancel = () => {
-		setOpen(false);
-		onClose(); // Call the onClose callback to notify the parent component
-	};
 	const openSignIn = () => {
-		// console.log('toggleSignUpFormModal:', toggleSignUpFormModal);
-		console.log('toggleSignInModal:', toggleSignInModal);
 		toggleSignUpFormModal();
 		toggleSignInModal();
 	};
@@ -63,7 +39,6 @@ const SignUpForm = ({
 	return (
 		<>
 			<Modal
-				// open={open}
 				open={signUpFormModalOpen}
 				closeIcon={
 					<svg
@@ -82,8 +57,7 @@ const SignUpForm = ({
 				width={580}
 				className={styles.modal}
 				title={t('textSignUp.signUpWithEmail')}
-				onCancel={handleCancel}
-				// onCancel={toggleSignUpFormModal}
+				onCancel={toggleSignUpFormModal}
 				footer={null}>
 				<p className={styles.description}>{t('textSignUp.signUpDescription')}</p>
 
@@ -162,6 +136,7 @@ const SignUpForm = ({
 										</div>
 									)}
 								</div>
+
 								{/* input password------------------------------------------------ */}
 								<div className={styles.inputWrapper}>
 									<label
@@ -296,7 +271,7 @@ const SignUpForm = ({
 								<CustomButton
 									htmlType='submit'
 									type='primary'
-									// style={{ height: '57px' }}
+									style={{ height: '57px' }}
 									isDisable={!isValid || !dirty || isSubmitting}>
 									<span className={styles.btn_submit_text}>{t('textSignUp.signUp')}</span>
 								</CustomButton>
@@ -306,11 +281,7 @@ const SignUpForm = ({
 				</Formik>
 				<span className={styles.bottomLinkWrapper}>
 					{t('textSignUp.alreadyHaveAnAccount')}
-					{/* <SignIn
-					// signInModalOpen={signInOpen}
-					// onClose={closeModal}
-					/> */}
-					<div onClick={toggleSignInModal}>{t('textSignUp.signIn')}</div>
+					<Link onClick={openSignIn}>{t('textSignUp.signIn')}</Link>
 				</span>
 			</Modal>
 		</>

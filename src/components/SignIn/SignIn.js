@@ -53,7 +53,7 @@ export default function SignIn({ signInModalOpen, toggleSignInModal, toggleSignU
 	};
 	const handleSignIn = async (values) => {
 		try {
-			const response = await axios.post('http://195.189.226.99/api/v1/auth/login/', values);
+			const response = await axios.post(' http://dmytromigirov.space/api/v1/auth/login/', values);
 			const authToken = response.data.key;
 			// localStorage.setItem('authTokenUHelp', authToken);
 			console.log('Sign-in successful:', response.data);
