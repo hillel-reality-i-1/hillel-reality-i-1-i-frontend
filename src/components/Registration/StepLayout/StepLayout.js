@@ -18,6 +18,7 @@ import StepForm3 from '../Step3Form/Step3Form';
 import { URL_CONFIRM_EMAIL, URL_SEND_VERIFICATION_CODE } from '../../../config/API_url';
 
 import styles from './StepLayout.module.scss';
+import { setAuthToken } from '../../../store/slices/signInSlice';
 
 const StepLayout = () => {
 	const { t } = useTranslation();
@@ -27,7 +28,6 @@ const StepLayout = () => {
 	const [current, setCurrent] = useState(0);
 	const [formData2, setFormData2] = useState({});
 	const [phone, setPhone] = useState('');
-
 	const { token } = useParams();
 
 	console.log(token);
@@ -40,6 +40,7 @@ const StepLayout = () => {
 						key: token,
 					});
 					localStorage.setItem('authTokenUHelp', userToken?.token);
+					dispatch(setAuthToken(userToken?.token));
 				} catch (error) {
 					return error.message;
 				}
