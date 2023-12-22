@@ -48,11 +48,11 @@ export default function AuthenticationWrapper() {
 					/>
 				</div>
 			)}
-			<SignUpForm
+			{/* <SignUpForm
 				signUpFormModalOpen={signUpFormModalOpen}
 				toggleSignUpFormModal={toggleSignUpFormModal}
 				toggleSignInModal={toggleSignInModal}
-			/>
+			/> */}
 		</div>
 	);
 }

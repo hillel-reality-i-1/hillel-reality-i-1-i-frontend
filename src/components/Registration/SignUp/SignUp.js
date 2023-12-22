@@ -57,7 +57,7 @@ const ModalFooter = ({ handleCancelFirst, toggleSignInModal }) => {
 			<CustomButton
 				type='primary'
 				htmlType='button'
-				style={{ height: '57px' }}
+				// style={{ height: '57px' }}
 				onClick={openModal}>
 				{t('textSignUp.signUpWithEmail')}
 			</CustomButton>
@@ -66,6 +66,7 @@ const ModalFooter = ({ handleCancelFirst, toggleSignInModal }) => {
 				// isOpen={isModalOpen}
 				signUpFormModalOpen={isModalOpen}
 				onClose={closeModal}
+				toggleSignInModal={toggleSignInModal}
 			/>
 			<span className={styles.bottomSpan}>
 				{t('textSignUp.alreadyHaveAnAccount')}

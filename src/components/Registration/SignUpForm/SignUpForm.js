@@ -56,7 +56,7 @@ const SignUpForm = ({
 	const openSignIn = () => {
 		// console.log('toggleSignUpFormModal:', toggleSignUpFormModal);
 		console.log('toggleSignInModal:', toggleSignInModal);
-		// toggleSignUpFormModal();
+		toggleSignUpFormModal();
 		toggleSignInModal();
 	};
 
@@ -296,7 +296,7 @@ const SignUpForm = ({
 								<CustomButton
 									htmlType='submit'
 									type='primary'
-									style={{ height: '57px' }}
+									// style={{ height: '57px' }}
 									isDisable={!isValid || !dirty || isSubmitting}>
 									<span className={styles.btn_submit_text}>{t('textSignUp.signUp')}</span>
 								</CustomButton>
@@ -306,15 +306,11 @@ const SignUpForm = ({
 				</Formik>
 				<span className={styles.bottomLinkWrapper}>
 					{t('textSignUp.alreadyHaveAnAccount')}
-					<SignIn
+					{/* <SignIn
 					// signInModalOpen={signInOpen}
 					// onClose={closeModal}
-					/>
-					{/* <button
-						type='link'
-						onClick={openSignIn}>
-						{t('textSignUp.signIn')}
-					</button> */}
+					/> */}
+					<div onClick={toggleSignInModal}>{t('textSignUp.signIn')}</div>
 				</span>
 			</Modal>
 		</>

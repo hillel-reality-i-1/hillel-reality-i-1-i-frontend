@@ -30,6 +30,7 @@ const StepLayout = () => {
 
 	const { token } = useParams();
 
+	console.log(token);
 	useEffect(() => {
 		const fetchKey = async () => {
 			const storedToken = localStorage.getItem('authTokenUHelp');

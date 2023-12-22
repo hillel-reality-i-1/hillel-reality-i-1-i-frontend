@@ -27,13 +27,13 @@ const Footer = () => {
 							</div>
 							<ul className={styles.footer_info}>
 								<li className={styles.footer_info_item}>
-									<a href='/'>{t('textFooter.terms')}</a>
+									<a href='/privacyPolicy'>{t('textFooter.terms')}</a>
 								</li>
 								<li className={styles.footer_info_item}>
-									<a href='/'>{t('textFooter.privacy')}</a>
+									<a href='/privacyPolicy'>{t('textFooter.privacy')}</a>
 								</li>
 								<li className={styles.footer_info_item}>
-									<a href='/'>{t('textFooter.help')}</a>
+									<a href='/privacyPolicy'>{t('textFooter.help')}</a>
 								</li>
 								<li className={styles.footer_info_item}>&copy; 2023 U-Help</li>
 							</ul>
@@ -43,16 +43,16 @@ const Footer = () => {
 								<h5 className={styles.footer_title}>{t('textFooter.menu')}</h5>
 								<ul className={styles.footer_menu_nav}>
 									<li className={styles.footer_menu_nav_item}>
-										<a href='/'>{t('textFooter.home')}</a>
+										<a href='/privacyPolicy'>{t('textFooter.home')}</a>
 									</li>
 									<li className={styles.footer_menu_nav_item}>
-										<a href='/'>{t('textFooter.map')}</a>
+										<a href='/privacyPolicy'>{t('textFooter.map')}</a>
 									</li>
 									<li className={styles.footer_menu_nav_item}>
-										<a href='/'>{t('textFooter.events')}</a>
+										<a href='/privacyPolicy'>{t('textFooter.events')}</a>
 									</li>
 									<li className={styles.footer_menu_nav_item}>
-										<a href='/'>{t('textFooter.faq')}</a>
+										<a href='/privacyPolicy'>{t('textFooter.faq')}</a>
 									</li>
 								</ul>
 							</div>
@@ -61,16 +61,16 @@ const Footer = () => {
 									<h5 className={styles.footer_title}>{t('textFooter.contacts')}</h5>
 									<ul className={styles.footer_menu_nav}>
 										<li className={styles.footer_contacts_nav_item}>
-											<a href='/'>+3800000000</a>
+											<a href='/privacyPolicy'>+3800000000</a>
 										</li>
 										<li className={styles.footer_contacts_nav_item}>
-											<a href='/'>uhelp@gmail.com</a>
+											<a href='/privacyPolicy'>uhelp@gmail.com</a>
 										</li>
 									</ul>
 								</div>
 								<ul className={styles.footer_contacts_socmedia}>
 									<li className={styles.footer_contacts_socmedia_item}>
-										<a href='/'>
+										<a href='/privacyPolicy'>
 											<img
 												src={instagram}
 												alt='Instagram'
@@ -78,7 +78,7 @@ const Footer = () => {
 										</a>
 									</li>
 									<li className={styles.footer_contacts_socmedia_item}>
-										<a href='/'>
+										<a href='/privacyPolicy'>
 											<img
 												src={facebook}
 												alt='Facebook'

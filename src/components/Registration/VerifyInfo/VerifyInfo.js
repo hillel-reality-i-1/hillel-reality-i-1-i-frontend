@@ -14,7 +14,7 @@ import { URL_RESEND_EMAIL } from '../../../config/API_url';
 import CustomButton from '../../CustomButton/CustomButton';
 
 import styles from './VerifyInfo.module.scss';
-import SignUpForm from '../SignUpForm/SignUpForm';
+import SignUp from '../SignUp/SignUp';
 
 const VerifyInfo = () => {
 	const { t } = useTranslation();
@@ -99,7 +99,7 @@ const VerifyInfo = () => {
 						htmlType='button'
 						type='secondary'
 						isDisable={false}
-						style={{ height: '57px' }}
+						// style={{ height: '57px' }}
 						onClick={openModal}>
 						<img
 							src={arrow_back}
@@ -107,10 +107,10 @@ const VerifyInfo = () => {
 						/>
 						<span className={styles.btn_back}>{t('textSignUp.returnToRegistration')}</span>
 					</CustomButton>
-					<SignUpForm
-						isOpen={isModalOpen}
-						onClose={closeModal}
-					/>
+					{/* <SignUp
+						signUpModalOpen={isModalOpen}
+						// onClose={closeModal}
+					/> */}
 				</div>
 
 				<aside className={styles.aside}>

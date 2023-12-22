@@ -11,23 +11,26 @@ import ForgotYourPasswordForm from './components/RecoveryPassword/ForgotYourPass
 import EmailOnTheWay from './components/RecoveryPassword/EmailOnTheWay/EmailOnTheWay';
 import CreateNewPassword from './components/RecoveryPassword/CreateNewPassword/CreateNewPassword';
 import PasswordUpdated from './components/RecoveryPassword/PasswordUpdated/PasswordUpdated';
-
 import StepLayout from './components/Registration/StepLayout/StepLayout';
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
+import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicy';
 
 const router = createBrowserRouter([
 	{
 		path: '/',
-		element: <Layout/>,
+		element: <Layout />,
 		children: [
 			{
 				index: true,
-				element: <HomePage/>
+				element: <HomePage />,
 			},
 			{
 				path: '/user',
-				element: <UserPage/>
-			}
-		]
+				element: <UserPage />,
+			},
+			{ path: '/privacyPolicy', element: <PrivacyPolicy /> },
+			{ path: '/*', element: <NotFoundPage /> },
+		],
 	},
 	{
 		path: '/verifyInfo',

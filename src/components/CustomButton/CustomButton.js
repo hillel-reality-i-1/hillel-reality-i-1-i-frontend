@@ -22,7 +22,7 @@ const CustomButton = ({ children, onClick, htmlType, isDisable, type, style }) =
 					size='large'
 					onClick={onClick}
 					disabled={isDisable}
-					style={style}
+					// style={{ ...style }}
 					className={`${styles.btn}  ${
 						type === 'primary' ? styles.buttonPrimary : styles.buttonSecondary
 					}`}>

@@ -1,5 +1,21 @@
 @import '../../../styles/constants.scss';
 
+:global {
+	.ant-tabs {
+		.ant-tabs-nav {
+			max-width: fit-content;
+		}
+	}
+
+	.ant-tabs-top {
+		.ant-tabs-nav {
+			&:before {
+				border-color: $color-gray30;
+			}
+		}
+	}
+}
+
 .activity_wrapper {
 	width: 100%;
 	margin: 0 auto;
@@ -11,6 +27,8 @@
 .header_activity {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 12px;
 
 	&_title {
 		font-family: $font-ns-semiBold;
@@ -19,7 +37,7 @@
 		line-height: 130%;
 	}
 
-	.text_button {
+	.children_button {
 		font-size: 16px;
 	}
 }
