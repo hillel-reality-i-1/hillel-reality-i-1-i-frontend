@@ -24,11 +24,11 @@
 
 				.ant-modal-title {
 					font-family: $font-ns-semiBold;
-					margin-top: 20px;
+					// margin-top: 20px;
 					font-size: 28px;
 					line-height: 130%;
 					text-align: center;
-					color: $color-gray70;
+					color: $color-gray80;
 				}
 			}
 		}
@@ -87,30 +87,30 @@
 	font-family: $font-ns-regular;
 	font-size: 16px;
 	line-height: 160%;
-	color: $color-gray50;
+	color: $color-gray70;
 	text-align: center;
-	margin-top: 8px;
 }
 
 .form {
-	margin-top: 32px;
+	margin-top: 24px;
 
 	.label {
 		color: $color-gray80;
-		font-family: $font-ns-regular;
+		font-family: $font-ns-medium;
 		font-size: 16px;
 		line-height: 160%;
 		margin-bottom: 8px;
 	}
 
 	.input {
+		height: 56px;
 		font-family: $font-ns-medium;
 		font-size: 16px;
 		color: $color-gray70;
 		padding: 14px;
 		border-radius: 12px;
-		line-height: 160%;
-		margin: 8px 0;
+		line-height: 25.6px;
+		margin: 8px 0 0;
 		border-color: $color-gray30;
 
 		&:focus {
@@ -131,26 +131,27 @@
 
 	.btn_submit_text {
 		font-size: 18px;
+		color: $color-gray;
 	}
 
 	.checkbox_label {
-		margin: 8px 0 24px;
+		margin: 24px 0 16px;
 		display: flex;
 
 		.shecked_text {
 			font-family: $font-ns-regular;
 			font-size: 16px;
 			line-height: 160%;
-			color: $color-gray50;
+			color: $color-gray70;
 			display: flex;
 			justify-content: center;
 			align-items: center;
 			margin-left: 8px;
 
-			a {
+			.link {
 				font-family: $font-ns-medium;
 				color: $color-primary30base;
-				margin-left: 8px;
+				margin-left: 1px;
 
 				&:hover {
 					color: $color-primary20;
@@ -161,7 +162,7 @@
 }
 
 .inputWrapper {
-	margin-top: 16px;
+	margin: 8px 0 16px;
 }
 
 .bottomLinkWrapper {
@@ -173,9 +174,9 @@
 	justify-content: center;
 	margin-top: 24px;
 	margin-bottom: 10px;
-	gap: 8px;
+	// gap: 8px;
 
-	a {
+	.link {
 		font-family: $font-ns-medium;
 		color: $color-primary30base;
 		margin-left: 8px;

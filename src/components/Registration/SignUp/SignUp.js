@@ -48,7 +48,7 @@ const ModalFooter = ({ toggleSignUpModal, toggleSignInModal, toggleSignUpFormMod
 				type='primary'
 				htmlType='button'
 				onClick={openSinUpForm}>
-				{t('textSignUp.signUpWithEmail')}
+				<span className={styles.button_pr_inner}>{t('textSignUp.signUpWithEmail')}</span>
 			</CustomButton>
 			<span className={styles.bottomSpan}>
 				{t('textSignUp.alreadyHaveAnAccount')}

@@ -56,7 +56,7 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 				centered
 				width={580}
 				className={styles.modal}
-				title={t('textSignUp.signUpWithEmail')}
+				title={t('textSignUp.signUpWithEmailTitle')}
 				onCancel={toggleSignUpFormModal}
 				footer={null}>
 				<p className={styles.description}>{t('textSignUp.signUpDescription')}</p>
@@ -92,6 +92,8 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 						<ConfigProvider
 							theme={{
 								token: {
+									colorTextPlaceholder: '#47474F',
+									colorText: '#0D101D',
 									colorBorder: '#126FE1',
 									colorBgContainer: '#FDFEFF',
 								},
@@ -264,7 +266,12 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 										)}
 									</Field>
 									<span className={styles.shecked_text}>
-										{t('textSignUp.agree')} <a href='/'>The Terms and Conditions</a>
+										{t('textSignUp.agree')}{' '}
+										<Link
+											to='/'
+											className={styles.link}>
+											The Terms and Conditions
+										</Link>
 									</span>
 								</label>
 								{/* button submit ----------------------- */}
@@ -280,7 +287,11 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 				</Formik>
 				<span className={styles.bottomLinkWrapper}>
 					{t('textSignUp.alreadyHaveAnAccount')}
-					<Link onClick={openSignIn}>{t('textSignUp.signIn')}</Link>
+					<Link
+						onClick={openSignIn}
+						className={styles.link}>
+						{t('textSignUp.signIn')}
+					</Link>
 				</span>
 			</Modal>
 		</>

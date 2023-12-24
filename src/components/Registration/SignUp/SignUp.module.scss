@@ -30,16 +30,6 @@
 					justify-content: center;
 					text-align: center;
 					margin-top: 135px;
-
-					.ant-btn-lg {
-						min-height: 57px;
-						font-size: 18px;
-						border-radius: 48px;
-						display: flex;
-						padding: 14px;
-						align-items: center;
-						justify-content: center;
-					}
 				}
 			}
 		}
@@ -78,7 +68,7 @@
 		font-family: $font-ns-regular;
 		font-size: 16px;
 		line-height: 160%;
-		color: $color-gray50;
+		color: $color-gray70;
 		text-align: center;
 		margin-top: 8px;
 	}
@@ -153,4 +143,8 @@
 			color: $color-primary20;
 		}
 	}
+}
+
+.button_pr_inner {
+	color: $color-gray;
 }

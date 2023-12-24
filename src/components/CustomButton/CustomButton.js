@@ -13,6 +13,13 @@ const CustomButton = ({ children, onClick, htmlType, isDisable, type }) => {
 						colorBorder: 'none',
 						colorTextDisabled: '#FDFEFF',
 						colorPrimaryHover: '#3989EC',
+						colorPrimary: '#126FE1',
+						paddingBlock: '14px 16px',
+						fontSize: '18px',
+						// colorPrimary: `${type === 'primary' ? '#ffffff' : '#126FE1'}`,
+					},
+					components: {
+						Button: { paddingBlock: '14px 16px' },
 					},
 				}}>
 				<Button
