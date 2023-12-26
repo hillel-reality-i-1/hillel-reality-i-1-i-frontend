@@ -21,6 +21,20 @@ const Step2Form = ({ onNext }) => {
 	const [selectedCountryId, setSelectedCountryId] = useState(null);
 	const [selectedCityId, setSelectedCityId] = useState(null);
 
+	useEffect(() => {
+		const fetchLanguage = async () => {
+			try {
+				const data = await axios.get('http://dmytromigirov.space/set-language/uk/');
+				console.log(data);
+				return data;
+			} catch (error) {
+				return error.message;
+			}
+		};
+
+		fetchLanguage();
+	}, []);
+
 	const getAllCountries = async () => {
 		try {
 			const data = await axios.get(URL_COUNTRY_LIST);

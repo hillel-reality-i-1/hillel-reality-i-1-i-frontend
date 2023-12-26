@@ -55,9 +55,9 @@ export const TRANSLATIONS_UK = {
 			titleH2: 'Як вас звати?',
 			fullName: 'Повне ім’я',
 			description: 'Введіть ваше ім’я для того, щоб інші учасники U-Help могли вас впізнати',
-			enterUserName: 'Введіть свій username',
+			enterUserName: 'Введіть свій нікнейм',
 			enterFullName: 'Введіть своє повне ім’я',
-			infoUserName: "Username - це ваше унікальне ім'я у нашій системі",
+			infoUserName: "Hікнейм - це ваше унікальне ім'я у нашій системі, яке не можна змінювати",
 			infoFullName: "Ім'я можна змінювати раз на 90 днів",
 		},
 		textStep2: {
@@ -88,7 +88,7 @@ export const TRANSLATIONS_UK = {
 			userSuccessfullyRegistered: 'користувач успішно зареєстрований',
 		},
 		error: {
-			lengthUserName: 'Довжина має бути від 2 до 32 символів. Будь ласка, заповніть його',
+			lengthUserName: "Це обов'язкове поле у нашій системі, яке не можна змінювати",
 			lengthFullName: 'Поле має містити від 2 до 50 символів. Будь ласка, заповніть його',
 			otherValidUserName:
 				'Поле може містити лише латинські літери (A-Z), цифри (0-9) та символ підкреслення («_»)',
