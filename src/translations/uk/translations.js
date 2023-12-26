@@ -41,6 +41,7 @@ export const TRANSLATIONS_UK = {
 		clickOnTheLink: 'Натисніть на посилання в ньому для того, щоб розпочати!',
 		didntNotGetTheEmail: 'Не отримали лист?',
 		sandAgain: 'Відправити ще раз через ',
+		buttonSandAgain: 'Відправити ще раз',
 		seconds: 'сек',
 		returnToRegistration: 'Повернутися до Реєстрації',
 		back: 'Повернутися',
@@ -96,13 +97,14 @@ export const TRANSLATIONS_UK = {
 			otherValidFullName: "Введеть коректні ім'я та призвіще",
 			required: 'Це обов’язкове поле. Будь ласка, заповніть його',
 			email: 'Введіть дійсну пошту (email@example.com)',
-			length: 'Має містити щонайменше 8 символів',
+			length: 'Має містити від 8 до 16 символів',
 			symbolNumber: 'Має містити хоча б 1 цифру та символ',
 			register: 'Має містити літери верхнього та нижнього регістрів',
 			coincidence: 'Паролі не збігаються. Спробуйте ще раз',
 			thisEmailIsAlreadyInUse:
 				'Ця електронна адреса вже використовується. Будь ласка, використовуйте інший або увійдіть',
 			errorCode: 'Не вірний код, спробуйте ще раз',
+			mailIsAlreadyInUse: 'Ця пошта вже використовується. Використайте іншу або увійдіть',
 		},
 	},
 	textForgotYourPassword: {

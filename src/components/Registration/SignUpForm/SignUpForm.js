@@ -1,10 +1,9 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
 import '../../../translations/i18n';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Modal, Checkbox, Input, ConfigProvider } from 'antd';
 import { Formik, Form, Field } from 'formik';
@@ -12,6 +11,7 @@ import error from '../../../assets/img/icons/icons-SignUp/error.svg';
 import success from '../../../assets/img/icons/icons-SignUp/success.svg';
 import open_eye from '../../../assets/img/icons/icons-SignUp/open_eye.svg';
 import closed_eye from '../../../assets/img/icons/icons-SignUp/closed_eye.svg';
+// import dot_password from '../../../assets/img/icons/icons-SignUp/dot_password.svg';
 import { fetchRegisterEmail } from '../../../store/slices/authSlice';
 import CustomButton from '../../CustomButton/CustomButton';
 import { useValidation } from '../../../helpers/validation';
@@ -22,6 +22,22 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 	const { t } = useTranslation();
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	const status = useSelector((state) => state.auth?.status);
+	const [isError, setIsError] = useState(false);
+	const [emailValue, setEmailValue] = useState('');
+	const [prevEmailValue, setPrevEmailValue] = useState('');
+
+	useEffect(() => {
+		if (status === 'error') {
+			setIsError(true);
+		}
+	}, [isError, status]);
+
+	useEffect(() => {
+		if (prevEmailValue !== emailValue) {
+			setIsError(false);
+		}
+	}, [emailValue, isError, prevEmailValue]);
 
 	const {
 		validateEmail,
@@ -68,7 +84,7 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 						confirmPassword: '',
 						checked: false,
 					}}
-					onSubmit={async (values, { setSubmitting }) => {
+					onSubmit={async (values, { setSubmitting, resetForm }) => {
 						try {
 							// Sending a request to the server
 							const user = {
@@ -76,14 +92,17 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 								password1: values.password,
 								password2: values.confirmPassword,
 							};
+							setPrevEmailValue(values.email);
+
 							const response = await dispatch(fetchRegisterEmail(user));
 
 							if (fetchRegisterEmail.fulfilled.match(response)) {
 								navigate('/verifyInfo');
+								resetForm();
 							}
 							// If there are errors, they will be handled in the fetchRegisterEmail thunk
 						} catch (error) {
-							toast.error(error.response.data.email[0] || 'Error');
+							console.error(error.response.data.email[0]);
 						} finally {
 							setSubmitting(false);
 						}
@@ -99,8 +118,6 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 								},
 							}}>
 							<Form className={styles.form}>
-								<ToastContainer />
-
 								{/* input email------------------------------------------------- */}
 								<div className={styles.inputWrapper}>
 									<label
@@ -110,7 +127,11 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 									</label>
 									<Field
 										name='email'
-										validate={(values) => validateEmail(values)}>
+										validate={(values) => {
+											setEmailValue(values);
+											// setEmailChanged(true); //Set emailChanged state to true when email changes
+											return validateEmail(values);
+										}}>
 										{({ field }) => (
 											<Input
 												{...field}
@@ -124,6 +145,21 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 											/>
 										)}
 									</Field>
+
+									{isError && (
+										<div className={styles.error}>
+											<div className={styles.img_wrapper}>
+												<img
+													className={styles.img_er}
+													style={{ width: '16px', display: 'block' }}
+													src={error}
+													alt='error'
+												/>
+											</div>
+											{t('textSignUp.error.mailIsAlreadyInUse')}
+										</div>
+									)}
+
 									{errors.email && touched.email && (
 										<div className={styles.error}>
 											<div className={styles.img_wrapper}>
@@ -170,6 +206,16 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 													)
 												}
 												placeholder='&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;'
+												// {
+												// 	<Space>
+												// 		<img
+												// 			src={dot_password}
+												// 			alt='dot'
+												// 			style={{ width: '16px', display: 'block' }}
+												// 		/>
+												// 		Введите пароль
+												// 	</Space>
+												// }
 												style={{ color: errors.password && '#a7a7b2' }}
 												className={`${styles.input} ${
 													errors.password && touched.password ? styles.invalid : ''
@@ -278,7 +324,7 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 								<CustomButton
 									htmlType='submit'
 									type='primary'
-									isDisable={!isValid || !dirty || isSubmitting}>
+									isDisable={!isValid || !dirty || isSubmitting || isError}>
 									<span className={styles.btn_submit_text}>{t('textSignUp.signUp')}</span>
 								</CustomButton>
 							</Form>

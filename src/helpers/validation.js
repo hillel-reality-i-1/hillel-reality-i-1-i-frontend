@@ -173,7 +173,9 @@ export const useValidation = () => {
 
 		if (value.length < 2 || value.length > 50) {
 			return (error = t('textSignUp.error.lengthFullName'));
-		} else if (!/^[а-яА-Яa-zA-Z][а-яА-Яa-zA-Z\s'-]*[а-яА-Яa-zA-Z]$/u.test(value)) {
+		} else if (
+			!/^[а-яА-Яa-zA-ZґҐєЄіІїЇ'][а-яА-Яa-zA-ZґҐєЄіІїЇ'\s-]*[а-яА-Яa-zA-ZґҐєЄіІїЇ']$/u.test(value)
+		) {
 			return (error = t('textSignUp.error.otherValidFullName'));
 		}
 

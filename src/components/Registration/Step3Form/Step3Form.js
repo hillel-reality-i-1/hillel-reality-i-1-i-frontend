@@ -4,9 +4,14 @@ import { useTranslation } from 'react-i18next';
 import '../../../translations/i18n';
 import { Form, Formik, Field } from 'formik';
 import { PhoneNumberUtil } from 'google-libphonenumber';
-import { PhoneInput } from 'react-international-phone';
+import { PhoneInput, defaultCountries, parseCountry } from 'react-international-phone';
 import 'react-international-phone/style.css';
 import CustomButton from '../../CustomButton/CustomButton';
+import flag_ua from '../../../assets/img/icons/icons-SignUp/flag_ua.svg';
+import flag_pl from '../../../assets/img/icons/icons-SignUp/flag_pl.svg';
+import flag_gb from '../../../assets/img/icons/icons-SignUp/flag_gb.svg';
+import flag_de from '../../../assets/img/icons/icons-SignUp/flag_de.svg';
+import flag_cz from '../../../assets/img/icons/icons-SignUp/flag_cz.svg';
 
 import styles from './Step3Form.module.scss';
 
@@ -18,6 +23,52 @@ const isPhoneValid = (phone) => {
 		return false;
 	}
 };
+
+const customFlags = [
+	{
+		iso2: 'ua',
+		src: flag_ua,
+	},
+	{
+		iso2: 'pl',
+		src: flag_pl,
+	},
+	{
+		iso2: 'gb',
+		src: flag_gb,
+	},
+	{
+		iso2: 'de',
+		src: flag_de,
+	},
+	{
+		iso2: 'cz',
+		src: flag_cz,
+	},
+];
+
+const ukrainianCountryNames = {
+	ua: 'Україна',
+	pl: 'Польща',
+	gb: 'Велика Британія',
+	de: 'Німеччина',
+	cz: 'Чехія',
+};
+
+// Update country names and select required countries
+const updatedCountries = defaultCountries.map((country) => {
+	const [name, iso2, dialCode, format, priority, areaCodes] = country;
+
+	// Change the name to Ukrainian if it is defined
+	const ukrainianName = ukrainianCountryNames[iso2] || name;
+
+	return [ukrainianName, iso2, dialCode, format, priority, areaCodes];
+});
+
+const countries = updatedCountries.filter((country) => {
+	const { iso2 } = parseCountry(country);
+	return ['ua', 'pl', 'gb', 'cz', 'de'].includes(iso2);
+});
 
 const Step3Form = ({ onNext, onPhoneChange }) => {
 	const { t } = useTranslation();
@@ -61,6 +112,8 @@ const Step3Form = ({ onNext, onPhoneChange }) => {
 											value={phone}
 											className={styles.phone_input}
 											onChange={(phone) => setPhone(phone)}
+											countries={countries}
+											flags={customFlags}
 										/>
 									)}
 								</Field>

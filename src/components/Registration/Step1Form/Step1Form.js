@@ -54,7 +54,7 @@ const Step1Form = ({ onNext }) => {
 									<label
 										htmlFor='span'
 										className={styles.label}>
-										Username
+										Нікнейм
 									</label>
 									<Field
 										name='userName'

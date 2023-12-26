@@ -87,7 +87,7 @@ const VerifyInfo = () => {
 						<button
 							onClick={handleResend}
 							className={`${styles.text_link} ${styles.link_send}`}>
-							{t('textSignUp.sandAgain')}
+							{t('textSignUp.buttonSandAgain')}
 						</button>
 					)}
 

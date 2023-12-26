@@ -11,9 +11,6 @@ export const fetchRegisterEmail = createAsyncThunk(
 			const data = await axios.post(URL_REGISTRATION_EMAIL, user);
 			return data;
 		} catch (error) {
-			// Sending an error as a notification
-			toast.error(error.response.data.email[0] || 'Error');
-			// Sending an error to thunk and using rejectWithValue to store the error in state
 			return rejectWithValue(error.response.data);
 		}
 	}
