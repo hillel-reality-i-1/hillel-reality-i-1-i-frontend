@@ -55,6 +55,11 @@ const StepLayout = () => {
 			data.country_id = null;
 			data.city_id = null;
 		}
+
+		if (data.city_id === 0) {
+			data.city_id = null;
+		}
+
 		setFormData2(data);
 		next();
 	};

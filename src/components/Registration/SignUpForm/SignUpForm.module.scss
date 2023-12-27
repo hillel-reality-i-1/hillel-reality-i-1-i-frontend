@@ -64,6 +64,9 @@
 	color: $color-systemError;
 	font-size: 14px;
 	gap: 5px;
+	&.error_big_size {
+		font-size: 16px;
+	}
 
 	.img_wrapper {
 		display: flex;

@@ -145,20 +145,21 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 										)}
 									</Field>
 									<div className={styles.error_message_wrapper}>
+										{/* check for mail uniqueness============================ */}
 										{isError && (
-											<div className={styles.error}>
-												<div className={styles.img_wrapper}>
-													<img
-														className={styles.img_er}
-														style={{ width: '16px', display: 'block' }}
-														src={error}
-														alt='error'
-													/>
-												</div>
+											<div className={`${styles.error} ${styles.error_big_size}`}>
+												{/* <div className={styles.img_wrapper}> */}
+												<img
+													className={styles.img_er}
+													style={{ width: '16px', display: 'block' }}
+													src={error}
+													alt='error'
+												/>
 												{t('textSignUp.error.mailIsAlreadyInUse')}
+												{/* </div> */}
 											</div>
 										)}
-
+										{/* other error messages ================================= */}
 										{errors.email && touched.email && (
 											<div className={styles.error}>
 												<div className={styles.img_wrapper}>
