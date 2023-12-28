@@ -79,87 +79,6 @@ const Modal = ({ onClose, setSummary }) => {
                     />
                 </div>
                 <div className={styles.сontainer} >
-                    <div className={styles.сontainer_name}>
-                        <div className={styles.name_block}>
-                            <h5 className={styles.block_title}>
-                                Name
-                            </h5>
-                            <p className={styles.block_text}>
-                                You can change your name once every 90 days.
-                            </p>
-                        </div>
-                        <div className={styles.сontainer_fullName}>
-                            <form className={styles.fullName_form}>
-                                <label className={styles.fullName_form_label} htmlFor="full-name">
-                                    Full Name:
-                                </label>
-                                <Input
-                                    className={styles.fullName_form_input}
-                                    id="full-name"
-                                    value={fullName}
-                                    onChange={fullNameInputChange}
-                                />
-                            </form>
-                        </div>
-                    </div>
-                    <div className={styles.сontainer_location}>
-                        <div className={styles.location_textBlock}>
-                            <div className={styles.location_description}>
-                                <h5 className={styles.description_title}>
-                                    Location
-                                </h5>
-                                <p className={styles.description_text}>
-                                    We value your security and will not share your exact location.
-                                </p>
-                            </div>
-                        </div>
-                        <div className={styles.location_inputsBlock}>
-                            <a className={styles.location_button} href="/">
-                                <img className={styles.location_button_icon} src={locationIcon} alt="location icon" />
-                                Share your location
-                            </a>
-                            <div className={styles.location_descriptionBlock}>
-                                <p className={styles.descriptionBlock_text}>
-                                    or select from the list
-                                </p>
-                            </div>
-                            <div className={styles.location_dropdownsBlock}>
-                                <form className={styles.dropdownsBlock_form}>
-                                    <label className={styles.dropdownsBlock_form_label} htmlFor="country-name">
-                                        Country:
-                                    </label>
-                                    <input className={styles.dropdownsBlock_form_input} list="countries" id="country-name" placeholder="Select the country" />
-                                    <datalist className={styles.dropdownsBlock_form_datalist} id="countries">
-                                        {
-                                            countries.map(({ id, name }) => (
-                                                <option
-                                                    key={id}
-                                                    value={id}>
-                                                    {name}
-                                                </option>))
-                                        }
-                                    </datalist>
-                                </form>
-
-                                <form className={styles.dropdownsBlock_form}>
-                                    <label className={styles.dropdownsBlock_form_label} htmlFor="city-name">
-                                        City:
-                                    </label>
-                                    <input className={styles.dropdownsBlock_form_input} list="countries" id="city-name" placeholder="Select the city" />
-                                    <datalist className={styles.dropdownsBlock_form_datalist} id="countries">
-                                        {
-                                            countries.map(({ id, name }) => (
-                                                <option
-                                                    key={id}
-                                                    value={id}>
-                                                    {name}
-                                                </option>))
-                                        }
-                                    </datalist>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
                     <div className={styles.сontainer_email}>
                         <div className={styles.email_title}>
                             <h5 className={styles.email_title_text}>
@@ -297,19 +216,26 @@ const Modal = ({ onClose, setSummary }) => {
                                 </ConfigProvider>
                             </div>
                         </div>
-                        <div className={styles.summary_switch}>
-                            <div className={styles.switch_text_wrapper}>
-                                <h5 className={styles.switch_title}>
-                                    Expetrise
-                                </h5>
+                    </div>
+                    <div className={styles.сontainer_expertise}>
+                        <div className={styles.сontainer_expertise_top}>
+                            <div className={styles.сontainer_expertise_top_block}>
+                                <div className={styles.сontainer_expertise_top_block_title_wrapper}>
+                                    <h5 className={styles.сontainer_expertise_top_block_title}>
+                                        Expetrise
+                                    </h5>
+                                </div>
+                                <div className={styles.сontainer_expertise_top_block_switcher_wrapper}>
+                                    <Switch className={styles.сontainer_expertise_top_block_switcher}/>
+                                    <span className={styles.сontainer_expertise_top_block_switcher_text}>
+                                        Switch to Expert Profile
+                                    </span>
+                                    <img src={exclamation} alt='exclamation icon' />
+                                </div>
                             </div>
-                            <div className={styles.switch_wrapper}>
-                                <Switch />
-                                <span className={styles.switch_text}>
-                                    Switch to Expert Profile
-                                </span>
-                                <img src={exclamation} alt='exclamation icon' />
-                            </div>
+                            <p className={styles.сontainer_expertise_top_text}>
+                                You can add up to 5 expertises
+                            </p>
                         </div>
                     </div>
                 </div>

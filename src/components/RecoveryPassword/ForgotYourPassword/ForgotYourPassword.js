@@ -17,8 +17,16 @@ import styles from './ForgotYourPassword.module.scss'
 export default function ForgotYourPassword() {
     const [activeButton, setActiveButton] = useState('');
     const [emailValue, setEmailValue] = useState('');
+    const [errorEmail, setErrorEmail] = useState('');
     const navigate = useNavigate();
     const { t } = useTranslation();
+
+    const someOtherFunction = async (values) => {
+        const isValid = await emailValidationServer(values);
+        setActiveButton(isValid);
+        setErrorEmail(!isValid);
+        isValid && setEmailValue(values);
+    };
 
     return (
         <div className={styles.forgotYourPassword}>
@@ -46,9 +54,9 @@ export default function ForgotYourPassword() {
                         initialValues={{
                             email: '',
                         }}
-                        validate={(values) => 
-                            emailValidationServer(values, setActiveButton, setEmailValue)
-                        }
+                        validate={(values) => {
+                            someOtherFunction(values);
+                        }}
                         onSubmit={() => {
                             navigate(activeButton
                                 ? '/emailOnTheWay'
@@ -56,13 +64,13 @@ export default function ForgotYourPassword() {
                                 passwordReset(emailValue)
                         }}
                     >
-                        {({ touched, errors }) => (
+                        {({ touched }) => (
                             <Form className={styles.section_form}>
                                 <div className={styles.form_wrapper}>
                                     <label className={styles.form_label} htmlFor="email">
                                         {t('textForgotYourPassword.email')}
                                     </label>
-                                    <Field className={errors.email
+                                    <Field className={errorEmail
                                         && touched.email
                                         ? styles.form_input_wrong
                                         : styles.form_input} 
@@ -73,7 +81,7 @@ export default function ForgotYourPassword() {
                                         required 
                                     />
                                     {!activeButton
-                                        && errors.email
+                                        && errorEmail
                                         ? (
                                             <div className={styles.form_error_wrapper}>
                                                 <img

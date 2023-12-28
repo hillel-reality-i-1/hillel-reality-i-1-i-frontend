@@ -13,3 +13,4 @@ export const URL_PASSWORD_RESET_CONFIRM =
 export const URL_PASSWORD_RESET = 'http://195.189.226.99/api/v1/auth/password/reset/';
 export const URL_LOGIN = 'http://195.189.226.99/api/v1/auth/login/';
 export const URL_USER_LIST = 'http://195.189.226.99/api/v1/users/user_list/';
+export const URL_CHECK_EMAIL = 'http://195.189.226.99/api/v1/accounts/check-email/'
