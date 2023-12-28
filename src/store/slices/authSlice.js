@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from '../../config/axios/axios';
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { URL_REGISTRATION_EMAIL, URL_UPDATE_USER, URL_CREATE_PROFILE } from '../../config/API_url';
 
@@ -26,8 +25,6 @@ export const fetchUpdateName = createAsyncThunk(
 			});
 			return data;
 		} catch (error) {
-			// Sending an error as a notification
-			toast.error(error.response.data.email[0] || 'Error');
 			// Sending an error to thunk and using rejectWithValue to store the error in state
 			return rejectWithValue(error.response.data);
 		}
@@ -45,8 +42,6 @@ export const fetchAddDataProfile = createAsyncThunk(
 			});
 			return data;
 		} catch (error) {
-			// Sending an error as a notification
-			toast.error(error.response.data.email[0] || 'Error');
 			// Sending an error to thunk and using rejectWithValue to store the error in state
 			return rejectWithValue(error.response.data);
 		}

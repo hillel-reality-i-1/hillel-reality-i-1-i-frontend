@@ -26,6 +26,8 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 	const [emailValue, setEmailValue] = useState('');
 	const [prevEmailValue, setPrevEmailValue] = useState('');
 
+	const [confirmPasswordError, setConfirmPasswordError] = useState('');
+	console.log('confirmPasswordError', confirmPasswordError);
 	useEffect(() => {
 		if (status === 'error') {
 			setIsError(true);
@@ -148,29 +150,33 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 										{/* check for mail uniqueness============================ */}
 										{isError && (
 											<div className={`${styles.error} ${styles.error_big_size}`}>
-												{/* <div className={styles.img_wrapper}> */}
-												<img
-													className={styles.img_er}
-													style={{ width: '16px', display: 'block' }}
-													src={error}
-													alt='error'
-												/>
-												{t('textSignUp.error.mailIsAlreadyInUse')}
-												{/* </div> */}
+												<div className={styles.img_wrapper}>
+													<img
+														className={styles.img_er}
+														style={{
+															width: '24px',
+															height: '24px',
+															marginRight: '8px',
+														}}
+														src={error}
+														alt='error'
+													/>
+													{t('textSignUp.error.mailIsAlreadyInUse')}
+												</div>
 											</div>
 										)}
 										{/* other error messages ================================= */}
 										{errors.email && touched.email && (
 											<div className={styles.error}>
-												<div className={styles.img_wrapper}>
+												<div className={`${styles.error} ${styles.error_big_size}`}>
 													<img
 														className={styles.img_er}
-														style={{ width: '16px', display: 'block' }}
+														style={{ width: '24px', height: '24px', marginRight: '8px' }}
 														src={error}
 														alt='error'
 													/>
+													{errors.email}
 												</div>
-												{errors.email}
 											</div>
 										)}
 									</div>
@@ -181,8 +187,8 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 								<ConfigProvider
 									theme={{
 										token: {
-											colorTextPlaceholder: `${errors.password && '#B3261E'}`,
-											colorText: `${errors.password && '#B3261E'}`,
+											colorTextPlaceholder: `${errors.password && touched.password && '#B3261E'}`,
+											colorText: `${errors.password && touched.password && '#B3261E'}`,
 										},
 									}}>
 									<div className={styles.inputWrapper}>
@@ -218,6 +224,10 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 													style={{ color: errors.password && '#a7a7b2' }}
 													className={`${styles.input} ${
 														errors.password && touched.password ? styles.invalid : ''
+													} ${
+														errors.confirmPassword?.success && touched.confirmPassword
+															? styles.success
+															: ''
 													}`}
 												/>
 											)}
@@ -235,12 +245,12 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 															<div className={styles.img_wrapper}>
 																<img
 																	className={styles.img_er}
-																	style={{ width: '16px', display: 'block' }}
+																	style={{ width: '16px', height: '16px', marginRight: '4px' }}
 																	src={!msg.isWarning ? error : success}
 																	alt='error'
 																/>
+																{msg.message}
 															</div>
-															{msg.message}
 														</li>
 													))}
 												</ul>
@@ -254,8 +264,15 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 								<ConfigProvider
 									theme={{
 										token: {
-											colorTextPlaceholder: `${errors.password && '#B3261E'}`,
-											colorText: `${errors.password && '#B3261E'}`,
+											colorTextPlaceholder: `${
+												errors.confirmPassword && touched.confirmPassword && '#B3261E'
+											}`,
+											colorText: '#0D101D',
+											// `${
+											// 	(confirmPasswordError?.error && '#228326') ||
+											// 	(confirmPasswordError?.access && '#B3261E') ||
+											// 	(confirmPasswordError?.access && confirmPasswordError?.error && '#0D101D')
+											// }`,
 										},
 									}}>
 									<div className={styles.inputWrapper}>
@@ -266,7 +283,10 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 										</label>
 										<Field
 											name='confirmPassword'
-											validate={(value) => validateConfirmPassword(value)}
+											validate={(value) => {
+												setConfirmPasswordError(errors.confirmPassword);
+												return validateConfirmPassword(value);
+											}}
 											value={values}>
 											{({ field }) => (
 												<Input.Password
@@ -287,27 +307,52 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 															/>
 														)
 													}
+													// className={`${styles.input} ${
+													// 	errors.confirmPassword?.error && touched.confirmPassword
+													// 		? styles.invalid
+													// 		: ''
+													// } ${
+													// 	errors.confirmPassword?.success && touched.confirmPassword
+													// 		? styles.success
+													// 		: ''
+													// }`}
 													className={`${styles.input} ${
 														errors.confirmPassword && touched.confirmPassword ? styles.invalid : ''
-													}`}
+													} `}
 													placeholder='&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;'
 												/>
 											)}
 										</Field>
 										<div className={styles.error_message_wrapper}>
+											{console.log(errors)}
+											{/* {errors.confirmPassword?.error && touched.confirmPassword && ( */}
 											{errors.confirmPassword && touched.confirmPassword && (
-												<div className={styles.error}>
+												<div className={`${styles.error} ${styles.error_big_size}`}>
 													<div className={styles.img_wrapper}>
 														<img
 															className={styles.img_er}
-															style={{ width: '16px', display: 'block' }}
+															style={{ width: '24px', height: '24px', marginRight: '8px' }}
 															src={error}
 															alt='error'
 														/>
+														{/* {errors.confirmPassword.error} */}
+														{errors.confirmPassword}
 													</div>
-													{errors.confirmPassword}
 												</div>
 											)}
+											{/* {errors.confirmPassword?.success && touched.confirmPassword && (
+												<div className={styles.success}>
+													<div className={styles.img_wrapper}>
+														<img
+															className={styles.img_success}
+															style={{ width: '24px', height: '24px', marginRight: '8px' }}
+															src={success}
+															alt='success'
+														/>
+														{errors.confirmPassword.success}
+													</div>
+												</div>
+											)} */}
 										</div>
 									</div>
 								</ConfigProvider>
@@ -342,7 +387,7 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 								<CustomButton
 									htmlType='submit'
 									type='primary'
-									isDisable={!isValid || !dirty || isSubmitting || isError}>
+									isDisable={!isValid || !dirty || isSubmitting}>
 									<span className={styles.btn_submit_text}>{t('textSignUp.signUp')}</span>
 								</CustomButton>
 							</Form>

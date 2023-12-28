@@ -109,12 +109,23 @@ export const useValidation = () => {
 	// validate validateConfirmPassword==========================//
 
 	const validateConfirmPassword = (value) => {
-		let error;
+		let error = '';
+		let success = '';
 		if (!value) {
 			error = t('textSignUp.error.required');
 		} else if (value !== password) {
 			error = t('textSignUp.error.coincidence');
+		} else {
+			success = t('textSignUp.success.greatPassword');
+			error = '';
 		}
+		console.log(error, success);
+
+		// if (error) {
+		// 	return { error: error };
+		// } else if (success) {
+		// 	return { success: success };
+		// }
 		return error;
 	};
 
@@ -167,6 +178,7 @@ export const useValidation = () => {
 
 	const validateFullName = (value) => {
 		let error;
+
 		if (!value) {
 			error = t('textSignUp.error.required');
 		}
@@ -179,7 +191,7 @@ export const useValidation = () => {
 			return (error = t('textSignUp.error.otherValidFullName'));
 		}
 
-		return error;
+		return { error };
 	};
 
 	return {

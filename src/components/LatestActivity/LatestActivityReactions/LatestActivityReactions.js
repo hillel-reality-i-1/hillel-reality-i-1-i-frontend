@@ -1,11 +1,11 @@
 import { Button, ConfigProvider } from 'antd';
-import styles from './LatestActivityComments.module.scss';
+import styles from './LatestActivityReactions.module.scss';
 
-const LatestActivityComments = () => {
+const LatestActivityReactions = () => {
 	return (
-		<div className={styles.activity_comments_container}>
-			<p className={styles.comments_description}>
-				You haven’t made any comments yet. You can discover loads of interesting posts on the main
+		<div className={styles.activity_reactions_container}>
+			<p className={styles.reactions_description}>
+				You haven’t left any reaction yet. You can discover loads of interesting posts on the Main
 				page.
 			</p>
 
@@ -26,7 +26,7 @@ const LatestActivityComments = () => {
 					// type='secondary'
 					htmlType='button'
 					// disable='true'
-					className={styles.btn_activity_comments}>
+					className={styles.btn_activity_reactions}>
 					<span className={styles.btn_inner}>Go to Main</span>
 				</Button>
 			</ConfigProvider>
@@ -34,4 +34,4 @@ const LatestActivityComments = () => {
 	);
 };
 
-export default LatestActivityComments;
+export default LatestActivityReactions;

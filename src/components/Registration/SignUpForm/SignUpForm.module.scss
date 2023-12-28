@@ -63,14 +63,26 @@
 	display: flex;
 	color: $color-systemError;
 	font-size: 14px;
-	gap: 5px;
+
 	&.error_big_size {
 		font-size: 16px;
 	}
 
 	.img_wrapper {
 		display: flex;
-		text-align: center;
+		align-items: center;
+	}
+}
+
+.success {
+	font-family: $font-ns-regular;
+	display: flex;
+	color: $color-systemSuccess;
+	font-size: 16px;
+
+	.img_wrapper {
+		display: flex;
+		align-items: center;
 	}
 }
 
@@ -129,6 +141,11 @@
 		&.invalid {
 			border-color: $color-systemError;
 			color: $color-systemError;
+		}
+
+		&.success {
+			border-color: $color-systemSuccess;
+			color: $color-systemSuccess;
 		}
 	}
 

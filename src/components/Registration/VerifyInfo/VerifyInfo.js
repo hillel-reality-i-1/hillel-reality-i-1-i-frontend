@@ -12,10 +12,11 @@ import arrow_back from '../../../assets/img/icons/icons-SignUp/arrow_back.svg';
 import CountdownTimer from '../../CountdownTimer/CountdownTimer';
 import { URL_RESEND_EMAIL } from '../../../config/API_url';
 import CustomButton from '../../CustomButton/CustomButton';
+import AuthenticationWrapper from '../../AuthenticationWrapper/AuthenticationWrapper';
 
 import styles from './VerifyInfo.module.scss';
 
-const VerifyInfo = () => {
+const VerifyInfo = ({ toggleSignUpModal }) => {
 	const { t } = useTranslation();
 	const navigate = useNavigate();
 	const [showButton, setShowButton] = useState(false);
@@ -47,7 +48,8 @@ const VerifyInfo = () => {
 	};
 
 	const openModalSignUp = () => {
-		navigate('/');
+		console.log(toggleSignUpModal);
+		toggleSignUpModal();
 	};
 
 	return (
@@ -102,6 +104,10 @@ const VerifyInfo = () => {
 						/>
 						<span className={styles.btn_back}>{t('textSignUp.returnToRegistration')}</span>
 					</CustomButton>
+
+					{/* <div style={{ display: 'none' }}> */}
+					{/* <AuthenticationWrapper /> */}
+					{/* </div> */}
 				</div>
 
 				<aside className={styles.aside}>

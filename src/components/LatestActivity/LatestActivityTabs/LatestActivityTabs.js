@@ -1,11 +1,13 @@
 import React from 'react';
 
-import { Tabs } from 'antd';
+import { ConfigProvider, Tabs } from 'antd';
 import LatestActivityPosts from '../LatestActivityPosts/LatestActivityPosts';
 // import styles from './LatestActivityTabs.module.scss';
 import LatestActivityComments from '../LatestActivityComments/LatestActivityComments';
-import LatestActivityLikes from '../LatestActivityLikes/LatestActivityLikes';
+import LatestActivityReactions from '../LatestActivityReactions/LatestActivityReactions';
 import LatestActivitySaved from '../LatestActivitySaved/LatestActivitySaved';
+import LatestActivityContributions from '../LatestActivityContributions/LatestActivityContributions';
+
 const latestActivity = [
 	{
 		key: '1',
@@ -19,11 +21,16 @@ const latestActivity = [
 	},
 	{
 		key: '3',
-		label: 'Likes',
-		children: <LatestActivityLikes />,
+		label: 'Contributions',
+		children: <LatestActivityContributions />,
 	},
 	{
 		key: '4',
+		label: 'Reactions',
+		children: <LatestActivityReactions />,
+	},
+	{
+		key: '5',
 		label: 'Saved',
 		children: <LatestActivitySaved />,
 	},
@@ -35,12 +42,17 @@ const LatestActivityTabs = () => {
 	};
 	return (
 		<>
-			<Tabs
-				defaultActiveKey='1'
-				items={latestActivity}
-				onChange={onChange}
-				TabBarGutter={18}
-			/>
+			<ConfigProvider
+				theme={{
+					token: { fontSize: '18px' },
+				}}>
+				<Tabs
+					defaultActiveKey='1'
+					items={latestActivity}
+					onChange={onChange}
+					TabBarGutter={18}
+				/>
+			</ConfigProvider>
 		</>
 	);
 };

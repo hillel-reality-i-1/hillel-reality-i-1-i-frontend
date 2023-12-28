@@ -86,6 +86,7 @@ export const TRANSLATIONS_UK = {
 		},
 		success: {
 			userSuccessfullyRegistered: 'користувач успішно зареєстрований',
+			greatPassword: 'Чудовий пароль!',
 		},
 		error: {
 			lengthUserName: "Це обов'язкове поле у нашій системі, яке не можна змінювати",
