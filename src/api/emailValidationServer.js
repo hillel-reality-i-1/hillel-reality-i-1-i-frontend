@@ -8,8 +8,8 @@ const emailValidationServer = async (values, setActiveButton, setEmailValue) => 
     try {
         // ВХОД (Здесь временно, для того, чтобы получить список юзеров)
         const loginResponse = await axios.post(URL_LOGIN, {
-            email: 'admin@gmail.com',
-            password: 'admin'
+            email: 'django@gjan.go',
+            password: 'Adminadmin!'
         });
 
         if (loginResponse.status < 200 || loginResponse.status >= 300) {
