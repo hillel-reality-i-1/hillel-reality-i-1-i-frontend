@@ -26,7 +26,7 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 	const [emailValue, setEmailValue] = useState('');
 	const [prevEmailValue, setPrevEmailValue] = useState('');
 
-	const [confirmPasswordError, setConfirmPasswordError] = useState('');
+	const [confirmPasswordError, setConfirmPasswordError] = useState('#0D101D');
 	console.log('confirmPasswordError', confirmPasswordError);
 	useEffect(() => {
 		if (status === 'error') {
@@ -109,23 +109,24 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 						}
 					}}>
 					{({ isSubmitting, errors, isValid, dirty, values, touched }) => (
-						<ConfigProvider
-							theme={{
-								token: {
-									colorTextPlaceholder: '#47474F',
-									colorText: '#0D101D',
-									colorBorder: '#126FE1',
-									colorBgContainer: '#FDFEFF',
-								},
-							}}>
-							<Form className={styles.form}>
-								{/* input email------------------------------------------------- */}
-								<div className={styles.inputWrapper}>
-									<label
-										className={styles.label}
-										htmlFor='email'>
-										{t('textSignUp.email')}
-									</label>
+						<Form className={styles.form}>
+							{/* input email------------------------------------------------- */}
+							<div className={styles.inputWrapper}>
+								<label
+									className={styles.label}
+									htmlFor='email'>
+									{t('textSignUp.email')}
+								</label>
+
+								<ConfigProvider
+									theme={{
+										token: {
+											colorTextPlaceholder: '#47474F',
+											colorText: '#0D101D',
+											colorBorder: '#126FE1',
+											colorBgContainer: '#FDFEFF',
+										},
+									}}>
 									<Field
 										name='email'
 										validate={(values) => {
@@ -146,252 +147,254 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 											/>
 										)}
 									</Field>
+								</ConfigProvider>
+								<div className={styles.error_message_wrapper}>
+									{/* check for mail uniqueness============================ */}
+									{isError && (
+										<div className={`${styles.error} ${styles.error_big_size}`}>
+											<div className={styles.img_wrapper}>
+												<img
+													className={styles.img_er}
+													style={{
+														width: '24px',
+														height: '24px',
+														marginRight: '8px',
+													}}
+													src={error}
+													alt='error'
+												/>
+												{t('textSignUp.error.mailIsAlreadyInUse')}
+											</div>
+										</div>
+									)}
+									{/* other error messages ================================= */}
+									{errors.email && touched.email && (
+										<div className={styles.error}>
+											<div className={`${styles.error} ${styles.error_big_size}`}>
+												<img
+													className={styles.img_er}
+													style={{ width: '24px', height: '24px', marginRight: '8px' }}
+													src={error}
+													alt='error'
+												/>
+												{errors.email}
+											</div>
+										</div>
+									)}
+								</div>
+							</div>
+
+							{/* input password------------------------------------------------ */}
+
+							<ConfigProvider
+								theme={{
+									token: {
+										colorTextPlaceholder: `${errors.password && touched.password && '#B3261E'}`,
+										colorText: `${errors.password && touched.password && '#B3261E'}`,
+									},
+								}}>
+								<div className={styles.inputWrapper}>
+									<label
+										htmlFor='password'
+										className={styles.label}>
+										{t('textSignUp.password')}
+									</label>
+									<Field
+										name='password'
+										validate={(value) => validatePassword(value)}
+										autoComplete='off'>
+										{({ field }) => (
+											<Input.Password
+												{...field}
+												type='password'
+												name='password'
+												autoComplete='off'
+												iconRender={(visible) =>
+													visible ? (
+														<img
+															src={open_eye}
+															alt='eye'
+														/>
+													) : (
+														<img
+															src={closed_eye}
+															alt='eye'
+														/>
+													)
+												}
+												placeholder='&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;'
+												style={{ color: errors.password && '#a7a7b2' }}
+												className={`${styles.input} ${
+													errors.password && touched.password ? styles.invalid : ''
+												} ${
+													errors.confirmPassword?.success && touched.confirmPassword
+														? styles.success
+														: ''
+												}`}
+											/>
+										)}
+									</Field>
+
 									<div className={styles.error_message_wrapper}>
-										{/* check for mail uniqueness============================ */}
-										{isError && (
+										{errors.password && touched.password && (
+											<ul>
+												{validWarnings.map((msg, i) => (
+													<li
+														className={`${styles.error} ${
+															msg.isWarning ? styles.input_success : ''
+														}`}
+														key={i}>
+														<div className={styles.img_wrapper}>
+															<img
+																className={styles.img_er}
+																style={{ width: '16px', height: '16px', marginRight: '4px' }}
+																src={!msg.isWarning ? error : success}
+																alt='error'
+															/>
+															{msg.message}
+														</div>
+													</li>
+												))}
+											</ul>
+										)}
+									</div>
+								</div>
+							</ConfigProvider>
+
+							{/* input passwordConfirm------------------------------------------------------------ */}
+							{console.log(confirmPasswordError?.success)}
+							<ConfigProvider
+								theme={{
+									token: {
+										colorTextPlaceholder: `${
+											errors.confirmPassword ? touched.confirmPassword && '#B3261E' : '#228326'
+										}`,
+										// colorText: '#0D101D',
+
+										colorText: `${
+											(confirmPasswordError?.error && '#228326') ||
+											(confirmPasswordError?.access && '#B3261E') ||
+											(!confirmPasswordError?.access && !confirmPasswordError?.error && '#0D101D')
+										}`,
+									},
+								}}>
+								<div className={styles.inputWrapper}>
+									<label
+										htmlFor='confirmPassword'
+										className={styles.label}>
+										{t('textSignUp.confirmPassword')}
+									</label>
+									<Field
+										name='confirmPassword'
+										validate={(value) => {
+											setConfirmPasswordError(errors.confirmPassword);
+											return validateConfirmPassword(value);
+										}}
+										value={values}>
+										{({ field }) => (
+											<Input.Password
+												{...field}
+												type='password'
+												name='confirmPassword'
+												autoComplete='off'
+												iconRender={(visible) =>
+													visible ? (
+														<img
+															src={open_eye}
+															alt='eye'
+														/>
+													) : (
+														<img
+															src={closed_eye}
+															alt='eye'
+														/>
+													)
+												}
+												className={`${styles.input} ${
+													errors.confirmPassword?.error && touched.confirmPassword
+														? styles.invalid
+														: ''
+												} ${
+													errors.confirmPassword?.success && touched.confirmPassword
+														? styles.success
+														: ''
+												}`}
+												// className={`${styles.input} ${
+												// 	errors.confirmPassword && touched.confirmPassword ? styles.invalid : ''
+												// } `}
+												placeholder='&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;'
+											/>
+										)}
+									</Field>
+									<div className={styles.error_message_wrapper}>
+										{console.log(errors)}
+										{errors.confirmPassword && touched.confirmPassword && (
+											// {errors.confirmPassword?.error && touched.confirmPassword && (
 											<div className={`${styles.error} ${styles.error_big_size}`}>
 												<div className={styles.img_wrapper}>
-													<img
-														className={styles.img_er}
-														style={{
-															width: '24px',
-															height: '24px',
-															marginRight: '8px',
-														}}
-														src={error}
-														alt='error'
-													/>
-													{t('textSignUp.error.mailIsAlreadyInUse')}
-												</div>
-											</div>
-										)}
-										{/* other error messages ================================= */}
-										{errors.email && touched.email && (
-											<div className={styles.error}>
-												<div className={`${styles.error} ${styles.error_big_size}`}>
 													<img
 														className={styles.img_er}
 														style={{ width: '24px', height: '24px', marginRight: '8px' }}
 														src={error}
 														alt='error'
 													/>
-													{errors.email}
+													{/* {errors.confirmPassword.error} */}
+													{errors.confirmPassword}
 												</div>
 											</div>
 										)}
+										{/* // {errors.confirmPassword?.success && touched.confirmPassword && (
+										// 	<div className={styles.success}>
+										// 		<div className={styles.img_wrapper}>
+										// 			<img
+										// 				className={styles.img_success}
+										// 				style={{ width: '24px', height: '24px', marginRight: '8px' }}
+										// 				src={success}
+										// 				alt='success'
+										// 			/>
+										// 			{errors.confirmPassword.success}
+										// 		</div>
+										// 	</div>
+										// )} */}
 									</div>
 								</div>
+							</ConfigProvider>
 
-								{/* input password------------------------------------------------ */}
-
-								<ConfigProvider
-									theme={{
-										token: {
-											colorTextPlaceholder: `${errors.password && touched.password && '#B3261E'}`,
-											colorText: `${errors.password && touched.password && '#B3261E'}`,
-										},
-									}}>
-									<div className={styles.inputWrapper}>
-										<label
-											htmlFor='password'
-											className={styles.label}>
-											{t('textSignUp.password')}
-										</label>
-										<Field
-											name='password'
-											validate={(value) => validatePassword(value)}
-											autoComplete='off'>
-											{({ field }) => (
-												<Input.Password
-													{...field}
-													type='password'
-													name='password'
-													autoComplete='off'
-													iconRender={(visible) =>
-														visible ? (
-															<img
-																src={open_eye}
-																alt='eye'
-															/>
-														) : (
-															<img
-																src={closed_eye}
-																alt='eye'
-															/>
-														)
-													}
-													placeholder='&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;'
-													style={{ color: errors.password && '#a7a7b2' }}
-													className={`${styles.input} ${
-														errors.password && touched.password ? styles.invalid : ''
-													} ${
-														errors.confirmPassword?.success && touched.confirmPassword
-															? styles.success
-															: ''
-													}`}
-												/>
-											)}
-										</Field>
-
-										<div className={styles.error_message_wrapper}>
-											{errors.password && touched.password && (
-												<ul>
-													{validWarnings.map((msg, i) => (
-														<li
-															className={`${styles.error} ${
-																msg.isWarning ? styles.input_success : ''
-															}`}
-															key={i}>
-															<div className={styles.img_wrapper}>
-																<img
-																	className={styles.img_er}
-																	style={{ width: '16px', height: '16px', marginRight: '4px' }}
-																	src={!msg.isWarning ? error : success}
-																	alt='error'
-																/>
-																{msg.message}
-															</div>
-														</li>
-													))}
-												</ul>
-											)}
-										</div>
-									</div>
-								</ConfigProvider>
-
-								{/* input passwordConfirm------------------------------------------------------------ */}
-
-								<ConfigProvider
-									theme={{
-										token: {
-											colorTextPlaceholder: `${
-												errors.confirmPassword && touched.confirmPassword && '#B3261E'
-											}`,
-											colorText: '#0D101D',
-											// `${
-											// 	(confirmPasswordError?.error && '#228326') ||
-											// 	(confirmPasswordError?.access && '#B3261E') ||
-											// 	(confirmPasswordError?.access && confirmPasswordError?.error && '#0D101D')
-											// }`,
-										},
-									}}>
-									<div className={styles.inputWrapper}>
-										<label
-											htmlFor='confirmPassword'
-											className={styles.label}>
-											{t('textSignUp.confirmPassword')}
-										</label>
-										<Field
-											name='confirmPassword'
-											validate={(value) => {
-												setConfirmPasswordError(errors.confirmPassword);
-												return validateConfirmPassword(value);
-											}}
-											value={values}>
-											{({ field }) => (
-												<Input.Password
-													{...field}
-													type='password'
-													name='confirmPassword'
-													autoComplete='off'
-													iconRender={(visible) =>
-														visible ? (
-															<img
-																src={open_eye}
-																alt='eye'
-															/>
-														) : (
-															<img
-																src={closed_eye}
-																alt='eye'
-															/>
-														)
-													}
-													// className={`${styles.input} ${
-													// 	errors.confirmPassword?.error && touched.confirmPassword
-													// 		? styles.invalid
-													// 		: ''
-													// } ${
-													// 	errors.confirmPassword?.success && touched.confirmPassword
-													// 		? styles.success
-													// 		: ''
-													// }`}
-													className={`${styles.input} ${
-														errors.confirmPassword && touched.confirmPassword ? styles.invalid : ''
-													} `}
-													placeholder='&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;'
-												/>
-											)}
-										</Field>
-										<div className={styles.error_message_wrapper}>
-											{console.log(errors)}
-											{/* {errors.confirmPassword?.error && touched.confirmPassword && ( */}
-											{errors.confirmPassword && touched.confirmPassword && (
-												<div className={`${styles.error} ${styles.error_big_size}`}>
-													<div className={styles.img_wrapper}>
-														<img
-															className={styles.img_er}
-															style={{ width: '24px', height: '24px', marginRight: '8px' }}
-															src={error}
-															alt='error'
-														/>
-														{/* {errors.confirmPassword.error} */}
-														{errors.confirmPassword}
-													</div>
-												</div>
-											)}
-											{/* {errors.confirmPassword?.success && touched.confirmPassword && (
-												<div className={styles.success}>
-													<div className={styles.img_wrapper}>
-														<img
-															className={styles.img_success}
-															style={{ width: '24px', height: '24px', marginRight: '8px' }}
-															src={success}
-															alt='success'
-														/>
-														{errors.confirmPassword.success}
-													</div>
-												</div>
-											)} */}
-										</div>
-									</div>
-								</ConfigProvider>
-
-								{/* checkbox ------------------------------------------ */}
-								<label
-									style={{ dispay: 'block' }}
-									className={styles.checkbox_label}>
-									<Field
-										type='checkbox'
-										name='checked'
-										validate={(value) => validateCheckBox(value, t)}
-										checked={values.checked}>
-										{({ field }) => (
-											<Checkbox
-												{...field}
-												checked={values.checked}
-												className={styles.checkbox}
-											/>
-										)}
-									</Field>
-									<span className={styles.shecked_text}>
-										{t('textSignUp.agree')}{' '}
-										<Link
-											to='/'
-											className={styles.link}>
-											The Terms and Conditions
-										</Link>
-									</span>
-								</label>
-								{/* button submit ----------------------- */}
-								<CustomButton
-									htmlType='submit'
-									type='primary'
-									isDisable={!isValid || !dirty || isSubmitting}>
-									<span className={styles.btn_submit_text}>{t('textSignUp.signUp')}</span>
-								</CustomButton>
-							</Form>
-						</ConfigProvider>
+							{/* checkbox ------------------------------------------ */}
+							<label
+								style={{ dispay: 'block' }}
+								className={styles.checkbox_label}>
+								<Field
+									type='checkbox'
+									name='checked'
+									validate={(value) => validateCheckBox(value, t)}
+									checked={values.checked}>
+									{({ field }) => (
+										<Checkbox
+											{...field}
+											checked={values.checked}
+											className={styles.checkbox}
+										/>
+									)}
+								</Field>
+								<span className={styles.shecked_text}>
+									{t('textSignUp.agree')}{' '}
+									<Link
+										to='/'
+										className={styles.link}>
+										The Terms and Conditions
+									</Link>
+								</span>
+							</label>
+							{/* button submit ----------------------- */}
+							<CustomButton
+								htmlType='submit'
+								type='primary'
+								isDisable={!isValid || !dirty || isSubmitting}>
+								{console.log(!isValid)}
+								<span className={styles.btn_submit_text}>{t('textSignUp.signUp')}</span>
+							</CustomButton>
+						</Form>
 					)}
 				</Formik>
 				<span className={styles.bottomLinkWrapper}>
