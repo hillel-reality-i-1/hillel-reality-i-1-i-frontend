@@ -110,21 +110,25 @@ export const useValidation = () => {
 
 	const validateConfirmPassword = (value) => {
 		let error = '';
-		let success = '';
+		// let success = '';
+		// const err = { error: '', success: '' };
 		if (!value) {
 			error = t('textSignUp.error.required');
 		} else if (value !== password) {
 			error = t('textSignUp.error.coincidence');
-		} else {
-			success = t('textSignUp.success.greatPassword');
-			error = '';
 		}
-		console.log(error, success);
+		// else {
+		// 	err.success = t('textSignUp.success.greatPassword');
+		// 	err.error = '';
+		// }
+		// console.log(err);
+
+		// return err;
 
 		// if (error) {
 		// 	return { error: error };
 		// } else if (success) {
-		// 	return { success: success };
+		// 	return { success: success, isValide: true };
 		// }
 		return error;
 	};
@@ -191,7 +195,7 @@ export const useValidation = () => {
 			return (error = t('textSignUp.error.otherValidFullName'));
 		}
 
-		return { error };
+		return error;
 	};
 
 	return {
