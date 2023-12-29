@@ -8,8 +8,7 @@ export const URL_CONFIRM_EMAIL = '/api/v1/accounts/confirm-email/';
 export const URL_SEND_VERIFICATION_CODE = '/api/v1/auth/send-verification-code/';
 export const URL_CHECK_VERIFICATION_CODE = '/api/v1/auth/check-verification-code/';
 export const API_URL_SIGN_IN = 'http://195.189.226.99/api/v1/auth/login/';
-export const URL_PASSWORD_RESET_CONFIRM =
-	'http://195.189.226.99/api/v1/auth/password/reset/confirm/';
+export const URL_PASSWORD_RESET_CONFIRM = 'http://195.189.226.99/api/v1/auth/password/reset/confirm/';
 export const URL_PASSWORD_RESET = 'http://195.189.226.99/api/v1/auth/password/reset/';
 export const URL_LOGIN = 'http://195.189.226.99/api/v1/auth/login/';
 export const URL_USER_LIST = 'http://195.189.226.99/api/v1/users/user_list/';

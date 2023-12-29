@@ -3,7 +3,7 @@ import axios from 'axios';
 import { URL_PASSWORD_RESET_CONFIRM } from "../config/API_url";
 
 const resetPasswordConfirm = async (newPassword1, newPassword2, id, token) => {
-    const url = `${URL_PASSWORD_RESET_CONFIRM}${id}/${token}/`;
+    const url = `${URL_PASSWORD_RESET_CONFIRM}`;
 
     const data = {
         new_password1: newPassword1,
@@ -12,13 +12,9 @@ const resetPasswordConfirm = async (newPassword1, newPassword2, id, token) => {
         token: token,
     };
 
-    try {
-        const response = await axios.post(url, data);
+    const response = await axios.post(url, data);
 
-        console.log('Password reset successful:', response.data);
-    } catch (error) {
-        console.error('Password reset failed:', error.message);
-    }
+    return response
 };
 
 export default resetPasswordConfirm;

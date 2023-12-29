@@ -75,7 +75,11 @@ export default function CreateNewPassword() {
                         }}
                         onSubmit={() => {
                             resetPasswordConfirm(passwordValue, confirmPasswordValue, id, token)
-                            navigate(isButtonActive ? '/PasswordUpdated' : null);
+                                .then(response => {
+                                    if (response.status === 200) {
+                                        navigate(isButtonActive ? '/PasswordUpdated' : null);
+                                    }
+                                })
                         }}
                     >
                         {() => (
