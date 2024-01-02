@@ -3,8 +3,6 @@ import styles from './LatestActivityLayout.module.scss';
 import LatestActivityTabs from '../LatestActivityTabs/LatestActivityTabs';
 import { Button, ConfigProvider } from 'antd';
 
-// import CustomButton from '../../CustomButton/CustomButton';
-
 const LatestActivityLayout = () => {
 	return (
 		<div className={styles.activity_wrapper}>
@@ -14,13 +12,7 @@ const LatestActivityLayout = () => {
 					theme={{
 						token: {
 							colorBgContainerDisabled: '#caccd1',
-							// colorBorder: 'none',
 							colorTextDisabled: '#FDFEFF',
-							// colorPrimaryHover: '#3989EC',
-							// colorPrimary: '#126FE1',
-							// paddingBlock: '14px 16px',
-							// fontSize: '18px',
-							// colorPrimary: `${type === 'primary' ? '#ffffff' : '#126FE1'}`,
 						},
 						components: {
 							// Button: { paddingBlock: '14px 16px' },

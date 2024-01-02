@@ -131,7 +131,6 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 										name='email'
 										validate={(values) => {
 											setEmailValue(values);
-											// setEmailChanged(true); //Set emailChanged state to true when email changes
 											return validateEmail(values);
 										}}>
 										{({ field }) => (
@@ -270,12 +269,11 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 											errors.confirmPassword ? touched.confirmPassword && '#B3261E' : '#228326'
 										}`,
 										// colorText: '#0D101D',
-
-										colorText: `${
-											(confirmPasswordError?.error && '#228326') ||
-											(confirmPasswordError?.access && '#B3261E') ||
-											(!confirmPasswordError?.access && !confirmPasswordError?.error && '#0D101D')
-										}`,
+										// colorText: `${
+										// 	(confirmPasswordError?.error && '#228326') ||
+										// 	(confirmPasswordError?.access && '#B3261E') ||
+										// 	(!confirmPasswordError?.access && !confirmPasswordError?.error && '#0D101D')
+										// }`,
 									},
 								}}>
 								<div className={styles.inputWrapper}>

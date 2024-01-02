@@ -55,6 +55,7 @@ const initialState = {
 	user: initialUserData,
 	profile: null,
 	status: 'loading',
+	error: null,
 };
 
 const authSlice = createSlice({
@@ -66,41 +67,47 @@ const authSlice = createSlice({
 		builder.addCase(fetchRegisterEmail.pending, (state) => {
 			state.status = 'loading';
 			state.user = null;
+			state.error = null;
 		});
 		builder.addCase(fetchRegisterEmail.fulfilled, (state, action) => {
 			state.status = 'loaded';
 			state.user = action.payload;
 		});
-		builder.addCase(fetchRegisterEmail.rejected, (state) => {
+		builder.addCase(fetchRegisterEmail.rejected, (state, action) => {
 			state.status = 'error';
 			state.user = null;
+			state.error = action.payload;
 		});
 		// updateName=========================//
 		builder.addCase(fetchUpdateName.pending, (state) => {
 			state.status = 'loading';
 			state.user = null;
+			state.error = null;
 		});
 		builder.addCase(fetchUpdateName.fulfilled, (state, action) => {
 			state.status = 'loaded';
 			state.user = action.payload;
 		});
-		builder.addCase(fetchUpdateName.rejected, (state) => {
+		builder.addCase(fetchUpdateName.rejected, (state, action) => {
 			state.status = 'error';
 			state.user = null;
+			state.error = action.payload;
 		});
 
 		// addDataProfile phone country city=========================//
 		builder.addCase(fetchAddDataProfile.pending, (state) => {
 			state.status = 'loading';
 			state.profile = null;
+			state.error = null;
 		});
 		builder.addCase(fetchAddDataProfile.fulfilled, (state, action) => {
 			state.status = 'loaded';
 			state.profile = action.payload;
 		});
-		builder.addCase(fetchAddDataProfile.rejected, (state) => {
+		builder.addCase(fetchAddDataProfile.rejected, (state, action) => {
 			state.status = 'error';
 			state.profile = null;
+			state.error = action.payload;
 		});
 	},
 });

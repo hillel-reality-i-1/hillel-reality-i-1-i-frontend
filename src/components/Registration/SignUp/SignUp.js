@@ -5,9 +5,10 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 
 import { useTranslation } from 'react-i18next';
 import '../../../translations/i18n';
-import { Button, Modal } from 'antd';
+import { Button, ConfigProvider, Modal } from 'antd';
 import google from '../../../assets/img/icons/icons-SignUp/google.svg';
 import sign_up1_logo from '../../../assets/img/icons/logo/sign_up1_logo.svg';
+import arrow_back from '../../../assets/img/icons/icons-SignUp/arrow_back.svg';
 import CustomButton from '../../CustomButton/CustomButton';
 import GoogleSignIn from '../../SignIn/googleSignIn/GoogleSignIn';
 
@@ -67,17 +68,46 @@ const SignUp = ({
 	toggleSignUpModal,
 	toggleSignUpFormModal,
 	toggleSignInModal,
+	currentPage,
 }) => {
 	const { t } = useTranslation();
 
+	const buttonStyles =
+		currentPage === 'verifyInfo' ? 'btn_modal_open_varify_info' : 'btn_modal_open';
+
+	const buttonChildren =
+		currentPage === 'verifyInfo' ? (
+			<div className={styles.button_children}>
+				<img
+					src={arrow_back}
+					alt='back'
+					style={{ width: '24px', height: '24px' }}
+				/>
+				<span className={styles.btn_back}>{t('textSignUp.returnToRegistration')}</span>{' '}
+			</div>
+		) : (
+			t('textSignUp.signUp')
+		);
+
+	const buttonHover = currentPage === 'verifyInfo' ? 'rgba(255, 0, 0, 0)' : '#3989EC';
+	const buttonType = currentPage === 'verifyInfo' ? 'primary' : '';
+
 	return (
 		<>
-			<Button
-				type='primary'
-				className={styles.btn_modal_open}
-				onClick={toggleSignUpModal}>
-				{t('textSignUp.signUp')}
-			</Button>
+			<ConfigProvider
+				theme={{
+					token: {
+						colorPrimaryHover: buttonHover,
+					},
+				}}>
+				<Button
+					type={buttonType}
+					block={true}
+					className={styles[buttonStyles]}
+					onClick={toggleSignUpModal}>
+					{buttonChildren}
+				</Button>
+			</ConfigProvider>
 
 			<Modal
 				open={signUpModalOpen}

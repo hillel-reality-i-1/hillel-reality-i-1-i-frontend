@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import axios from '../../../config/axios/axios';
@@ -7,20 +7,19 @@ import { useTranslation } from 'react-i18next';
 import '../../../translations/i18n';
 import step_logo from '../../../assets/img/icons/logo/step_logo.svg';
 import envelope from '../../../assets/img/icons/icons-SignUp/envelope.svg';
-import arrow_back from '../../../assets/img/icons/icons-SignUp/arrow_back.svg';
-
 import CountdownTimer from '../../CountdownTimer/CountdownTimer';
 import { URL_RESEND_EMAIL } from '../../../config/API_url';
-import CustomButton from '../../CustomButton/CustomButton';
 import AuthenticationWrapper from '../../AuthenticationWrapper/AuthenticationWrapper';
 
 import styles from './VerifyInfo.module.scss';
 
 const VerifyInfo = ({ toggleSignUpModal }) => {
 	const { t } = useTranslation();
-	const navigate = useNavigate();
 	const [showButton, setShowButton] = useState(false);
 	const [timerFinished, setTimerFinished] = useState(false);
+	const location = useLocation();
+	const currentPagePath = location.pathname;
+	const currentPage = currentPagePath.split('/').pop();
 
 	const user = useSelector((state) => state.auth?.user);
 
@@ -47,10 +46,10 @@ const VerifyInfo = ({ toggleSignUpModal }) => {
 		}
 	};
 
-	const openModalSignUp = () => {
-		console.log(toggleSignUpModal);
-		toggleSignUpModal();
-	};
+	// const openModalSignUp = () => {
+	// 	console.log(toggleSignUpModal);
+	// 	toggleSignUpModal();
+	// };
 
 	return (
 		<>
@@ -92,22 +91,7 @@ const VerifyInfo = ({ toggleSignUpModal }) => {
 							{t('textSignUp.buttonSandAgain')}
 						</button>
 					)}
-
-					<CustomButton
-						htmlType='button'
-						type='secondary'
-						isDisable={false}
-						onClick={openModalSignUp}>
-						<img
-							src={arrow_back}
-							alt='back'
-						/>
-						<span className={styles.btn_back}>{t('textSignUp.returnToRegistration')}</span>
-					</CustomButton>
-
-					{/* <div style={{ display: 'none' }}> */}
-					{/* <AuthenticationWrapper /> */}
-					{/* </div> */}
+					<AuthenticationWrapper currentPage={currentPage} />
 				</div>
 
 				<aside className={styles.aside}>

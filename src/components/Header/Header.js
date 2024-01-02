@@ -55,12 +55,6 @@ export default function Header() {
 						<div style={{ display: 'flex', alignItems: 'center' }}>
 							<AuthenticationWrapper />
 						</div>
-						{/*
-						<a
-							href='/forgotYourPasswordForm'
-							className={styles.button_link}>
-							Recovery password
-						</a> */}
 					</div>
 				</nav>
 			</header>

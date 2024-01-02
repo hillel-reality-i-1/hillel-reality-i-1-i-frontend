@@ -1,11 +1,5 @@
 @import '../../styles/constants.scss';
 
-// :global {
-// 	.ant-btn.ant-btn-lg {
-// 		font-size: 18px;
-// 	}
-// }
-
 .btn {
 	font-family: $font-ns-medium;
 	width: 100%;
@@ -17,13 +11,6 @@
 	align-items: center;
 	justify-content: center;
 	line-height: 160%;
-
-	// 	font-size: 18px;
-	// 	border-radius: 48px;
-	// 	display: flex;
-	// 	padding: 14px;
-	// 	align-items: center;
-	// 	justify-content: center;
 }
 
 .buttonSecondary {

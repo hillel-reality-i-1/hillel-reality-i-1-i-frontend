@@ -17,7 +17,12 @@ import styles from './signIn.module.scss';
 import { useAuthModal } from '../AuthModalContext/AuthModalContext';
 import SignUp from '../Registration/SignUp/SignUp';
 
-export default function SignIn({ signInModalOpen, toggleSignInModal, toggleSignUpModal }) {
+export default function SignIn({
+	currentPage,
+	signInModalOpen,
+	toggleSignInModal,
+	toggleSignUpModal,
+}) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [loginError, setLoginError] = useState(null);
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -76,12 +81,14 @@ export default function SignIn({ signInModalOpen, toggleSignInModal, toggleSignU
 		onSubmit: handleSignIn,
 	});
 
+	const buttonStyles = currentPage === 'verifyInfo' ? 'btn_modal_open_varify_info' : 'signInButton';
+
 	return (
 		<>
 			{/* <p>signInModalOpen: {signInModalOpen ? 'Open' : 'Closed'}</p> */}
 			{!isAuthenticated && (
 				<p
-					className={styles.signInButton}
+					className={styles[buttonStyles]}
 					onClick={toggleSignInModal}>
 					Увійти
 				</p>

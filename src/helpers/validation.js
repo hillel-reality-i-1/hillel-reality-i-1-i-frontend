@@ -160,11 +160,6 @@ export const useValidation = () => {
 		if (!value) {
 			error = t('textSignUp.error.required');
 		}
-		// if (value.length < 2 || value.length > 32) {
-		// 	return (error = t('textSignUp.error.lengthUserName'));
-		// } else if (!/^[a-zA-Z_][a-zA-Z0-9_-]*$/u.test(value)) {
-		// 	return (error = t('textSignUp.error.otherValidUserName'));
-		// }
 		if (value.length < 2 || value.length > 32) {
 			return (error = t('textSignUp.error.lengthUserName'));
 		} else if (/^\d/.test(value)) {

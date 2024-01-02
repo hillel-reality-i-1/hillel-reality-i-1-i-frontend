@@ -2,7 +2,6 @@ import React from 'react';
 
 import { ConfigProvider, Tabs } from 'antd';
 import LatestActivityPosts from '../LatestActivityPosts/LatestActivityPosts';
-// import styles from './LatestActivityTabs.module.scss';
 import LatestActivityComments from '../LatestActivityComments/LatestActivityComments';
 import LatestActivityReactions from '../LatestActivityReactions/LatestActivityReactions';
 import LatestActivitySaved from '../LatestActivitySaved/LatestActivitySaved';

@@ -9,7 +9,7 @@ import SignUpForm from '../Registration/SignUpForm/SignUpForm';
 
 import style from './AuthenticationWrapper.module.scss';
 
-export default function AuthenticationWrapper() {
+export default function AuthenticationWrapper({ currentPage }) {
 	const authToken = useSelector((state) => state.signIn.authTokenUHelp);
 	const googleAuth = useSelector((state) => state.signIn.googleAuthTokenUHelp);
 
@@ -36,6 +36,7 @@ export default function AuthenticationWrapper() {
 			) : (
 				<div className={style.button_authorization_wrapper}>
 					<SignIn
+						currentPage={currentPage}
 						signInModalOpen={signInModalOpen}
 						toggleSignInModal={toggleSignInModal}
 						toggleSignUpModal={toggleSignUpModal}
@@ -45,6 +46,7 @@ export default function AuthenticationWrapper() {
 						toggleSignUpModal={toggleSignUpModal}
 						toggleSignInModal={toggleSignInModal}
 						toggleSignUpFormModal={toggleSignUpFormModal}
+						currentPage={currentPage}
 					/>
 				</div>
 			)}

@@ -85,7 +85,6 @@
 	border-radius: 48px;
 	padding: 14px;
 	justify-content: center;
-	// color: #03091c;
 	line-height: 160%;
 
 	&:hover {
@@ -147,4 +146,44 @@
 
 .button_pr_inner {
 	color: $color-gray;
+}
+
+.btn_modal_open_varify_info {
+	width: 100%;
+	min-width: 410px;
+	height: 56px;
+	max-height: 56px;
+	display: flex;
+	justify-content: center;
+	font-family: $font-ns-medium;
+	font-size: 18px;
+	line-height: 160%;
+	background-color: rgba(255, 0, 0, 0);
+	color: $color-primary30base;
+	border-radius: 48px;
+	border: 1px solid $color-primary30base;
+	padding: 14px 16px;
+
+	&:hover {
+		background-color: rgba(255, 0, 0, 0);
+		border: 1px solid $color-primary20;
+	}
+
+	.button_children {
+		display: flex;
+		align-items: center;
+
+		.btn_back {
+			margin-left: 8px;
+			font-family: $font-ns-medium;
+			font-size: 18px;
+			color: $color-primary30base;
+
+			line-height: 160%;
+
+			&:hover {
+				color: $color-primary20;
+			}
+		}
+	}
 }

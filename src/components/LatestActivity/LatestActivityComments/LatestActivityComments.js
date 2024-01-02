@@ -13,13 +13,6 @@ const LatestActivityComments = () => {
 				theme={{
 					token: {
 						// colorBgContainerDisabled: '#caccd1',
-						// colorBorder: 'none',
-						// colorTextDisabled: '#FDFEFF',
-						// colorPrimaryHover: '#3989EC',
-						// colorPrimary: '#126FE1',
-						// paddingBlock: '14px 16px',
-						// fontSize: '18px',
-						// colorPrimary: `${type === 'primary' ? '#ffffff' : '#126FE1'}`,
 					},
 				}}>
 				<Button

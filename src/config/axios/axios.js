@@ -4,10 +4,6 @@ const instance = axios.create({
 	baseURL: ' http://dmytromigirov.space',
 });
 
-// const instance = axios.create({
-// 	baseURL: 'http://0.0.0.0:8000',
-// });
-
 instance.interceptors.request.use((config) => {
 	const token = window.localStorage.getItem('authTokenUHelp');
 	if (token) {
