@@ -1,7 +1,6 @@
-import { useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import {useState } from 'react';
+import { useSelector } from 'react-redux';
 
-// import { setAuthToken, clearAuthToken } from '../../store/slices/signInSlice';
 import SignIn from '../SignIn/SignIn';
 import AccountHeader from '../accountHeader/AccountHeader';
 import SignUp from '../Registration/SignUp/SignUp';
@@ -17,7 +16,8 @@ export default function AuthenticationWrapper({ currentPage }) {
 	const [signUpModalOpen, setSignUpModalOpen] = useState(false);
 	const [signUpFormModalOpen, setSignUpFormModalOpen] = useState(false);
 
-	const toggleSignInModal = () => {
+	const toggleSignInModal = (event) => {
+		event.preventDefault();
 		setSignInModalOpen(!signInModalOpen);
 	};
 

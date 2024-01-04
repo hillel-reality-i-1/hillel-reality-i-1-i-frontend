@@ -1,7 +1,7 @@
 import { Input } from 'antd';
+import { Link } from 'react-router-dom';
 
 import errorIcon from '../../../assets/img/icons/icons-signIn/error-input-icon.png';
-import { Link } from 'react-router-dom';
 
 const SignInForm = ({ formik, loginError, styles }) => (
 	<form

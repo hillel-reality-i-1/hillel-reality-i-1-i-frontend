@@ -1,0 +1,56 @@
+.crop {
+  padding: 24px 40px 20px 0;
+}
+.crop__container {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 80px); 
+  // overflow: hidden;
+  height: 240px;
+  width: 424px;
+}
+
+.controls {
+
+}
+.cropped__img {
+  width: 100px;
+}
+.controls label {
+  margin-right: 10px;
+}
+
+.controls input {
+  width: 100%;
+}
+
+.button_container {
+  margin-top: 10px;
+}
+
+.custom_file_input {
+  position: relative;
+  display: inline-block;
+}
+
+.custom_file_input input[type="file"] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.custom_file_input label {
+  display: inline-block;
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.custom_file_input label:hover {
+  background-color: #45a049;
+}

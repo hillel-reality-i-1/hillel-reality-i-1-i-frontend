@@ -12,24 +12,21 @@ import settingsIcon  from '../../assets/img/icons/drop-down/settings-icon.svg';
 import userIcon  from '../../assets/img/icons/drop-down/user-icon.svg';
 import signOut from '../../assets/img/icons/drop-down/sign-out-icon.svg';
 import CustomModal from '../modals/CustomModal';
+import SignOutModalContent from './signOutContent/SignOutModalContent';
 
 import styles from './accountHeader.module.scss'
-import SignOutModalContent from './signOutContent/SignOutModalContent';
 
 export default function AccountHeader() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const openModal = () => setIsModalOpen(true); 
-  const closeModal = () => setIsModalOpen(false);
-
-  const toggleModal = () => {
-    setIsModalOpen((prevIsModalOpen) => !prevIsModalOpen);
-    console.log(isModalOpen ? "Open" : "Close");
-  };
-
+  
   const dispatch = useDispatch();
-
+  
   const navigate = useNavigate();
+  
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen)
+  };
 
   const delAuthToken = () => {
 
@@ -40,9 +37,9 @@ export default function AccountHeader() {
   return (
     <div className={styles.account}> 
 
-        <CustomModal isOpen={isModalOpen} onClose={closeModal}>
+        <CustomModal isOpen={isModalOpen} >
 
-          <SignOutModalContent delAuthToken={delAuthToken} />
+          <SignOutModalContent delAuthToken={delAuthToken} toggleModal={toggleModal} />
 
         </CustomModal>
 
@@ -64,17 +61,18 @@ export default function AccountHeader() {
             menu={{
               items: [...items, {
                 label: 
-                      <a className={styles.dropdown__item} onClick={openModal}>
+                      <a className={styles.dropdown__item} onClick={toggleModal}>
                         <img src={signOut} />Sign Out 
                       </a>,
                 key: '4',
               }],
             }}
-          trigger={['click']}
-        >
-            <a onClick={(e) => e.preventDefault()}>
+            placement="bottomRight"
+            trigger={['click']}
+          >
+            <a onClick={(e) => e.preventDefault()} >
               <Space>
-                <img src={dropDown}/>
+                <img   src={dropDown}/>
               </Space>
             </a>
           </Dropdown>

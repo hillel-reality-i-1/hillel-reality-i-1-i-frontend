@@ -45,6 +45,10 @@ const router = createBrowserRouter([
 		element: <StepLayout />,
 	},
 	{
+		path: '/createUnAccount',
+		element: <StepLayout />,
+	},
+	{
 		path: '/forgotYourPasswordForm',
 		element: <ForgotYourPasswordForm />,
 	},

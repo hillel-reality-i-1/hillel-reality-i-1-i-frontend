@@ -17,7 +17,6 @@
   color: $color-primary30base;
   @include customFontStyles(18px, normal, 500);
   font-family: $semiBold;
-  // text-transform: uppercase;
   white-space: nowrap;
   line-height: 160%;
   letter-spacing: 0.18px;
@@ -25,9 +24,11 @@
   transition: color 0.3s ease-in-out;
 }
 .signInButton:hover {
+  transition: color 0.3s ease-in-out;
   color: $color-primary20;
 }
 .signInButtont:active {
+  transition: color 0.3s ease-in-out;
   color: $color-primary40;
 }
 .shadow {
@@ -102,6 +103,16 @@
     font-family: $medium;
     @include customFontStyles(18px, normal, 500);
     line-height: 160%;
+    cursor: pointer;
+    transition:  0.3s ease-in-out;
+  }
+  &__google:hover {
+    border-color: #A7A7B2;
+    transition:  0.3s ease-in-out;
+  }
+  &__google:active {
+    border-color: #47474F;
+    transition:  0.3s ease-in-out;
   }
   &__separator {
     margin: 24px 0;
@@ -182,9 +193,18 @@
     font-family: $medium;
     @include fontSize16Normal(500);
     line-height: 160%;
+    transition: 0.3s ease-in-out;
     @media (max-width: 435px) {
       @include customFontStyles(14px, normal, 500);
     }
+  }
+  &__forgotPassword:hover {
+    color: #3989EC;
+    transition: 0.3s ease-in-out;
+  }
+  &__forgotPassword:active {
+    color: #094DA0;
+    transition: 0.3s ease-in-out;
   }
   &__submit {
     width: 100%;
@@ -253,8 +273,18 @@
   &__signUp {
     color: #126fe1;
     font-family: $medium;
+    cursor: pointer;
     @include customFontStyles(18px, normal, 500);
     line-height: 160%;
+    transition:  0.3s ease-in-out;
+  }
+  &__signUp:hover {
+    transition:  0.3s ease-in-out;
+    color: #3989EC;
+  }
+  &__signUp:active {
+    transition:  0.3s ease-in-out;
+    color: #094DA0;
   }
   @media (max-width: 435px) {
     &__text {

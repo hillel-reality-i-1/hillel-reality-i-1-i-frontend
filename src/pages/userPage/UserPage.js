@@ -1,11 +1,11 @@
-import { Tabs } from 'antd';
-
-import styles from './userPage.module.scss';
-import AboutMe from '../../components/AboutMe/AboutMe';
 import UserHead from '../../components/UserHead/UserHead';
+import AboutMe from '../../components/AboutMe/AboutMe';
 import LatestActivityLayout from '../../components/LatestActivity/LatestActivityLayout/LatestActivityLayout';
 
+import styles from './userPage.module.scss';
+
 export default function UserPage() {
+	
 	return (
 		<div className={styles.container}>
 			<div className={styles.user}>

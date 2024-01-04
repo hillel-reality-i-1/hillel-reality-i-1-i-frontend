@@ -218,7 +218,7 @@ export const validateSignInForm = (values) => {
 
 	if (!values.password) {
 		errors.password = "Обов'язкове поле";
-	} else if (values.password.length < 3) {
+	} else if (values.password.length < 8) {
 		errors.password = 'Пароль повинен містити не менше 8 символів.';
 	}
 

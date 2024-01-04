@@ -3,6 +3,7 @@ import { useFormik } from 'formik';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { useNavigate } from 'react-router-dom';
 
 import { ReactComponent as CloseIcon } from '../../assets/img/icons/icons-signIn/close-signIn-icon.svg';
 import miniLogo from '../../assets/img/icons/icons-signIn/mini-logo-signIn.png';
@@ -14,8 +15,6 @@ import { API_URL_SIGN_IN } from '../../config/API_url';
 import { clearAuthToken, setAuthToken, setGoogleAuthToken } from '../../store/slices/signInSlice';
 
 import styles from './signIn.module.scss';
-import { useAuthModal } from '../AuthModalContext/AuthModalContext';
-import SignUp from '../Registration/SignUp/SignUp';
 
 export default function SignIn({
 	currentPage,
@@ -27,6 +26,8 @@ export default function SignIn({
 	const [loginError, setLoginError] = useState(null);
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+	const navigate = useNavigate();
+
 	const dispatch = useDispatch();
 	const authToken = useSelector((state) => state.signIn.authTokenUHelp);
 
@@ -35,12 +36,13 @@ export default function SignIn({
 	};
 	const changeGoogleAuthToken = (authToken) => {
 		dispatch(setGoogleAuthToken(authToken));
+		socialLogin(authToken)
 		toggleSignInModal();
 		setLoginError(null);
 		setIsAuthenticated(true);
 	};
 	const delAuthToken = () => {
-		// Dispatch the action with a new token
+
 		dispatch(clearAuthToken());
 	};
 
@@ -58,9 +60,8 @@ export default function SignIn({
 	};
 	const handleSignIn = async (values) => {
 		try {
-			const response = await axios.post(' http://dmytromigirov.space/api/v1/auth/login/', values);
+			const response = await axios.post(API_URL_SIGN_IN, values);
 			const authToken = response.data.key;
-			// localStorage.setItem('authTokenUHelp', authToken);
 			console.log('Sign-in successful:', response.data);
 			changeAuthToken(authToken);
 			closeModal();
@@ -83,15 +84,29 @@ export default function SignIn({
 
 	const buttonStyles = currentPage === 'verifyInfo' ? 'btn_modal_open_varify_info' : 'signInButton';
 
+
+	const socialLogin = async (google_token) => {
+		try {
+		  const formData = new FormData();
+		  formData.append('access_token', google_token);
+		  const response = await axios.post('http://dmytromigirov.space/api/v1/social-login/', formData);
+		  const result = response.data;
+		  dispatch(setAuthToken(result.token));
+		  navigate(result.redirect_url)
+		  console.log(result);
+		} catch (error) {
+		  console.error('Error during social login:', error.message);
+		}
+	  };
+
 	return (
 		<>
-			{/* <p>signInModalOpen: {signInModalOpen ? 'Open' : 'Closed'}</p> */}
 			{!isAuthenticated && (
-				<p
+				<a
 					className={styles[buttonStyles]}
 					onClick={toggleSignInModal}>
 					Увійти
-				</p>
+				</a>
 			)}
 
 			{signInModalOpen && (
@@ -145,7 +160,6 @@ export default function SignIn({
 					</div>
 				</div>
 			)}
-			{isOpen && <style>{'body { overflow: hidden; } .shadow { overflow: scroll; }'}</style>}
 		</>
 	);
 }

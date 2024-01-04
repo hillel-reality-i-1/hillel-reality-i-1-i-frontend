@@ -6,9 +6,6 @@ export default function CustomModal({ isOpen, onClose, children }) {
       <div className={modalStyles.modalOverlay} onClick={onClose}></div>
       <div className={modalStyles.modalContent}>
         {children}
-        {/* <button className={modalStyles.modalClose} onClick={onClose}>
-          Закрыть
-        </button> */}
       </div>
     </div>
   );
