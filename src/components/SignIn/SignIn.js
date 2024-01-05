@@ -1,7 +1,7 @@
-import React, { useState, useContext } from 'react';
+import { useState } from 'react';
 import { useFormik } from 'formik';
 import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ import GoogleSignIn from './googleSignIn/GoogleSignIn';
 import { validateSignInForm } from '../../helpers/validation';
 import SignInForm from './signInForm/SignInForm';
 import { API_URL_SIGN_IN } from '../../config/API_url';
-import { clearAuthToken, setAuthToken, setGoogleAuthToken } from '../../store/slices/signInSlice';
+import { setAuthToken, setGoogleAuthToken } from '../../store/slices/signInSlice';
 
 import styles from './signIn.module.scss';
 
@@ -22,49 +22,41 @@ export default function SignIn({
 	toggleSignInModal,
 	toggleSignUpModal,
 }) {
-	const [isOpen, setIsOpen] = useState(false);
 	const [loginError, setLoginError] = useState(null);
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 
 	const navigate = useNavigate();
 
 	const dispatch = useDispatch();
-	const authToken = useSelector((state) => state.signIn.authTokenUHelp);
 
 	const changeAuthToken = (authToken) => {
 		dispatch(setAuthToken(authToken));
 	};
+
 	const changeGoogleAuthToken = (authToken) => {
 		dispatch(setGoogleAuthToken(authToken));
-		socialLogin(authToken)
 		toggleSignInModal();
+		socialLogin(authToken)
 		setLoginError(null);
 		setIsAuthenticated(true);
 	};
-	const delAuthToken = () => {
 
-		dispatch(clearAuthToken());
-	};
-
-	const openModal = () => {
-		setIsOpen(true);
-	};
-
-	const closeModal = () => {
-		setIsOpen(false);
-	};
+	// const closeModal = () => {
+	// 	setIsOpen(false);
+	// };
 
 	const openSignUp = () => {
 		toggleSignInModal();
 		toggleSignUpModal();
 	};
+
 	const handleSignIn = async (values) => {
 		try {
 			const response = await axios.post(API_URL_SIGN_IN, values);
 			const authToken = response.data.key;
-			console.log('Sign-in successful:', response.data);
 			changeAuthToken(authToken);
-			closeModal();
+			
+			// closeModal();
 			setLoginError(null);
 			setIsAuthenticated(true);
 		} catch (error) {
@@ -84,7 +76,6 @@ export default function SignIn({
 
 	const buttonStyles = currentPage === 'verifyInfo' ? 'btn_modal_open_varify_info' : 'signInButton';
 
-
 	const socialLogin = async (google_token) => {
 		try {
 		  const formData = new FormData();
@@ -97,7 +88,7 @@ export default function SignIn({
 		} catch (error) {
 		  console.error('Error during social login:', error.message);
 		}
-	  };
+	};
 
 	return (
 		<>

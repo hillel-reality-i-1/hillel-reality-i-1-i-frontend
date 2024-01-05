@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
+
 import { ReactComponent as Plus } from "../../assets/img/icons/user-profile/Plus.svg";
 import { ReactComponent as Pen } from "../../assets/img/icons/user-profile/Pen.svg";
 import { ReactComponent as Avatar } from "../../assets/img/icons/user-profile/Avatar.svg";
@@ -15,6 +17,9 @@ import styles from "./userHead.module.scss";
 import CropPhotoModal from "./imageCrop/CropPhotoModal";
 
 export default function UserHead() {
+
+  const authToken = useSelector((state) => state.signIn.authTokenUHelp);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [isModalOpen2, setIsModalOpen2] = useState(false);
@@ -107,7 +112,7 @@ export default function UserHead() {
     fetch('http://dmytromigirov.space/api/v1/users/upload_img/', {
       method: 'POST',
       headers: {
-        'Authorization': 'Token 4e246f0e0a53105a7c401f6309d43b02f322bae0'
+        'Authorization': `Token ${authToken}`
       },
       body: formData,
     })

@@ -62,7 +62,7 @@ export default function AccountHeader() {
               items: [...items, {
                 label: 
                       <a className={styles.dropdown__item} onClick={toggleModal}>
-                        <img src={signOut} />Sign Out 
+                        <img src={signOut} />Вийти
                       </a>,
                 key: '4',
               }],

@@ -16,8 +16,7 @@ export default function AuthenticationWrapper({ currentPage }) {
 	const [signUpModalOpen, setSignUpModalOpen] = useState(false);
 	const [signUpFormModalOpen, setSignUpFormModalOpen] = useState(false);
 
-	const toggleSignInModal = (event) => {
-		event.preventDefault();
+	const toggleSignInModal = () => {
 		setSignInModalOpen(!signInModalOpen);
 	};
 

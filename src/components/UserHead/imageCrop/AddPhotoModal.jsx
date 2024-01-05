@@ -49,9 +49,9 @@ export default function AddPhotoModal({
 
       <div className={styles.modal__footer}>
         <input
-          id="fileInput"
-          type="file"
-          accept="image/*"
+          id='fileInput'
+          type='file'
+          accept='image/*'
           onChange={handleFileChange}
           style={{ display: 'none' }}
           onClick={(event) => event.target.value = null} 
