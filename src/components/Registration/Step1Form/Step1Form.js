@@ -84,7 +84,7 @@ const Step1Form = ({ onNext }) => {
 											{errors.userName}
 										</div>
 									)}
-									<span className={styles.info}>{t('textSignUp.textStep1.infoUserName')}</span>
+									{/* <span className={styles.info}>{t('textSignUp.textStep1.infoUserName')}</span> */}
 								</div>
 
 								{/* input full name ----------------------------------------------------------------------- */}

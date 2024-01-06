@@ -1,97 +1,59 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
 import '../../translations/i18n';
-
-import instagram from '../../assets/img/icons/icons-footer/instagram.svg';
-import facebook from '../../assets/img/icons/icons-footer/facebook.svg';
-import footer_logo from '../../assets/img/icons/logo/footer_logo.svg';
+import footer_logo_1 from '../../assets/img/icons/logo/footer_logo_1.svg';
+import footer_logo_2 from '../../assets/img/icons/logo/footer_logo_2.svg';
 
 import styles from './Footer.module.scss';
 
 const Footer = () => {
 	const { t } = useTranslation();
 	return (
-		<>
-			<footer className={styles.footer}>
-				<div className={styles.container}>
-					<div className={styles.footer_inner}>
-						<div className={styles.footer_col_left}>
-							<div className={styles.footer_logo}>
-								<a href='/'>
-									<img
-										src={footer_logo}
-										alt='Logo'
-									/>
-								</a>
-							</div>
-							<ul className={styles.footer_info}>
-								<li className={styles.footer_info_item}>
-									<a href='/privacyPolicy'>{t('textFooter.terms')}</a>
-								</li>
-								<li className={styles.footer_info_item}>
-									<a href='/privacyPolicy'>{t('textFooter.privacy')}</a>
-								</li>
-								<li className={styles.footer_info_item}>
-									<a href='/privacyPolicy'>{t('textFooter.help')}</a>
-								</li>
-								<li className={styles.footer_info_item}>&copy; 2023 U-Help</li>
-							</ul>
-						</div>
-						<div className={styles.footer_col_right}>
-							<div className={styles.footer_menu}>
-								<h5 className={styles.footer_title}>{t('textFooter.menu')}</h5>
-								<ul className={styles.footer_menu_nav}>
-									<li className={styles.footer_menu_nav_item}>
-										<a href='/privacyPolicy'>{t('textFooter.home')}</a>
-									</li>
-									<li className={styles.footer_menu_nav_item}>
-										<a href='/privacyPolicy'>{t('textFooter.map')}</a>
-									</li>
-									<li className={styles.footer_menu_nav_item}>
-										<a href='/privacyPolicy'>{t('textFooter.events')}</a>
-									</li>
-									<li className={styles.footer_menu_nav_item}>
-										<a href='/privacyPolicy'>{t('textFooter.faq')}</a>
-									</li>
-								</ul>
-							</div>
-							<div className={styles.footer_contacts}>
-								<div>
-									<h5 className={styles.footer_title}>{t('textFooter.contacts')}</h5>
-									<ul className={styles.footer_menu_nav}>
-										<li className={styles.footer_contacts_nav_item}>
-											<a href='/privacyPolicy'>+3800000000</a>
-										</li>
-										<li className={styles.footer_contacts_nav_item}>
-											<a href='/privacyPolicy'>uhelp@gmail.com</a>
-										</li>
-									</ul>
-								</div>
-								<ul className={styles.footer_contacts_socmedia}>
-									<li className={styles.footer_contacts_socmedia_item}>
-										<a href='/privacyPolicy'>
-											<img
-												src={instagram}
-												alt='Instagram'
-											/>
-										</a>
-									</li>
-									<li className={styles.footer_contacts_socmedia_item}>
-										<a href='/privacyPolicy'>
-											<img
-												src={facebook}
-												alt='Facebook'
-											/>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</div>
+		<footer className={styles.footer}>
+			<div className={styles.container}>
+				<div className={styles.footer_inner}>
+					<div className={styles.footer_logo_wrapper}>
+						<Link to='/'>
+							<img
+								src={footer_logo_1}
+								alt='Logo'
+							/>
+							<img
+								className={styles.footer_logo_text}
+								src={footer_logo_2}
+								alt='Logo text'
+							/>
+						</Link>
+					</div>
+					<ul className={styles.footer_menu_nav}>
+						<li className={styles.footer_menu_nav_item}>
+							<Link to='/'>{t('textFooter.home')}</Link>
+						</li>
+						<li className={styles.footer_menu_nav_item}>
+							<Link to='/privacyPolicy'>{t('textFooter.map')}</Link>
+						</li>
+						<li className={styles.footer_menu_nav_item}>
+							<Link to='/privacyPolicy'>{t('textFooter.events')}</Link>
+						</li>
+						<li className={styles.footer_menu_nav_item}>
+							<Link to='/privacyPolicy'>{t('textFooter.faq')}</Link>
+						</li>
+						<li className={styles.footer_menu_nav_item}>
+							<Link to='/privacyPolicy'>{t('textFooter.termsOfUse')}</Link>
+						</li>
+						<li className={styles.footer_menu_nav_item}>
+							<Link to='/privacyPolicy'>{t('textFooter.privacy')}</Link>
+						</li>
+					</ul>
+					<div className={styles.copyright_wrapper}>
+						<span className={styles.copyright_text}>
+							© Copyright 2024. All Rights Reserved by U-Help
+						</span>
 					</div>
 				</div>
-			</footer>
-		</>
+			</div>
+		</footer>
 	);
 };
 
