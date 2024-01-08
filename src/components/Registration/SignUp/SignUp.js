@@ -56,6 +56,9 @@ const ModalFooter = ({ toggleSignUpModal, toggleSignInModal, toggleSignUpFormMod
 				formData
 			);
 			const result = response.data;
+			localStorage.setItem('userId', result.user_id);
+			localStorage.setItem('fullName', result.full_name);
+			console.log('result', result);
 			dispatch(setAuthToken(result.token));
 			navigate(result.redirect_url);
 			// console.log(result);

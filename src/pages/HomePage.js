@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from '../config/axios/axios';
 import SearchSection from '../components/SearchSection/SearchSection';
 import Footer from '../components/Footer/Footer';
-// import MainSection from '../components/MainSection/MainSection';
+import MainSection from '../components/MainSection/MainSection';
 
 export default function HomePage() {
 	const [posts, setPosts] = useState([]);
@@ -10,7 +10,7 @@ export default function HomePage() {
 	const [page, setPage] = useState(1);
 
 	const handleSearch = (newSearchTerm) => {
-		setSearchTerm(newSearchTerm);
+		// setSearchTerm(newSearchTerm);
 		// setPage(1); //Resetting the page number when changing the search query
 	};
 
@@ -44,10 +44,10 @@ export default function HomePage() {
 	return (
 		<>
 			<SearchSection onSearch={handleSearch} />
-			{/* <MainSection
+			<MainSection
 				posts={posts}
 				onNextPage={handleNextPage}
-			/> */}
+			/>
 			<Footer />
 		</>
 	);

@@ -16,6 +16,7 @@ import CustomButton from '../../CustomButton/CustomButton';
 import { useValidation } from '../../../helpers/validation';
 
 import styles from './SignUpForm.module.scss';
+import emailValidationServer from '../../../api/emailValidationServer';
 
 const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInModal }) => {
 	const { t } = useTranslation();
@@ -47,6 +48,17 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 		validatePassword,
 		validWarnings,
 	} = useValidation();
+
+	// useEffect(() => {
+	// 	const isValid = emailValidationServer(value);
+	// }, []);
+
+	// 	const someOtherFunction = async (values) => {
+	// 		const isValid = await emailValidationServer(values);
+	// 		// setActiveButton(isValid);
+	// 		// setErrorEmail(!isValid);
+	// 		// isValid && setEmailValue(values);
+	// };
 
 	const openSignIn = () => {
 		toggleSignUpFormModal();
