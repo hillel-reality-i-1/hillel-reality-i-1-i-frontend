@@ -27,7 +27,7 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 	const [prevEmailValue, setPrevEmailValue] = useState('');
 
 	const [confirmPasswordError, setConfirmPasswordError] = useState('#0D101D');
-	console.log('confirmPasswordError', confirmPasswordError);
+	// console.log('confirmPasswordError', confirmPasswordError);
 	useEffect(() => {
 		if (status === 'error') {
 			setIsError(true);
@@ -261,7 +261,7 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 							</ConfigProvider>
 
 							{/* input passwordConfirm------------------------------------------------------------ */}
-							{console.log(confirmPasswordError?.success)}
+							{/* {console.log(confirmPasswordError?.success)} */}
 							<ConfigProvider
 								theme={{
 									token: {
@@ -325,7 +325,7 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 										)}
 									</Field>
 									<div className={styles.error_message_wrapper}>
-										{console.log(errors)}
+										{/* {console.log(errors)} */}
 										{errors.confirmPassword && touched.confirmPassword && (
 											// {errors.confirmPassword?.error && touched.confirmPassword && (
 											<div className={`${styles.error} ${styles.error_big_size}`}>
@@ -389,7 +389,7 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 								htmlType='submit'
 								type='primary'
 								isDisable={!isValid || !dirty || isSubmitting}>
-								{console.log(!isValid)}
+								{/* {console.log(!isValid)} */}
 								<span className={styles.btn_submit_text}>{t('textSignUp.signUp')}</span>
 							</CustomButton>
 						</Form>

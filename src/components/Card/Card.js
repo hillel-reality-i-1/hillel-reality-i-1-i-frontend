@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import img_card from '../../assets/img/img_card/img_card.png';
 import Avatar from '../../assets/img/icons/user-profile/Avatar.svg';
@@ -9,14 +9,19 @@ import icon_comments from '../../assets/img/icons/post/icon_comments.svg';
 
 import styles from './Card.module.scss';
 
-const Card = () => {
+const Card = ({ posts }) => {
 	const [isExpanded, setIsExpanded] = useState(false);
+	const [postData, setPostData] = useState(null);
+
+	useEffect(() => {
+		setPostData(posts);
+	}, [posts]);
 
 	const handleReadMoreClick = () => {
 		setIsExpanded(!isExpanded);
 	};
 
-	const isImage = false;
+	const isImage = true;
 
 	return (
 		<div className={`${styles.container} ${styles.card_wrapper}`}>
@@ -49,26 +54,28 @@ const Card = () => {
 					<span className={styles.time_of_creation}>15 min ago</span>
 				</div>
 				<article className={styles.content}>
-					<h5 className={styles.content_title}>How to register in the Employment Center?</h5>
+					<h5 className={styles.content_title}>{postData?.title}</h5>
 					<p className={`${styles.content_post} ${isExpanded && styles.expanded}`}>
-						You need either a passport (e-passport) or a different document (e-document for the
-						period of martial law) that proves your Ukrainian citizenship. If you’re a foreigner,
-						you need a residence permit. You need a paper or electronic certificate that shows your
-						registrationrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
-						rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrttttttttttttttttttttttttttq
+						{postData?.content}
 					</p>
-					{!isExpanded && (
+					{!isExpanded ? (
 						<div
 							className={styles.btn_read_more}
 							onClick={handleReadMoreClick}>
 							Read more...
 						</div>
+					) : (
+						<div
+							className={styles.btn_read_more}
+							onClick={handleReadMoreClick}>
+							Hide...
+						</div>
 					)}
 				</article>
 				<div className={styles.content_footer}>
 					<div className={styles.content_footer_left_col}>
-						<span className={styles.post_user}>Poland</span>
-						<span className={styles.post_category}>Employment</span>
+						<span className={styles.post_user}>{postData?.country[0]}</span>
+						<span className={styles.post_category}>{postData?.category}</span>
 						<img
 							src={icon_save}
 							alt='Save'

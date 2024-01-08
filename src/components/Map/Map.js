@@ -23,6 +23,7 @@ const defaultOptions = {
 	scrollwheel: true,
 	disableDoubleClickZoom: false,
 	fullscreenControl: true,
+	zoomControl: false,
 	styles: defaultTheme,
 };
 

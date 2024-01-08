@@ -1,14 +1,28 @@
+import { useEffect, useState } from 'react';
+import axios from '../../config/axios/axios';
 import Card from '../Card/Card';
 import styles from './ContentSection.module.scss';
 
-const ContentSection = () => {
+const ContentSection = ({ posts, onNextPage }) => {
+	// console.log('posts', posts);
+
 	return (
-		<div className={styles.container}>
-			<Card />
-			<Card />
-			<Card />
-			<button className={styles.btn_see_more}>See more</button>
-		</div>
+		<section className={styles.container}>
+			{posts &&
+				posts.map((posts, id) => (
+					<Card
+						key={id}
+						posts={posts}
+					/>
+				))}
+			{/* {posts.length > 3 && ( */}
+			<button
+				className={styles.btn_see_more}
+				onClick={onNextPage}>
+				See more
+			</button>
+			{/* )} */}
+		</section>
 	);
 };
 

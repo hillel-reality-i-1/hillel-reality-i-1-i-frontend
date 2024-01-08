@@ -25,6 +25,20 @@
 		// text-transform: capitalize;
 	}
 
+	.react-calendar__tile:enabled:hover
+	// .react-calendar__tile:enabled:focus
+	{
+		background-color: #fdfeff;
+		color: $color-gray50;
+		cursor: pointer;
+		border-radius: 48px;
+	}
+
+	.react-calendar__tile:enabled:focus {
+		background-color: $color-primary30base;
+		color: $color-gray;
+	}
+
 	.react-calendar button:enabled {
 		&:hover {
 			cursor: pointer;
@@ -78,6 +92,7 @@
 		font-size: 20px;
 		font-family: $font-ns-medium;
 		line-height: 160%;
+		border-radius: 22px;
 	}
 
 	.react-calendar__navigation__prev2-button,
