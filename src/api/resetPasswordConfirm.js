@@ -14,6 +14,8 @@ const resetPasswordConfirm = async (newPassword1, newPassword2, id, token) => {
 
     const response = await axios.post(url, data);
 
+    localStorage.setItem('authTokenUHelp', response.data.token);
+
     return response
 };
 

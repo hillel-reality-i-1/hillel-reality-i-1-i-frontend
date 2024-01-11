@@ -26,7 +26,7 @@ export default function PasswordUpdated() {
                     </p>
                 </div>
                 <div className={styles.passwordUpdatedSection_button_wrapper}>
-                    <a className={styles.passwordUpdatedSection_button} href="/signin">
+                    <a className={styles.passwordUpdatedSection_button} href="/user">
                         {t('textPasswordUpdated.returnToSignIn')}
                     </a>
                 </div>

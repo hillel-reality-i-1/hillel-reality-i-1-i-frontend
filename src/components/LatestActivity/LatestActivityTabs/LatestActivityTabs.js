@@ -10,27 +10,27 @@ import LatestActivityContributions from '../LatestActivityContributions/LatestAc
 const latestActivity = [
 	{
 		key: '1',
-		label: 'Post',
+		label: 'Дописи',
 		children: <LatestActivityPosts />,
 	},
 	{
 		key: '2',
-		label: 'Comments',
+		label: 'Коментарі',
 		children: <LatestActivityComments />,
 	},
 	{
 		key: '3',
-		label: 'Contributions',
+		label: 'Внески',
 		children: <LatestActivityContributions />,
 	},
 	{
 		key: '4',
-		label: 'Reactions',
+		label: 'Реакції',
 		children: <LatestActivityReactions />,
 	},
 	{
 		key: '5',
-		label: 'Saved',
+		label: 'Збережені',
 		children: <LatestActivitySaved />,
 	},
 ];
@@ -49,7 +49,7 @@ const LatestActivityTabs = () => {
 					defaultActiveKey='1'
 					items={latestActivity}
 					onChange={onChange}
-					TabBarGutter={18}
+					tabBarGutter={24}
 				/>
 			</ConfigProvider>
 		</>

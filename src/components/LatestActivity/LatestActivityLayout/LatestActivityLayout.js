@@ -7,7 +7,9 @@ const LatestActivityLayout = () => {
 	return (
 		<div className={styles.activity_wrapper}>
 			<div className={styles.header_activity}>
-				<h4 className={styles.header_activity_title}>Latest activity</h4>
+				<h4 className={styles.header_activity_title}>
+					Остання активність
+				</h4>
 				<ConfigProvider
 					theme={{
 						token: {
@@ -21,7 +23,7 @@ const LatestActivityLayout = () => {
 					<Button
 						type='primary'
 						htmlType='button'
-						disabled='true'
+						disabled={true}
 						className={styles.btn_activity_header}>
 						<span className={styles.btn_inner}>Write a post</span>
 					</Button>

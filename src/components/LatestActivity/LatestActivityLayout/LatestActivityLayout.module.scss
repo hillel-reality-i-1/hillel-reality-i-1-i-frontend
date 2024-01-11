@@ -12,6 +12,19 @@
 			&:before {
 				border-color: $color-gray30;
 			}
+
+			.ant-tabs-nav-wrap {
+				.ant-tabs-nav-list {
+					.ant-tabs-tab {
+						color: #47474F;
+						font-family: $regular;
+						font-size: 18px;
+						font-style: normal;
+						font-weight: 400;
+						line-height: 160%;
+					}
+				}
+			}
 		}
 	}
 }
@@ -31,10 +44,12 @@
 	margin-bottom: 12px;
 
 	&_title {
-		font-family: $font-ns-semiBold;
+		font-family: $medium;
 		font-size: 28px;
-		color: $color-gray80;
+		font-style: normal;
+		font-weight: 600;
 		line-height: 130%;
+		color: $color-gray80;
 	}
 
 	.children_button {
