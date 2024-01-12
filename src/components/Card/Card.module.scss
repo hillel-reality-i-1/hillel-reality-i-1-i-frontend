@@ -2,6 +2,8 @@
 
 .container {
 	width: 100%;
+	// ============!!!!!!!!!!!!!!!!!!!
+	max-width: 845px;
 	height: 100%;
 	// max-height: 297px;
 	padding: 24px;
@@ -31,7 +33,7 @@
 	display: none;
 }
 
-.user_country::before {
+.user_country_dot::before {
 	content: '•';
 	margin: 0 4px;
 }
@@ -103,6 +105,7 @@
 		font-size: 20px;
 		line-height: 160%;
 		color: $color-gray80;
+		font-weight: 500;
 	}
 
 	&_post {
@@ -129,20 +132,12 @@
 	}
 
 	.btn_read_more {
-		// display: none;
-		// position: absolute;
-		// bottom: 0;
-		// right: 0;
 		cursor: pointer;
 		font-family: $font-ns-medium;
 		line-height: 160%;
 		font-size: 16px;
 		color: $color-primary30base;
 	}
-
-	// .expanded + .btn_read_more {
-	// 	display: none;
-	// }
 }
 
 .content_footer {

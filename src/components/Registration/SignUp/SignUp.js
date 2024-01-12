@@ -11,30 +11,25 @@ import sign_up1_logo from '../../../assets/img/icons/logo/sign_up1_logo.svg';
 import arrow_back from '../../../assets/img/icons/icons-SignUp/arrow_back.svg';
 import CustomButton from '../../CustomButton/CustomButton';
 import GoogleSignIn from '../../SignIn/googleSignIn/GoogleSignIn';
+import { setAuthToken, setGoogleAuthToken } from '../../../store/slices/signInSlice';
+import axios from '../../../config/axios/axios';
 
 import styles from './SignUp.module.scss';
-import { setAuthToken, setGoogleAuthToken } from '../../../store/slices/signInSlice';
-import axios from 'axios';
+import { URL_AUTH_GOOGLE } from '../../../config/API_url';
 
 const ModalFooter = ({ toggleSignUpModal, toggleSignInModal, toggleSignUpFormModal }) => {
 	const { t } = useTranslation();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	// const changeGoogleAuthToken = (authToken) => {
-	// 	dispatch(setGoogleAuthToken(authToken));
+	// const changeAuthToken = (authToken) => {
+	// 	dispatch(setAuthToken(authToken));
 	// };
-
-	const changeAuthToken = (authToken) => {
-		dispatch(setAuthToken(authToken));
-	};
 
 	const changeGoogleAuthToken = (authToken) => {
 		dispatch(setGoogleAuthToken(authToken));
 		toggleSignUpModal();
 		socialLogin(authToken);
-		// setLoginError(null);
-		// setIsAuthenticated(true);
 	};
 
 	const openSinUpForm = () => {
@@ -51,17 +46,11 @@ const ModalFooter = ({ toggleSignUpModal, toggleSignInModal, toggleSignUpFormMod
 		try {
 			const formData = new FormData();
 			formData.append('access_token', google_token);
-			const response = await axios.post(
-				'http://dmytromigirov.space/api/v1/social-login/',
-				formData
-			);
-			const result = response.data;
-			localStorage.setItem('userId', result.user_id);
-			localStorage.setItem('fullName', result.full_name);
-			console.log('result', result);
-			dispatch(setAuthToken(result.token));
-			navigate(result.redirect_url);
-			// console.log(result);
+			const response = await axios.post(URL_AUTH_GOOGLE, formData);
+			localStorage.setItem('userId', response.user_id);
+			localStorage.setItem('fullName', response.full_name);
+			dispatch(setAuthToken(response.token));
+			navigate(response.redirect_url);
 		} catch (error) {
 			console.error('Error during social login:', error.message);
 		}

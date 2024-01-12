@@ -3,10 +3,12 @@ import axios from '../config/axios/axios';
 import SearchSection from '../components/SearchSection/SearchSection';
 import Footer from '../components/Footer/Footer';
 import MainSection from '../components/MainSection/MainSection';
+import { URL_GET_POSTS } from '../config/API_url';
 
 export default function HomePage() {
 	const [posts, setPosts] = useState([]);
-	const [searchTerm, setSearchTerm] = useState('');
+	const [countPosts, setCountPosts] = useState(0);
+	// const [searchTerm, setSearchTerm] = useState('');
 	const [page, setPage] = useState(1);
 
 	const handleSearch = (newSearchTerm) => {
@@ -14,25 +16,19 @@ export default function HomePage() {
 		// setPage(1); //Resetting the page number when changing the search query
 	};
 
-	const handleNextPage = () => {
-		console.log('Next');
-		setPage((prevPage) => prevPage + 1);
-	};
-	// console.log('searchTerm', searchTerm);
-
-	// console.log(posts);
-
 	useEffect(() => {
 		const fetchAllPosts = async () => {
 			try {
-				const data = await axios.get('/api/v1/content/posts/', {
+				const data = await axios.get(URL_GET_POSTS, {
 					params: {
 						page_size: 3,
 						page: page,
 					},
 				});
+
+				setCountPosts(data.count);
 				// console.log('dsata', data);
-				setPosts(data.results);
+				setPosts((prevPosts) => [...prevPosts, ...data.results]);
 			} catch (error) {
 				return error.message;
 			}
@@ -41,12 +37,19 @@ export default function HomePage() {
 		fetchAllPosts();
 	}, [page]);
 
+	const handleNextPage = () => {
+		setPage((prevPage) => prevPage + 1);
+	};
+
+	// console.log(posts);
+
 	return (
 		<>
 			<SearchSection onSearch={handleSearch} />
 			<MainSection
 				posts={posts}
 				onNextPage={handleNextPage}
+				countPosts={countPosts}
 			/>
 			<Footer />
 		</>
