@@ -9,6 +9,10 @@
 	}
 	.ant-select-dropdown {
 		border-radius: 24px;
+
+		.ant-select-item {
+			color: $color-gray70;
+		}
 	}
 
 	.ant-select-dropdown .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {

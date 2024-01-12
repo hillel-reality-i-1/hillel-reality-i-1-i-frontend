@@ -9,7 +9,7 @@ import icon_like from '../../assets/img/icons/post/icon_like.svg';
 import icon_comments from '../../assets/img/icons/post/icon_comments.svg';
 import { calculateReadTime } from '../../helpers/calculateReadTime';
 import { formatTimeElapsed } from '../../helpers/formatTimeElapsed';
-import { URL_USER, URL_USER_PROFILE_BY_USER_ID } from '../../config/API_url';
+import { URL_USER_INFO_USER_ID } from '../../config/API_url';
 
 import styles from './Card.module.scss';
 
@@ -17,8 +17,6 @@ const Card = ({ posts }) => {
 	const [isExpanded, setIsExpanded] = useState(false);
 	const [postData, setPostData] = useState(null);
 	const [user, setUser] = useState(null);
-	const [profile, setProfile] = useState(null);
-	// console.log(postData);
 	const userId = postData && postData?.author;
 
 	useEffect(() => {
@@ -28,9 +26,7 @@ const Card = ({ posts }) => {
 	useEffect(() => {
 		const fetchInfoUser = async () => {
 			try {
-				console.log('id', userId);
-				const data = userId && (await axios.get(`${URL_USER}${userId}`));
-				// console.log('data', data);
+				const data = userId && (await axios.get(`${URL_USER_INFO_USER_ID}${userId}`));
 				setUser(data);
 			} catch (error) {
 				return error.message;
@@ -40,29 +36,13 @@ const Card = ({ posts }) => {
 		fetchInfoUser();
 	}, [userId]);
 
-	useEffect(() => {
-		const fetchUserProfile = async () => {
-			try {
-				const data = userId && (await axios.get(`${URL_USER_PROFILE_BY_USER_ID}${userId}`));
-				setProfile(data);
-			} catch (error) {
-				return error.message;
-			}
-		};
-
-		fetchUserProfile();
-	}, [userId]);
-
 	const handleReadMoreClick = () => {
 		setIsExpanded(!isExpanded);
 	};
 
 	const timeForRead = postData && calculateReadTime(postData?.content);
 	const timeElapsed = postData && formatTimeElapsed(postData?.creation_date);
-	// console.log('postData', postData.author);
-	// user && console.log('user', user);
-	// profile && console.log('profile', profile);
-	// console.log('id', userId);
+	const userCity = user?.user_profile?.city.split(',')[0];
 
 	const isImage = true;
 
@@ -78,21 +58,25 @@ const Card = ({ posts }) => {
 						/>
 						<div className={styles.user_data_wrapper}>
 							<div className={styles.user_info_top_wrapper}>
-								<span className={styles.full_name}>{user?.full_name}</span>
-								<div className={styles.label_vr_exp_wrapper}>
-									<img
-										className={styles.verify}
-										src={icon_expert}
-										alt='icon expert'
-									/>
-									<span className={styles.expert_badge}>Expert in Law</span>
-								</div>
+								<span className={styles.full_name}>{user?.user?.full_name}</span>
+								{user?.user_profile_extended?.profession && (
+									<div className={styles.label_vr_exp_wrapper}>
+										<img
+											className={styles.verify}
+											src={icon_expert}
+											alt='icon expert'
+										/>
+										<span className={styles.expert_badge}>
+											Експерт у {user?.user_profile_extended?.profession}
+										</span>
+									</div>
+								)}
 							</div>
 							<div className={styles.user_info_bottom_wrapper}>
-								<span className={styles.user_nickname}>@{user?.username}</span>
-								<span className={profile?.country.name && styles.user_country_dot}>
-									{profile?.country.name}
-									{profile?.country.name && profile?.city.name && ','} {profile?.city.name}{' '}
+								<span className={styles.user_nickname}>@{user?.user?.username}</span>
+								<span className={user?.user_profile?.country && styles.user_country_dot}>
+									{user?.user_profile?.country}
+									{user?.user_profile?.country && userCity && ','} {userCity}
 								</span>
 							</div>
 						</div>
