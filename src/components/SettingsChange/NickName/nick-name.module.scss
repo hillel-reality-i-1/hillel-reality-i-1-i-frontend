@@ -1,0 +1,38 @@
+@import '../../../styles/constants.scss';
+@import '../../../styles/mixins.scss';
+
+.nickName {
+    max-width: 410px;
+
+    h4 {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        color: #03091C;
+        font-family: $semiBold;
+        @include customFontStyles(28px, normal, 600);
+        line-height: 130%;
+        path {
+            fill: #126FE1;
+        }
+    }
+    p {
+        color: $color-gray50;
+        font-family: $regular;
+        @include customFontStyles(16, normal, 400);
+        line-height: 160%;
+    }
+    input {
+        margin: 24px 0;
+        padding: 14px;
+        width: 100%;
+        border-radius: 12px;
+        border: 1px solid #A7A7B2;
+    }
+}
+
+.button {
+    width: 100%;
+    background-color: #CACCD1;
+}

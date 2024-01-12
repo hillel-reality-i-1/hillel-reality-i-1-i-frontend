@@ -118,7 +118,7 @@ export default function SignIn({
 						<div className={styles.signIn__wrapper}>
 							<h3 className={styles.signIn__title}>Увійти в аккаунт</h3>
 							<p className={styles.signIn__description}>
-								Будь ласка, введіть дані для входу до акаунту
+								Будь ласка, введіть дані для входу в акаунт
 							</p>
 
 							<GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>

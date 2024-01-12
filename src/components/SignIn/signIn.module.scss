@@ -188,6 +188,7 @@
 }
 .form {
   &__forgotPassword {
+    max-width: fit-content;
     text-align: left;
     color: #126fe1;
     font-family: $medium;

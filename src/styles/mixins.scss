@@ -20,3 +20,15 @@
         }
     }
 }
+
+@mixin container-998 {
+    margin: auto;
+    max-width: 998px;
+    padding: 0 5px ;
+}
+
+@mixin customFontStyles($font-size, $font-style, $font-weight) {
+    font-size: $font-size;
+    font-style: $font-style;
+    font-weight: $font-weight;
+}

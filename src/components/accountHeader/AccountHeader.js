@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Dropdown, Space } from 'antd'
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { clearAuthToken } from '../../store/slices/signInSlice';
 import { ReactComponent as Bell } from '../../assets/img/icons/icons-header/bell-grey.svg'
@@ -37,7 +37,7 @@ export default function AccountHeader() {
   return (
     <div className={styles.account}> 
 
-        <CustomModal isOpen={isModalOpen} >
+        <CustomModal isOpen={isModalOpen} additionalStyles={styles.modal}>
 
           <SignOutModalContent delAuthToken={delAuthToken} toggleModal={toggleModal} />
 
@@ -67,7 +67,7 @@ export default function AccountHeader() {
                 key: '4',
               }],
             }}
-            placement="bottomRight"
+            placement='bottomRight'
             trigger={['click']}
           >
             <a onClick={(e) => e.preventDefault()} >
@@ -84,17 +84,17 @@ export default function AccountHeader() {
 
 const items = [
   {
-    label: <a className={styles.dropdown__item}> <img src={userIcon} /> My Profile </a>,
+    label: <Link to='user' className={styles.dropdown__item}> <img src={userIcon} /> My Profile </Link>,
     key: '0',
   },
   {
-    label: <a className={styles.dropdown__item}> <img src={settingsIcon} />Settings & Privacy</a>,
+    label: <Link to='settings' className={styles.dropdown__item}> <img src={settingsIcon} />Settings & Privacy</Link>,
     key: '1',
   },
-  {
-    label: <a className={styles.dropdown__item}><img src={questionMark} />  Help </a>,
-    key: '3',
-  },
+  // {
+  //   label: <a className={styles.dropdown__item}><img src={questionMark} />  Help </a>,
+  //   key: '3',
+  // },
   {
     type: 'divider',
   },

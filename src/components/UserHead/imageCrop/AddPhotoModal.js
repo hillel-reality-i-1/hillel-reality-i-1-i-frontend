@@ -12,21 +12,22 @@ export default function AddPhotoModal({
   togglenModa2,
   onFileChange,
 }) {
-  const [fileSelected, setFileSelected] = useState(false);
+  // const [fileSelected, setFileSelected] = useState(false);
 
   const handleFileChange = (event) => {
     onFileChange(event);
-    setFileSelected(true);
+    // setFileSelected(true);
   };
 
-  const openSecondModal = () => {
-    togglenModa2();
-    setFileSelected(false); 
-  };
+  // const openSecondModal = () => {
+  //   togglenModa2();
+  //   setFileSelected(false); 
+  // };
 
   const handleUploadButtonClick = () => {
 
     document.getElementById('fileInput').click();
+    
   };
 
   const handleFileInputChange = () => {
@@ -34,7 +35,7 @@ export default function AddPhotoModal({
   };
 
   return (
-    <CustomModal isOpen={isModalOpen} onClose={toggleModal}>
+    <CustomModal isOpen={isModalOpen} onClose={toggleModal} additionalStyles={styles.modal}>
       <div className={styles.modal__header}>
         <h2 className={styles.modal__header__title}>Add your photo</h2>
         <CloseIcon className={styles.modal__header__icon} onClick={toggleModal} />
@@ -51,7 +52,7 @@ export default function AddPhotoModal({
         <input
           id='fileInput'
           type='file'
-          accept='image/*'
+          accept='.jpg, .jpeg, .png'
           onChange={handleFileChange}
           style={{ display: 'none' }}
           onClick={(event) => event.target.value = null} 

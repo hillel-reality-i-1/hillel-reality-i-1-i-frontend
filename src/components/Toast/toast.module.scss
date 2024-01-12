@@ -1,0 +1,38 @@
+@import '../../styles/constants.scss';
+
+@mixin customFontStyles($font-size, $font-style, $font-weight) {
+    font-size: $font-size;
+    font-style: $font-style;
+    font-weight: $font-weight;
+}
+
+.toast {
+    position: fixed;
+    top: 88px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #F1F7F2;
+    box-shadow: 0px 2px 8px 0px rgba(167, 167, 178, 0.20);
+    padding: 16px 24px;
+    border-radius: 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: $color-systemSuccess;
+    @include customFontStyles(18px, normal, 500);
+    font-family: $medium;
+    line-height: 160%;
+}
+  
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+  
+.toast.hide {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+}
