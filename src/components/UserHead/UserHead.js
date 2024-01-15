@@ -11,8 +11,8 @@ import { ReactComponent as AddPhoto } from "../../assets/img/icons/add-photo-ico
 import verified_icon from '../../assets/img/icons/user-profile/verified_icon.png'
 import CropPhotoModal from "./imageCrop/CropPhotoModal";
 import AddPhotoModal from "./imageCrop/AddPhotoModal";
-import CustomModal from "../modals/CustomModal";
-import BlueButton from "../buttons/blueButton/BlueButton";
+import CustomModal from "../modals/CustomModal/CustomModal";
+import BlueButton from "../buttons/BlueButton/BlueButton";
 import ImageCrop from "./imageCrop/ImageCrop";
 
 import styles from "./userHead.module.scss";
@@ -75,7 +75,7 @@ export default function UserHead() {
         console.log(response.data.id);
       } catch (error) {
         setAvatarData(null)
-        console.error('Error during fetch image from profile xxxxxxxxxxxxxxxxxxxx', error);
+        console.error('Error during fetch image from profile ', error);
       }
     };
     fetchImageFromProfile()
@@ -88,9 +88,8 @@ export default function UserHead() {
     const file = e.target.files[0];
   
     if (file) {
-      // Check if the file size is greater than 5MB
       if (file.size > 4.9 * 1024 * 1024) {
-        console.error("File size exceeds 5MB limit.");
+        console.error('File size exceeds 5MB limit.');
         return;
       }
   

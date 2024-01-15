@@ -1,4 +1,4 @@
-import CustomModal from "../../modals/CustomModal";
+import CustomModal from "../../modals/CustomModal/CustomModal";
 import { ReactComponent as CloseIcon } from '../../../assets/img/icons/icons-signIn/close-signIn-icon.svg';
 import ImageCrop from "./ImageCrop";
 

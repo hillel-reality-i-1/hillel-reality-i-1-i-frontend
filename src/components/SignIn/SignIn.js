@@ -10,7 +10,7 @@ import miniLogo from '../../assets/img/icons/icons-signIn/mini-logo-signIn.png';
 import googleIcon from '../../assets/img/icons/icons-signIn/google-button-icon.png';
 import GoogleSignIn from './googleSignIn/GoogleSignIn';
 import { validateSignInForm } from '../../helpers/validation';
-import SignInForm from './signInForm/SignInForm';
+import SignInForm from './SignInForm/SignInForm';
 import { API_URL_SIGN_IN } from '../../config/API_url';
 import { setAuthToken, setGoogleAuthToken } from '../../store/slices/signInSlice';
 
@@ -41,10 +41,6 @@ export default function SignIn({
 		setIsAuthenticated(true);
 	};
 
-	// const closeModal = () => {
-	// 	setIsOpen(false);
-	// };
-
 	const openSignUp = () => {
 		toggleSignInModal();
 		toggleSignUpModal();
@@ -55,8 +51,6 @@ export default function SignIn({
 			const response = await axios.post(API_URL_SIGN_IN, values);
 			const authToken = response.data.key;
 			changeAuthToken(authToken);
-			
-			// closeModal();
 			setLoginError(null);
 			setIsAuthenticated(true);
 		} catch (error) {
@@ -71,6 +65,9 @@ export default function SignIn({
 			password: '',
 		},
 		validate: validateSignInForm,
+		initialStatus: {
+			isValid: false, 
+		  },
 		onSubmit: handleSignIn,
 	});
 
@@ -116,7 +113,7 @@ export default function SignIn({
 						</div>
 
 						<div className={styles.signIn__wrapper}>
-							<h3 className={styles.signIn__title}>Увійти в аккаунт</h3>
+							<h3 className={styles.signIn__title}>Увійти в акаунт</h3>
 							<p className={styles.signIn__description}>
 								Будь ласка, введіть дані для входу в акаунт
 							</p>
@@ -140,7 +137,7 @@ export default function SignIn({
 							/>
 
 							<div className={styles.noAccount}>
-								<p className={styles.noAccount__text}>Немає аккаунту?</p>
+								<p className={styles.noAccount__text}>Немає акаунту?</p>
 								<p
 									className={styles.noAccount__signUp}
 									onClick={openSignUp}>

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { ReactComponent as AddPhoto } from '../../../assets/img/icons/add-photo-icon/image-gallery-plus.svg';
 import { ReactComponent as CloseIcon } from '../../../assets/img/icons/icons-signIn/close-signIn-icon.svg';
-import BlueButton from "../../buttons/blueButton/BlueButton";
-import CustomModal from "../../modals/CustomModal";
+import BlueButton from "../../buttons/BlueButton/BlueButton";
+import CustomModal from "../../modals/CustomModal/CustomModal";
 
 import styles from '../userHead.module.scss';
 

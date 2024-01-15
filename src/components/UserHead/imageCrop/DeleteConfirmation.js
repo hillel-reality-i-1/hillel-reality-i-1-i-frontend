@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 
-import CustomModal from '../../modals/CustomModal';
+import CustomModal from '../../modals/CustomModal/CustomModal';
 import { ReactComponent as CloseIcon } from '../../../assets/img/icons/icons-signIn/close-signIn-icon.svg';
 import styles from '../userHead.module.scss';
-import BlueButton from '../../buttons/blueButton/BlueButton';
+import BlueButton from '../../buttons/BlueButton/BlueButton';
 
 export default function DeleteConfirmation({isModalOpen, toggleModal, avatarID, setAvatarData}) {
   const authToken = useSelector((state) => state.signIn.authTokenUHelp);

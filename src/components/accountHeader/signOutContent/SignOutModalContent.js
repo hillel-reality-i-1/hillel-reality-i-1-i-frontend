@@ -1,5 +1,5 @@
 import {ReactComponent as CloseIcon} from '../../../assets/img/icons/icons-signIn/close-signIn-icon.svg';
-import BlueButton from '../../buttons/blueButton/BlueButton';
+import BlueButton from '../../buttons/BlueButton/BlueButton';
 
 import styles from './signOutContent.module.scss'
 

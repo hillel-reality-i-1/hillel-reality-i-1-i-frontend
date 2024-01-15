@@ -1,6 +1,7 @@
 import { Input } from 'antd';
 import { Link } from 'react-router-dom';
 
+import { isSignInFormValid } from '../../../helpers/validation';
 import errorIcon from '../../../assets/img/icons/icons-signIn/error-input-icon.png';
 
 const SignInForm = ({ formik, loginError, styles }) => (
@@ -77,10 +78,12 @@ const SignInForm = ({ formik, loginError, styles }) => (
 		<button
 			type='submit'
 			className={`${styles.form__submit} ${
-				formik.isValid && formik.touched.email && formik.touched.password ? styles.validSubmit : ''
-			}`}>
+				isSignInFormValid(formik.values.email, formik.values.password) ? styles.validSubmit : ''
+			}`}
+		>
 			Увійти
 		</button>
+
 	</form>
 );
 

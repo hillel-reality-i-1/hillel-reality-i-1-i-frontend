@@ -1,4 +1,4 @@
-import BlueButton from '../../buttons/blueButton/BlueButton';
+import BlueButton from '../../buttons/BlueButton/BlueButton';
 
 import { ReactComponent as UserSettings } from '../../../assets/img/icons/settings-icons/user-settings.svg';
 

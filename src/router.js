@@ -4,7 +4,7 @@ import './translations/i18n';
 
 import Layout from './pages/Layout';
 import HomePage from './pages/HomePage';
-import UserPage from './pages/userPage/UserPage';
+import UserPage from './pages/UserPage/UserPage';
 import VerifyCodeForm from './components/Registration/VerifyCodeForm/VerifyCodeForm';
 import VerifyInfo from './components/Registration/VerifyInfo/VerifyInfo';
 import ForgotYourPasswordForm from './components/RecoveryPassword/ForgotYourPassword/ForgotYourPassword';

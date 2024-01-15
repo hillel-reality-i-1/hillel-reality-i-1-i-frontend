@@ -4,7 +4,7 @@ import { Slider } from 'antd';
 
 import { ReactComponent as Plus } from '../../../assets/img/icons/crop-image-controls/plus.svg';
 import { ReactComponent as Minus } from '../../../assets/img/icons/crop-image-controls/minus.svg';
-import BlueButton from '../../buttons/blueButton/BlueButton';
+import BlueButton from '../../buttons/BlueButton/BlueButton';
 
 import styles from './imageCrop.module.scss';
 
