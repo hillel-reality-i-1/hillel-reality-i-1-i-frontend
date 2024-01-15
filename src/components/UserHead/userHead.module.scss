@@ -1,9 +1,10 @@
 @import '../../styles/constants.scss';
 @import '../../styles/mixins.scss';
+
 $common-styles: (
-    padding: 24px,
-    background-color: $color-gray10,
-    border-radius: 24px,
+  padding: 24px,
+  background-color: $color-gray10,
+  border-radius: 24px,
 );
 
 @mixin commonStyles () {
@@ -11,7 +12,6 @@ $common-styles: (
     background-color: $color-gray10;
     border-radius: 24px;
 }
-
 @mixin customTextStyle() {
     color: $color-primary30base;
     font-family: $medium;
@@ -24,94 +24,69 @@ $common-styles: (
 .user {
     display: grid;
     gap: 24px;
-
     &__head {
         @include commonStyles;
         display: flex;
         flex-direction: row;
         gap: 16px;
-
         &__avatar {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 72px;
             height: 72px;
+            width: 72px;
             border-radius: 50%;
             background-color: $color-gray30;
+            cursor: pointer;
+            .avatar_svg {
+                width: 72px;
+                height: 72px;
+            }
+            .avatar_img {
+                max-width: 72px;
+                border-radius: 50%;
+            }
         }
-
         &__info {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            gap: 4px;
+            .name {
+                color: #03091C;
+                font-family: $medium;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 160%; 
 
-            .info_nameAndUserName_block {
                 display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: flex-start;
-
-                .name_block {
+                align-items: center;
+                span {
                     display: flex;
-                    align-items: center;
-                    gap: 8px;
-
-                    .name {
-                        font-family: $medium;
-                        font-size: 20px;
-                        font-style: normal;
-                        font-weight: 500;
-                        line-height: 160%;
-                        color: #03091C;
-                    }
+                    cursor: pointer;
                 }
-
-                .info_nameAndUserName_username {
-                    color: #0D101D;
-                    font-family: $regular;
-                    font-size: 16px;
-                    font-style: normal;
-                    font-weight: 400;
-                    line-height: 160%;
+                img {
+                    padding-left: 8px;
                 }
             }
-
+            .nick__name {
+                color: #0D101D;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 160%;
+                font-family: $regular;
+            }
             .location {
                 display: flex;
                 align-items: center;
                 gap: 4px;
-                @include customTextStyle;
-            }
-
-            .location_true {
-                display: flex;
-                align-items: center;
-                gap: 4px;
-
-                .location_true_text {
-                    font-family: $regular;
-                    font-size: 16px;
-                    font-style: normal;
-                    font-weight: 400;
-                    line-height: 160%;
-                    color: #0D101D;
-                }
+                @include customTextStyle
             }
         }
-
         &__edit {
             margin-left: auto;
-
             p {
                 display: flex;
                 align-items: center;
                 gap: 4px;
                 @include customTextStyle
             }
-
+            
         }
     }
 }
@@ -119,38 +94,35 @@ $common-styles: (
 .modal {
     // padding: 32px 40px 24px 40px;
     z-index: 2;
-
+    max-width: 520px;
     &__header {
         padding: 32px 40px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-
         &__title {
-            color: $color-gray80;
+            color:  $color-gray80;
             font-family: $semiBold;
             font-size: 28px;
             font-style: normal;
             font-weight: 600;
             line-height: 130%;
         }
-
         &__icon {
             cursor: pointer;
             transition: color 0.3s ease-in-out;
             @include buttonEffect
+        
         }
 
     }
-
     &__main {
         padding: 24px 40px;
-        border-top: 1px solid #DBDBDD;
-        border-bottom: 1px solid #DBDBDD;
+        border-top: 1px solid  #DBDBDD;
+        border-bottom: 1px solid  #DBDBDD;
         display: flex;
         flex-direction: column;
         gap: 24px;
-
         &__photo {
             margin: auto;
             height: 128px;
@@ -158,9 +130,8 @@ $common-styles: (
             border-radius: 50%;
             background-color: $color-gray30;
         }
-
         &__text {
-            color: $color-gray70;
+            color:  $color-gray70;
             font-family: $regular;
             font-size: 16px;
             font-style: normal;
@@ -168,17 +139,168 @@ $common-styles: (
             line-height: 160%
         }
     }
-
     &__footer {
         display: flex;
         justify-content: center;
         margin: 20px;
     }
 }
+.deleteModal {
+    max-width: 520px;
+    &__main {
+        padding: 24px 40px;
+        border-top: 1px solid  #DBDBDD;
+        border-bottom: 1px solid  #DBDBDD;
+        color: $color-gray70;
+        font-family: $regular;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 160%;
+    }
+    &__footer {
+        display: flex;
+        justify-content: center;
+        padding: 22px 48px;
+        gap: 20px;
+    }
+    
 
+}
 .blueButtonStyles {
     padding: 12px 14px;
     width: 100%;
-    max-width: 187px;
-    font-size: 16px;
+    max-width: 202px;
+    font-size: 18px;
+}
+
+.profile__photo {
+    padding: 17px 0;
+    border-top: 1px solid  #DBDBDD;
+    border-bottom: 1px solid  #DBDBDD;
+    display: flex;
+    justify-content: center;
+}
+
+.profile__photo img{
+    border-radius: 50%;
+    max-width: 218px;
+}
+
+.custom_file_input {
+    position: relative;
+    display: inline-block;
+    // max-width: 128px;
+    width: 100%;
+}
+  
+.custom_file_input input[type="file"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+}
+  
+.custom_file_input a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 15px;
+    border-radius: 48px;
+    border: 1px solid #126FE1;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    color:  #126FE1;
+    font-family: $medium;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 160%;
+    transition:  0.3s ease-in-out;
+    path {
+        transition:  0.3s ease-in-out;
+        fill: #126FE1;
+    }
+}
+  
+.custom_file_input a:hover {
+    path {
+        transition:  0.3s ease-in-out;
+        fill: #3989EC;
+    }
+    color: #3989EC;
+    border: 1px solid #3989EC;
+}
+  
+.custom_file_input a:active {
+    path {
+        transition:  0.3s ease-in-out;
+        fill: #094DA0;
+    }
+    color: #094DA0;
+    border: 1px solid  #094DA0;
+}
+
+.profile__modal__footer {
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+
+    .custom_file_input{
+        width: 100%;
+        max-width: 202px;
+    }
+    .upload {
+        display: flex;
+        width: 100%;
+        max-width: 202px;
+        .blueButtonStyles {
+            width: 100%;
+
+        }
+
+    }
+
+}
+.discard {
+    width: 100%;
+    // max-width: 202px;
+    a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 15px;
+        border-radius: 48px;
+        border: 1px solid #126FE1;
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+        color:  #126FE1;
+        font-family: $medium;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 160%;
+        transition:  0.3s ease-in-out;
+        path {
+            transition:  0.3s ease-in-out;
+            fill: #126FE1;
+        }
+    }
+      
+     a:hover {
+
+        color: #3989EC;
+        border: 1px solid #3989EC;
+    }
+      
+     a:active {
+        color: #094DA0;
+        border: 1px solid  #094DA0;
+    }
+    
 }

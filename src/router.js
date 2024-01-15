@@ -4,7 +4,7 @@ import './translations/i18n';
 
 import Layout from './pages/Layout';
 import HomePage from './pages/HomePage';
-import UserPage from './pages/userPage/UserPage';
+import UserPage from './pages/UserPage/UserPage';
 import VerifyCodeForm from './components/Registration/VerifyCodeForm/VerifyCodeForm';
 import VerifyInfo from './components/Registration/VerifyInfo/VerifyInfo';
 import ForgotYourPasswordForm from './components/RecoveryPassword/ForgotYourPassword/ForgotYourPassword';
@@ -14,6 +14,10 @@ import PasswordUpdated from './components/RecoveryPassword/PasswordUpdated/Passw
 import StepLayout from './components/Registration/StepLayout/StepLayout';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicy';
+import SettingsPage from './pages/SettingsPage/SettingsPage';
+import NicknamePage from './pages/NicknamePage/NicknamePage';
+import FullName from './pages/FullNamePage/FullName';
+import LocationPage from './pages/LocationPage/LocationPage';
 
 const router = createBrowserRouter([
 	{
@@ -33,6 +37,22 @@ const router = createBrowserRouter([
 						element: <UserPage />,
 					},
 				],
+			},
+			{
+				path: 'settings',
+				element: <SettingsPage />,
+			},
+			{
+				path: 'settings/nickname',
+				element: <NicknamePage />,
+			},
+			{
+				path: 'settings/fullName',
+				element: <FullName />,
+			},
+			{
+				path: 'settings/location',
+				element: <LocationPage />,
 			},
 			{ path: '/privacyPolicy', element: <PrivacyPolicy /> },
 			{ path: '/*', element: <NotFoundPage /> },

@@ -1,5 +1,5 @@
 import cancelIcon from '../../../assets/img/icons/icons-AboutMe/cancel.svg'
-import BlueButton from '../../../components/buttons/blueButton/BlueButton'
+import BlueButton from '../../buttons/BlueButton/BlueButton';
 
 import styles from '../ModalInfoAboutExpertProfile/ModalInfoAboutExpertProfile.module.scss'
 

@@ -1,11 +1,7 @@
-import { useEffect, useState } from 'react';
-import axios from '../../config/axios/axios';
 import Card from '../Card/Card';
 import styles from './ContentSection.module.scss';
 
-const ContentSection = ({ posts, onNextPage }) => {
-	// console.log('posts', posts);
-
+const ContentSection = ({ posts, onNextPage, countPosts }) => {
 	return (
 		<section className={styles.container}>
 			{posts &&
@@ -15,13 +11,14 @@ const ContentSection = ({ posts, onNextPage }) => {
 						posts={posts}
 					/>
 				))}
-			{/* {posts.length > 3 && ( */}
-			<button
-				className={styles.btn_see_more}
-				onClick={onNextPage}>
-				See more
-			</button>
-			{/* )} */}
+
+			{countPosts > posts.length && (
+				<button
+					className={styles.btn_see_more}
+					onClick={onNextPage}>
+					See more
+				</button>
+			)}
 		</section>
 	);
 };

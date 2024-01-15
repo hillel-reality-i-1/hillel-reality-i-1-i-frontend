@@ -1,0 +1,15 @@
+@import '../../styles/constants.scss';
+
+.container {
+    margin: auto;
+    padding: 0 8px;
+    max-width: 553px;
+}
+.title {
+    color:  #03091C;
+    font-family: $semiBold;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 130%;
+}

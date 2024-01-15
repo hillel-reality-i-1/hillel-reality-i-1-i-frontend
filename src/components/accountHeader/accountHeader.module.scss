@@ -4,6 +4,9 @@
     display: flex;
     align-items: center;
     flex-direction: row;
+    .modal {
+        max-width: 476px;
+    }
     &__notification {
         display: flex;
         justify-content: center;
@@ -36,7 +39,9 @@
     }
 }
 
-
+.dropdown {
+    cursor: pointer;
+}
 .dropdown__item {
     padding: 9px 2px;
     display: flex;

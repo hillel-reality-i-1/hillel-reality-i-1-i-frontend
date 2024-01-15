@@ -238,7 +238,6 @@ export const useValidation = () => {
 
 export const validateSignInForm = (values) => {
 	const errors = {};
-
 	if (!values.email) {
 		errors.email = "Обов'язкове поле";
 	} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
@@ -253,3 +252,16 @@ export const validateSignInForm = (values) => {
 
 	return errors;
 };
+
+export const isSignInFormValid = (email, password) => {
+	if (!email || !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
+	  return false; 
+	}
+  
+	if (!password || password.length < 8) {
+	  return false; 
+	}
+  
+	return true; 
+};
+  
