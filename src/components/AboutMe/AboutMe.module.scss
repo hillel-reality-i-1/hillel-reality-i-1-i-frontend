@@ -1,5 +1,107 @@
 @import '../../styles/constants.scss';
 
+.modal_сontainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9990;
+
+    .modal_сontainer_wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        width: 476px;
+        max-height: 524px;
+        height: 100%;
+        border-radius: 20px;
+        background: #FDFEFF;
+
+        .сontainer_header {
+            display: flex;
+            width: 100%;
+            height: 100px;
+            padding: 32px 40px;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid #DBDBDD;
+
+
+            .сontainer_header_wrapper {
+                display: flex;
+                width: 396px;
+                justify-content: space-between;
+                align-items: center;
+
+                .header_title {
+                    font-family: $medium;
+                    font-style: normal;
+                    font-size: 28px;
+                    font-weight: 600;
+                    line-height: 130%;
+                    color: #03091C;
+                }
+
+                .header_close {
+                    width: 24px;
+                    height: 24px;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .сontainer_content {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+          
+
+            .сontainer_content_wrapper {
+                width: 396px;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+
+                .сontainer_content_text {
+                    font-family: $regular;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 160%;
+                    color: #0D101D;
+                }
+            }
+        }
+
+        .сontainer_bottom {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            border-top: 1px solid #DBDBDD;
+
+
+            .сontainer_bottom_additionalStyles {
+                display: flex;
+                width: 187px;
+                padding: 12px, 14px;
+                margin: 24px;
+                justify-content: center;
+                align-items: center;
+                gap: 8px;
+                flex-shrink: 0;
+                align-self: stretch;
+            }
+        }
+    }
+}
+
 $common-styles: (
     padding: 24px,
     background-color: $color-gray10,
@@ -22,6 +124,7 @@ $common-styles: (
         align-self: stretch;
 
         .title_text {
+            
             color: #0D101D;
             font-family: $medium;
             font-size: 28px;
@@ -35,6 +138,7 @@ $common-styles: (
             align-items: center;
             gap: 4px;
 
+            .switcher_text_disabled,
             .switcher_text {
                 color: #0D101D;
                 font-family: $regular;
@@ -47,16 +151,13 @@ $common-styles: (
     }
 
     .tubs {
-        .tubs_wrapper {
-        }
-    
         .tubs_button {
             display: flex;
             padding: 8px;
             align-items: center;
             gap: 4px;
             cursor: pointer;
-        
+
             .tubs_text {
                 color: #126FE1;
                 font-family: $medium;
@@ -130,6 +231,7 @@ $common-styles: (
             }
 
             .item_text {
+                
                 .text_title {
                     color: #47474F;
                     font-family: $regular;
@@ -140,12 +242,18 @@ $common-styles: (
                 }
 
                 .text_value {
+                    max-width: 346px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                     color: #0D101D;
                     font-family: $medium;
                     font-size: 16px;
                     font-style: normal;
                     font-weight: 500;
                     line-height: 160%;
+                    user-select: all;
+                    cursor: pointer;
                 }
             }
         }
@@ -188,12 +296,18 @@ $common-styles: (
                 }
 
                 .text_value {
+                    max-width: 346px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                     color: #0D101D;
                     font-family: $medium;
                     font-size: 16px;
                     font-style: normal;
                     font-weight: 500;
                     line-height: 160%;
+                    user-select: all;
+                    cursor: pointer;
                 }
             }
         }
@@ -229,7 +343,7 @@ $common-styles: (
             cursor: pointer;
             border: 1px dashed #126FE1;
             background: rgba(18, 111, 225, 0.10);
-        
+
             .my_portfolio_button_input {
                 display: none;
             }
@@ -269,10 +383,3 @@ $common-styles: (
         }
     }
 }
-
-
-
-
-
-
-

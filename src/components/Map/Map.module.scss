@@ -1,0 +1,17 @@
+@import '../../styles/constants.scss';
+
+.container {
+	margin-top: 24px;
+}
+
+.map_title {
+	font-family: $font-ns-semiBold;
+	font-size: 28px;
+	line-height: 130%;
+	color: $color-gray80;
+}
+
+.map_wrapper {
+	margin-top: 16px;
+	border-color: aqua;
+}

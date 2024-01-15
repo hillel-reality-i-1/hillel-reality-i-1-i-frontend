@@ -1,25 +1,54 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import '../translations/i18n';
+// import emailValidationServer from '../api/emailValidationServer';
+// import axios from '../config/axios/axios';
 
 export const useValidation = () => {
 	const { t } = useTranslation();
 	const [validWarnings, setValidWarnings] = useState([]);
 	const [password, setPassword] = useState('');
+	// const [data, setData] = useState('');
 
 	// validate EMAIL==========================//
 
-	const validateEmail = (value) => {
+	const validateEmail = async (value) => {
 		let error;
+
+		// const emailValidationServer = async (value) => {
+		// 	// if (!value.email.trim() || value.email.length <= 1) {
+		// 	// 	return false;
+		// 	// }
+
+		// 	try {
+		// 		const response = await axios.post('/api/v1/accounts/check-email/', value);
+		// 		console.log(response);
+		// 		setData(response);
+		// 		// return response.data.exists;
+		// 	} catch (error) {
+		// 		return false;
+		// 	}
+		// };
+
+		// console.log('ooo', emailValidationServer(value));
+
+		// console.log('data', data);
 
 		if (!value) {
 			error = t('textSignUp.error.required');
-		} else {
+		}
+		// else if (value && !isValidEmail) {
+		// 	error = 'Ця пошта вже використовується. Використайте іншу або увійдіть';
+		// }
+		else {
 			const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
 			const maxLength = 50;
 
 			if (!emailRegex.test(value) || !value.length > maxLength) {
 				error = t('textSignUp.error.email');
+				// } else if (emailValidationServer(value)) {
+				// 	console.log('ooo', emailValidationServer(value));
+				// 	error = 'rrrrrrr';
 			}
 		}
 

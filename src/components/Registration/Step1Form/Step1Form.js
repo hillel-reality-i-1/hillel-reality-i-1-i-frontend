@@ -28,9 +28,10 @@ const Step1Form = ({ onNext }) => {
 					<h2 className={styles.title}>{t('textSignUp.textStep1.titleH2')}</h2>
 					<p className={styles.text}>{t('textSignUp.textStep1.description')}</p>
 					<Formik
+						// {const getGoogleFullName = window.localStorage.getItem('full_name')
 						initialValues={{
 							userName: '',
-							fullName: '',
+							fullName: window.localStorage.getItem('fullName') || '',
 						}}
 						onSubmit={async (values, { setSubmitting }) => {
 							setSubmitting(false);
@@ -42,6 +43,7 @@ const Step1Form = ({ onNext }) => {
 										full_name: values?.fullName,
 									})
 								);
+								localStorage.setItem('fullName', '');
 								onNext();
 							} catch (error) {
 								console.error('Error updating user data:', error);
@@ -84,7 +86,7 @@ const Step1Form = ({ onNext }) => {
 											{errors.userName}
 										</div>
 									)}
-									<span className={styles.info}>{t('textSignUp.textStep1.infoUserName')}</span>
+									{/* <span className={styles.info}>{t('textSignUp.textStep1.infoUserName')}</span> */}
 								</div>
 
 								{/* input full name ----------------------------------------------------------------------- */}

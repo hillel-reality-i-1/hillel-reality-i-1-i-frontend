@@ -17,6 +17,7 @@ export const TRANSLATIONS_UK = {
 		terms: 'Умови',
 		privacy: 'Політика Конфіденційності',
 		help: 'Допомога',
+		termsOfUse: 'Умови',
 	},
 	textSignUp: {
 		signUpTo: 'Зареєструватися в',

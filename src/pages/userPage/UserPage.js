@@ -10,6 +10,7 @@ import styles from './userPage.module.scss';
 
 export default function UserPage() {
 	const [userData, setUserData] = useState('');
+	// const [expertUserData, setExpertUserData] = useState('');
 	const navigate = useNavigate();
          
     useEffect(() => {
@@ -24,7 +25,10 @@ export default function UserPage() {
 			};
 	
 			const userResponse = await axios.get('http://dmytromigirov.space/api/v1/auth/user/', config);
-			const userProfileResponse = await axios.get(`http://dmytromigirov.space/api/v1/users/user_profile_by_user_id/${userResponse.data.pk}/`, config);
+
+			
+			const userProfileResponse = await axios.get(`http://dmytromigirov.space/api/v1/users/user_profile_by_user_id/${userResponse.data.pk}/`, 
+			config);
 	
 			setUserData(userProfileResponse.data);
 		  } catch (error) {
@@ -40,11 +44,11 @@ export default function UserPage() {
 		<div className={styles.container}>
 			<div className={styles.user}>
 				<div className={styles.user__head}>
-					<UserHead userData={userData}/>
+					<UserHead userData={userData} />
 				</div>
 				
 
-				<AboutMe userData={userData} />
+				<AboutMe userData={userData}/>
 				<LatestActivityLayout />
 			</div>
 

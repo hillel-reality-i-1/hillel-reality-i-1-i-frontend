@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
@@ -13,14 +13,28 @@ import CustomButton from '../../CustomButton/CustomButton';
 import GoogleSignIn from '../../SignIn/googleSignIn/GoogleSignIn';
 
 import styles from './SignUp.module.scss';
-import { setGoogleAuthToken } from '../../../store/slices/signInSlice';
+import { setAuthToken, setGoogleAuthToken } from '../../../store/slices/signInSlice';
+import axios from 'axios';
 
 const ModalFooter = ({ toggleSignUpModal, toggleSignInModal, toggleSignUpFormModal }) => {
 	const { t } = useTranslation();
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
+	// const changeGoogleAuthToken = (authToken) => {
+	// 	dispatch(setGoogleAuthToken(authToken));
+	// };
+
+	const changeAuthToken = (authToken) => {
+		dispatch(setAuthToken(authToken));
+	};
 
 	const changeGoogleAuthToken = (authToken) => {
 		dispatch(setGoogleAuthToken(authToken));
+		toggleSignUpModal();
+		socialLogin(authToken);
+		// setLoginError(null);
+		// setIsAuthenticated(true);
 	};
 
 	const openSinUpForm = () => {
@@ -31,6 +45,26 @@ const ModalFooter = ({ toggleSignUpModal, toggleSignInModal, toggleSignUpFormMod
 	const openSinIn = () => {
 		toggleSignUpModal();
 		toggleSignInModal();
+	};
+
+	const socialLogin = async (google_token) => {
+		try {
+			const formData = new FormData();
+			formData.append('access_token', google_token);
+			const response = await axios.post(
+				'http://dmytromigirov.space/api/v1/social-login/',
+				formData
+			);
+			const result = response.data;
+			localStorage.setItem('userId', result.user_id);
+			localStorage.setItem('fullName', result.full_name);
+			console.log('result', result);
+			dispatch(setAuthToken(result.token));
+			navigate(result.redirect_url);
+			// console.log(result);
+		} catch (error) {
+			console.error('Error during social login:', error.message);
+		}
 	};
 
 	return (

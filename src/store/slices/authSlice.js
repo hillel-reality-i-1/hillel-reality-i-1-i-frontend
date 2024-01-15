@@ -19,7 +19,8 @@ export const fetchUpdateName = createAsyncThunk(
 	'fetchUpdateName',
 	async ({ id, user_name, full_name }, { rejectWithValue }) => {
 		try {
-			const data = await axios.patch(`${URL_UPDATE_USER}${id}/`, {
+			const userId = id ? id : window.localStorage.getItem('userId');
+			const data = await axios.patch(`${URL_UPDATE_USER}${userId}/`, {
 				username: user_name,
 				full_name: full_name,
 			});

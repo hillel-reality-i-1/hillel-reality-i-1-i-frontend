@@ -1,0 +1,11 @@
+@import '../../styles/constants.scss';
+
+.container {
+	display: grid;
+	grid-template-columns: 2fr 1fr;
+	column-gap: 24px;
+	width: 100%;
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 32px 0 72px;
+}
