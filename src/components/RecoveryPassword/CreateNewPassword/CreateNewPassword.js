@@ -32,6 +32,7 @@ export default function CreateNewPassword() {
     useEffect(() => {
         setId(paramId);
         setToken(paramToken);
+
     }, [paramId, paramToken]);
 
     const {
@@ -99,7 +100,7 @@ export default function CreateNewPassword() {
                                             <Input.Password
                                                 {...field}
                                                 type='password'
-                                                placeholder="password"
+                                                placeholder='&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;'
                                                 className={styles.form_input}
                                                 id="password"
                                                 required
@@ -171,7 +172,7 @@ export default function CreateNewPassword() {
                                         {({ field }) => (
                                             <Input.Password {...field}
                                                 type='password'
-                                                placeholder="password"
+                                                placeholder='&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;'
                                                 className={styles.form_input}
                                                 id="confirmPassword"
                                                 required

@@ -18,14 +18,26 @@ export default function ForgotYourPassword() {
     const [activeButton, setActiveButton] = useState('');
     const [emailValue, setEmailValue] = useState('');
     const [errorEmail, setErrorEmail] = useState('');
+    const [invalidEmail, setInvalidEmail] = useState('');
     const navigate = useNavigate();
     const { t } = useTranslation();
 
     const someOtherFunction = async (values) => {
         const isValid = await emailValidationServer(values);
-        setActiveButton(isValid);
-        setErrorEmail(!isValid);
-        isValid && setEmailValue(values);
+        if(isValid === 1) {
+            setActiveButton(false);
+            setErrorEmail(false);
+            setInvalidEmail(true)
+        } else if (isValid === false) {
+            setActiveButton(false);
+            setErrorEmail(!isValid);
+            setInvalidEmail(false)
+        } else {
+            isValid && setEmailValue(values);
+            setInvalidEmail(false)
+            setActiveButton(true);
+        }
+        
     };
 
     return (
@@ -96,6 +108,22 @@ export default function ForgotYourPassword() {
                                         )
                                         : null
                                     }
+                                    {!activeButton
+                                        && invalidEmail
+                                        ? (
+                                            <div className={styles.form_error_wrapper}>
+                                                <img
+                                                    className={styles.error_img}
+                                                    src={error}
+                                                    alt="warning, no such email"
+                                                />
+                                                <p className={styles.error_text}>
+                                                    Введіть дійсну пошту (email@example.com)
+                                                </p>
+                                            </div>
+                                        )
+                                        : null
+                                    }
                                 </div>
                                 <div className={styles.form_button_and_link}>
                                     <button
@@ -107,7 +135,7 @@ export default function ForgotYourPassword() {
                                         <p className={activeButton
                                             ? styles.button_link_active
                                             : styles.button_link}>
-                                            {t('textForgotYourPassword.recieveTheLink')}
+                                            {t('textForgotYourPassword.recieveTheLink')} 
                                         </p>
                                     </button>
                                     <div className={styles.link_wrapper}>

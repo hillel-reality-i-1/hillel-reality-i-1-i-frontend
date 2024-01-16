@@ -3,16 +3,19 @@ import axios from 'axios';
 import { URL_CHECK_EMAIL } from '../config/API_url';
 
 const emailValidationServer = async (values) => {
-	if (!values.email.trim() || values.email.length <= 1) {
-		return false;
+	const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
+  
+	if (!values.email.trim() || values.email.length <= 2 || !emailRegex.test(values.email)) {
+		console.log('1');
+	  	return 1;
 	}
-
+  
 	try {
-		const response = await axios.post(URL_CHECK_EMAIL, values);
-		return response.data.exists;
+	  const response = await axios.post(URL_CHECK_EMAIL, values);
+	  return response.data.exists;
 	} catch (error) {
-		return false;
+	  return false;
 	}
-};
-
-export default emailValidationServer;
+  };
+  
+  export default emailValidationServer;
