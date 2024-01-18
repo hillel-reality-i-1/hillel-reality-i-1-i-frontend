@@ -1,121 +1,121 @@
 @import '../../../src/styles/constants.scss';
 
-:global {
-	.ant-select:not(.ant-select-customize-input) {
-		.ant-select-selector {
-			background-color: $color-gray;
-			// border: 1px solid $color-gray30;
-		}
-	}
-	.ant-select-dropdown {
-		border-radius: 24px;
-		padding: 6px 0;
-		border: 1px solid $color-gray30;
-		background-color: $color-gray;
+// :global {
+// 	.ant-select:not(.ant-select-customize-input) {
+// 		.ant-select-selector {
+// 			background-color: $color-gray;
+// 			// border: 1px solid $color-gray30;
+// 		}
+// 	}
+// 	.ant-select-dropdown {
+// 		border-radius: 24px;
+// 		padding: 6px 0;
+// 		border: 1px solid $color-gray30;
+// 		background-color: $color-gray;
 
-		.ant-select-item {
-			color: $color-gray70;
-			font-size: 16px;
-			font-weight: 400;
-			line-height: 160%;
-			padding: 8px 14px;
-			border-radius: 0;
-		}
-	}
+// 		.ant-select-item {
+// 			color: $color-gray70;
+// 			font-size: 16px;
+// 			font-weight: 400;
+// 			line-height: 160%;
+// 			padding: 8px 14px;
+// 			border-radius: 0;
+// 		}
+// 	}
 
-	.ant-select-dropdown .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
-		font-family: $font-ns-regular;
-		// position: relative;
-		font-size: 16px;
-		color: $color-primary30base;
-		width: 100%;
-		font-weight: 400;
-		line-height: 160%;
-		background-color: #f4f9ff;
-		border-radius: 0;
+// 	.ant-select-dropdown .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+// 		font-family: $font-ns-regular;
+// 		// position: relative;
+// 		font-size: 16px;
+// 		color: $color-primary30base;
+// 		width: 100%;
+// 		font-weight: 400;
+// 		line-height: 160%;
+// 		background-color: #f4f9ff;
+// 		border-radius: 0;
 
-		&::after {
-			content: '';
-			display: block;
-			position: absolute;
-			width: 24px;
-			height: 24px;
-			background-image: url('../../assets/img/icons/icon-search-bar/icon_active_dropdown.svg');
-			background-repeat: no-repeat;
-			background-size: 24px 24px;
-			top: 50%;
-			right: 14px;
-			transform: translate(0, -50%);
-		}
-	}
+// 		&::after {
+// 			content: '';
+// 			display: block;
+// 			position: absolute;
+// 			width: 24px;
+// 			height: 24px;
+// 			background-image: url('../../assets/img/icons/icon-search-bar/icon_active_dropdown.svg');
+// 			background-repeat: no-repeat;
+// 			background-size: 24px 24px;
+// 			top: 50%;
+// 			right: 14px;
+// 			transform: translate(0, -50%);
+// 		}
+// 	}
 
-	.ant-select-multiple {
-		.ant-select-selector {
-			padding: 14px 38px 14px 24px;
+// 	.ant-select-multiple {
+// 		.ant-select-selector {
+// 			padding: 14px 38px 14px 24px;
 
-			.ant-select-selection-placeholder {
-				padding-left: 14px;
-				font-family: $font-ns-regular;
-				color: $color-gray50;
-				font-size: 16px;
-				font-weight: 400;
-				line-height: 160%;
-			}
-		}
-	}
+// 			.ant-select-selection-placeholder {
+// 				padding-left: 14px;
+// 				font-family: $font-ns-regular;
+// 				color: $color-gray50;
+// 				font-size: 16px;
+// 				font-weight: 400;
+// 				line-height: 160%;
+// 			}
+// 		}
+// 	}
 
-	.anticon {
-		svg {
-			display: none;
-		}
-	}
+// 	.anticon {
+// 		svg {
+// 			display: none;
+// 		}
+// 	}
 
-	.ant-select .ant-select-arrow {
-		// pointer-events: painted;
-		&:hover {
-			cursor: pointer !important;
-		}
+// 	.ant-select .ant-select-arrow {
+// 		// pointer-events: painted;
+// 		&:hover {
+// 			cursor: pointer !important;
+// 		}
 
-		svg[data-icon='down'] {
-			display: none;
-			cursor: pointer;
-		}
+// 		svg[data-icon='down'] {
+// 			display: none;
+// 			cursor: pointer;
+// 		}
 
-		svg[data-icon='search'] {
-			display: none;
-		}
-		.anticon-down {
-			background-image: url('../../assets/img/icons/icons-SignUp/arrow_down.svg');
-			background-size: 24px;
-			background-repeat: no-repeat;
-			background-position: 96%;
-			height: 24px;
-			width: 24px;
-		}
+// 		svg[data-icon='search'] {
+// 			display: none;
+// 		}
+// 		.anticon-down {
+// 			background-image: url('../../assets/img/icons/icons-SignUp/arrow_down.svg');
+// 			background-size: 24px;
+// 			background-repeat: no-repeat;
+// 			background-position: 96%;
+// 			height: 24px;
+// 			width: 24px;
+// 		}
 
-		.anticon-search {
-			background-image: url('../../assets/img/icons/icons-SignUp/arrow_up.svg');
-			background-size: 24px;
-			width: 24px;
-			height: 24px;
-		}
+// 		.anticon-search {
+// 			background-image: url('../../assets/img/icons/icons-SignUp/arrow_up.svg');
+// 			background-size: 24px;
+// 			width: 24px;
+// 			height: 24px;
+// 		}
 
-		// &:hover {
-		// 	cursor: pointer;
-		// }
-	}
+// 		// &:hover {
+// 		// 	cursor: pointer;
+// 		// }
+// 	}
 
-	.ant-input {
-		&::placeholder {
-			padding-left: 14px;
-			font-family: $font-ns-regular;
-			color: $color-gray50;
-			font-size: 16px;
-			font-weight: 400;
-			line-height: 160%;
-		}
-	}
-}
+// 	.ant-input {
+// 		&::placeholder {
+// 			padding-left: 14px;
+// 			font-family: $font-ns-regular;
+// 			color: $color-gray50;
+// 			font-size: 16px;
+// 			font-weight: 400;
+// 			line-height: 160%;
+// 		}
+// 	}
+// }
 
 .search {
 	// height: 100%;
