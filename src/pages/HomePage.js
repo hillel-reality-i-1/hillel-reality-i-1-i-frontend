@@ -3,45 +3,77 @@ import axios from '../config/axios/axios';
 import SearchSection from '../components/SearchSection/SearchSection';
 import Footer from '../components/Footer/Footer';
 import MainSection from '../components/MainSection/MainSection';
-import { URL_GET_POSTS } from '../config/API_url';
+import { URL_GET_POSTS, URL_SEARCH_POSTS } from '../config/API_url';
 
 export default function HomePage() {
 	const [posts, setPosts] = useState([]);
 	const [countPosts, setCountPosts] = useState(0);
-	// const [searchTerm, setSearchTerm] = useState('');
+	const [searchTerm, setSearchTerm] = useState(null);
 	const [page, setPage] = useState(1);
 
-	const handleSearch = (newSearchTerm) => {
-		// setSearchTerm(newSearchTerm);
-		// setPage(1); //Resetting the page number when changing the search query
+	const handleSearch = async (newSearchTerm) => {
+		setSearchTerm(newSearchTerm);
+		setPage(1); //Resetting the page number when changing the search query
 	};
 
 	useEffect(() => {
-		const fetchAllPosts = async () => {
+		const fetcFilterPosts = async () => {
 			try {
-				const data = await axios.get(URL_GET_POSTS, {
-					params: {
-						page_size: 3,
-						page: page,
-					},
-				});
+				const params = {
+					page_size: 3,
+					page: page,
+				};
 
+				if (searchTerm.query) {
+					params.query = searchTerm.query;
+				}
+
+				if (searchTerm.countryId && searchTerm.countryId.length > 0) {
+					params.country_ids = `[${searchTerm.countryId}]`;
+				}
+
+				if (searchTerm.profCategoriesId && searchTerm.profCategoriesId.length > 0) {
+					params.category_ids = `[${searchTerm.profCategoriesId}]`;
+				}
+
+				const data = await axios.get(URL_SEARCH_POSTS, { params });
+				setPosts([]);
 				setCountPosts(data.count);
-				// console.log('dsata', data);
 				setPosts((prevPosts) => [...prevPosts, ...data.results]);
+				// }
 			} catch (error) {
 				return error.message;
 			}
 		};
 
-		fetchAllPosts();
-	}, [page]);
+		if (searchTerm) {
+			fetcFilterPosts();
+		} else {
+			const fetchAllPosts = async () => {
+				try {
+					const data = await axios.get(URL_GET_POSTS, {
+						params: {
+							page_size: 3,
+							page: page,
+						},
+					});
+					// setCountPosts(0);
+					// setPosts([]);
+					setCountPosts(data.count);
+
+					setPosts((prevPosts) => [...prevPosts, ...data.results]);
+				} catch (error) {
+					return error.message;
+				}
+			};
+
+			fetchAllPosts();
+		}
+	}, [page, searchTerm]);
 
 	const handleNextPage = () => {
 		setPage((prevPage) => prevPage + 1);
 	};
-
-	// console.log(posts);
 
 	return (
 		<>

@@ -1,0 +1,43 @@
+@import '../../../styles/constants.scss';
+
+.container {
+	width: 100%;
+	max-width: 410px;
+	border-radius: 24px;
+	padding: 24px;
+	background-color: $color-gray10;
+}
+
+.title_contributions {
+	color: $color-gray80;
+	font-family: $font-ns-semiBold;
+	font-size: 28px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 130%;
+}
+
+.description_contributions {
+	color: $color-gray70;
+	font-family: $font-ns-regular;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 160%;
+	margin-top: 8px;
+}
+
+.contributions_wrapper {
+	margin-top: 24px;
+
+	&_empty {
+		color: $color-gray50;
+		text-align: center;
+		font-family: $font-ns-regular;
+		font-size: 18px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 160%;
+		padding: 48px 0;
+	}
+}

@@ -1,9 +1,24 @@
 import Card from '../Card/Card';
+import cat from '../../assets/img/icons/post/cat.svg';
 import styles from './ContentSection.module.scss';
 
 const ContentSection = ({ posts, onNextPage, countPosts }) => {
 	return (
 		<section className={styles.container}>
+			<span className={styles.count_posts}>{countPosts} results for your search</span>
+			{countPosts === 0 && (
+				<div className={styles.empty_search_results}>
+					<img
+						className={styles.empty_search_results_img}
+						src={cat}
+						alt='Cat'
+					/>
+					<p className={styles.empty_search_results_text}>
+						We're sorry, but it seems that your search didn't yield any results. Please check your
+						spelling, try different keywords, countries, or explore related categories.
+					</p>
+				</div>
+			)}
 			{posts &&
 				posts.map((posts, id) => (
 					<Card

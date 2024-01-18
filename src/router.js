@@ -18,6 +18,7 @@ import SettingsPage from './pages/SettingsPage/SettingsPage';
 import NicknamePage from './pages/NicknamePage/NicknamePage';
 import FullName from './pages/FullNamePage/FullName';
 import LocationPage from './pages/LocationPage/LocationPage';
+import PostDetailsPage from './pages/PostDetailsPage/PostDetailsPage';
 
 const router = createBrowserRouter([
 	{
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
 				index: true,
 				element: <HomePage />,
 			},
+			{ path: '/PostDetailsPage/:id', element: <PostDetailsPage /> },
 			{
 				path: '/user',
 				element: <UserPage />,

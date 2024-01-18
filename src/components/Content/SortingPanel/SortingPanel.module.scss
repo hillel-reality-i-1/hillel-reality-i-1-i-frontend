@@ -1,0 +1,51 @@
+@import '../../../styles/constants.scss';
+
+.sorting_panel {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 24px;
+
+	.left_col {
+		color: $color-gray70;
+		font-family: $font-ns-medium;
+		font-size: 18px;
+		font-style: normal;
+		font-weight: 500;
+		line-height: 160%;
+	}
+
+	.right_col {
+		display: flex;
+		align-items: center;
+		gap: 4px;
+		color: $color-gray80;
+
+		font-family: $font-ns-regular;
+		font-size: 16px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 160%;
+
+		.select_sort {
+			display: flex;
+			align-items: center;
+
+			.blue_text {
+				color: $color-primary30base;
+
+				font-family: $font-ns-medium;
+				font-size: 16px;
+				font-style: normal;
+				font-weight: 500;
+				line-height: 160%;
+			}
+
+			img {
+				width: 24px;
+				height: 24px;
+			}
+		}
+	}
+}

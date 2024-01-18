@@ -30,7 +30,6 @@ const StepLayout = () => {
 	const [phone, setPhone] = useState('');
 	const { token } = useParams();
 
-	console.log(token);
 	useEffect(() => {
 		const fetchKey = async () => {
 			const storedToken = localStorage.getItem('authTokenUHelp');
@@ -108,6 +107,7 @@ const StepLayout = () => {
 				phone_number: phoneData,
 			};
 			await dispatch(fetchAddDataProfile(combinedData));
+
 			if (phoneData.length > 1) {
 				await sendVerificationCode();
 				novigate('/verifyCodeForm');

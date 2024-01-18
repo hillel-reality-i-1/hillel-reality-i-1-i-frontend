@@ -1,7 +1,8 @@
 @import '../../styles/constants.scss';
 
 .container {
-	display: grid;
+	display: flex;
+	flex-direction: column;
 	row-gap: 20px;
 }
 
@@ -13,4 +14,36 @@
 	width: 100%;
 	max-width: 82px;
 	margin-top: 46px;
+}
+
+.count_posts {
+	display: inline-block;
+	font-family: $font-ns-medium;
+	font-size: 20px;
+	font-weight: 500;
+	line-height: 160%;
+	color: $color-gray80;
+}
+
+.empty_search_results {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 4px;
+	padding: 32px;
+	&_img {
+		width: 192px;
+		height: 133px;
+	}
+	&_text {
+		width: 100%;
+		max-width: 500px;
+		margin-top: 16px;
+		color: $color-gray50;
+		font-family: $font-ns-regular;
+		font-size: 18px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 160%;
+	}
 }

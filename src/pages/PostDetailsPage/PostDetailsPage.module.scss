@@ -1,0 +1,40 @@
+@import '../../styles/constants.scss';
+
+.container {
+	width: 100%;
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 14px 0 38px;
+}
+
+.customClassButton {
+	margin-left: 14px;
+}
+
+.btn_inner {
+	display: flex;
+	align-items: center;
+	color: $color-primary30base;
+	font-family: $font-ns-medium;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 160%;
+
+	&:hover {
+		color: $color-primary20;
+	}
+
+	.icon_back {
+		width: 24px;
+		height: 24px;
+		margin-right: 4px;
+	}
+}
+
+.post_details_wrapper {
+	display: grid;
+	grid-template-columns: 2fr 1fr;
+	column-gap: 24px;
+	margin-top: 14px;
+}

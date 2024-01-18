@@ -7,7 +7,7 @@ import '../../../translations/i18n';
 import { Formik, Form, Field } from 'formik';
 import { Button, Spin } from 'antd';
 import location from '../../../assets/img/icons/icons-SignUp/location.svg';
-import { URL_COUNTRY_LIST, URL_CITY_LIST } from '../../../config/API_url';
+import { URL_COUNTRY_LIST, URL_CITY_LIST, URL_LANGUAGE } from '../../../config/API_url';
 
 import CustomButton from '../../CustomButton/CustomButton';
 import styles from './Step2Form.module.scss';
@@ -20,12 +20,12 @@ const Step2Form = ({ onNext }) => {
 	const [cities, setCities] = useState(null);
 	const [selectedCountryId, setSelectedCountryId] = useState(null);
 	const [selectedCityId, setSelectedCityId] = useState(null);
+	const langUK = 'uk/';
 
 	useEffect(() => {
 		const fetchLanguage = async () => {
 			try {
-				const data = await axios.get('http://dmytromigirov.space/set-language/uk/');
-				console.log(data);
+				const data = await axios.get(`${URL_LANGUAGE}${langUK}`);
 				return data;
 			} catch (error) {
 				return error.message;

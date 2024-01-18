@@ -10,7 +10,7 @@ import icon_comments from '../../assets/img/icons/post/icon_comments.svg';
 import { calculateReadTime } from '../../helpers/calculateReadTime';
 import { formatTimeElapsed } from '../../helpers/formatTimeElapsed';
 import { URL_USER_INFO_USER_ID } from '../../config/API_url';
-
+// import icon_active_dropdown from '../../assets/img/icons/icon-search-bar/icon_active_dropdown.svg';
 import styles from './Card.module.scss';
 
 const Card = ({ posts }) => {
@@ -18,6 +18,22 @@ const Card = ({ posts }) => {
 	const [postData, setPostData] = useState(null);
 	const [user, setUser] = useState(null);
 	const userId = postData && postData?.author;
+
+	// const langUK = 'uk/';
+
+	// useEffect(() => {
+	// 	const fetchLanguage = async () => {
+	// 		try {
+	// 			const data = await axios.get(`${URL_LANGUAGE}${langUK}`);
+	// 			// console.log(data);
+	// 			return data;
+	// 		} catch (error) {
+	// 			return error.message;
+	// 		}
+	// 	};
+
+	// 	fetchLanguage();
+	// }, []);
 
 	useEffect(() => {
 		setPostData(posts);
@@ -67,7 +83,7 @@ const Card = ({ posts }) => {
 											alt='icon expert'
 										/>
 										<span className={styles.expert_badge}>
-											Експерт у {user?.user_profile_extended?.profession}
+											{user?.user_profile_extended?.profession}
 										</span>
 									</div>
 								)}
