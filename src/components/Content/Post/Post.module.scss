@@ -1,5 +1,11 @@
 @import '../../../styles/constants.scss';
 
+:global {
+	.ant-input:hover {
+		border-color: #dbdbdd;
+	}
+}
+
 .post_wrapper {
 	width: 100%;
 	padding: 24px;
@@ -131,5 +137,20 @@
 			display: flex;
 			align-items: center;
 		}
+	}
+}
+
+.creation_comment {
+	margin-top: 24px;
+	&_input_wrapper {
+		display: flex;
+		width: 100%;
+	}
+
+	&_btn_wrapper {
+		width: 100%;
+		max-width: 218px;
+		margin-left: auto;
+		margin-top: 12px;
 	}
 }

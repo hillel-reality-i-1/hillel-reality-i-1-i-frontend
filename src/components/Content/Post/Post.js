@@ -10,11 +10,13 @@ import icon_comments from '../../../assets/img/icons/post/icon_comments.svg';
 import { calculateReadTime } from '../../../helpers/calculateReadTime';
 import { formatTimeElapsed } from '../../../helpers/formatTimeElapsed';
 import { URL_GET_POST_DETAILS, URL_USER_INFO_USER_ID } from '../../../config/API_url';
+import CustomButton from '../../CustomButton/CustomButton';
 
 import SortingPanel from '../SortingPanel/SortingPanel';
 
 import styles from './Post.module.scss';
 import { useParams } from 'react-router-dom';
+import TextArea from 'antd/es/input/TextArea';
 
 const Post = () => {
 	const { id } = useParams();
@@ -56,7 +58,8 @@ const Post = () => {
 	const timeElapsed = post && formatTimeElapsed(post?.creation_date);
 	const userCity = user?.user_profile?.city.split(',')[0];
 
-	console.log('post', post);
+	console.log('ggg', post?.category);
+	// console.log('post', post);
 	return (
 		<>
 			<div className={styles.post_wrapper}>
@@ -102,22 +105,22 @@ const Post = () => {
 					</div>
 					<div className={styles.post_footer}>
 						<div className={styles.post_footer_tags}>
-							{/* {post.country &&
-								post.country.map((item, i) => (
+							{post?.country &&
+								post?.country.map((item, i) => (
 									<span
 										className={styles.post_footer_tags_label}
 										key={i}>
 										{item}
 									</span>
 								))}
-							{post.category.length > 0 &&
-								post.category.map((item, i) => (
+							{post?.category.length > 0 &&
+								post?.category.map((item, i) => (
 									<span
 										className={styles.post_footer_tags_label}
 										key={i}>
 										{item}
 									</span>
-								))} */}
+								))}
 							{/* <span className={styles.post_footer_tags_label}>{post?.category}</span> */}
 						</div>
 						<div className={styles.post_footer_bottom}>
@@ -143,6 +146,28 @@ const Post = () => {
 			<div className={styles.comments}>
 				{' '}
 				<SortingPanel nameResult='коментарів' />
+				<div className={styles.creation_comment}>
+					<div className={styles.creation_comment_input_wrapper}>
+						<img
+							src={Avatar}
+							alt='Avatar'
+							style={{ width: '56px', height: '56px', marginRight: '16px' }}
+						/>
+						<TextArea
+							rows={4}
+							placeholder='Розскажіть свою думку тут.'
+							maxLength={6}
+						/>
+					</div>
+				</div>
+				<div className={styles.creation_comment_btn_wrapper}>
+					<CustomButton
+						htmlType='submit'
+						type='primary'
+						isDisable={true}>
+						Залишити коментар
+					</CustomButton>
+				</div>
 			</div>
 		</>
 	);

@@ -23,7 +23,7 @@ export default function HomePage() {
 			try {
 				setIsLoading(true);
 				const params = {
-					page_size: 3,
+					page_size: 5,
 					page: page,
 				};
 
@@ -45,7 +45,6 @@ export default function HomePage() {
 				setIsSearch(true);
 				setIsLoading(false);
 				setPosts((prevPosts) => [...prevPosts, ...data.results]);
-				// }
 			} catch (error) {
 				setIsLoading(false);
 				return error.message;
@@ -60,7 +59,7 @@ export default function HomePage() {
 					setIsLoading(true);
 					const data = await axios.get(URL_GET_POSTS, {
 						params: {
-							page_size: 3,
+							page_size: 5,
 							page: page,
 						},
 					});
