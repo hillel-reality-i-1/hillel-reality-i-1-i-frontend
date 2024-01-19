@@ -9,7 +9,9 @@ export default function HomePage() {
 	const [posts, setPosts] = useState([]);
 	const [countPosts, setCountPosts] = useState(0);
 	const [searchTerm, setSearchTerm] = useState(null);
+	const [isSearch, setIsSearch] = useState(false);
 	const [page, setPage] = useState(1);
+	const [isLoading, setIsLoading] = useState(true);
 
 	const handleSearch = async (newSearchTerm) => {
 		setSearchTerm(newSearchTerm);
@@ -19,6 +21,7 @@ export default function HomePage() {
 	useEffect(() => {
 		const fetcFilterPosts = async () => {
 			try {
+				setIsLoading(true);
 				const params = {
 					page_size: 3,
 					page: page,
@@ -39,9 +42,12 @@ export default function HomePage() {
 				const data = await axios.get(URL_SEARCH_POSTS, { params });
 				setPosts([]);
 				setCountPosts(data.count);
+				setIsSearch(true);
+				setIsLoading(false);
 				setPosts((prevPosts) => [...prevPosts, ...data.results]);
 				// }
 			} catch (error) {
+				setIsLoading(false);
 				return error.message;
 			}
 		};
@@ -51,6 +57,7 @@ export default function HomePage() {
 		} else {
 			const fetchAllPosts = async () => {
 				try {
+					setIsLoading(true);
 					const data = await axios.get(URL_GET_POSTS, {
 						params: {
 							page_size: 3,
@@ -60,9 +67,11 @@ export default function HomePage() {
 					// setCountPosts(0);
 					// setPosts([]);
 					setCountPosts(data.count);
-
+					setIsSearch(false);
+					setIsLoading(false);
 					setPosts((prevPosts) => [...prevPosts, ...data.results]);
 				} catch (error) {
+					setIsLoading(false);
 					return error.message;
 				}
 			};
@@ -82,6 +91,8 @@ export default function HomePage() {
 				posts={posts}
 				onNextPage={handleNextPage}
 				countPosts={countPosts}
+				isSearch={isSearch}
+				isLoading={isLoading}
 			/>
 			<Footer />
 		</>

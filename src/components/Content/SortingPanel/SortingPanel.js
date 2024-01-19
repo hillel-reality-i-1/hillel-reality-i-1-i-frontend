@@ -2,11 +2,11 @@ import icon_arrow_down from '../../../assets/img/icons/post/icon_arrow_down.svg'
 
 import styles from './SortingPanel.module.scss';
 
-const SortingPanel = () => {
+const SortingPanel = ({ nameResult }) => {
 	return (
 		<div className={styles.sorting_panel}>
-			<p className={styles.left_col}>0 внесків</p>
-			<p className={styles.right_col}>
+			<p className={styles.left_col}>0 {nameResult}</p>
+			<div className={styles.right_col}>
 				Сортувати за
 				<div className={styles.select_sort}>
 					<span className={styles.blue_text}>Спершу нові</span>
@@ -15,7 +15,7 @@ const SortingPanel = () => {
 						alt='Arrow'
 					/>
 				</div>
-			</p>
+			</div>
 		</div>
 	);
 };

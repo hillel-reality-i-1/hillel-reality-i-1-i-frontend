@@ -29,7 +29,7 @@ const router = createBrowserRouter([
 				index: true,
 				element: <HomePage />,
 			},
-			{ path: '/PostDetailsPage/:id', element: <PostDetailsPage /> },
+			{ path: '/postDetailsPage/:id', element: <PostDetailsPage /> },
 			{
 				path: '/user',
 				element: <UserPage />,

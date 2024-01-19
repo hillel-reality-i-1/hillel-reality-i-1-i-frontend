@@ -1,12 +1,15 @@
+import { useState } from 'react';
+import { Spin } from 'antd';
 import Card from '../Card/Card';
 import cat from '../../assets/img/icons/post/cat.svg';
 import styles from './ContentSection.module.scss';
 
-const ContentSection = ({ posts, onNextPage, countPosts }) => {
+const ContentSection = ({ posts, onNextPage, countPosts, isSearch, isLoading }) => {
+	console.log('post', posts);
 	return (
 		<section className={styles.container}>
-			<span className={styles.count_posts}>{countPosts} results for your search</span>
-			{countPosts === 0 && (
+			{isSearch && <span className={styles.count_posts}>{countPosts} results for your search</span>}
+			{!isLoading && countPosts === 0 && (
 				<div className={styles.empty_search_results}>
 					<img
 						className={styles.empty_search_results_img}
@@ -19,7 +22,14 @@ const ContentSection = ({ posts, onNextPage, countPosts }) => {
 					</p>
 				</div>
 			)}
-			{posts &&
+			{isLoading && (
+				<div className={styles.spin_wrapper}>
+					<Spin />
+				</div>
+			)}
+
+			{!isLoading &&
+				posts &&
 				posts.map((posts, id) => (
 					<Card
 						key={id}

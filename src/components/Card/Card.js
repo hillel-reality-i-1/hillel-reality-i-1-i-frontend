@@ -12,6 +12,7 @@ import { formatTimeElapsed } from '../../helpers/formatTimeElapsed';
 import { URL_USER_INFO_USER_ID } from '../../config/API_url';
 // import icon_active_dropdown from '../../assets/img/icons/icon-search-bar/icon_active_dropdown.svg';
 import styles from './Card.module.scss';
+import { Link } from 'react-router-dom';
 
 const Card = ({ posts }) => {
 	const [isExpanded, setIsExpanded] = useState(false);
@@ -99,25 +100,27 @@ const Card = ({ posts }) => {
 					</div>
 					<span className={styles.time_of_creation}>{timeElapsed}</span>
 				</div>
-				<article className={styles.content}>
-					<h5 className={styles.content_title}>{postData?.title}</h5>
-					<p className={`${styles.content_post} ${isExpanded && styles.expanded}`}>
-						{postData?.content}
-					</p>
-					{!isExpanded ? (
-						<div
-							className={styles.btn_read_more}
-							onClick={handleReadMoreClick}>
-							Read more...
-						</div>
-					) : (
-						<div
-							className={styles.btn_read_more}
-							onClick={handleReadMoreClick}>
-							Hide...
-						</div>
-					)}
-				</article>
+				<Link to={`/postDetailsPage/${postData?.id}`}>
+					<article className={styles.content}>
+						<h5 className={styles.content_title}>{postData?.title}</h5>
+						<p className={`${styles.content_post} ${isExpanded && styles.expanded}`}>
+							{postData?.content}
+						</p>
+						{!isExpanded ? (
+							<div
+								className={styles.btn_read_more}
+								onClick={handleReadMoreClick}>
+								Read more...
+							</div>
+						) : (
+							<div
+								className={styles.btn_read_more}
+								onClick={handleReadMoreClick}>
+								Hide...
+							</div>
+						)}
+					</article>
+				</Link>
 				<div className={styles.content_footer}>
 					<div className={styles.content_footer_left_col}>
 						<span className={styles.post_user}>{postData?.country[0]}</span>
