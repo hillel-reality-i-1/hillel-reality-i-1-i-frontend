@@ -2,9 +2,10 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 
 import CustomModal from '../../modals/CustomModal/CustomModal';
-import { ReactComponent as CloseIcon } from '../../../assets/img/icons/icons-signIn/close-signIn-icon.svg';
-import styles from '../userHead.module.scss';
 import BlueButton from '../../buttons/BlueButton/BlueButton';
+import { ReactComponent as CloseIcon } from '../../../assets/img/icons/icons-signIn/close-signIn-icon.svg';
+
+import styles from '../userHead.module.scss';
 
 export default function DeleteConfirmation({isModalOpen, toggleModal, avatarID, setAvatarData}) {
   const authToken = useSelector((state) => state.signIn.authTokenUHelp);
@@ -12,7 +13,7 @@ export default function DeleteConfirmation({isModalOpen, toggleModal, avatarID, 
   const handleDeleteItem = async (itemId) => {
     try {
       console.log(avatarID);
-      const response = await axios.delete(`http://dmytromigirov.space/api/v1/files/img_list/${avatarID}/`, {
+      const response = await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/v1/files/img_list/${avatarID}/`, {
         headers: {
           Authorization: `Token ${authToken}`,
         },
@@ -37,7 +38,7 @@ export default function DeleteConfirmation({isModalOpen, toggleModal, avatarID, 
           Фото допомогає іншим користувачам вас впізнавати.
         </div>
         <div className={styles.deleteModal__footer}>
-            <div className={styles.discard}> <a>Скасувати</a> </div>
+            <div className={styles.discard}> <a onClick={toggleModal}>Скасувати</a> </div>
             <BlueButton text={'Видалити'} additionalStyles={styles.blueButtonStyles} onClick={handleDeleteItem}/>
         </div>
 

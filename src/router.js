@@ -19,6 +19,7 @@ import NicknamePage from './pages/NicknamePage/NicknamePage';
 import FullName from './pages/FullNamePage/FullName';
 import LocationPage from './pages/LocationPage/LocationPage';
 import PostDetailsPage from './pages/PostDetailsPage/PostDetailsPage';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
 const router = createBrowserRouter([
 	{
@@ -31,18 +32,29 @@ const router = createBrowserRouter([
 			},
 			{ path: '/postDetailsPage/:id', element: <PostDetailsPage /> },
 			{
-				path: '/user',
-				element: <UserPage />,
-				children: [
-					{
-						path: ':username',
-						element: <UserPage />,
-					},
-				],
+				path: 'user',
+				element: <ProtectedRoute><UserPage /></ProtectedRoute>,
 			},
 			{
 				path: 'settings',
-				element: <SettingsPage />,
+				element: <ProtectedRoute> <Outlet /></ProtectedRoute>,
+				children: [
+					{
+						index: true, element: <SettingsPage />
+					},
+					{
+						path: 'nickname',
+						element: <NicknamePage />,
+					},
+					{
+						path: 'fullName',
+						element: <FullName />,
+					},
+					{
+						path: 'location',
+						element: <LocationPage />,
+					},
+				]
 			},
 			{
 				path: 'settings/nickname',

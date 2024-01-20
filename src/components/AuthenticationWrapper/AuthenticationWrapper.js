@@ -30,7 +30,7 @@ export default function AuthenticationWrapper({ currentPage }) {
 
 	return (
 		<div style={{ display: 'flex' }}>
-			{authToken || googleAuth ? (
+			{authToken  ? (
 				<AccountHeader />
 			) : (
 				<div className={style.button_authorization_wrapper}>

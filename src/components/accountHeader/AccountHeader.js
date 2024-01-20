@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Dropdown, Space } from 'antd'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
+import { useGetUserDataQuery } from '../../store/services/userApi';
 import { clearAuthToken } from '../../store/slices/signInSlice';
 import { ReactComponent as Bell } from '../../assets/img/icons/icons-header/bell-grey.svg'
-import BlueButton from '../buttons/BlueButton/BlueButton';
+import { ReactComponent as DropDown } from '../../assets/img/icons/drop-down/drop-down-icon.svg'
+import BlueButton from '../buttons/BlueButton/BlueButton'
 import dropDown from '../../assets/img/icons/drop-down/dropDown.png'
 import questionMark from '../../assets/img/icons/drop-down/question-mark.svg';
 import settingsIcon from '../../assets/img/icons/drop-down/settings-icon.svg';
@@ -17,6 +19,8 @@ import SignOutModalContent from './SignOutContent/SignOutModalContent';
 import styles from './accountHeader.module.scss'
 
 export default function AccountHeader() {
+
+  const { data, error, isLoading } = useGetUserDataQuery();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -34,6 +38,15 @@ export default function AccountHeader() {
     navigate('/')
   };
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+console.log(data);
+
   return (
     <div className={styles.account}>
 
@@ -45,23 +58,26 @@ export default function AccountHeader() {
 
       <BlueButton text={'Створити допис'} />
 
-      <div className={styles.account__notification}>
+      {/* <div className={styles.account__notification}>
         <Bell />
-      </div>
+      </div> */}
 
       <div className={styles.account__user} >
-        <div className={styles.account__user__avatar}>
-          {/* <img /> */}
-        </div>
+        {/* <div className={styles.account__user__avatar}>
+        {data.profile_picture && data.profile_picture.image !== null ? 
+    <img src={`${process.env.REACT_APP_API_BASE_URL}${data.profile_picture.image}`} /> 
+    : ''
+  }
+        </div> */}
 
-        <p className={styles.account__user__name} > Name </p>
+        <p className={styles.account__user__name} > {data.full_name} </p>
 
         <Dropdown
           className={styles.dropdown}
           menu={{
             items: [...items, {
               label:
-                <a className={styles.dropdown__item} onClick={toggleModal}>
+                <a className={styles.dropdown__item__red} onClick={toggleModal}>
                   <img src={signOut} />Вийти
                 </a>,
               key: '4',
@@ -70,17 +86,16 @@ export default function AccountHeader() {
           placement='bottomRight'
           trigger={['click']}
         >
-          <a onClick={(e) => e.preventDefault()} >
-            <Space>
-              <img src={dropDown} />
-            </Space>
+          <a onClick={(e) => e.preventDefault()} className={styles.flex}>
+            {/* <Space className={styles.flex}> */}
+              <DropDown />
+            {/* </Space> */}
           </a>
         </Dropdown>
       </div>
     </div>
   )
 }
-
 
 const items = [
   {
