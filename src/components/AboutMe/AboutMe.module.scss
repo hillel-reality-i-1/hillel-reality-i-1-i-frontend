@@ -60,7 +60,7 @@
             width: 100%;
             display: flex;
             justify-content: center;
-          
+
 
             .сontainer_content_wrapper {
                 width: 396px;
@@ -124,7 +124,7 @@ $common-styles: (
         align-self: stretch;
 
         .title_text {
-            
+
             color: #0D101D;
             font-family: $medium;
             font-size: 28px;
@@ -231,7 +231,7 @@ $common-styles: (
             }
 
             .item_text {
-                
+
                 .text_title {
                     color: #47474F;
                     font-family: $regular;
@@ -324,13 +324,37 @@ $common-styles: (
         display: flex;
         width: 100%;
         gap: 16px;
-        position: relative;
+     
 
-        .my_portfolio_item {
+        .my_portfolio_item_wrapper {
             width: 146px;
             height: 182px;
             border-radius: 12px;
+            position: relative;
+
+            .my_portfolio_item {
+                width: 100%;
+                height: 100%;
+                border-radius: 12px;
+                position: absolute;
+            }
+
+            .my_portfolio_item_delete {
+                width: 100%;
+                height: 100%;
+                border-radius: 12px;
+                position: absolute;
+                
+                &:hover {
+                    background: url('../../assets/img/icons/icons-AboutMe/trash.svg') no-repeat;
+                    background-position: center;
+                    background-color: rgba(13, 16, 29, 0.40);
+                    cursor: pointer;
+                }
+            }
         }
+
+
 
         .my_portfolio_button {
             display: flex;
@@ -355,6 +379,7 @@ $common-styles: (
             top: 50%;
             left: 0;
             transform: translateY(-50%);
+            z-index: 9999;
 
             .my_portfolio_leftButton {
                 display: flex;

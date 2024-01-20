@@ -15,33 +15,50 @@ import arrowLeftIcon from '../../assets/img/icons/icons-AboutMe/arrowLeft.svg'
 import arrowRightIcon from '../../assets/img/icons/icons-AboutMe/arrowRight.svg'
 
 import styles from './AboutMe.module.scss'
+import axios from 'axios';
 
-const AboutMe = ({ userData }) => {
+const AboutMe = ({ userData, expertUserData }) => {
     const [checkedExpert, setCheckedExpert] = useState(false);
     const [tubKey, setTubKey] = useState('1');
     const [imagesArray, setImagesArray] = useState([]);
-    const [services] = useState(['UX Research', 'Creating Landing page, web services, mobile app', 'Creating animation', 'UX Writing'])
-    const [expertise] = useState(['Creating UI Design', 'Web Designer', 'Graphic Designer', 'Motion Designer'])
     const [userInstagramValue] = useState('')
     const [userFacebookValue] = useState('')
     const defaultTextSummary = 'You can share more about yourself: your history, work experience, interests, and more';
+    const [isModalOpen, setModalOpen] = useState(false);
     const [startIndex, setStartIndex] = useState(0);
+
     const endIndex = startIndex + 5;
     const visibleImages = imagesArray.slice(startIndex, endIndex);
     const showRightArrow = endIndex - 1 < imagesArray.length;
     const showLeftArrow = startIndex > 0;
-    const [isModalOpen, setModalOpen] = useState(false);
+
+    useEffect(() => {
+
+
+        addPhotoFunction()
+    }, [expertUserData.portfolio]);
+
+    const addPhotoFunction = () => {
+        if (Array.isArray(expertUserData.portfolio) && expertUserData.portfolio.length > 0) {
+            const mappedArray = expertUserData.portfolio.map(item => item.file);
+
+            setImagesArray(mappedArray);
+        }
+    }
+
+    const deletePhoto = (index, imageUrl) => {
+
+        console.log(imageUrl)
+
+    }
 
     const openModal = () => {
         setModalOpen(true);
-        console.log('true')
     };
 
     const closeModal = () => {
         setModalOpen(false);
-        console.log('false')
     };
-
 
     const changeExpertUser = (e) => {
         if (userData.phone_verified === true) {
@@ -51,11 +68,6 @@ const AboutMe = ({ userData }) => {
         }
 
     }
-
-    useEffect(() => {
-
-    }, [checkedExpert])
-
 
     const handleTabChange = (key) => {
         setTubKey(key)
@@ -70,9 +82,34 @@ const AboutMe = ({ userData }) => {
     };
 
     const handleFileChange = (e) => {
-        const files = e.target.files;
-        const newImages = Array.from(files).map((file) => URL.createObjectURL(file));
-        setImagesArray((prevImages) => [...prevImages, ...newImages]);
+        const API_ENDPOINT = 'http://dmytromigirov.space/api/v1/users/upload_portfolio/';
+        const authTokenUHelp = localStorage.getItem('authTokenUHelp');
+
+        const config = {
+            headers: {
+                'Authorization': `Token ${authTokenUHelp}`,
+                'Content-Type': 'multipart/form-data',
+            },
+        };
+
+        const formData = new FormData();
+        formData.append('file', e.target.files[0]);
+
+        axios.post(API_ENDPOINT, formData, config)
+            .then(response => {
+
+                if (response.status === 201) {
+                    console.log('true')
+
+                    console.log(response.data)
+
+
+
+
+                    setImagesArray(prevImages => [...prevImages, response.data.file]);
+
+                }
+            })
     };
 
     const items = [
@@ -257,7 +294,7 @@ const AboutMe = ({ userData }) => {
                 <div className={styles.my_expertise_block}>
                     <ul className={styles.my_expertise_list}>
                         {
-                            expertise ? expertise.map((el, index) => {
+                            expertUserData.profession ? expertUserData.profession.map((el, index) => {
                                 return <li key={index} className={styles.my_expertise_list_item}>
                                     {el}
                                 </li>
@@ -274,7 +311,7 @@ const AboutMe = ({ userData }) => {
                 <div className={styles.my_services_block}>
                     <ul className={styles.my_services_list}>
                         {
-                            services ? services.map((el, index) => {
+                            expertUserData.service ? expertUserData.service.map((el, index) => {
                                 return <li key={index} className={styles.my_services_list_item}>
                                     {el}
                                 </li>
@@ -298,12 +335,20 @@ const AboutMe = ({ userData }) => {
                         )}
 
                         {visibleImages.map((imageUrl, index) => (
-                            <img key={index}
-                                src={imageUrl}
-                                alt={`Description-${startIndex + index}`}
-                                className={styles.my_portfolio_item}
-                            />
+
+                            <div className={styles.my_portfolio_item_wrapper} key={`${imageUrl} - ${index}`} onClick={() => deletePhoto(index, imageUrl)}>
+                                <img key={index}
+                                    src={`${imageUrl}`}
+                                    alt={`Description-${startIndex + index}`}
+                                    className={styles.my_portfolio_item}
+                                />
+                                <div className={styles.my_portfolio_item_delete}></div>
+                            </div>
                         ))}
+
+                        {
+
+                        }
 
                         {!showRightArrow && (
                             <label className={styles.my_portfolio_button}>
@@ -316,6 +361,7 @@ const AboutMe = ({ userData }) => {
                                     className={styles.my_portfolio_button_input}
                                 />
                                 <img src={addIcon} alt="add icon" />
+
                             </label>
                         )}
 
@@ -405,7 +451,7 @@ const AboutMe = ({ userData }) => {
                             </span>
                         </button>
                     )}
-                    {!expertise && tubKey === '3' && (
+                    {!expertUserData.profession && tubKey === '3' && (
                         <button className={styles.tubs_button} onClick={() => { console.log('Add Expertise') }}>
                             <img src={addIcon} alt='add icon' />
                             <span className={styles.tubs_text}>
@@ -413,7 +459,7 @@ const AboutMe = ({ userData }) => {
                             </span>
                         </button>
                     )}
-                    {!services && tubKey === '4' && (
+                    {!expertUserData.service && tubKey === '4' && (
                         <button className={styles.tubs_button} onClick={() => { console.log('Add Service') }}>
                             <img src={addIcon} alt='add icon' />
                             <span className={styles.tubs_text} >

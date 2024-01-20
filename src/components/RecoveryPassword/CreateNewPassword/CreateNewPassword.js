@@ -33,6 +33,8 @@ export default function CreateNewPassword() {
         setId(paramId);
         setToken(paramToken);
 
+   
+
     }, [paramId, paramToken]);
 
     const {

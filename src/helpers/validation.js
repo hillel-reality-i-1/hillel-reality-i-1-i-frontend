@@ -8,54 +8,25 @@ export const useValidation = () => {
 	const { t } = useTranslation();
 	const [validWarnings, setValidWarnings] = useState([]);
 	const [password, setPassword] = useState('');
-	// const [data, setData] = useState('');
-
-	// validate EMAIL==========================//
 
 	const validateEmail = async (value) => {
 		let error;
 
-		// const emailValidationServer = async (value) => {
-		// 	// if (!value.email.trim() || value.email.length <= 1) {
-		// 	// 	return false;
-		// 	// }
-
-		// 	try {
-		// 		const response = await axios.post('/api/v1/accounts/check-email/', value);
-		// 		console.log(response);
-		// 		setData(response);
-		// 		// return response.data.exists;
-		// 	} catch (error) {
-		// 		return false;
-		// 	}
-		// };
-
-		// console.log('ooo', emailValidationServer(value));
-
-		// console.log('data', data);
-
 		if (!value) {
 			error = t('textSignUp.error.required');
 		}
-		// else if (value && !isValidEmail) {
-		// 	error = 'Ця пошта вже використовується. Використайте іншу або увійдіть';
-		// }
+
 		else {
 			const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
 			const maxLength = 50;
 
 			if (!emailRegex.test(value) || !value.length > maxLength) {
 				error = t('textSignUp.error.email');
-				// } else if (emailValidationServer(value)) {
-				// 	console.log('ooo', emailValidationServer(value));
-				// 	error = 'rrrrrrr';
 			}
 		}
 
 		return error;
 	};
-
-	// validate Password==========================//
 
 	const validatePasswordLength = (value) => {
 		if (value.length < 8 || value.length > 16) {
@@ -81,11 +52,11 @@ export const useValidation = () => {
 	const validatePasswordForForgotYourPassword = (value) => {
 		const errors = [];
 
-		if (value.length < 8) {
+		if (value.length < 8 || value.length > 16) {
 			errors.push('mustBeAtLeast8Numbers');
 		}
 
-		if (!/[0-9!@#$%^&*()_+={}[\]:;<>,±"'|.?~\\/-]/.test(value)) {
+		if (!/[0-9]/.test(value) || !/[!@#$%^&*()_+{}[\]:;<>,.?~\\/-]/.test(value)) {
 			errors.push('mustHaveAtLeastOneSymbolOrNumber');
 		}
 
