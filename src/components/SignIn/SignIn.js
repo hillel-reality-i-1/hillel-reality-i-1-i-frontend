@@ -77,11 +77,10 @@ export default function SignIn({
 		try {
 		  const formData = new FormData();
 		  formData.append('access_token', google_token);
-		  const response = await axios.post('http://dmytromigirov.space/api/v1/social-login/', formData);
+		  const response = await axios.post(process.env.REACT_APP_API_BASE_URL +'/api/v1/social-login/', formData);
 		  const result = response.data;
 		  dispatch(setAuthToken(result.token));
 		  navigate(result.redirect_url)
-		  console.log(result);
 		} catch (error) {
 		  console.error('Error during social login:', error.message);
 		}

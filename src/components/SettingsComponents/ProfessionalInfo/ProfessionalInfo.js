@@ -14,7 +14,7 @@ export default function ProfessionalInfo() {
   return (
     <>
       <div className={styles.professional}>
-        <h2 className={styles.title}><Briefcase /> Особиста інформація</h2>  
+        <h2 className={styles.title}><Briefcase /> Сфера діяльності</h2>  
         <div className={styles.professional__switcher}>
           <Switch defaultChecked onChange={onChange} />
           <p>Експертний Профіль</p>

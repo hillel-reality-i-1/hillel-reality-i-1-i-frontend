@@ -137,11 +137,13 @@ const SearchSection = ({ onSearch }) => {
 	};
 
 	const onSubmit = () => {
-		onSearch({
-			countryId: countryId || null,
-			profCategoriesId: profCategoriesId || null,
-			query: formik.values.query || null,
-		});
+		if (countryId || profCategoriesId || formik.values.query) {
+			onSearch({
+				countryId: countryId || null,
+				profCategoriesId: profCategoriesId || null,
+				query: formik.values.query || null,
+			});
+		}
 	};
 
 	const formik = useFormik({

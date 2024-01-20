@@ -9,7 +9,7 @@ const Contributions = () => {
 				Внески — це коментарі, що отримали найбільше позначок «Корисно», щоб користувачі швидше
 				побачили важливу інформацію в U-Help.
 			</p>
-			<SortingPanel />
+			<SortingPanel nameResult='внесків' />
 			<div className={styles.contributions_wrapper}>
 				<p className={styles.contributions_wrapper_empty}>На жаль, поки немає внесків.</p>
 			</div>

@@ -17,7 +17,7 @@ import arrowRightIcon from '../../assets/img/icons/icons-AboutMe/arrowRight.svg'
 import styles from './AboutMe.module.scss'
 import axios from 'axios';
 
-const AboutMe = ({ userData, expertUserData }) => {
+const AboutMe = ({ userData, expertUserData}) => {
     const [checkedExpert, setCheckedExpert] = useState(false);
     const [tubKey, setTubKey] = useState('1');
     const [imagesArray, setImagesArray] = useState([]);

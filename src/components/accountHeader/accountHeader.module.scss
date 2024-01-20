@@ -4,6 +4,7 @@
     display: flex;
     align-items: center;
     flex-direction: row;
+    gap: 24px;
     .modal {
         max-width: 476px;
     }
@@ -24,7 +25,7 @@
         gap: 8px;
         &__name {
             color: $color-gray80;
-            font-family: $semiBold;
+            font-family: $medium;
             font-size: 16px;
             font-style: normal;
             font-weight: 500;
@@ -35,10 +36,17 @@
             width: 56px;
             border-radius: 50%;
             background-color: $color-gray30;
+            img {
+                max-width: 56px;
+                border-radius: 50%;
+            }
         }
     }
 }
-
+.flex {
+    display: flex;
+    align-items: center;
+}
 .dropdown {
     cursor: pointer;
 }
@@ -48,7 +56,17 @@
     align-items: center;
     gap: 8px;
     font-family: $regular;
-    color: $color-gray70;
+    color: $color-gray70 !important;
+    font-size: 18px;
+    line-height: 160%; 
+}
+.dropdown__item__red {
+    padding: 9px 2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: $regular;
+    color: $color-systemError !important;
     font-size: 18px;
     line-height: 160%; 
 }

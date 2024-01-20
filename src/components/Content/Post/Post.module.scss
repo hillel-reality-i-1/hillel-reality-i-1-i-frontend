@@ -1,1 +1,156 @@
 @import '../../../styles/constants.scss';
+
+:global {
+	.ant-input:hover {
+		border-color: #dbdbdd;
+	}
+}
+
+.post_wrapper {
+	width: 100%;
+	padding: 24px;
+	border-radius: 24px;
+	background-color: $color-gray10;
+}
+
+.post {
+	margin-top: 24px;
+
+	&_title {
+		color: $color-gray80;
+		font-family: $font-ns-semiBold;
+		font-size: 40px;
+		font-style: normal;
+		font-weight: 600;
+		line-height: 120%;
+	}
+
+	&_content {
+		width: 100%;
+
+		&_text {
+			width: 100%;
+			font-family: $font-ns-medium;
+			font-size: 18px;
+			color: $color-gray70;
+			line-height: 160%;
+			margin-top: 24px;
+		}
+	}
+}
+
+.content_header {
+	display: flex;
+	justify-content: space-between;
+
+	.user {
+		display: flex;
+		// width: 100%;
+
+		.user_data_wrapper {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			margin-left: 8px;
+
+			.user_info_top_wrapper {
+				display: flex;
+
+				.full_name {
+					font-family: $font-ns-medium;
+					line-height: 160%;
+					font-size: 18px;
+					color: $color-gray80;
+				}
+
+				.label_vr_exp_wrapper {
+					display: flex;
+					margin-left: 8px;
+
+					.expert_badge {
+						font-family: $font-ns-regular;
+						line-height: 160%;
+						font-size: 14px;
+						color: $color-primary30base;
+						border-radius: 24px;
+						padding: 4px 8px;
+						background-color: #e1ebf8;
+						margin-left: 8px;
+					}
+				}
+			}
+
+			.user_info_bottom_wrapper {
+				font-family: $font-ns-regular;
+				line-height: 160%;
+				font-size: 16px;
+				color: $color-gray50;
+				margin-top: 4px;
+			}
+		}
+	}
+
+	.user_country_dot::before {
+		content: '•';
+		margin: 0 4px;
+	}
+
+	.time_of_creation {
+		font-family: $font-ns-regular;
+		line-height: 160%;
+		font-size: 14px;
+		color: $color-gray50;
+	}
+}
+
+.post_footer {
+	&_tags {
+		display: flex;
+		margin-top: 24px;
+		gap: 8px;
+
+		&_label {
+			color: $color-gray70;
+			border-radius: 24px;
+			padding: 4px 8px;
+			background-color: $color-gray20;
+
+			font-family: $font-ns-regular;
+			font-size: 14px;
+			font-style: normal;
+			font-weight: 400;
+			line-height: 160%;
+		}
+	}
+
+	&_bottom {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 24px;
+
+		&_left_col {
+			display: flex;
+			align-items: center;
+		}
+
+		&_right_col {
+			display: flex;
+			align-items: center;
+		}
+	}
+}
+
+.creation_comment {
+	margin-top: 24px;
+	&_input_wrapper {
+		display: flex;
+		width: 100%;
+	}
+
+	&_btn_wrapper {
+		width: 100%;
+		max-width: 218px;
+		margin-left: auto;
+		margin-top: 12px;
+	}
+}
