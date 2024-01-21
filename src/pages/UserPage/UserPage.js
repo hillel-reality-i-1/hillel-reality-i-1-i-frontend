@@ -41,7 +41,8 @@ export default function UserPage() {
 				setUserData(userProfileResponse.data);
 
 			} catch (error) {
-				navigate('/');
+				console.log(error);
+				// navigate('/');
 			}
 		};
 
