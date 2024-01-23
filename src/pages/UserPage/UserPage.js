@@ -36,7 +36,8 @@ export default function UserPage() {
 
 
 			} catch (error) {
-				navigate('/');
+				console.log(error);
+				// navigate('/');
 			}
 		};
 
