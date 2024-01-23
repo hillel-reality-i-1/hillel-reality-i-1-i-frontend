@@ -1,0 +1,16 @@
+.my_portfolio_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 146px;
+    height: 182px;
+    gap: 10px;
+    border-radius: 12px;
+    cursor: pointer;
+    border: 1px dashed #126FE1;
+    background: rgba(18, 111, 225, 0.10);
+
+    .my_portfolio_button_input {
+        display: none;
+    }
+}

@@ -1,0 +1,110 @@
+@import '../../../styles/constants.scss';
+
+
+.statusInformation {
+    width: 100%;
+    max-width: 100%;
+    height: 1024px;
+    background: #FDFEFF;
+
+    .statusInformation_wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 105px;
+        width: 100%;
+        max-width: 100%;
+        padding-top: 64px;
+
+        .statusInformation_logo_wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 68px;
+            gap: 0.103px;
+
+            .statusInformation_logo {
+                width: 68.25px;
+                height: 37.397px;
+            }
+
+            .statusInformation_logo_text {
+                color: #031C35;
+                text-align: center;
+                font-family: $font-p-medium;
+                font-size: 16.5px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 140%;
+            }
+        }
+
+        .statusInformation_container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 410px;
+            height: 603px;
+
+            .statusInformation_envelope_wrapper {
+                display: inline-flex;
+                padding: 16px;
+                flex-direction: column;
+                align-items: flex-start;
+                border-radius: 12px;
+                background: rgba(18, 111, 225, 0.10);
+
+                .statusInformation_envelope {
+                    width: 32px;
+                    height: 26px;
+                }
+            }
+
+            .statusInformation_text {
+                display: flex;
+                width: 410px;
+                margin-top: 48px;
+                flex-direction: column;
+                align-items: center;
+                gap: 8px;
+
+                .text_title {
+                    color: #03091C;
+                    text-align: center;
+                    font-family: $semiBold;
+                    font-size: 40px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 120%;
+                }
+
+                .text_description {
+                    color: #0D101D;
+                    text-align: center;
+                    font-family: $regular;
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 160%;
+                }
+            }
+
+            .statusInformation_blue_button {
+                display: flex;
+                width: 410px;
+                height: 56px;
+                padding: 14px 16px;
+                margin-top: 80px;
+                justify-content: center;
+                align-items: center;
+                gap: 8px;
+                flex-shrink: 0;
+            }
+
+            .statusInformation_toTheMain_button {
+                margin-top: 114px;
+            }
+        }
+    }
+}

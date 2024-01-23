@@ -10,7 +10,6 @@ import styles from './userPage.module.scss';
 
 export default function UserPage() {
 	const { data, error, isLoading } = useGetUserDataQuery();
-	const [userData, setUserData] = useState('');
 	const [userDataPortfolio, setUserDataPortfolio] = useState('');
 	const [expertUserData, setExpertUserData] = useState('');
 	const navigate = useNavigate();
@@ -28,9 +27,6 @@ export default function UserPage() {
 
 				const userResponse = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/v1/auth/user/`, config);
 
-				const userProfileResponse = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/v1/users/user_profile_by_user_id/${userResponse.data.pk}/`,
-					config);
-
 				const expertUserProfileData = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/v1/users/expert_user_profile_by_user_id/${userResponse.data.pk}/`,
 					config);
 
@@ -38,7 +34,6 @@ export default function UserPage() {
 				setUserDataPortfolio(expertUserProfileData.data.portfolio)
 				setExpertUserData(expertUserProfileData.data)
 
-				setUserData(userProfileResponse.data);
 
 			} catch (error) {
 				navigate('/');
@@ -62,7 +57,7 @@ export default function UserPage() {
 				</div>
 
 
-				<AboutMe data={data} userData={userData} userDataPortfolio={userDataPortfolio} expertUserData={expertUserData}/>
+				<AboutMe data={data} userData={data} userDataPortfolio={userDataPortfolio} expertUserData={expertUserData}/>
 				<LatestActivityLayout />
 			</div>
 

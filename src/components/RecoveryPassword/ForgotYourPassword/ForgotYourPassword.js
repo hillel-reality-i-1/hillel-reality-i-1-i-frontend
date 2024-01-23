@@ -151,7 +151,7 @@ export default function ForgotYourPassword() {
                         )}
                     </Formik>
                 </div>
-                <ButtonSignIn />
+                <ButtonSignIn text={t('textForgotYourPassword.backToSignIn')}/>
             </div>
             <div className={styles.forgotYourPasswordSection_background_wrapper}>
                 <div className={styles.forgotYourPasswordSection_background}>

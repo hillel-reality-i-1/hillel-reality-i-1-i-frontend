@@ -11,6 +11,7 @@ import ForgotYourPasswordForm from './components/RecoveryPassword/ForgotYourPass
 import EmailOnTheWay from './components/RecoveryPassword/EmailOnTheWay/EmailOnTheWay';
 import CreateNewPassword from './components/RecoveryPassword/CreateNewPassword/CreateNewPassword';
 import PasswordUpdated from './components/RecoveryPassword/PasswordUpdated/PasswordUpdated';
+import StatusInformation from './components/RecoveryPassword/StatusInformation/StatusInformation'
 import StepLayout from './components/Registration/StepLayout/StepLayout';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicy';
@@ -20,6 +21,7 @@ import FullName from './pages/FullNamePage/FullName';
 import LocationPage from './pages/LocationPage/LocationPage';
 import PostDetailsPage from './pages/PostDetailsPage/PostDetailsPage';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+
 
 const router = createBrowserRouter([
 	{
@@ -69,7 +71,6 @@ const router = createBrowserRouter([
 				element: <LocationPage />,
 			},
 			{ path: '/privacyPolicy', element: <PrivacyPolicy /> },
-			{ path: '/*', element: <NotFoundPage /> },
 		],
 	},
 	{
@@ -109,6 +110,14 @@ const router = createBrowserRouter([
 	{
 		path: '/PasswordUpdated',
 		element: <PasswordUpdated />,
+	},
+	{
+		path: '/test',
+		element: <StatusInformation />,
+	},
+	{ 
+		path: '/*', 
+		element: <NotFoundPage /> 
 	},
 ]);
 

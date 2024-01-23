@@ -22,3 +22,5 @@ export const URL_PASSWORD_RESET = `${process.env.REACT_APP_API_BASE_URL}/api/v1/
 export const URL_LOGIN = `${process.env.REACT_APP_API_BASE_URL}/api/v1/auth/login/`;
 export const URL_USER_LIST = `${process.env.REACT_APP_API_BASE_URL}/api/v1/users/user_list/`;
 export const URL_CHECK_EMAIL = `${process.env.REACT_APP_API_BASE_URL}/api/v1/accounts/check-email/`;
+export const URL_PASSWORD_RESET_CHECK_API = `${process.env.REACT_APP_API_BASE_URL}/api/v1/auth/password/reset/check-link/`;
+

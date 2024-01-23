@@ -84,7 +84,7 @@ export default function EmailOnTheWay() {
                             )
                         }
                     </div>
-                    <ButtonSignIn />
+                    <ButtonSignIn text={t('textForgotYourPassword.backToSignIn')} />
                 </div>
             </div>
             <div className={styles.emailOnTheWay_asideBackground_wrapper}>

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Tabs, Switch, Tooltip } from 'antd';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import ModalInfoAboutExpertProfile from '../AboutMe/ModalInfoAboutExpertProfile/ModalInfoAboutExpertProfile'
+import ModalInfoAboutExpertProfile from '../AboutMe/ModalInfoAboutExpertProfile/ModalInfoAboutExpertProfile';
+import ImageUploader from '../ImageUploader/ImageUploader';
 
 import facebookIcon from '../../assets/img/icons/icons-AboutMe/facebook_icon.svg'
 import instagramIcon from '../../assets/img/icons/icons-AboutMe/insta_icon.svg'
@@ -17,7 +18,7 @@ import arrowRightIcon from '../../assets/img/icons/icons-AboutMe/arrowRight.svg'
 import styles from './AboutMe.module.scss'
 import axios from 'axios';
 
-const AboutMe = ({ userData, expertUserData}) => {
+const AboutMe = ({ userData, expertUserData, data}) => {
     const [checkedExpert, setCheckedExpert] = useState(false);
     const [tubKey, setTubKey] = useState('1');
     const [imagesArray, setImagesArray] = useState([]);
@@ -31,6 +32,8 @@ const AboutMe = ({ userData, expertUserData}) => {
     const visibleImages = imagesArray.slice(startIndex, endIndex);
     const showRightArrow = endIndex - 1 < imagesArray.length;
     const showLeftArrow = startIndex > 0;
+
+    console.log(data)
 
     useEffect(() => {
 
@@ -350,20 +353,7 @@ const AboutMe = ({ userData, expertUserData}) => {
 
                         }
 
-                        {!showRightArrow && (
-                            <label className={styles.my_portfolio_button}>
-                                <input
-                                    type="file"
-                                    id="avatar"
-                                    name="avatar"
-                                    accept="image/png, image/jpeg"
-                                    onChange={handleFileChange}
-                                    className={styles.my_portfolio_button_input}
-                                />
-                                <img src={addIcon} alt="add icon" />
-
-                            </label>
-                        )}
+                        {!showRightArrow && <ImageUploader handleFileChange={handleFileChange} />}
 
                         {showRightArrow && (
                             <button onClick={handleNext} className={styles.my_portfolio_rightButton_wrapper}>
