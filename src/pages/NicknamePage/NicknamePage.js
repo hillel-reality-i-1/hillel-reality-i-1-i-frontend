@@ -1,17 +1,14 @@
-import { Link } from 'react-router-dom';
-
-import { ReactComponent as UserSettings } from '../../assets/img/icons/settings-icons/arrow-left.svg';
 import NickName from '../../components/SettingsChange/NickName/NickName';
+import BackLinkButton from '../../components/buttons/BackLinkButton/BackLinkButton';
 
 import styles from './nickname.module.scss';
 
 export default function NicknamePage() {
+
+
   return (
     <div className={styles.container}>
-      
-      <Link to='/settings' className={styles.back}>
-        <UserSettings /> Назад до Налаштувань
-      </Link>
+      <BackLinkButton />
       <div className={styles.main}>
         <NickName />
       </div>

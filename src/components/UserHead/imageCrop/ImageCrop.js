@@ -91,10 +91,10 @@ export default function ImageCrop({ image, onCropImage, onCropComplete, onFileCh
 
         <div className={styles.button_container}>
           <div className={styles.custom_file_input}>
-            <a>Change photo</a>
+            <a>Змінити фото</a>
             <input type='file' name='file' accept='.jpg, .jpeg, .png' onChange={onFileChange} />
           </div>
-          <BlueButton text={'Save photo'} additionalStyles={styles.BlueButton} onClick={onCropImage}/>
+          <BlueButton text={'Зберегти фото'} additionalStyles={styles.BlueButton} onClick={onCropImage}/>
 
         </div>
     </div>

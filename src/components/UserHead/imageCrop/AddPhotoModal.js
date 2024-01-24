@@ -37,14 +37,14 @@ export default function AddPhotoModal({
   return (
     <CustomModal isOpen={isModalOpen} onClose={toggleModal} additionalStyles={styles.modal}>
       <div className={styles.modal__header}>
-        <h2 className={styles.modal__header__title}>Add your photo</h2>
+        <h2 className={styles.modal__header__title}>Додавання фото</h2>
         <CloseIcon className={styles.modal__header__icon} onClick={toggleModal} />
       </div>
 
       <div className={styles.modal__main}>
         <div></div>
         <p className={styles.modal__main__text}>
-          Accepted file type (JPEG, JPG, PNG) and the maximum allowed file size of 5 MB.
+          Допустимі типи файлів для завантаження (JPEG, JPG, PNG). Максимальний розмір файлу не повинен перевищувати 5 МБ.
         </p>
       </div>
 
@@ -59,7 +59,7 @@ export default function AddPhotoModal({
           onInput={handleFileInputChange} 
         />
         <BlueButton
-          text={'Upload photo'}
+          text={'Завантажити '}
           additionalStyles={styles.blueButtonStyles}
           onClick={handleUploadButtonClick}
         >

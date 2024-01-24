@@ -13,18 +13,30 @@
         font-family: $semiBold;
         @include customFontStyles(28px, normal, 600);
         line-height: 130%;
-        path {
-            fill: #126FE1;
-        }
+
     }
     p {
         color: $color-gray50;
         font-family: $regular;
-        @include customFontStyles(16, normal, 400);
+        @include customFontStyles(16px, normal, 400);
         line-height: 160%;
     }
+    label {
+      
+        color:  #03091C;
+        font-family: $medium;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 160%; 
+    }
     input {
-        margin: 24px 0;
+        color:  #03091C;
+        font-family: $medium;
+        font-size: 16px;
+        font-style: normal;
+        
+        margin: 8px 0 24px 0;
         padding: 14px;
         width: 100%;
         border-radius: 12px;

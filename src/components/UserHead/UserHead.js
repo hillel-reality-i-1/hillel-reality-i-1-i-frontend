@@ -253,7 +253,7 @@ export default function UserHead({data}) {
       <div className={styles.user__head__info}>
         <p className={styles.name}>
           {data?.full_name}
-          <Tooltip placement='topLeft' title={'Your profile is verified'}>
+          <Tooltip placement='topLeft' title={'Це верифікований користувач'}>
             <img src={verified_icon} />
           </Tooltip>
         </p>

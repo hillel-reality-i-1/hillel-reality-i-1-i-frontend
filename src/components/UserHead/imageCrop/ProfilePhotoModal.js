@@ -34,7 +34,7 @@ export default function ProfilePhotoModal({ isModalOpen,
     return (
         <CustomModal isOpen={isModalOpen} onClose={toggleModal} additionalStyles={styles.modal}>
             <div className={styles.modal__header}>
-                <h2 className={styles.modal__header__title}>Profile Photo</h2>
+                <h2 className={styles.modal__header__title}>Фото профілю</h2>
                 <CloseIcon className={styles.modal__header__icon} onClick={toggleModal} />
             </div>
 
@@ -49,7 +49,7 @@ export default function ProfilePhotoModal({ isModalOpen,
                 <div 
                     className={styles.custom_file_input} 
                 >
-                    <a onClick={toggleDelete}><Trash /> Delete photo</a>
+                    <a onClick={toggleDelete}><Trash /> Видалити </a>
                     {/* <input type="file" name="file" accept="image/*" onChange={onFileChange} /> */}
                 </div>
 
@@ -64,7 +64,7 @@ export default function ProfilePhotoModal({ isModalOpen,
                         onInput={handleFileInputChange}
                     />
                     <BlueButton
-                        text={'Upload photo'}
+                        text={'Завантажити'}
                         additionalStyles={styles.blueButtonStyles}
                         onClick={handleUploadButtonClick}
                     >

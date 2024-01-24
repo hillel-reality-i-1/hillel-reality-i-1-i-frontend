@@ -183,7 +183,7 @@ export default function UserAvatar({data}) {
       )} */}
         {showSuccessToast && (
           <Toast
-            message='Your changes were successfully saved'
+            message='Ваші зміни були успішно збережені'
             duration={3000}
           />
         )}

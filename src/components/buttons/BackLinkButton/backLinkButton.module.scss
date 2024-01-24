@@ -1,0 +1,35 @@
+@import '../../../styles/constants.scss';
+@import '../../../styles/mixins.scss';
+
+.back {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 23px 0 26px 0;
+  color: #126FE1;
+  max-width: fit-content;
+  font-family: $medium;
+  @include customFontStyles(18px, normal, 500);
+  line-height: 160%;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  &:hover {
+    transition: 0.3s ease-in-out;
+    color: #3989EC;
+    svg
+      path {
+        transition: 0.3s ease-in-out;
+        fill: #3989EC;
+      }
+  }
+
+  &:active {
+    transition: 0.3s ease-in-out;
+    color: #094DA0;
+    svg
+      path {
+        transition: 0.3s ease-in-out;
+        fill: #094DA0;
+      }
+  }
+}
