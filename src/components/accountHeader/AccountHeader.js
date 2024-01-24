@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { useGetUserDataQuery } from '../../store/services/userApi';
 import { clearAuthToken } from '../../store/slices/signInSlice';
+import { ReactComponent as AvatarIcon } from '../../assets/img/icons/icons-header/avatar-account-wrapper-icon.svg'
 import { ReactComponent as Bell } from '../../assets/img/icons/icons-header/bell-grey.svg'
 import { ReactComponent as DropDown } from '../../assets/img/icons/drop-down/drop-down-icon.svg'
 import BlueButton from '../buttons/BlueButton/BlueButton'
@@ -38,14 +39,19 @@ export default function AccountHeader() {
     navigate('/')
   };
 
-  if (isLoading) {
-    return <div>Loading...</div>;
+  if (isLoading || typeof data === 'undefined') {
+    
+    return (
+      <div className={styles.container}>
+        <div>Loading...</div>
+      </div>
+    )
   }
 
   if (error) {
     return <div>Error: {error.message}</div>;
   }
-console.log(data);
+
 
   return (
     <div className={styles.account}>
@@ -63,12 +69,12 @@ console.log(data);
       </div> */}
 
       <div className={styles.account__user} >
-        {/* <div className={styles.account__user__avatar}>
+        <div className={styles.account__user__avatar}>
         {data.profile_picture && data.profile_picture.image !== null ? 
     <img src={`${process.env.REACT_APP_API_BASE_URL}${data.profile_picture.image}`} /> 
-    : ''
+    : <AvatarIcon/>
   }
-        </div> */}
+        </div>
 
         <p className={styles.account__user__name} > {data.full_name} </p>
 

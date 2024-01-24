@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 
+import { useGetUserDataQuery } from '../../../store/services/userApi';
 import CropPhotoModal from './CropPhotoModal';
 import ProfilePhotoModal from './ProfilePhotoModal';
 import DeleteConfirmation from './DeleteConfirmation';
@@ -14,7 +15,7 @@ import { onCrop, onFile } from './utils/avatarUtils';
 import styles from '../userHead.module.scss';
 
 export default function UserAvatar({data}) {
-
+  const { refetch} = useGetUserDataQuery();
   const authToken = useSelector((state) => state.signIn.authTokenUHelp);
 
   const [isModalOpen, toggleModal, setIsModalOpen] = useModalToggle(false);
@@ -148,17 +149,18 @@ export default function UserAvatar({data}) {
         setIsModalOpen(false);
         togglenModa2();
         setShowSuccessToast(true);
+
         setTimeout(() => {
           setShowSuccessToast(false);
         }, 5000);
       })
+      .then(()=> refetch())
       .catch((error) => {
-        console.error('Error xxxxxxxxxxxxxxxxxxxxxxx :', error);
+        console.error('Error :', error);
       });
   };
-  console.log('image' , image);
-  console.log('avatarData', avatarData);
-  console.log(data);
+
+
   return (
     <>
       <div className={styles.user__head__avatar}>
@@ -216,6 +218,7 @@ export default function UserAvatar({data}) {
         toggleModal={toggleDeleteConfirmationModal}
         avatarID={avatarID}
         setAvatarData={setAvatarData}
+        refetch={refetch}
       />
     </>
   );

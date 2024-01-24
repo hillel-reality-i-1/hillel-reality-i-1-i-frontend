@@ -190,6 +190,7 @@ export default function UserHead({data}) {
   //     });
   // };
 
+  
   return (
     <>
       <UserAvatar  data={data}/>
@@ -258,7 +259,7 @@ export default function UserHead({data}) {
         </p>
         <p className={styles.nick__name}>@{data?.username}</p>
 
-        { data.country.name ? 
+        { data.country ? 
           <p className={styles.location__grey}>
             <Location/> {data?.city?.name} {data?.country?.name}
           </p> 

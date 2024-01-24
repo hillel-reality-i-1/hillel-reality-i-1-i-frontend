@@ -9,7 +9,7 @@ import LatestActivityLayout from '../../components/LatestActivity/LatestActivity
 import styles from './userPage.module.scss';
 
 export default function UserPage() {
-	const { data, error, isLoading } = useGetUserDataQuery();
+	const { data, error, isLoading, refetch } = useGetUserDataQuery()
 	const [userDataPortfolio, setUserDataPortfolio] = useState('');
 	const [expertUserData, setExpertUserData] = useState('');
 	const navigate = useNavigate();
@@ -44,12 +44,14 @@ export default function UserPage() {
 		fetchData();
 	}, [navigate]);
 
-	if (isLoading) {
-		return <div className={styles.container}>
+	if (isLoading || typeof data === 'undefined') {
+    
+		return (
+		  <div className={styles.container}>
 			<div>Loading...</div>
-		</div>
+		  </div>
+		)
 	}
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.user}>

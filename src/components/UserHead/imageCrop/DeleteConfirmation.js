@@ -7,7 +7,7 @@ import { ReactComponent as CloseIcon } from '../../../assets/img/icons/icons-sig
 
 import styles from '../userHead.module.scss';
 
-export default function DeleteConfirmation({isModalOpen, toggleModal, avatarID, setAvatarData}) {
+export default function DeleteConfirmation({isModalOpen, toggleModal, avatarID, setAvatarData,refetch}) {
   const authToken = useSelector((state) => state.signIn.authTokenUHelp);
   
   const handleDeleteItem = async (itemId) => {
@@ -21,7 +21,9 @@ export default function DeleteConfirmation({isModalOpen, toggleModal, avatarID, 
   
       console.log('Success:', response.data);
       toggleModal()
+      
       setAvatarData(null)
+      refetch()
     } catch (error) {
       console.error('Error:', error);
 

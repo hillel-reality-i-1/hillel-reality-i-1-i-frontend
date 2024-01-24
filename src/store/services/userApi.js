@@ -16,17 +16,31 @@ export const userApi = createApi({
   endpoints: (builder) => ({
     getUserData: builder.query({
       async queryFn(_arg, _queryApi, _extraOptions, fetchWithBQ) {
-        const userResult = await fetchWithBQ('api/v1/auth/user/');
-       
-        if (userResult.error) return { error: userResult.error };
-        const user = userResult.data;
-        if (user ) {
-          
-          const userProfileResult = await fetchWithBQ(`api/v1/users/user_profile_by_user_id/${user.pk}`);
-          console.log(user);
-          return userProfileResult.data ? { data: userProfileResult.data } : { error: userProfileResult.error };
-        } else {
-          return { error: 'Invalid user data' };
+        try {
+          const userResult = await fetchWithBQ('api/v1/auth/user/');
+    
+          if (userResult.error) {
+            console.error('Error fetching user:', userResult.error);
+            return { error: 'Error fetching user' };
+          }
+    
+          const user = userResult.data;
+    
+          if (user !== undefined && user !== null) {
+            const userProfileResult = await fetchWithBQ(`api/v1/users/user_profile_by_user_id/${user.pk}`);
+            
+            if (userProfileResult.error) {
+              console.error('Error fetching user profile:', userProfileResult.error);
+              return { error: 'Error fetching user profile' };
+            }
+    
+            return userProfileResult.data ? { data: userProfileResult.data } : { error: 'Empty user profile data' };
+          } else {
+            return { error: 'Invalid user data' };
+          }
+        } catch (error) {
+          console.error('Unexpected error:', error);
+          return { error: 'Unexpected error' };
         }
       },
     }),

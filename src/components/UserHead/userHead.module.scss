@@ -30,6 +30,7 @@ $common-styles: (
         flex-direction: row;
         gap: 16px;
         &__avatar {
+            align-self: center;
             height: 72px;
             width: 72px;
             border-radius: 50%;
