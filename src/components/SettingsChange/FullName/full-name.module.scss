@@ -1,20 +1,17 @@
-@import '../../../styles/constants.scss';
+@import '../../../styles//constants.scss';
 @import '../../../styles/mixins.scss';
 
-.nickName {
+.fullName {
     max-width: 410px;
-
     h4 {
         display: flex;
         align-items: center;
         gap: 8px;
-        margin-bottom: 8px;
-
         color: #03091C;
         font-family: $semiBold;
         @include customFontStyles(28px, normal, 600);
         line-height: 130%;
-
+        margin-bottom: 8px;
     }
     p {
         margin-bottom: 24px;
@@ -55,7 +52,6 @@
     &__inputError:focus {
         outline: 1px solid #B3261E !important;
     }
-
     &__error {
         margin-top: 8px;
         display: flex;
@@ -73,7 +69,6 @@
         }
     }
 }
-
 .button {
     margin-top: 24px;
     width: 100%;

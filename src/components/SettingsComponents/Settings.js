@@ -7,6 +7,14 @@ import General from './General/General';
 export default function Settings() {
   const { data, error, isLoading } = useGetUserDataQuery();
 
+  if (isLoading ) {
+    return (
+      <>
+        <div>Loading...</div>
+      </>
+    )
+  }
+  
   return (
     <>
       <PersonalInfo data={data} />

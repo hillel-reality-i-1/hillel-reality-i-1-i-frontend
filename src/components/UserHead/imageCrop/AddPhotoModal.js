@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ReactComponent as Avatar } from '../../../assets/img/icons/add-photo-icon/add-photo-avatar.svg';
 import { ReactComponent as AddPhoto } from '../../../assets/img/icons/add-photo-icon/image-gallery-plus.svg';
 import { ReactComponent as CloseIcon } from '../../../assets/img/icons/icons-signIn/close-signIn-icon.svg';
 import BlueButton from "../../buttons/BlueButton/BlueButton";
@@ -42,7 +43,7 @@ export default function AddPhotoModal({
       </div>
 
       <div className={styles.modal__main}>
-        <div></div>
+        <div  className={styles.modal__main__avatar}><Avatar/></div>
         <p className={styles.modal__main__text}>
           Допустимі типи файлів для завантаження (JPEG, JPG, PNG). Максимальний розмір файлу не повинен перевищувати 5 МБ.
         </p>

@@ -42,7 +42,7 @@ export const onCrop = (image, cropDetails, handleUploadAvatar) => {
       handleUploadAvatar(blob);
     },
     'image/jpeg',
-    0.9
+    1
   );
   // console.log(image);
 };

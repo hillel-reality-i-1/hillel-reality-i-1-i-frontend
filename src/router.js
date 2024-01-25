@@ -17,7 +17,7 @@ import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicy';
 import SettingsPage from './pages/SettingsPage/SettingsPage';
 import NicknamePage from './pages/NicknamePage/NicknamePage';
-import FullName from './pages/FullNamePage/FullName';
+import FullNamePage from './pages/FullNamePage/FullNamePage';
 import LocationPage from './pages/LocationPage/LocationPage';
 import PostDetailsPage from './pages/PostDetailsPage/PostDetailsPage';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
@@ -46,7 +46,6 @@ const router = createBrowserRouter([
 				path: 'settings',
 				element: (
 					<ProtectedRoute>
-						{' '}
 						<Outlet />
 					</ProtectedRoute>
 				),
@@ -60,8 +59,8 @@ const router = createBrowserRouter([
 						element: <NicknamePage />,
 					},
 					{
-						path: 'fullName',
-						element: <FullName />,
+						path: 'fullname',
+						element: <FullNamePage />,
 					},
 					{
 						path: 'location',
@@ -74,8 +73,8 @@ const router = createBrowserRouter([
 				element: <NicknamePage />,
 			},
 			{
-				path: 'settings/fullName',
-				element: <FullName />,
+				path: 'settings/fullname',
+				element: <FullNamePage />,
 			},
 			{
 				path: 'settings/location',
