@@ -1,8 +1,10 @@
-.wrapper {
-	width: 100%;
-	padding: 31px 0 25px;
+@import '../../styles/constants.scss';
 
-	.header {
+.header {
+	width: 100%;
+	padding: 24px 0px;
+
+	.header_wrapper {
 		width: 100%;
 		max-width: 1280px;
 		margin: 0 auto;
@@ -10,22 +12,31 @@
 		justify-content: space-between;
 		align-items: center;
 
-		&_logo {
+		.header_logo_wrapper {
+			display: flex;
 			width: 83px;
 			height: 32px;
+			padding: 0px 34px 5px 0px;
+			align-items: center;
+			flex-shrink: 0;
+
+			.header_logo {
+				width: 49px;
+				height: 27px;
+				flex-shrink: 0;
+			}
 		}
 
-		&_navigation {
+		.header_navigation {
 			display: flex;
-			width: 61%;
+			width: 782px;
 			justify-content: space-between;
 			align-items: center;
 
 			.navigation_menu {
 				display: flex;
-				width: 46%;
-				justify-content: space-between;
 				align-items: flex-start;
+				gap: 32px;
 
 				.menu_item {
 					display: flex;
@@ -34,7 +45,7 @@
 
 					.item_link {
 						color: #03091c;
-						font-family: 'Poppins', sans-serif;
+						font-family: $regular;
 						font-size: 18px;
 						font-style: normal;
 						font-weight: 400;
@@ -45,6 +56,7 @@
 							color: #3989ec;
 							font-weight: 500;
 							line-height: 160%;
+							border-bottom: 1px solid #126FE1;
 						}
 
 						&:active {
@@ -68,7 +80,7 @@
 					white-space: nowrap;
 					background: #126fe1;
 					color: #fdfeff;
-					font-family: 'Poppins', sans-serif;
+					font-family: $medium;
 					font-size: 18px;
 					font-style: normal;
 					font-weight: 500;

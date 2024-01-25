@@ -60,6 +60,7 @@
             width: 100%;
             display: flex;
             justify-content: center;
+            
 
 
             .сontainer_content_wrapper {
@@ -151,12 +152,15 @@ $common-styles: (
     }
 
     .tubs {
+        width: 797px;
+
         .tubs_button {
             display: flex;
             padding: 8px;
             align-items: center;
             gap: 4px;
             cursor: pointer;
+            
 
             .tubs_text {
                 color: #126FE1;

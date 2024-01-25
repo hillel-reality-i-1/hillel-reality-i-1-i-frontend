@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-import addIcon from '../../assets/img/icons/icons-AboutMe/add_icon.svg'; // Замените путь на фактический путь к вашей иконке
+import addIcon from '../../assets/img/icons/icons-AboutMe/add_icon.svg'; 
 
 import styles from './ImageUploader.module.scss'; 
 

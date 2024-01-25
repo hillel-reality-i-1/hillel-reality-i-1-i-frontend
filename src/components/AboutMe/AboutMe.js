@@ -18,7 +18,7 @@ import arrowRightIcon from '../../assets/img/icons/icons-AboutMe/arrowRight.svg'
 import styles from './AboutMe.module.scss'
 import axios from 'axios';
 
-const AboutMe = ({ userData, expertUserData, data}) => {
+const AboutMe = ({ userData, expertUserData }) => {
     const [checkedExpert, setCheckedExpert] = useState(false);
     const [tubKey, setTubKey] = useState('1');
     const [imagesArray, setImagesArray] = useState([]);
@@ -33,27 +33,46 @@ const AboutMe = ({ userData, expertUserData, data}) => {
     const showRightArrow = endIndex - 1 < imagesArray.length;
     const showLeftArrow = startIndex > 0;
 
-    console.log(data)
 
     useEffect(() => {
 
+        const addPhotoFunction = () => {
+            if (Array.isArray(expertUserData.portfolio) && expertUserData.portfolio.length > 0) {
+                const mappedArray = expertUserData.portfolio.map(item => item);
+
+                setImagesArray(mappedArray);
+            }
+        }
 
         addPhotoFunction()
     }, [expertUserData.portfolio]);
 
-    const addPhotoFunction = () => {
-        if (Array.isArray(expertUserData.portfolio) && expertUserData.portfolio.length > 0) {
-            const mappedArray = expertUserData.portfolio.map(item => item.file);
 
-            setImagesArray(mappedArray);
-        }
-    }
 
-    const deletePhoto = (index, imageUrl) => {
+    const deletePhoto = (item) => {
+        console.log(item.id)
 
-        console.log(imageUrl)
+        const API_ENDPOINT = `http://dmytromigirov.space/api/v1/files/portfolio_list/${item.id}/`;
+        const authTokenUHelp = localStorage.getItem('authTokenUHelp');
 
-    }
+        const config = {
+            headers: {
+                'Authorization': `Token ${authTokenUHelp}`,
+            },
+        };
+
+        axios.delete(API_ENDPOINT, config)
+            .then(response => {
+                if (response.status === 204) {
+
+                    setImagesArray(prevImages => prevImages.filter(image => image.id !== item.id));
+
+                }
+            })
+            .catch(error => {
+                console.error('Ошибка при удалении фотографии:', error);
+            });
+    };
 
     const openModal = () => {
         setModalOpen(true);
@@ -85,6 +104,8 @@ const AboutMe = ({ userData, expertUserData, data}) => {
     };
 
     const handleFileChange = (e) => {
+
+        console.log(e.target.files)
         const API_ENDPOINT = 'http://dmytromigirov.space/api/v1/users/upload_portfolio/';
         const authTokenUHelp = localStorage.getItem('authTokenUHelp');
 
@@ -102,14 +123,9 @@ const AboutMe = ({ userData, expertUserData, data}) => {
             .then(response => {
 
                 if (response.status === 201) {
-                    console.log('true')
-
                     console.log(response.data)
 
-
-
-
-                    setImagesArray(prevImages => [...prevImages, response.data.file]);
+                    setImagesArray(prevImages => [...prevImages, response.data]);
 
                 }
             })
@@ -337,11 +353,11 @@ const AboutMe = ({ userData, expertUserData, data}) => {
                             </button>
                         )}
 
-                        {visibleImages.map((imageUrl, index) => (
+                        {visibleImages.map((item, index) => (
 
-                            <div className={styles.my_portfolio_item_wrapper} key={`${imageUrl} - ${index}`} onClick={() => deletePhoto(index, imageUrl)}>
+                            <div className={styles.my_portfolio_item_wrapper} key={`${item.id}`} onClick={() => deletePhoto(item)}>
                                 <img key={index}
-                                    src={`${imageUrl}`}
+                                    src={item.file}
                                     alt={`Description-${startIndex + index}`}
                                     className={styles.my_portfolio_item}
                                 />
@@ -353,7 +369,7 @@ const AboutMe = ({ userData, expertUserData, data}) => {
 
                         }
 
-                        {!showRightArrow && <ImageUploader handleFileChange={handleFileChange} />}
+                        {!showRightArrow && imagesArray.length < 10 && <ImageUploader handleFileChange={handleFileChange} />}
 
                         {showRightArrow && (
                             <button onClick={handleNext} className={styles.my_portfolio_rightButton_wrapper}>
@@ -365,9 +381,6 @@ const AboutMe = ({ userData, expertUserData, data}) => {
             ),
         },
     ];
-
-
-
 
     return (
         <>
