@@ -23,7 +23,7 @@ $color-systemSuccess: #228326;
 $color-systemError: #b3261e;
 
 @font-face {
-	font-family: 'NotoSans SemiBold', ;
+	font-family: 'NotoSans SemiBold';
 	src: url('../assets/fonts/Noto_Sans/NotoSans-SemiBold.ttf') format('truetype');
 }
 
@@ -93,7 +93,7 @@ $medium: 'NotoSans Medium';
 
 @font-face {
 	font-family: 'NotoSans-Regular';
-	src: local('Poppins-Regular'), url('../assets/fonts/NotoSans-Regular.woff2') format('woff2');
+	src: local('NotoSans-Regular'), url('../assets/fonts/NotoSans-Regular.woff2') format('woff2');
 	font-weight: 400;
 	font-style: normal;
 }
@@ -101,14 +101,14 @@ $medium: 'NotoSans Medium';
 @font-face {
 	font-family: 'NotoSans-Medium';
 	// src: local('Poppins-Medium'), url('../assets/fonts/Inter-Medium.woff2') format('woff2');
-	src: local('Poppins-Medium'), url('../assets/fonts/Inter-Medium.woff2') format('woff2');
+	src: local('NotoSans-Medium'), url('../assets/fonts/Inter-Medium.woff2') format('woff2');
 	font-weight: 500;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: 'NotoSans-SemiBold';
-	src: local('Poppins-SemiBold'), url('../assets/fonts/NotoSans-SemiBold.woff2') format('woff2');
+	src: local('NotoSans-SemiBold'), url('../assets/fonts/NotoSans-SemiBold.woff2') format('woff2');
 	font-weight: 600;
 	font-style: normal;
 }

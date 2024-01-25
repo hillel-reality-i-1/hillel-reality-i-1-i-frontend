@@ -126,6 +126,16 @@
 		word-wrap: break-word;
 		text-overflow: ellipsis;
 
+		.content_style {
+			ul {
+				list-style: inside;
+			}
+			ol {
+				list-style: desimal;
+				padding-left: 20px;
+			}
+		}
+
 		&.expanded {
 			max-height: none;
 		}
@@ -192,4 +202,12 @@
 			gap: 4px;
 		}
 	}
+}
+
+ul {
+	list-style: inside;
+}
+
+ol {
+	list-style: decimal;
 }

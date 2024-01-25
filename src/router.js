@@ -11,7 +11,7 @@ import ForgotYourPasswordForm from './components/RecoveryPassword/ForgotYourPass
 import EmailOnTheWay from './components/RecoveryPassword/EmailOnTheWay/EmailOnTheWay';
 import CreateNewPassword from './components/RecoveryPassword/CreateNewPassword/CreateNewPassword';
 import PasswordUpdated from './components/RecoveryPassword/PasswordUpdated/PasswordUpdated';
-import StatusInformation from './components/RecoveryPassword/StatusInformation/StatusInformation'
+import StatusInformation from './components/RecoveryPassword/StatusInformation/StatusInformation';
 import StepLayout from './components/Registration/StepLayout/StepLayout';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicy';
@@ -21,7 +21,7 @@ import FullName from './pages/FullNamePage/FullName';
 import LocationPage from './pages/LocationPage/LocationPage';
 import PostDetailsPage from './pages/PostDetailsPage/PostDetailsPage';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
-
+import PostCreationPage from './pages/PostCreationPage/PostCreationPage';
 
 const router = createBrowserRouter([
 	{
@@ -33,16 +33,27 @@ const router = createBrowserRouter([
 				element: <HomePage />,
 			},
 			{ path: '/postDetailsPage/:id', element: <PostDetailsPage /> },
+			{ path: '/postCreationPage', element: <PostCreationPage /> },
 			{
 				path: 'user',
-				element: <ProtectedRoute><UserPage /></ProtectedRoute>,
+				element: (
+					<ProtectedRoute>
+						<UserPage />
+					</ProtectedRoute>
+				),
 			},
 			{
 				path: 'settings',
-				element: <ProtectedRoute> <Outlet /></ProtectedRoute>,
+				element: (
+					<ProtectedRoute>
+						{' '}
+						<Outlet />
+					</ProtectedRoute>
+				),
 				children: [
 					{
-						index: true, element: <SettingsPage />
+						index: true,
+						element: <SettingsPage />,
 					},
 					{
 						path: 'nickname',
@@ -56,7 +67,7 @@ const router = createBrowserRouter([
 						path: 'location',
 						element: <LocationPage />,
 					},
-				]
+				],
 			},
 			{
 				path: 'settings/nickname',
@@ -115,9 +126,9 @@ const router = createBrowserRouter([
 		path: '/test',
 		element: <StatusInformation />,
 	},
-	{ 
-		path: '/*', 
-		element: <NotFoundPage /> 
+	{
+		path: '/*',
+		element: <NotFoundPage />,
 	},
 ]);
 

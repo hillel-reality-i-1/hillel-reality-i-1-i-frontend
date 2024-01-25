@@ -9,32 +9,35 @@ import icon_like from '../../assets/img/icons/post/icon_like.svg';
 import icon_comments from '../../assets/img/icons/post/icon_comments.svg';
 import { calculateReadTime } from '../../helpers/calculateReadTime';
 import { formatTimeElapsed } from '../../helpers/formatTimeElapsed';
-import { URL_USER_INFO_USER_ID } from '../../config/API_url';
+import { URL_LANGUAGE, URL_USER_INFO_USER_ID } from '../../config/API_url';
 // import icon_active_dropdown from '../../assets/img/icons/icon-search-bar/icon_active_dropdown.svg';
 import styles from './Card.module.scss';
 import { Link } from 'react-router-dom';
+import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
 
 const Card = ({ posts }) => {
 	const [isExpanded, setIsExpanded] = useState(false);
 	const [postData, setPostData] = useState(null);
 	const [user, setUser] = useState(null);
+	const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
 	const userId = postData && postData?.author;
 
-	// const langUK = 'uk/';
+	const langUK = 'uk/';
 
-	// useEffect(() => {
-	// 	const fetchLanguage = async () => {
-	// 		try {
-	// 			const data = await axios.get(`${URL_LANGUAGE}${langUK}`);
-	// 			// console.log(data);
-	// 			return data;
-	// 		} catch (error) {
-	// 			return error.message;
-	// 		}
-	// 	};
+	useEffect(() => {
+		const fetchLanguage = async () => {
+			try {
+				const data = await axios.get(`${URL_LANGUAGE}${langUK}`);
+				return data;
+			} catch (error) {
+				return error.message;
+			}
+		};
 
-	// 	fetchLanguage();
-	// }, []);
+		fetchLanguage();
+	}, []);
 
 	useEffect(() => {
 		setPostData(posts);
@@ -53,6 +56,27 @@ const Card = ({ posts }) => {
 		fetchInfoUser();
 	}, [userId]);
 
+	// function for converting data from the server to EditorState
+	useEffect(() => {
+		const getEditorStateFromPostData = () => {
+			const rawContentFromServer = postData?.content;
+
+			if (rawContentFromServer !== undefined) {
+				try {
+					const jsonData = JSON.parse(rawContentFromServer);
+
+					const contentState = convertFromRaw(jsonData);
+					const newEditorState = EditorState.createWithContent(contentState);
+					setEditorState(newEditorState);
+				} catch (error) {
+					return error.message;
+				}
+			}
+		};
+
+		getEditorStateFromPostData();
+	}, [postData]);
+
 	const handleReadMoreClick = () => {
 		setIsExpanded(!isExpanded);
 	};
@@ -60,6 +84,9 @@ const Card = ({ posts }) => {
 	const timeForRead = postData && calculateReadTime(postData?.content);
 	const timeElapsed = postData && formatTimeElapsed(postData?.creation_date);
 	const userCity = user?.user_profile?.city.split(',')[0];
+
+	const rawContentState = draftToHtml(convertToRaw(editorState.getCurrentContent()));
+	// console.log('rawContentState$$$$$', rawContentState);
 
 	const isImage = true;
 
@@ -104,7 +131,10 @@ const Card = ({ posts }) => {
 					<article className={styles.content}>
 						<h5 className={styles.content_title}>{postData?.title}</h5>
 						<p className={`${styles.content_post} ${isExpanded && styles.expanded}`}>
-							{postData?.content}
+							<div
+								className={styles.content_style}
+								dangerouslySetInnerHTML={rawContentState && { __html: rawContentState }}
+							/>
 						</p>
 						{!isExpanded ? (
 							<div

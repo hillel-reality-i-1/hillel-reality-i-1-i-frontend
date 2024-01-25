@@ -6,11 +6,13 @@ import Avatar from '../../../assets/img/icons/user-profile/Avatar.svg';
 import icon_expert from '../../../assets/img/icons/post/icon_expert.svg';
 import icon_save from '../../../assets/img/icons/post/icon_save.svg';
 import icon_like from '../../../assets/img/icons/post/icon_like.svg';
-import icon_comments from '../../../assets/img/icons/post/icon_comments.svg';
+// import icon_comments from '../../../assets/img/icons/post/icon_comments.svg';
 import { calculateReadTime } from '../../../helpers/calculateReadTime';
 import { formatTimeElapsed } from '../../../helpers/formatTimeElapsed';
-import { URL_GET_POST_DETAILS, URL_USER_INFO_USER_ID } from '../../../config/API_url';
+import { URL_GET_POST_DETAILS, URL_LANGUAGE, URL_USER_INFO_USER_ID } from '../../../config/API_url';
 import CustomButton from '../../CustomButton/CustomButton';
+import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
 
 import SortingPanel from '../SortingPanel/SortingPanel';
 
@@ -22,13 +24,27 @@ const Post = () => {
 	const { id } = useParams();
 	const [post, setPost] = useState(null);
 	const [user, setUser] = useState(null);
+	const [editorState, setEditorState] = useState(EditorState.createEmpty());
 	const userId = post && post?.author;
+
+	const langUK = 'uk/';
+
+	useEffect(() => {
+		const fetchLanguage = async () => {
+			try {
+				await axios.get(`${URL_LANGUAGE}${langUK}`);
+			} catch (error) {
+				return error.message;
+			}
+		};
+
+		fetchLanguage();
+	}, []);
 
 	useEffect(() => {
 		const fetchPost = async () => {
 			try {
 				const data = await axios.get(`${URL_GET_POST_DETAILS}${id}`);
-				console.log(data);
 
 				setPost(data);
 			} catch (error) {
@@ -43,8 +59,6 @@ const Post = () => {
 		const fetchUserInfo = async () => {
 			try {
 				const data = userId && (await axios.get(`${URL_USER_INFO_USER_ID}${userId}`));
-				console.log(data);
-
 				setUser(data);
 			} catch (error) {
 				return error.message;
@@ -54,12 +68,33 @@ const Post = () => {
 		fetchUserInfo();
 	}, [userId]);
 
+	// function for converting data from the server to EditorState
+	useEffect(() => {
+		const getEditorStateFromPostData = () => {
+			const rawContentFromServer = post?.content;
+
+			if (rawContentFromServer !== undefined) {
+				try {
+					const jsonData = JSON.parse(rawContentFromServer);
+
+					const contentState = convertFromRaw(jsonData);
+					const newEditorState = EditorState.createWithContent(contentState);
+					setEditorState(newEditorState);
+				} catch (error) {
+					return error.message;
+				}
+			}
+		};
+
+		getEditorStateFromPostData();
+	}, [post]);
+
 	const timeForRead = post && calculateReadTime(post?.content);
 	const timeElapsed = post && formatTimeElapsed(post?.creation_date);
 	const userCity = user?.user_profile?.city.split(',')[0];
 
-	console.log('ggg', post?.category);
-	// console.log('post', post);
+	const rawContentState = draftToHtml(convertToRaw(editorState.getCurrentContent()));
+
 	return (
 		<>
 			<div className={styles.post_wrapper}>
@@ -101,7 +136,10 @@ const Post = () => {
 					<h2 className={styles.post_title}>{post?.title}</h2>
 					<div className={styles.post_content}>
 						{/* <img src={} className={styles.post_content_img} /> */}
-						<p className={styles.post_content_text}>{post?.content}</p>
+						<div
+							className={styles.post_content_text}
+							dangerouslySetInnerHTML={rawContentState && { __html: rawContentState }}
+						/>
 					</div>
 					<div className={styles.post_footer}>
 						<div className={styles.post_footer_tags}>

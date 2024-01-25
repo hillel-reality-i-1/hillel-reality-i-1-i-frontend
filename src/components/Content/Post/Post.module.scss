@@ -35,6 +35,16 @@
 			color: $color-gray70;
 			line-height: 160%;
 			margin-top: 24px;
+
+			// .content_style {
+			ul {
+				list-style: inside;
+			}
+			ol {
+				list-style: desimal;
+				padding-left: 20px;
+			}
+			// }
 		}
 	}
 }

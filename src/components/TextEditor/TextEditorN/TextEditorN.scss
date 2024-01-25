@@ -1,0 +1,116 @@
+@import '../../../styles/constants.scss';
+
+.RichEditor-root {
+	border-bottom: 1px solid #dbdbdd;
+	font-family: $font-ns-regular;
+	color: $color-gray70;
+
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 160%;
+	margin-top: 38px;
+}
+
+.DraftEditor-root {
+	padding: 10px;
+	margin-top: 12px;
+}
+
+.DraftEditor-editorContainer {
+	overflow-y: auto;
+	scrollbar-width: thin;
+	scrollbar-color: #ccc transparent;
+
+	&::-webkit-scrollbar {
+		width: 12px;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: #a7a7b2;
+		border-radius: 100px;
+		width: 8px;
+
+		height: 208px;
+	}
+
+	&::-webkit-scrollbar-track {
+		background-color: #eeeeef;
+		width: 8px;
+	}
+}
+
+.RichEditor-editor {
+	// border-top: 1px solid #ddd;
+	cursor: text;
+	font-size: 18px;
+}
+
+.public-DraftStyleDefault-block {
+	margin: 0;
+	// padding: 0 18px;
+}
+
+.RichEditor-editor .public-DraftEditorPlaceholder-root,
+.RichEditor-editor .public-DraftEditor-content {
+	width: 100%;
+	max-width: 810px;
+	height: 620px;
+
+	// margin: 16px -15px -15px;
+}
+
+.RichEditor-editor .public-DraftEditor-content {
+	min-height: 100px;
+}
+
+.RichEditor-hidePlaceholder .public-DraftEditorPlaceholder-root {
+	// display: none;
+	color: rgba(71, 71, 79, 0.4);
+	font-family: $font-ns-regular;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 160%;
+}
+
+.RichEditor-editor .RichEditor-blockquote {
+	border-left: 5px solid #eee;
+	color: #666;
+	font-family: 'Hoefler Text', 'Georgia', serif;
+	font-style: italic;
+	margin: 16px 0;
+	padding: 10px 20px;
+}
+
+.RichEditor-editor .public-DraftStyleDefault-pre {
+	background-color: rgba(0, 0, 0, 0.05);
+	// font-family: 'Inconsolata', 'Menlo', 'Consolas', monospace;
+	font-size: 16px;
+	padding: 20px;
+}
+
+.RichEditor-controls {
+	// font-family: 'Helvetica', sans-serif;
+	padding: 14px 0;
+	// font-size: 14px;
+	// margin-bottom: 5px;
+	user-select: none;
+}
+
+.RichEditor-styleButton {
+	color: #999;
+	cursor: pointer;
+	margin-right: 16px;
+	padding: 2px 0;
+	display: inline-block;
+}
+
+.RichEditor-activeButton {
+	color: #5890ff;
+}
+
+.button_control_wrapper {
+	display: flex;
+	align-items: center;
+}
