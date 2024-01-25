@@ -1,11 +1,9 @@
-import { useState } from 'react';
 import { Spin } from 'antd';
 import Card from '../Card/Card';
 import cat from '../../assets/img/icons/post/cat.svg';
 import styles from './ContentSection.module.scss';
 
 const ContentSection = ({ posts, onNextPage, countPosts, isSearch, isLoading }) => {
-	console.log('post', posts);
 	return (
 		<section className={styles.container}>
 			{isSearch && <span className={styles.count_posts}>{countPosts} results for your search</span>}

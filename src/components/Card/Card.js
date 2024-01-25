@@ -86,7 +86,6 @@ const Card = ({ posts }) => {
 	const userCity = user?.user_profile?.city.split(',')[0];
 
 	const rawContentState = draftToHtml(convertToRaw(editorState.getCurrentContent()));
-	// console.log('rawContentState$$$$$', rawContentState);
 
 	const isImage = true;
 
@@ -130,12 +129,12 @@ const Card = ({ posts }) => {
 				<Link to={`/postDetailsPage/${postData?.id}`}>
 					<article className={styles.content}>
 						<h5 className={styles.content_title}>{postData?.title}</h5>
-						<p className={`${styles.content_post} ${isExpanded && styles.expanded}`}>
+						<div className={`${styles.content_post} ${isExpanded && styles.expanded}`}>
 							<div
 								className={styles.content_style}
 								dangerouslySetInnerHTML={rawContentState && { __html: rawContentState }}
 							/>
-						</p>
+						</div>
 						{!isExpanded ? (
 							<div
 								className={styles.btn_read_more}

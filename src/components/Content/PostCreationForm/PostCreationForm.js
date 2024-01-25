@@ -21,7 +21,7 @@ const PostCreationForm = () => {
 
 	const [selectedCategory, setSelectedCategory] = useState([]);
 	const [profCategories, setProfCategories] = useState(null);
-	const [newPost, setNewPost] = useState(null);
+	// const [newPost, setNewPost] = useState(null);
 
 	const [changeHTMLText, setChangeHTMLText] = useState('');
 
@@ -37,19 +37,15 @@ const PostCreationForm = () => {
 	const [isCategoryVisible, setCategoryVisible] = useState(false);
 	const selectCountryRef = useRef(null);
 	const selectCategoryRef = useRef(null);
+	const [selectedFile, setSelectedFile] = useState(null);
+	const [previewImage, setPreviewImage] = useState(null);
+	const [isValid, setIsValid] = useState(false);
 
 	const isLimitCategories = selectedCategory.length < 3;
 
-	// console.log('profCategories', profCategories);
-	// console.log('selectedCategory', selectedCategory);
-	// console.log('newPost', newPost && newPost);
-
 	const onChangeHTMLText = async (text) => {
-		// console.log(text, 'text');
 		setChangeHTMLText(text);
 	};
-	// console.log('changHTML', changeHTMLText);
-	// console.log('newPost', newPost);
 
 	useEffect(() => {
 		const fetchCategories = async () => {
@@ -157,59 +153,42 @@ const PostCreationForm = () => {
 		setCountryVisible(false);
 	};
 
-	// const handleFileChange = (e) => {
-	// 	const API_ENDPOINT = 'http://dmytromigirov.space/api/v1/users/upload_portfolio/';
-	// 	const authTokenUHelp = localStorage.getItem('authTokenUHelp');
+	const handleFileChange = (event) => {
+		const file = event.target.files[0]; // Select the first file from the list of files
+		setSelectedFile(file);
 
-	// 	const config = {
-	// 		headers: {
-	// 			Authorization: `Token ${authTokenUHelp}`,
-	// 			'Content-Type': 'multipart/form-data',
-	// 		},
-	// 	};
-
-	// 	const formData = new FormData();
-	// 	formData.append('file', e.target.files[0]);
-
-	// 	axios.post(API_ENDPOINT, formData, config).then((response) => {
-	// 		if (response.status === 201) {
-	// 			console.log('true');
-
-	// 			console.log(response.data);
-
-	// 			// setImagesArray((prevImages) => [...prevImages, response.data.file]);
-	// 		}
-	// 	});
-	// };
-
-	const fetchCreationPost = async () => {
-		try {
-			// console.log('ffff', newPost);
-			// console.log('Sumit !!!!!!!eHTMLText', changeHTMLText);
-			newPost &&
-				(await axios.post(URL_POST_CREATE, {
-					title: newPost?.title,
-					category: newPost?.category,
-					country: newPost?.country,
-					content: changeHTMLText && changeHTMLText,
-				}));
-			// navigate(-1);
-		} catch (error) {
-			return error.message;
-		}
+		// Create a FileReader object to read the contents of a file
+		const reader = new FileReader();
+		reader.onloadend = () => {
+			setPreviewImage(reader.result); // Setting the preview image
+		};
+		reader.readAsDataURL(file); // Reading the contents of the file in Data URL format
 	};
+
+	useEffect(() => {
+		if (
+			selectedCategory.length >= 1 &&
+			selectedCategory.length <= 3 &&
+			selectedCountries.length >= 1 &&
+			changeHTMLText.length > 1 &&
+			changeHTMLText.length < 10000
+		) {
+			setIsValid(true);
+		}
+	}, [changeHTMLText.length, selectedCategory.length, selectedCountries.length]);
 
 	const handleSubmit = async (values) => {
 		try {
-			await setNewPost(values);
-			if (newPost) {
-				await fetchCreationPost();
-			}
+			await axios.post(URL_POST_CREATE, {
+				title: values.title,
+				category: values.category,
+				country: values.country,
+				content: changeHTMLText && changeHTMLText,
+			});
+			navigate(-1);
 		} catch (error) {
 			return error.message;
 		}
-
-		// fetchCreationPost();
 	};
 
 	const formik = useFormik({
@@ -223,7 +202,7 @@ const PostCreationForm = () => {
 
 		onSubmit: handleSubmit,
 	});
-	// console.log('formik values:', formik.values);
+
 	return (
 		<div className={styles.form_container}>
 			<form
@@ -282,17 +261,6 @@ const PostCreationForm = () => {
 						</div>
 						<div className={styles.input_text}>
 							{/* ================================editor */}
-							{/* <Editor
-								editorState={editorState}
-								onChange={setEditorState}
-							/> */}
-							{/* <TextEditor
-								onChangeHTMLText={onChangeHTMLText}
-								name='content'
-								// onChange={formik.handleChangeContent}
-								onBlur={formik.handleBlur}
-								value={changeHTMLText}
-							/> */}
 							<TextEditorN
 								onChangeHTMLText={onChangeHTMLText}
 								name='content'
@@ -376,18 +344,26 @@ const PostCreationForm = () => {
 							)}
 						</div>
 						<div className={styles.image_wrapper}>
-							<ImageUploader
-								additionalStyles='container_image'
-								// handleFileChange={handleFileChange}
-							/>
+							{!previewImage ? (
+								<ImageUploader
+									additionalStyles='container_image'
+									handleFileChange={handleFileChange}
+								/>
+							) : (
+								<img
+									src={previewImage}
+									alt='Preview'
+									style={{ width: '100%', height: '100%', maxWidth: '410px', maxHeight: '248px' }}
+								/>
+							)}
 						</div>
 					</div>
 				</div>
 				<div className={styles.button_wrapper}>
 					<CustomButton
 						htmlType='submit'
-						type='primary'>
-						{/* {console.log(!isValid)} */}
+						type='primary'
+						isDisable={!isValid}>
 						<span className={styles.btn_submit_text}>Опублікувати</span>
 					</CustomButton>
 				</div>
