@@ -155,10 +155,8 @@ export const useValidation = () => {
 
 	const validateUserName = (value) => {
 		let error;
-		if (!value) {
-			error = t('textSignUp.error.required');
-		}
-		if (value.length < 2 || value.length > 32) {
+		if (!value || value.trim() === '') return (error = t('textSignUp.error.required'));
+		if ((value.length > 0 && value.length < 2) || value.length > 32) {
 			return (error = t('textSignUp.error.lengthUserName'));
 		} else if (/^\d/.test(value)) {
 			return (error = t('textSignUp.error.startWithDigit'));
@@ -179,7 +177,7 @@ export const useValidation = () => {
 
 		if (!value || value.trim() === '') return (error = t('textSignUp.error.required'));
 
-		if (value.length < 2 || value.length > 50) {
+		if ((value.length > 0 && value.length < 2) || value.length > 50) {
 			return (error = t('textSignUp.error.lengthFullName'));
 		} else if (
 			// (!/^[а-яА-Яa-zA-ZґҐєЄіІїЇ'][а-яА-Яa-zA-ZґҐєЄіІїЇ'\s-]*[а-яА-Яa-zA-ZґҐєЄіІїЇ']$/u.test(value))
