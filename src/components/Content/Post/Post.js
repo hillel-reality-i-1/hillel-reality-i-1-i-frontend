@@ -100,11 +100,19 @@ const Post = () => {
 			<div className={styles.post_wrapper}>
 				<div className={styles.content_header}>
 					<div className={styles.user}>
-						<img
-							src={Avatar}
-							alt='Avatar'
-							style={{ width: '56px', height: '56px' }}
-						/>
+						{user?.user_profile?.profile_picture ? (
+							<img
+								src={user?.user_profile?.profile_picture}
+								alt='Avatar'
+								style={{ width: '56px', height: '56px', borderRadius: '56px' }}
+							/>
+						) : (
+							<img
+								src={Avatar}
+								alt='Avatar'
+								style={{ width: '56px', height: '56px' }}
+							/>
+						)}
 						<div className={styles.user_data_wrapper}>
 							<div className={styles.user_info_top_wrapper}>
 								<span className={styles.full_name}>{user?.user?.full_name}</span>

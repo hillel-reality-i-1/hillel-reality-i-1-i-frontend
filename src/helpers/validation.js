@@ -14,9 +14,7 @@ export const useValidation = () => {
 
 		if (!value) {
 			error = t('textSignUp.error.required');
-		}
-
-		else {
+		} else {
 			const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
 			const maxLength = 50;
 
@@ -164,7 +162,8 @@ export const useValidation = () => {
 			return (error = t('textSignUp.error.lengthUserName'));
 		} else if (/^\d/.test(value)) {
 			return (error = t('textSignUp.error.startWithDigit'));
-		} else if (!/^[a-zA-Z][a-zA-Z0-9_]{0,31}$/u.test(value)) {
+			// } else if (!/^[a-zA-Z][a-zA-Z0-9_]{0,31}$/u.test(value)) {
+		} else if (!/^[a-zA-Z][a-zA-Z0-9]{0,30}(?![a-zA-Z0-9_])$/u.test(value)) {
 			return (error = t('textSignUp.error.otherValidUserName'));
 		} else if (/\s/.test(value)) {
 			return (error = t('textSignUp.error.noSpaces'));
@@ -185,7 +184,10 @@ export const useValidation = () => {
 		if (value.length < 2 || value.length > 50) {
 			return (error = t('textSignUp.error.lengthFullName'));
 		} else if (
-			!/^[а-яА-Яa-zA-ZґҐєЄіІїЇ'][а-яА-Яa-zA-ZґҐєЄіІїЇ'\s-]*[а-яА-Яa-zA-ZґҐєЄіІїЇ']$/u.test(value)
+			// (!/^[а-яА-Яa-zA-ZґҐєЄіІїЇ'][а-яА-Яa-zA-ZґҐєЄіІїЇ'\s-]*[а-яА-Яa-zA-ZґҐєЄіІїЇ']$/u.test(value))
+			!/^(?!['" -])[а-яА-Яa-zA-ZґҐєЄіІїЇ'][а-яА-Яa-zA-ZґҐєЄіІїЇ'\s-]*[а-яА-Яa-zA-ZґҐєЄіІїЇ'](?!['" -])$/u.test(
+				value
+			)
 		) {
 			return (error = t('textSignUp.error.otherValidFullName'));
 		}
@@ -226,13 +228,12 @@ export const validateSignInForm = (values) => {
 
 export const isSignInFormValid = (email, password) => {
 	if (!email || !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
-	  return false; 
+		return false;
 	}
-  
+
 	if (!password || password.length < 8) {
-	  return false; 
+		return false;
 	}
-  
-	return true; 
+
+	return true;
 };
-  

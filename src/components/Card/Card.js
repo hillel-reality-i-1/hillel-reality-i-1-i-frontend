@@ -94,11 +94,19 @@ const Card = ({ posts }) => {
 			<div className={styles.content_wrapper}>
 				<div className={styles.content_header}>
 					<div className={styles.user}>
-						<img
-							src={Avatar}
-							alt='Avatar'
-							style={{ width: '56px', height: '56px' }}
-						/>
+						{user?.user_profile?.profile_picture ? (
+							<img
+								src={user?.user_profile?.profile_picture}
+								alt='Avatar'
+								style={{ width: '56px', height: '56px', borderRadius: '56px' }}
+							/>
+						) : (
+							<img
+								src={Avatar}
+								alt='Avatar'
+								style={{ width: '56px', height: '56px' }}
+							/>
+						)}
 						<div className={styles.user_data_wrapper}>
 							<div className={styles.user_info_top_wrapper}>
 								<span className={styles.full_name}>{user?.user?.full_name}</span>
@@ -110,7 +118,7 @@ const Card = ({ posts }) => {
 											alt='icon expert'
 										/>
 										<span className={styles.expert_badge}>
-											{user?.user_profile_extended?.profession}
+											{user?.user_profile_extended?.profession[0]}
 										</span>
 									</div>
 								)}
@@ -119,7 +127,7 @@ const Card = ({ posts }) => {
 								<span className={styles.user_nickname}>@{user?.user?.username}</span>
 								<span className={user?.user_profile?.country && styles.user_country_dot}>
 									{user?.user_profile?.country}
-									{user?.user_profile?.country && userCity && ','} {userCity}
+									{user?.user_profile?.country && userCity && ','} {userCity && userCity}
 								</span>
 							</div>
 						</div>
@@ -153,7 +161,7 @@ const Card = ({ posts }) => {
 				<div className={styles.content_footer}>
 					<div className={styles.content_footer_left_col}>
 						<span className={styles.post_user}>{postData?.country[0]}</span>
-						<span className={styles.post_category}>{postData?.category}</span>
+						<span className={styles.post_category}>{postData?.category[0]}</span>
 						<img
 							src={icon_save}
 							alt='Save'
