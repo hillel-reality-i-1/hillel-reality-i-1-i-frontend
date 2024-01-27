@@ -84,7 +84,6 @@ const Card = ({ posts }) => {
 	const timeForRead = postData && calculateReadTime(postData?.content);
 	const timeElapsed = postData && formatTimeElapsed(postData?.creation_date);
 	const userCity = user?.user_profile?.city && user?.user_profile?.city.split(',')[0];
-	console.log(userCity);
 
 	const rawContentState = draftToHtml(convertToRaw(editorState.getCurrentContent()));
 

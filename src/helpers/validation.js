@@ -177,9 +177,7 @@ export const useValidation = () => {
 	const validateFullName = (value) => {
 		let error;
 
-		// if (!value) {
-		// 	error = t('textSignUp.error.required');
-		// }
+		if (!value || value.trim() === '') return (error = t('textSignUp.error.required'));
 
 		if (value.length < 2 || value.length > 50) {
 			return (error = t('textSignUp.error.lengthFullName'));
