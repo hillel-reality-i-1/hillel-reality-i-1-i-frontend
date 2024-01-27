@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import '../translations/i18n';
-// import emailValidationServer from '../api/emailValidationServer';
-// import axios from '../config/axios/axios';
+import emailValidationServer from '../api/emailValidationServer';
+import axios from '../config/axios/axios';
+import { URL_CHECK_EMAIL } from '../config/API_url';
 
 export const useValidation = () => {
 	const { t } = useTranslation();
@@ -20,6 +21,18 @@ export const useValidation = () => {
 
 			if (!emailRegex.test(value) || !value.length > maxLength) {
 				error = t('textSignUp.error.email');
+			}
+		}
+
+		if (!error) {
+			try {
+				const response = await axios.post(URL_CHECK_EMAIL, { email: value });
+				if (response.exists === true) {
+					error =
+						'Ця пошта вже використовується. Будь ласка, використайте іншу або увійдіть у профіль';
+				}
+			} catch (error) {
+				return error.message;
 			}
 		}
 
