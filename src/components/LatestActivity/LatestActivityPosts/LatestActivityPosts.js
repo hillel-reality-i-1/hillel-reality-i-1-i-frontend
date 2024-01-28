@@ -5,8 +5,7 @@ const LatestActivityPosts = () => {
 		<>
 			<div className={styles.activity_posts_container}>
 				<p className={styles.posts_description}>
-					You don’t have any posts yet. Please verify your profile to share your experience and
-					knowledge.
+					У вас ще немає жодного допису. Поділіться знаннями та досвідом з іншими користувачами.
 				</p>
 				<Button
 					type='primary'

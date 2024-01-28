@@ -1,0 +1,72 @@
+@import '../../../../styles/constants.scss';
+
+:global {
+	.ant-tabs {
+		.ant-tabs-nav {
+			max-width: fit-content;
+		}
+	}
+
+	.ant-tabs-top {
+		.ant-tabs-nav {
+			&:before {
+				border-color: $color-gray30;
+			}
+
+			.ant-tabs-nav-wrap {
+				.ant-tabs-nav-list {
+					.ant-tabs-tab {
+						color: #47474F;
+						font-family: $regular;
+						font-size: 18px;
+						font-style: normal;
+						font-weight: 400;
+						line-height: 160%;
+					}
+				}
+			}
+		}
+	}
+}
+
+.activity_wrapper {
+	width: 100%;
+	margin: 0 auto;
+	border-radius: 24px;
+	padding: 24px;
+	background-color: $color-gray10;
+}
+
+.header_activity {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 12px;
+
+	&_title {
+		font-family: $medium;
+		font-size: 28px;
+		font-style: normal;
+		font-weight: 600;
+		line-height: 130%;
+		color: $color-gray80;
+	}
+
+	.children_button {
+		font-size: 16px;
+	}
+}
+
+.btn_activity_header {
+	height: 52px;
+	padding: 12px 14px;
+	border-radius: 48px;
+	background-color: $color-primary30base;
+
+	.btn_inner {
+		font-family: $font-ns-medium;
+		font-size: 16px;
+		line-height: 160%;
+		color: $color-gray;
+	}
+}

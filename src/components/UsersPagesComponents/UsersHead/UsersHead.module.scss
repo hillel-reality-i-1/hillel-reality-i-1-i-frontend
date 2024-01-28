@@ -1,0 +1,105 @@
+@import '../../../styles/constants.scss';
+@import '../../../styles/mixins.scss';
+
+$common-styles: (
+    padding: 24px,
+    background-color: $color-gray10,
+    border-radius: 24px,
+);
+
+@mixin commonStyles () {
+    padding: 24px;
+    background-color: $color-gray10;
+    border-radius: 24px;
+}
+
+@mixin customTextStyle() {
+    color: $color-primary30base;
+    font-family: $medium;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 160%;
+}
+
+.avatar_svg_wrapper {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    height: 72px;
+    width: 72px;
+    background-color: $color-gray30;
+    border-radius: 50%;
+
+    .avatar_svg {
+        max-width: 72px;
+        border-radius: 50%;
+      
+    }
+}
+
+.user {
+    display: grid;
+    gap: 24px;
+
+    &__head {
+        @include commonStyles;
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+
+        &__info {
+            .name {
+                color: #03091C;
+                font-family: $medium;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 160%;
+
+                display: flex;
+                align-items: center;
+
+                span {
+                    display: flex;
+                    cursor: pointer;
+                }
+
+                img {
+                    cursor: pointer;
+                    padding-left: 8px;
+                }
+            }
+
+            .nick__name {
+                color: #0D101D;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 160%;
+                font-family: $regular;
+            }
+
+            .location {
+                margin-top: 4px;
+                display: flex;
+                align-items: center;
+                gap: 4px;
+                @include customTextStyle;
+
+                &__grey {
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                    margin-top: 4px;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 160%;
+                    font-family: $regular;
+                    color: #0D101D;
+                }
+            }
+        }
+    }
+}

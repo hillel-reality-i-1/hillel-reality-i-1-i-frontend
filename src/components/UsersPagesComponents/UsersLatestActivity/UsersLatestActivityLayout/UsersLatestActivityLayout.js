@@ -1,9 +1,9 @@
 import React from 'react';
-import styles from './LatestActivityLayout.module.scss';
+import styles from './UsersLatestActivityLayout.module.scss';
 import LatestActivityTabs from '../LatestActivityTabs/LatestActivityTabs';
 import { Button, ConfigProvider } from 'antd';
 
-const LatestActivityLayout = () => {
+const UsersLatestActivityLayout = () => {
 	return (
 		<div className={styles.activity_wrapper}>
 			<div className={styles.header_activity}>
@@ -34,4 +34,4 @@ const LatestActivityLayout = () => {
 	);
 };
 
-export default LatestActivityLayout;
+export default UsersLatestActivityLayout;

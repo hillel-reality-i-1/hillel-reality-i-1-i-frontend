@@ -22,6 +22,7 @@ import LocationPage from './pages/LocationPage/LocationPage';
 import PostDetailsPage from './pages/PostDetailsPage/PostDetailsPage';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import PostCreationPage from './pages/PostCreationPage/PostCreationPage';
+import UsersPages from './pages/UsersPages/UsersPages';
 
 const router = createBrowserRouter([
 	{
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
 						<UserPage />
 					</ProtectedRoute>
 				),
+			},
+			{
+				path: 'user/:id',
+				element: <UsersPages />
 			},
 			{
 				path: 'settings',
