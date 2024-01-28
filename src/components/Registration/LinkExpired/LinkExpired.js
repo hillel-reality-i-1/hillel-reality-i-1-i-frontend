@@ -8,7 +8,7 @@ import axios from '../../../config/axios/axios';
 import styles from './LinkExpired.module.scss';
 import CustomButton from '../../CustomButton/CustomButton';
 import { ConfigProvider } from 'antd';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 const LinkExpired = () => {
 	const navigate = useNavigate();

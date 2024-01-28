@@ -47,7 +47,7 @@ const StepLayout = () => {
 		};
 
 		fetchKey();
-	}, [token]);
+	}, [dispatch, token]);
 
 	const handleForm2Submit = async (data) => {
 		if (data.country_id === 0 && data.city_id === 0) {

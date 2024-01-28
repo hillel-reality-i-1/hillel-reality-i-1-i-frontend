@@ -200,7 +200,8 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 							<ConfigProvider
 								theme={{
 									token: {
-										colorTextPlaceholder: `${errors.password && touched.password && '#B3261E'}`,
+										// colorTextPlaceholder: `${errors.password && touched.password && '#B3261E'}`,
+										colorTextPlaceholder: '#47474F',
 										colorText: `${errors.password && touched.password && '#B3261E'}`,
 									},
 								}}>
@@ -277,9 +278,10 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 							<ConfigProvider
 								theme={{
 									token: {
-										colorTextPlaceholder: `${
-											errors.confirmPassword ? touched.confirmPassword && '#B3261E' : '#228326'
-										}`,
+										// colorTextPlaceholder: `${
+										// 	errors.confirmPassword ? touched.confirmPassword && '#B3261E' : '#228326'
+										// }`,
+										colorTextPlaceholder: '#47474F',
 										// colorText: '#0D101D',
 										// colorText: `${
 										// 	(confirmPasswordError?.error && '#228326') ||

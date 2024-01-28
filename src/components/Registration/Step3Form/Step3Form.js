@@ -75,6 +75,8 @@ const Step3Form = ({ onNext, onPhoneChange }) => {
 	const [phone, setPhone] = useState('');
 	const isValid = isPhoneValid(phone);
 
+	// console.log(phone);
+
 	return (
 		<>
 			<div className={styles.step3}>
