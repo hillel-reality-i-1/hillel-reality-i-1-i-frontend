@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import '../translations/i18n';
 import emailValidationServer from '../api/emailValidationServer';
 import axios from '../config/axios/axios';
-import { URL_CHECK_EMAIL } from '../config/API_url';
+import { URL_CHECK_EMAIL, URL_USERNAME_UNIQUE } from '../config/API_url';
 
 export const useValidation = () => {
 	const { t } = useTranslation();
@@ -166,7 +166,7 @@ export const useValidation = () => {
 
 	// validate validateUserName==========================//
 
-	const validateUserName = (value) => {
+	const validateUserName = async (value) => {
 		let error;
 		if (!value || value.trim() === '') return (error = t('textSignUp.error.required'));
 		if ((value.length > 0 && value.length < 2) || value.length > 32) {
@@ -178,6 +178,22 @@ export const useValidation = () => {
 			return (error = t('textSignUp.error.otherValidUserName'));
 		} else if (/\s/.test(value)) {
 			return (error = t('textSignUp.error.noSpaces'));
+		}
+
+		if (!error) {
+			try {
+				const response = await axios.get(URL_USERNAME_UNIQUE, {
+					params: {
+						username: value,
+					},
+				});
+
+				if (response.username_exists === true) {
+					error = 'Цей нікнейм вже використовується. Будь ласка, спробуйте інший';
+				}
+			} catch (error) {
+				return error.message;
+			}
 		}
 
 		return error;

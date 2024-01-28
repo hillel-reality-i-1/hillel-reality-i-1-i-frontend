@@ -1,0 +1,105 @@
+@import '../../../styles/constants.scss';
+
+.container {
+	width: 100%;
+	max-width: 410px;
+	margin: 0 auto;
+	display: flex;
+}
+
+.verify_info_main {
+	width: 100%;
+	margin: 0 auto;
+	display: flex;
+	justify-content: flex-end;
+	padding: 60px 0 20px;
+	flex-direction: column;
+	align-items: center;
+
+	.img_phone {
+		width: 64px;
+		height: 58px;
+		margin-top: 105px;
+	}
+
+	.title {
+		font-family: $font-ns-semiBold;
+		font-size: 40px;
+		line-height: 120%;
+		text-align: center;
+		color: $color-gray80;
+		margin-top: 48px;
+		margin-bottom: 8px;
+		font-weight: 600;
+	}
+
+	.text {
+		font-family: $font-ns-regular;
+		font-size: 18px;
+		line-height: 160%;
+		color: $color-gray80;
+		text-align: center;
+		margin-bottom: 32px;
+	}
+
+	.btn_wrapper {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 114px;
+
+		.btn_send {
+			display: block;
+			min-height: 57px;
+			padding: 14px 16px;
+			margin-left: 38px;
+			border-radius: 48px;
+			background: $color-primary30base;
+			color: #fdfeff;
+			font-family: $font-ns-medium;
+			font-size: 18px;
+			font-style: normal;
+			line-height: 160%;
+			text-decoration: none;
+		}
+
+		.btn_home_back {
+			width: 100%;
+			min-width: 410px;
+			height: 56px;
+			max-height: 56px;
+			display: flex;
+			justify-content: center;
+			font-family: $font-ns-medium;
+			font-size: 18px;
+			line-height: 160%;
+			background-color: rgba(255, 0, 0, 0);
+			color: $color-primary30base;
+			border-radius: 48px;
+			border: 1px solid $color-primary30base;
+			padding: 14px 16px;
+
+			&:hover {
+				background-color: rgba(255, 0, 0, 0);
+				border: 1px solid $color-primary20;
+			}
+		}
+	}
+}
+
+.button_children {
+	display: flex;
+	align-items: center;
+
+	.btn_back {
+		margin-left: 8px;
+		font-family: $font-ns-medium;
+		font-size: 18px;
+		color: $color-primary30base;
+
+		line-height: 160%;
+
+		&:hover {
+			color: $color-primary20;
+		}
+	}
+}

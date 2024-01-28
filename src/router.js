@@ -22,6 +22,8 @@ import LocationPage from './pages/LocationPage/LocationPage';
 import PostDetailsPage from './pages/PostDetailsPage/PostDetailsPage';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import PostCreationPage from './pages/PostCreationPage/PostCreationPage';
+import LinkUsed from './components/Registration/LinkUsed/LinkUsed';
+import LinkExpired from './components/Registration/LinkExpired/LinkExpired';
 
 const router = createBrowserRouter([
 	{
@@ -82,6 +84,14 @@ const router = createBrowserRouter([
 			},
 			{ path: '/privacyPolicy', element: <PrivacyPolicy /> },
 		],
+	},
+	{
+		path: '/linkExpired',
+		element: <LinkExpired />,
+	},
+	{
+		path: '/linkUsed',
+		element: <LinkUsed />,
 	},
 	{
 		path: '/verifyInfo',

@@ -17,6 +17,7 @@ export const URL_GET_POST_DETAILS = '/api/v1/content/post/';
 export const URL_SEARCH_POSTS = 'api/v1/content/search/';
 export const URL_PROF_CATEGORIES = '/api/v1/prof_service/categories/';
 export const URL_POST_CREATE = '/api/v1/content/post/create/';
+export const URL_USERNAME_UNIQUE = '/api/v1/auth/is_username_unique/';
 export const API_URL_SIGN_IN = `${process.env.REACT_APP_API_BASE_URL}/api/v1/auth/login/`;
 export const URL_PASSWORD_RESET_CONFIRM = `${process.env.REACT_APP_API_BASE_URL}/api/v1/auth/password/reset/confirm/`;
 export const URL_PASSWORD_RESET = `${process.env.REACT_APP_API_BASE_URL}/api/v1/auth/password/reset/`;
