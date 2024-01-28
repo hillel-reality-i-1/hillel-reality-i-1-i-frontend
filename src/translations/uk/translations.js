@@ -58,7 +58,7 @@ export const TRANSLATIONS_UK = {
 			description: 'Введіть ваше ім’я для того, щоб інші учасники U-Help могли вас впізнати',
 			enterUserName: 'Введіть свій нікнейм',
 			enterFullName: 'Введіть своє повне ім’я',
-			infoUserName: "Це ваше унікальне ім'я у нашій системі",
+			infoUserName: "Це ваше унікальне ім'я у U-Help",
 			infoFullName: "Ім'я можна змінювати раз на 90 днів",
 		},
 		textStep2: {

@@ -38,9 +38,10 @@ const StepLayout = () => {
 					const userToken = await axios.post(URL_CONFIRM_EMAIL, {
 						key: token,
 					});
-					// return userToken;
+
 					localStorage.setItem('authTokenUHelp', userToken?.token);
 					dispatch(setAuthToken(userToken?.token));
+					// return userToken;
 				} catch (error) {
 					// return error.message;
 					return console.log(error);

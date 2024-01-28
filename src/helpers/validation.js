@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import '../translations/i18n';
 import emailValidationServer from '../api/emailValidationServer';
 import axios from '../config/axios/axios';
-import { URL_CHECK_EMAIL, URL_USERNAME_UNIQUE } from '../config/API_url';
+import { URL_CHECK_EMAIL, URL_USERNAME_OR_PHONE_CHECK_UNIQUE } from '../config/API_url';
 
 export const useValidation = () => {
 	const { t } = useTranslation();
@@ -182,7 +182,7 @@ export const useValidation = () => {
 
 		if (!error) {
 			try {
-				const response = await axios.get(URL_USERNAME_UNIQUE, {
+				const response = await axios.get(URL_USERNAME_OR_PHONE_CHECK_UNIQUE, {
 					params: {
 						username: value,
 					},
