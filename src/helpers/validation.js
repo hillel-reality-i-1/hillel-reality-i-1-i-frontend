@@ -214,8 +214,6 @@ export const useValidation = () => {
 			!/^(?!['" -])[а-яА-Яa-zA-ZґҐєЄіІїЇ'][а-яА-Яa-zA-ZґҐєЄіІїЇ'\s-]*[а-яА-Яa-zA-ZґҐєЄіІїЇ'](?!['" -])(?<!['"])$/u.test(
 				value
 			)
-			// isValid ||
-			// noApostropheBeforeSecondWord
 		) {
 			return (error = t('textSignUp.error.otherValidFullName'));
 		}
