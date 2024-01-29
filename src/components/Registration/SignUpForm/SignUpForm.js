@@ -202,7 +202,8 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 									token: {
 										// colorTextPlaceholder: `${errors.password && touched.password && '#B3261E'}`,
 										colorTextPlaceholder: '#47474F',
-										colorText: `${errors.password && touched.password && '#B3261E'}`,
+										colorText: '#0D101D',
+										// colorText: `${errors.password && touched.password && '#B3261E'}`,
 									},
 								}}>
 								<div className={styles.inputWrapper}>
@@ -282,7 +283,7 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 										// 	errors.confirmPassword ? touched.confirmPassword && '#B3261E' : '#228326'
 										// }`,
 										colorTextPlaceholder: '#47474F',
-										// colorText: '#0D101D',
+										colorText: '#0D101D',
 										// colorText: `${
 										// 	(confirmPasswordError?.error && '#228326') ||
 										// 	(confirmPasswordError?.access && '#B3261E') ||
@@ -394,7 +395,7 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 									<Link
 										to='/'
 										className={styles.link}>
-										The Terms and Conditions
+										Умовами користування
 									</Link>
 								</span>
 							</label>

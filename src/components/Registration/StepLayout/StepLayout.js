@@ -22,7 +22,7 @@ import { setAuthToken } from '../../../store/slices/signInSlice';
 
 const StepLayout = () => {
 	const { t } = useTranslation();
-	const novigate = useNavigate();
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	const [current, setCurrent] = useState(0);
@@ -41,16 +41,24 @@ const StepLayout = () => {
 
 					localStorage.setItem('authTokenUHelp', userToken?.token);
 					dispatch(setAuthToken(userToken?.token));
+					return;
 					// return userToken;
 				} catch (error) {
-					// return error.message;
-					return console.log(error);
+					const errorMsg = error?.response.data.details;
+					return console.log(errorMsg);
+					// if (errorMsg === 'bad signature') {
+					// 	return navigate('/*');
+					// } else if (errorMsg === 'signature expired') {
+					// 	return navigate('/linkExpired');
+					// } else if (errorMsg === 'email address does not exist') {
+					// 	return navigate('/linkUsed');
+					// }
 				}
 			}
 		};
 
 		fetchKey();
-	}, [dispatch, token]);
+	}, [dispatch, navigate, token]);
 
 	const handleForm2Submit = async (data) => {
 		if (data.country_id === 0 && data.city_id === 0) {
@@ -113,14 +121,14 @@ const StepLayout = () => {
 
 			if (phoneData.length > 1) {
 				await sendVerificationCode();
-				novigate('/verifyCodeForm');
+				navigate('/verifyCodeForm');
 			} else {
-				novigate('/user');
+				navigate('/user');
 			}
 		} catch (error) {
 			return error.message;
 		}
-	}, [phone, formData2, dispatch, sendVerificationCode, novigate]);
+	}, [phone, formData2, dispatch, sendVerificationCode, navigate]);
 
 	useEffect(() => {
 		if (phone && current === steps.length - 1) {

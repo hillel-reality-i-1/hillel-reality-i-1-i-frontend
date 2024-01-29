@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import '../translations/i18n';
-import emailValidationServer from '../api/emailValidationServer';
+
 import axios from '../config/axios/axios';
 import { URL_CHECK_EMAIL, URL_USERNAME_OR_PHONE_CHECK_UNIQUE } from '../config/API_url';
 
@@ -209,10 +209,13 @@ export const useValidation = () => {
 		if ((value.length > 0 && value.length < 2) || value.length > 50) {
 			return (error = t('textSignUp.error.lengthFullName'));
 		} else if (
-			// (!/^[а-яА-Яa-zA-ZґҐєЄіІїЇ'][а-яА-Яa-zA-ZґҐєЄіІїЇ'\s-]*[а-яА-Яa-zA-ZґҐєЄіІїЇ']$/u.test(value))
-			!/^(?!['" -])[а-яА-Яa-zA-ZґҐєЄіІїЇ'][а-яА-Яa-zA-ZґҐєЄіІїЇ'\s-]*[а-яА-Яa-zA-ZґҐєЄіІїЇ'](?!['" -])$/u.test(
+			// (!/^(?!['" -])[а-яА-Яa-zA-ZґҐєЄіІїЇ'][а-яА-Яa-zA-ZґҐєЄіІїЇ'\s-]*[а-яА-Яa-zA-ZґҐєЄіІїЇ'](?!['" -])(?<!['"])$/u.test(value))
+
+			!/^(?!['" -])[а-яА-Яa-zA-ZґҐєЄіІїЇ'][а-яА-Яa-zA-ZґҐєЄіІїЇ'\s-]*[а-яА-Яa-zA-ZґҐєЄіІїЇ'](?!['" -])(?<!['"])$/u.test(
 				value
 			)
+			// isValid ||
+			// noApostropheBeforeSecondWord
 		) {
 			return (error = t('textSignUp.error.otherValidFullName'));
 		}
