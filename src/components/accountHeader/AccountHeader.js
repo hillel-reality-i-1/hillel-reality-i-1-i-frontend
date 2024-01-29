@@ -41,7 +41,7 @@ export default function AccountHeader() {
 		navigate('/postCreationPage');
 	};
 
-	if (isLoading ) {
+	if (isLoading) {
 		return (
 			<div className={styles.container}>
 				<div>Loading...</div>
@@ -102,7 +102,7 @@ export default function AccountHeader() {
 						onClick={(e) => e.preventDefault()}
 						className={styles.flex}>
 						{/* <Space className={styles.flex}> */}
-						<a className={styles.account__user__name}> {data.full_name} </a><DropDown />
+						<p className={styles.account__user__name}> {data.full_name} </p><DropDown />
 						{/* </Space> */}
 					</a>
 				</Dropdown>

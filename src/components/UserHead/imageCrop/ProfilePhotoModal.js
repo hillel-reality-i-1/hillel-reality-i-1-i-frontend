@@ -1,9 +1,8 @@
-import { useState } from 'react';
 import { ReactComponent as AddPhoto } from '../../../assets/img/icons/add-photo-icon/image-gallery-plus.svg';
 import { ReactComponent as CloseIcon } from '../../../assets/img/icons/icons-signIn/close-signIn-icon.svg';
 import { ReactComponent as Trash } from '../../../assets/img/icons/crop-image-controls/trash-bucket.svg';
-import BlueButton from "../../buttons/BlueButton/BlueButton";
-import CustomModal from "../../modals/CustomModal/CustomModal";
+import BlueButton from '../../buttons/BlueButton/BlueButton';
+import CustomModal from '../../modals/CustomModal/CustomModal';
 
 import styles from '../userHead.module.scss';
 
@@ -45,9 +44,9 @@ export default function ProfilePhotoModal({ isModalOpen,
 
 
             <div className={styles.profile__modal__footer}>
- 
-                <div 
-                    className={styles.custom_file_input} 
+
+                <div
+                    className={styles.custom_file_input}
                 >
                     <a onClick={toggleDelete}><Trash /> Видалити </a>
                     {/* <input type="file" name="file" accept="image/*" onChange={onFileChange} /> */}

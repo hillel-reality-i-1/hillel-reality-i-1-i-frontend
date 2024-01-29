@@ -24,6 +24,7 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import PostCreationPage from './pages/PostCreationPage/PostCreationPage';
 import LinkUsed from './components/Registration/LinkUsed/LinkUsed';
 import LinkExpired from './components/Registration/LinkExpired/LinkExpired';
+import BiographyPage from './pages/Biography/BiographyPage';
 
 const router = createBrowserRouter([
 	{
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
 					{
 						path: 'location',
 						element: <LocationPage />,
+					},
+					{
+						path: 'biography',
+						element: <BiographyPage />,
 					},
 				],
 			},

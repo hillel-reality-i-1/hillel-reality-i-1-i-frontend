@@ -11,65 +11,65 @@ import Toast from '../../Toast/Toast';
 import styles from './full-name.module.scss';
 
 export default function FullName() {
-    const { data, isLoading, refetch,  } = useGetUserDataQuery();
-    const authToken = useSelector((state) => state.signIn.authTokenUHelp);
-    const fullNameRef = useRef('');
-    const [fullName, setFullName] = useState('');
-    const [error, setError] = useState('');
-    const [showSuccessToast, setShowSuccessToast] = useState(false);
-    const validateFullName = (value) => {
-        if (!value.trim()) {
-            return 'Це обов’язкове поле. Будь ласка, заповніть його';
-          }
-        
-          if (value.length < 2 || value.length > 50) {
-            return 'Поле має містити від 2 до 50 символів. Будь ласка, заповніть його';
-          }
-        
-          return '';
-      };
-    const handleInputChange = (e) => {
-        const inputValue = e.target.value;
-        setFullName(inputValue);
-        setError(validateFullName(inputValue));
-    
-      };
-      const handleSaveFullName = async () => {
-        const validationError = validateFullName(fullName);
-    
-        if (validationError) {
-          setError(validationError);
-          return;
-        }
+  const { data, isLoading, refetch, } = useGetUserDataQuery();
+  const authToken = useSelector((state) => state.signIn.authTokenUHelp);
+  const fullNameRef = useRef('');
+  const [fullName, setFullName] = useState('');
+  const [error, setError] = useState('');
+  const [showSuccessToast, setShowSuccessToast] = useState(false);
+  const validateFullName = (value) => {
+    if (!value.trim()) {
+      return 'Це обов’язкове поле. Будь ласка, заповніть його';
+    }
 
-        console.log(data);
-        try {
-          const url = `${process.env.REACT_APP_API_BASE_URL}/api/v1/users/user_list/${data.user}/`;
-          const token = authToken;
-    
-          const response = await axios.patch(
-            url,
-            { full_name: fullName},
-            {
-              headers: {
-                Authorization: `Token ${token}`,
-                'Content-Type': 'application/json',
-              },
-            }
-          );
-          setShowSuccessToast(true);
-          refetch()
-          setTimeout(() => {
-            setShowSuccessToast(false);
-          }, 3500);
-    
-          
-        } catch (error) {
-          console.error('Error updating username:', error);
+    if (value.length < 2 || value.length > 50) {
+      return 'Поле має містити від 2 до 50 символів. Будь ласка, заповніть його';
+    }
 
+    return '';
+  };
+  const handleInputChange = (e) => {
+    const inputValue = e.target.value;
+    setFullName(inputValue);
+    setError(validateFullName(inputValue));
+
+  };
+  const handleSaveFullName = async () => {
+    const validationError = validateFullName(fullName);
+
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
+    console.log(data);
+    try {
+      const url = `${process.env.REACT_APP_API_BASE_URL}/api/v1/users/user_list/${data.user}/`;
+      const token = authToken;
+
+      const response = await axios.patch(
+        url,
+        { full_name: fullName },
+        {
+          headers: {
+            Authorization: `Token ${token}`,
+            'Content-Type': 'application/json',
+          },
         }
-      };
-      if (isLoading ) { return <> Loading </> }
+      );
+      setShowSuccessToast(true);
+      refetch()
+      setTimeout(() => {
+        setShowSuccessToast(false);
+      }, 3500);
+
+
+    } catch (error) {
+      console.error('Error updating username:', error);
+
+    }
+  };
+  if (isLoading) { return <> Loading </> }
   return (
     <div className={styles.fullName}>
       <h4>
@@ -87,17 +87,17 @@ export default function FullName() {
         placeholder={data.full_name}
         onChange={handleInputChange}
       />
-      {error && <div  className={styles.fullName__error}><ErrorIcon /> {error}</div>}
+      {error && <div className={styles.fullName__error}><ErrorIcon /> {error}</div>}
       {showSuccessToast && (
-          <Toast
-            message='Ваші зміни були успішно збережені'
-            duration={3000}
-          />
+        <Toast
+          message='Ваші зміни були успішно збережені'
+          duration={3000}
+        />
       )}
-      <BlueButton 
-        text={'Зберегти'} 
+      <BlueButton
+        text={'Зберегти'}
         additionalStyles={(error || fullNameRef.current === '') ? styles.button : styles.validButton}
-        onClick={handleSaveFullName} 
+        onClick={handleSaveFullName}
       />
     </div>
   );

@@ -5,32 +5,14 @@
     max-width: 410px;
 
     h4 {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin-bottom: 8px;
-
-        color: #03091C;
-        font-family: $semiBold;
-        @include customFontStyles(28px, normal, 600);
-        line-height: 130%;
+        @include heading-styles-settings;
 
     }
     p {
-        margin-bottom: 24px;
-        color: $color-gray50;
-        font-family: $regular;
-        @include customFontStyles(16px, normal, 400);
-        line-height: 160%;
+        @include paragraph-styles-settings;
     }
     label {
-      
-        color:  #03091C;
-        font-family: $medium;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 160%; 
+        @include label-styles-settings;
     }
     input {
         color:  #03091C;

@@ -24,17 +24,17 @@ $color-systemError: #b3261e;
 
 @font-face {
 	font-family: 'NotoSans SemiBold';
-	src: url('../assets/fonts/Noto_Sans/NotoSans-SemiBold.ttf') format('truetype');
+	src: local('NotoSans-SemiBold'), url('../assets/fonts/NotoSans-SemiBold.woff2') format('woff2');
 }
 
 @font-face {
 	font-family: 'NotoSans Regular';
-	src: url('../assets/fonts/Noto_Sans/NotoSans-Regular.ttf') format('truetype');
+	src: local('NotoSans-Regular'), url('../assets/fonts/NotoSans-Regular.woff2') format('woff2');
 }
 
 @font-face {
 	font-family: 'NotoSans Medium';
-	src: url('../assets/fonts/Noto_Sans/NotoSans-Medium.ttf') format('truetype');
+	src: local('NotoSans-Medium'), url('../assets/fonts/Inter-Medium.woff2') format('woff2');
 }
 
 $semiBold: 'NotoSans SemiBold';

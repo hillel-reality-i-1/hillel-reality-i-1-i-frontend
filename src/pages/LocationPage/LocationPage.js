@@ -1,20 +1,15 @@
-import { Link } from 'react-router-dom';
-
-import { ReactComponent as UserSettings } from '../../assets/img/icons/settings-icons/arrow-left.svg';
+import Location from '../../components/SettingsChange/Location/Location';
+import BackLinkButton from '../../components/buttons/BackLinkButton/BackLinkButton';
 
 import styles from './location.module.scss';
 
 export default function LocationPage() {
   return (
     <div className={styles.container}>
-      
-      <Link to='/settings' className={styles.back}>
-        <UserSettings /> Назад до Налаштувань
-      </Link>
+      <BackLinkButton />
       <div className={styles.main}>
-        LocationPage
+        <Location />
       </div>
-    
     </div>
-  )
+  );
 }
