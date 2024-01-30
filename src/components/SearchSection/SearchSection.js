@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-import { Button, ConfigProvider, Input, Select } from 'antd';
+import { Button, Checkbox, ConfigProvider, Input, Select } from 'antd';
 import { ReactComponent as IconSearch } from '../../assets/img/icons/icon-search-bar/icon_search.svg';
 import styles from './SearchSection.module.scss';
 import axios from '../../config/axios/axios';
@@ -75,6 +75,42 @@ const SearchSection = ({ onSearch }) => {
 		// }
 	};
 
+	const optionRenderCategory = (option) => {
+		// if (option.value === 'all') {
+		// 	return (
+		// 		<Checkbox
+		// 			onChange={(e) =>
+		// 				handleChangeCategory(
+		// 					e.target.checked ? profCategories.map((category) => category.value) : []
+		// 				)
+		// 			}>
+		// 			{option.label}
+		// 		</Checkbox>
+		// 	);
+		// }
+		// return (
+		// 	<Checkbox
+		// 		value={option.value}
+		// 		onChange={() => handleChangeCategory([option.value])}>
+		// 		{option.label}
+		// 	</Checkbox>
+		// );
+
+		const onCheckAllChange = (value) => {
+			console.log(value);
+		};
+
+		return (
+			<Checkbox
+			// value={selectAllOption.value}
+			// onChange={onCheckAllChange}
+			// checked={selectAllOption.label}
+			>
+				Обрати всі
+			</Checkbox>
+		);
+	};
+
 	const countryTagRender = () => {
 		console.log(selectedLabels);
 
@@ -87,7 +123,7 @@ const SearchSection = ({ onSearch }) => {
 
 	const categoryTagRender = () => {
 		console.log(selectedLabels);
-		if (categorySelectedLabels.length === 1) {
+		if (categorySelectedLabels?.length === 1) {
 			return <div className={styles.selected_value}>{categorySelectedLabels[0].label}</div>;
 		} else {
 			return <div className={styles.selected_value}>{categorySelectedLabels.length} категорій</div>;
@@ -205,6 +241,7 @@ const SearchSection = ({ onSearch }) => {
 										onChange={handleChangeCategory}
 										options={profCategories}
 										tagRender={categoryTagRender}
+										optionRender={optionRenderCategory}
 										// fieldNames={{ label: profCategories?.name, value: profCategories?.id }}
 										// onChange={formik.handleChangeCategory}
 										// onBlur={formik.handleBlur}

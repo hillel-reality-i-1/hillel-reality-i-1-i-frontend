@@ -11,7 +11,7 @@ import img_aside_step1 from '../../../assets/img/img-sign-up/img_aside_step1.png
 import img_aside_step2 from '../../../assets/img/img-sign-up/img_aside_step2.png';
 import img_aside_step3 from '../../../assets/img/img-sign-up/img_aside_step3.png';
 import arrowLeft from '../../../assets/img/icons/icons-SignUp/arrowLeft.svg';
-import { fetchAddDataProfile, saveDataUserProfile } from '../../../store/slices/authSlice';
+import { fetchAddDataProfile } from '../../../store/slices/authSlice';
 import StepForm1 from '../Step1Form/Step1Form';
 import StepForm2 from '../Step2Form/Step2Form';
 import StepForm3 from '../Step3Form/Step3Form';
@@ -89,9 +89,9 @@ const StepLayout = () => {
 		return data;
 	};
 
-	const sendVerificationCode = useCallback(async (phoneData) => {
+	const sendVerificationCode = useCallback(async () => {
 		try {
-			await axios.post(URL_SEND_VERIFICATION_CODE, { phone_number: phoneData });
+			await axios.post(URL_SEND_VERIFICATION_CODE);
 		} catch (error) {
 			return error.message;
 		}
@@ -128,8 +128,8 @@ const StepLayout = () => {
 				...formData2,
 				phone_number: phoneData,
 			};
-			dispatch(saveDataUserProfile(combinedData));
-			// await dispatch(fetchAddDataProfile(combinedData));
+			// dispatch(saveDataUserProfile(combinedData));
+			await dispatch(fetchAddDataProfile(combinedData));
 
 			if (phoneData.length > 1) {
 				await sendVerificationCode(phoneData);

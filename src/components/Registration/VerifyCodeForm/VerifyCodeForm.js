@@ -17,7 +17,7 @@ import { useValidation } from '../../../helpers/validation';
 import { URL_CHECK_VERIFICATION_CODE, URL_SEND_VERIFICATION_CODE } from '../../../config/API_url';
 import CountdownTimer from '../../CountdownTimer/CountdownTimer';
 import styles from './VerifyCodeForm.module.scss';
-import { fetchAddDataProfile } from '../../../store/slices/authSlice';
+// import { fetchAddDataProfile } from '../../../store/slices/authSlice';
 
 const NumericInput = (props) => {
 	const { onChange } = props;
@@ -42,10 +42,10 @@ const NumericInput = (props) => {
 const VerifyCodeForm = () => {
 	const { t } = useTranslation();
 	const navigate = useNavigate();
-	const dispatch = useDispatch();
+	// const dispatch = useDispatch();
 
 	// const { phone_number } = useSelector((state) => state.auth?.profile);
-	const combinedData = useSelector((state) => state.auth?.temporaryStorage);
+	// const combinedData = useSelector((state) => state.auth?.temporaryStorage);
 	const [value1, setValue1] = useState('');
 	const [value2, setValue2] = useState('');
 	const [value3, setValue3] = useState('');
@@ -55,10 +55,10 @@ const VerifyCodeForm = () => {
 	const [error, setError] = useState(null);
 
 	const { validateInputRequired } = useValidation();
-	combinedData && console.log(combinedData);
-	combinedData && console.log(combinedData.phone_number);
+	// combinedData && console.log(combinedData);
+	// combinedData && console.log(combinedData.phone_number);
 
-	const phone_number = combinedData && combinedData.phone_number;
+	// const phone_number = combinedData && combinedData.phone_number;
 	const handleTimerEnd = () => {
 		setTimerFinished(true);
 	};
@@ -71,7 +71,7 @@ const VerifyCodeForm = () => {
 
 	const handleResend = async () => {
 		try {
-			await axios.post(URL_SEND_VERIFICATION_CODE, { phone_number: phone_number });
+			await axios.post(URL_SEND_VERIFICATION_CODE);
 		} catch (error) {
 			return error.message;
 		}
@@ -81,13 +81,13 @@ const VerifyCodeForm = () => {
 		const codePhone = `${value1}${value2}${value3}${value4}`;
 
 		try {
-			await dispatch(fetchAddDataProfile(combinedData));
+			// await dispatch(fetchAddDataProfile(combinedData));
 			await axios.post(URL_CHECK_VERIFICATION_CODE, {
 				verification_code: codePhone,
-				phone_number: phone_number,
+				// phone_number: phone_number,
 			});
 
-			console.log('combinedData', combinedData);
+			// console.log('combinedData', combinedData);
 
 			navigate('/user');
 		} catch (error) {
