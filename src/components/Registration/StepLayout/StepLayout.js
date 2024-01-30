@@ -89,9 +89,9 @@ const StepLayout = () => {
 		return data;
 	};
 
-	const sendVerificationCode = useCallback(async () => {
+	const sendVerificationCode = useCallback(async (phoneData) => {
 		try {
-			await axios.post(URL_SEND_VERIFICATION_CODE);
+			await axios.post(URL_SEND_VERIFICATION_CODE, { phone_number: phoneData });
 		} catch (error) {
 			return error.message;
 		}
@@ -132,7 +132,7 @@ const StepLayout = () => {
 			// await dispatch(fetchAddDataProfile(combinedData));
 
 			if (phoneData.length > 1) {
-				await sendVerificationCode();
+				await sendVerificationCode(phoneData);
 				navigate('/verifyCodeForm');
 			} else {
 				await dispatch(fetchAddDataProfile(combinedData));

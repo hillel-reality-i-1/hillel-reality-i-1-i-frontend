@@ -44,7 +44,7 @@ const VerifyCodeForm = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	const { phone_number } = useSelector((state) => state.auth?.profile);
+	// const { phone_number } = useSelector((state) => state.auth?.profile);
 	const combinedData = useSelector((state) => state.auth?.temporaryStorage);
 	const [value1, setValue1] = useState('');
 	const [value2, setValue2] = useState('');
@@ -55,7 +55,10 @@ const VerifyCodeForm = () => {
 	const [error, setError] = useState(null);
 
 	const { validateInputRequired } = useValidation();
+	combinedData && console.log(combinedData);
+	combinedData && console.log(combinedData.phone_number);
 
+	const phone_number = combinedData && combinedData.phone_number;
 	const handleTimerEnd = () => {
 		setTimerFinished(true);
 	};
@@ -68,7 +71,7 @@ const VerifyCodeForm = () => {
 
 	const handleResend = async () => {
 		try {
-			await axios.post(URL_SEND_VERIFICATION_CODE);
+			await axios.post(URL_SEND_VERIFICATION_CODE, { phone_number: phone_number });
 		} catch (error) {
 			return error.message;
 		}
@@ -78,13 +81,14 @@ const VerifyCodeForm = () => {
 		const codePhone = `${value1}${value2}${value3}${value4}`;
 
 		try {
+			await dispatch(fetchAddDataProfile(combinedData));
 			await axios.post(URL_CHECK_VERIFICATION_CODE, {
 				verification_code: codePhone,
+				phone_number: phone_number,
 			});
 
 			console.log('combinedData', combinedData);
 
-			await dispatch(fetchAddDataProfile(combinedData));
 			navigate('/user');
 		} catch (error) {
 			error && setError(error);
@@ -129,7 +133,7 @@ const VerifyCodeForm = () => {
 						<div className={styles.description}>
 							<span className={styles.text}>{t('textSignUp.textVerifyCode.weSentCode')}</span>
 							<div className={styles.description_bottom}>
-								<span className={styles.text_link}>{phone_number}</span>
+								{/* <span className={styles.text_link}>{phone_number}</span> */}
 								<span className={styles.text}>{t('textSignUp.textVerifyCode.enterCode')}</span>
 							</div>
 						</div>

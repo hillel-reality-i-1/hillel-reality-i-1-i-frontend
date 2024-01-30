@@ -15,6 +15,11 @@ const SearchSection = ({ onSearch }) => {
 	const [selectedLabels, setSelectedLabels] = useState(null);
 	const [categorySelectedLabels, setCategorySelectedLabels] = useState(null);
 
+	const selectAllOption = {
+		label: 'Обрати всі',
+		value: 'all',
+	};
+
 	const optionsCountry = [
 		{
 			label: 'Чехія',
@@ -40,8 +45,7 @@ const SearchSection = ({ onSearch }) => {
 				const data = await axios.get(URL_PROF_CATEGORIES);
 				// changing object keys for use in selects
 				const categoryChangedKeys = data.map(({ id, name }) => ({ value: id, label: name }));
-
-				setProfCategories(categoryChangedKeys);
+				setProfCategories([selectAllOption, ...categoryChangedKeys]);
 			} catch (error) {
 				return error.message;
 			}
@@ -61,8 +65,14 @@ const SearchSection = ({ onSearch }) => {
 	const handleChangeCategory = (value, option) => {
 		console.log(value, option);
 		setProfCategoriesId(value);
-
 		setCategorySelectedLabels(option);
+		// if (value.includes('all')) {
+		// 	setProfCategoriesId(profCategories.map((category) => category.value));
+		// 	setCategorySelectedLabels(profCategories);
+		// } else {
+		// 	setProfCategoriesId(value.filter((v) => v !== 'all'));
+		// 	setCategorySelectedLabels(option);
+		// }
 	};
 
 	const countryTagRender = () => {
