@@ -41,17 +41,26 @@ const StepLayout = () => {
 
 					localStorage.setItem('authTokenUHelp', userToken?.token);
 					dispatch(setAuthToken(userToken?.token));
-					return;
-					// return userToken;
+					// return;
+					return userToken;
 				} catch (error) {
 					const errorMsg = error?.response.data.details;
+					console.log(error);
 					console.log(errorMsg);
 					// return console.log(errorMsg);
-					if (errorMsg === 'bad signature') {
+					// if (errorMsg === 'bad signature') {
+					// 	return navigate('/*');
+					// } else if (errorMsg === 'signature expired') {
+					// 	return navigate('/linkExpired');
+					// } else if (errorMsg === 'email address does not exist') {
+					// 	return navigate('/linkUsed');
+
+					// }
+					if (errorMsg.includes('bad signature')) {
 						return navigate('/*');
-					} else if (errorMsg === 'signature expired') {
+					} else if (errorMsg.includes('signature expired')) {
 						return navigate('/linkExpired');
-					} else if (errorMsg === 'email address does not exist') {
+					} else if (errorMsg.includes('email address does not exist')) {
 						return navigate('/linkUsed');
 					}
 				}
