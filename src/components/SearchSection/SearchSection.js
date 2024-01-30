@@ -7,100 +7,32 @@ import axios from '../../config/axios/axios';
 import { URL_PROF_CATEGORIES } from '../../config/API_url';
 import { useEffect, useState } from 'react';
 
-// const tagRender = (props) => {
-// 	const { countryId, label, value, closable, onClose } = props;
-// 	const onPreventMouseDown = (event) => {
-// 		event.preventDefault();
-// 		event.stopPropagation();
-// 	};
-// 	console.log('countryId', countryId);
-// 	// const countryiesLength = countryId?.length;
-
-// 	// const isLimitLength = !(countryiesLength > 1);
-// 	// console.log(countryiesLength, isLimitLength);
-// 	console.log(label, value);
-
-// 	return (
-// 		<Tag
-// 			// color={value}
-// 			onMouseDown={onPreventMouseDown}
-// 			// closable={closable}
-// 			// onClose={onClose}
-// 			// style={{
-// 			// 	marginRight: 3,
-// 			// }}
-// 		>
-// 			{label}
-// 			{console.log(label)}
-// 			{/* {isLimitLength ? { label } : `${countryId.length} countries`} */}
-// 		</Tag>
-// 	);
-// };
-
 const SearchSection = ({ onSearch }) => {
 	const { t } = useTranslation();
 	const [profCategories, setProfCategories] = useState(null);
 	const [countryId, setCountryId] = useState(null);
 	const [profCategoriesId, setProfCategoriesId] = useState(null);
+	const [selectedLabels, setSelectedLabels] = useState(null);
+	const [categorySelectedLabels, setCategorySelectedLabels] = useState(null);
 
-	// const tagRender = (props) => {
-	// 	const { countryId, label, value } = props;
-	// const onPreventMouseDown = (event) => {
-	// 	event.preventDefault();
-	// 	event.stopPropagation();
-	// };
-	// console.log('countryId', countryId);
-	// const countryiesLength = countryId?.length;
-
-	// const isLimitLength = !(countryiesLength > 1);
-	// console.log(countryiesLength, isLimitLength);
-	// console.log(label, value);
-	// console.log('countryiesLength', countryiesLength);
-
-	// return <Tag style={{ opacity: 1 }}>'Errrrr'</Tag>;
-	// isLimitLength ? (
-	// 	<Tag
-	// 		// color={value}
-	// 		onMouseDown={onPreventMouseDown}
-	// 		// closable={closable}
-	// 		// onClose={onClose}
-	// 		// style={{
-	// 		// 	marginRight: 3,
-	// 		// }}
-	// 	>
-	// 		{label}
-
-	// 		{/* {isLimitLength ? { label } : `${countryId.length} countries`} */}
-	// 	</Tag>
-	// ) : (
-	// <Tag>countryiesLength 'countries'</Tag>
-
-	// );
-	// };
-	const optionsCountry =
-		// : SelectProps['options']
-		[
-			{
-				label: 'Чехія',
-				value: 1,
-			},
-			{
-				label: 'Німеччина',
-				value: 2,
-			},
-			{
-				label: 'Польща',
-				value: 4,
-			},
-			// {
-			// 	label: 'Україна',
-			// 	value: 5,
-			// },
-			{
-				label: 'Велика Британія',
-				value: 3,
-			},
-		];
+	const optionsCountry = [
+		{
+			label: 'Чехія',
+			value: 1,
+		},
+		{
+			label: 'Німеччина',
+			value: 2,
+		},
+		{
+			label: 'Польща',
+			value: 4,
+		},
+		{
+			label: 'Велика Британія',
+			value: 3,
+		},
+	];
 
 	useEffect(() => {
 		const fetchCategories = async () => {
@@ -118,22 +50,38 @@ const SearchSection = ({ onSearch }) => {
 		fetchCategories();
 	}, []);
 
-	const handleChangeCountry = (value) => {
-		// console.log(`selected ${value}`);
+	const handleChangeCountry = (value, option) => {
 		setCountryId(value);
-		// onSearch(countryId, profCategoriesId);
-		// optionsCountry.push({
-		// 	label: value,
-		// 	value,
-		// });
+
+		setSelectedLabels(option);
+
+		// console.log(option);
 	};
 
-	// console.log(countryId);
-
-	const handleChangeCategory = (value) => {
-		// console.log(`selectedCategory ${value}`);
+	const handleChangeCategory = (value, option) => {
+		console.log(value, option);
 		setProfCategoriesId(value);
-		// onSearch(countryId, profCategoriesId);
+
+		setCategorySelectedLabels(option);
+	};
+
+	const countryTagRender = () => {
+		console.log(selectedLabels);
+
+		if (selectedLabels.length === 1) {
+			return <div className={styles.selected_value}>{selectedLabels[0].label}</div>;
+		} else {
+			return <div className={styles.selected_value}>{selectedLabels.length} країни</div>;
+		}
+	};
+
+	const categoryTagRender = () => {
+		console.log(selectedLabels);
+		if (categorySelectedLabels.length === 1) {
+			return <div className={styles.selected_value}>{categorySelectedLabels[0].label}</div>;
+		} else {
+			return <div className={styles.selected_value}>{categorySelectedLabels.length} категорій</div>;
+		}
 	};
 
 	const onSubmit = () => {
@@ -179,7 +127,6 @@ const SearchSection = ({ onSearch }) => {
 								<Select
 									mode='multiple'
 									name='country'
-									// mode='tags'
 									// tagRender={'tagRender'}
 									maxTagCount={1}
 									filterOption={false}
@@ -192,6 +139,7 @@ const SearchSection = ({ onSearch }) => {
 									placeholder='Select country'
 									onChange={handleChangeCountry}
 									options={optionsCountry}
+									tagRender={countryTagRender}
 									// value={countryId}
 								/>
 							</ConfigProvider>
@@ -246,6 +194,7 @@ const SearchSection = ({ onSearch }) => {
 										// defaultValue={['a10', 'c12']}
 										onChange={handleChangeCategory}
 										options={profCategories}
+										tagRender={categoryTagRender}
 										// fieldNames={{ label: profCategories?.name, value: profCategories?.id }}
 										// onChange={formik.handleChangeCategory}
 										// onBlur={formik.handleBlur}

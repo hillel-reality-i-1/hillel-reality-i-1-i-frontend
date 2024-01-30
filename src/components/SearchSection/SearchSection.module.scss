@@ -114,6 +114,17 @@
 	// 		line-height: 160%;
 	// 	}
 	// }
+
+	.ant-select-selection-overflow-item.ant-select-selection-overflow-item-rest {
+		display: none;
+	}
+
+	.ant-select-show-search:where(.css-dev-only-do-not-override-5mdaa7).ant-select:not(
+			.ant-select-customize-input
+		)
+		.ant-select-selector {
+		cursor: pointer;
+	}
 }
 
 .search {
@@ -286,5 +297,14 @@
 				border: 1px solid $color-primary20;
 			}
 		}
+	}
+
+	.selected_value {
+		color: $color-gray50;
+		font-family: $font-ns-regular;
+		font-size: 16px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 160%;
 	}
 }

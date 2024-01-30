@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from '../../../config/axios/axios';
 
 import { useTranslation } from 'react-i18next';
@@ -17,6 +17,7 @@ import { useValidation } from '../../../helpers/validation';
 import { URL_CHECK_VERIFICATION_CODE, URL_SEND_VERIFICATION_CODE } from '../../../config/API_url';
 import CountdownTimer from '../../CountdownTimer/CountdownTimer';
 import styles from './VerifyCodeForm.module.scss';
+import { fetchAddDataProfile } from '../../../store/slices/authSlice';
 
 const NumericInput = (props) => {
 	const { onChange } = props;
@@ -41,7 +42,10 @@ const NumericInput = (props) => {
 const VerifyCodeForm = () => {
 	const { t } = useTranslation();
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
+
 	const { phone_number } = useSelector((state) => state.auth?.profile);
+	const combinedData = useSelector((state) => state.auth?.temporaryStorage);
 	const [value1, setValue1] = useState('');
 	const [value2, setValue2] = useState('');
 	const [value3, setValue3] = useState('');
@@ -77,6 +81,10 @@ const VerifyCodeForm = () => {
 			await axios.post(URL_CHECK_VERIFICATION_CODE, {
 				verification_code: codePhone,
 			});
+
+			console.log('combinedData', combinedData);
+
+			await dispatch(fetchAddDataProfile(combinedData));
 			navigate('/user');
 		} catch (error) {
 			error && setError(error);

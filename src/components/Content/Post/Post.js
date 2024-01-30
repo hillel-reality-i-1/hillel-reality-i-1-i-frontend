@@ -91,7 +91,7 @@ const Post = () => {
 
 	const timeForRead = post && calculateReadTime(post?.content);
 	const timeElapsed = post && formatTimeElapsed(post?.creation_date);
-	const userCity = user?.user_profile?.city.split(',')[0];
+	const userCity = user?.user_profile?.city && user?.user_profile?.city.split(',')[0];
 
 	const rawContentState = draftToHtml(convertToRaw(editorState.getCurrentContent()));
 

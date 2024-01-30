@@ -11,7 +11,7 @@ import img_aside_step1 from '../../../assets/img/img-sign-up/img_aside_step1.png
 import img_aside_step2 from '../../../assets/img/img-sign-up/img_aside_step2.png';
 import img_aside_step3 from '../../../assets/img/img-sign-up/img_aside_step3.png';
 import arrowLeft from '../../../assets/img/icons/icons-SignUp/arrowLeft.svg';
-import { fetchAddDataProfile } from '../../../store/slices/authSlice';
+import { saveDataUserProfile } from '../../../store/slices/authSlice';
 import StepForm1 from '../Step1Form/Step1Form';
 import StepForm2 from '../Step2Form/Step2Form';
 import StepForm3 from '../Step3Form/Step3Form';
@@ -45,14 +45,15 @@ const StepLayout = () => {
 					// return userToken;
 				} catch (error) {
 					const errorMsg = error?.response.data.details;
-					return console.log(errorMsg);
-					// if (errorMsg === 'bad signature') {
-					// 	return navigate('/*');
-					// } else if (errorMsg === 'signature expired') {
-					// 	return navigate('/linkExpired');
-					// } else if (errorMsg === 'email address does not exist') {
-					// 	return navigate('/linkUsed');
-					// }
+					console.log(errorMsg);
+					// return console.log(errorMsg);
+					if (errorMsg === 'bad signature') {
+						return navigate('/*');
+					} else if (errorMsg === 'signature expired') {
+						return navigate('/linkExpired');
+					} else if (errorMsg === 'email address does not exist') {
+						return navigate('/linkUsed');
+					}
 				}
 			}
 		};
@@ -117,7 +118,8 @@ const StepLayout = () => {
 				...formData2,
 				phone_number: phoneData,
 			};
-			await dispatch(fetchAddDataProfile(combinedData));
+			dispatch(saveDataUserProfile(combinedData));
+			// await dispatch(fetchAddDataProfile(combinedData));
 
 			if (phoneData.length > 1) {
 				await sendVerificationCode();
