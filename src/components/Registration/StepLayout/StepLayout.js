@@ -11,7 +11,7 @@ import img_aside_step1 from '../../../assets/img/img-sign-up/img_aside_step1.png
 import img_aside_step2 from '../../../assets/img/img-sign-up/img_aside_step2.png';
 import img_aside_step3 from '../../../assets/img/img-sign-up/img_aside_step3.png';
 import arrowLeft from '../../../assets/img/icons/icons-SignUp/arrowLeft.svg';
-import { saveDataUserProfile } from '../../../store/slices/authSlice';
+import { fetchAddDataProfile, saveDataUserProfile } from '../../../store/slices/authSlice';
 import StepForm1 from '../Step1Form/Step1Form';
 import StepForm2 from '../Step2Form/Step2Form';
 import StepForm3 from '../Step3Form/Step3Form';
@@ -41,6 +41,7 @@ const StepLayout = () => {
 
 					localStorage.setItem('authTokenUHelp', userToken?.token);
 					dispatch(setAuthToken(userToken?.token));
+					console.log(userToken?.token);
 					// return;
 					return userToken;
 				} catch (error) {
@@ -134,6 +135,7 @@ const StepLayout = () => {
 				await sendVerificationCode();
 				navigate('/verifyCodeForm');
 			} else {
+				await dispatch(fetchAddDataProfile(combinedData));
 				navigate('/user');
 			}
 		} catch (error) {
