@@ -4,6 +4,8 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import ModalInfoAboutExpertProfile from '../AboutMe/ModalInfoAboutExpertProfile/ModalInfoAboutExpertProfile';
 import ImageUploader from '../ImageUploader/ImageUploader';
+import registrationUserProfile from '../../api/registrationUserProfile';
+import deleteUserProfile from '../../api/deleteUserProfile';
 
 import facebookIcon from '../../assets/img/icons/icons-AboutMe/facebook_icon.svg'
 import instagramIcon from '../../assets/img/icons/icons-AboutMe/insta_icon.svg'
@@ -19,7 +21,7 @@ import styles from './AboutMe.module.scss'
 import axios from 'axios';
 
 const AboutMe = ({ userData, expertUserData }) => {
-    const [checkedExpert, setCheckedExpert] = useState(false);
+    const [checkedExpert, setCheckedExpert] = useState(expertUserData);
     const [tubKey, setTubKey] = useState('1');
     const [imagesArray, setImagesArray] = useState([]);
     const [userInstagramValue] = useState('')
@@ -82,14 +84,29 @@ const AboutMe = ({ userData, expertUserData }) => {
         setModalOpen(false);
     };
 
-    const changeExpertUser = (e) => {
-        if (userData.phone_verified === true) {
-            setCheckedExpert(e)
-        } else {
-            setCheckedExpert(false)
+    const changeExpertUser = async (e) => {
+        try {
+            if (userData.phone_verified === true) {
+                setCheckedExpert(e);
+            } else {
+                setCheckedExpert(false);
+            }
+    
+            if (!e) {
+                await deleteUserProfile(expertUserData.id);
+                
+            } else {
+                const updatedExpertUserData = await registrationUserProfile();
+                setCheckedExpert(updatedExpertUserData);
+            }
+        } catch (error) {
+            console.error('Ошибка при изменении экспертного профиля:', error);
+        } finally {
+            window.location.reload();
         }
+    };
 
-    }
+    
 
     const handleTabChange = (key) => {
         setTubKey(key)
@@ -390,7 +407,11 @@ const AboutMe = ({ userData, expertUserData }) => {
                         Про мене
                     </h4>
                     <div className={styles.title_switcher}>
-                        <Switch disabled={!userData.phone_verified} onChange={e => changeExpertUser(e)} />
+                        <Switch
+                            disabled={!userData.phone_verified}
+                            checked={checkedExpert}
+                            onChange={(e) => changeExpertUser(e)}
+                        />
                         {checkedExpert
                             ? <p className={styles.switcher_text}>
                                 Експертний профіль

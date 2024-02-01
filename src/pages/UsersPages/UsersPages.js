@@ -32,6 +32,8 @@ export default function UsersPages() {
         return <div>Loading...</div>;
     }
 
+    console.log(dataUser)
+
     return (
         <div className={styles.container}>
             <div className={styles.user}>
@@ -39,7 +41,7 @@ export default function UsersPages() {
                     <UsersHead data={dataUser} />
                 </div>
                 <UsersAboutMe userData={dataUser}/>
-                <UsersLatestActivityTabs/>
+                <UsersLatestActivityTabs userData={dataUser}/>
             </div>
 
             <aside className={styles.aside}>

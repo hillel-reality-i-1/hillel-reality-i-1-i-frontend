@@ -42,51 +42,11 @@ export const onCrop = (image, cropDetails, handleUploadAvatar) => {
       handleUploadAvatar(blob);
     },
     'image/jpeg',
-    0.9
+    1
   );
-  // console.log(image);
+
 };
 
-// export const handleUploadAvatar = (
-//   file,
-//   authToken,
-//   setAvatarData,
-//   setAvatarId,
-//   setIsModalOpen,
-//   togglenModa2,
-//   setShowSuccessToast
-// ) => {
-//   if (!file) {
-//     console.error('Выберите изображение для загрузки.');
-//     return;
-//   }
-
-//   const formData = new FormData();
-//   formData.append('image', file, 'cropped_image.jpg');
-
-//   fetch('http://195.189.226.99/api/v1/users/upload_img/', {
-//     method: 'POST',
-//     headers: {
-//       Authorization: `Token ${authToken}`,
-//     },
-//     body: formData,
-//   })
-//     .then((response) => response.json())
-//     .then((data) => {
-//       // console.log('Success:', data);
-//       setAvatarData(data.image);
-//       setAvatarId(data.id);
-//       setIsModalOpen(false);
-//       togglenModa2();
-//       setShowSuccessToast(true);
-//       setTimeout(() => {
-//         setShowSuccessToast(false);
-//       }, 5000);
-//     })
-//     .catch((error) => {
-//       console.error('Error:', error);
-//     });
-// };
 
 export const onFile = (e, setImage) => {
   const file = e.target.files[0];

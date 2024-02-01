@@ -9,7 +9,7 @@
 		}
 	}
 	.react-international-phone-input-container {
-		margin-bottom: 32px;
+		// margin-bottom: 32px;
 
 		.react-international-phone-country-selector-button {
 			height: 100%;
@@ -161,5 +161,17 @@
 				color: $color-primary20;
 			}
 		}
+	}
+
+	.error {
+		font-family: $font-ns-regular;
+		display: flex;
+		color: $color-systemError;
+		font-size: 16px;
+		margin-top: 8px;
+	}
+
+	.btn_submit_wrapper {
+		margin-top: 32px;
 	}
 }

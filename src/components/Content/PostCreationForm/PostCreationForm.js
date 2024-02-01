@@ -24,6 +24,7 @@ const PostCreationForm = () => {
 	// const [newPost, setNewPost] = useState(null);
 
 	const [changeHTMLText, setChangeHTMLText] = useState('');
+	const [characters, setCharacters] = useState(0);
 
 	const [selectedCountries, setSelectedCountries] = useState([]);
 	const [availableCountries, setAvailableCountries] = useState([
@@ -40,12 +41,17 @@ const PostCreationForm = () => {
 	const [selectedFile, setSelectedFile] = useState(null);
 	const [previewImage, setPreviewImage] = useState(null);
 	const [isValid, setIsValid] = useState(false);
+	const [dataTitle, setDataTitle] = useState('');
 
 	const isLimitCategories = selectedCategory.length < 3;
 
-	const onChangeHTMLText = async (text) => {
+	const onChangeHTMLText = async (text, characters) => {
+		// console.log(text);
 		setChangeHTMLText(text);
+		setCharacters(characters);
 	};
+
+	// console.log(characters);
 
 	useEffect(() => {
 		const fetchCategories = async () => {
@@ -203,6 +209,18 @@ const PostCreationForm = () => {
 		onSubmit: handleSubmit,
 	});
 
+	useEffect(() => {
+		setDataTitle(formik.values.title);
+	}, [formik.values.title]);
+
+	// setDataTitle(formik.values.title);
+	// console.log(dataTitle);
+
+	const isLimitContent = characters > 1 && characters < 10000 && true;
+	const isLimitTitle = dataTitle.length > 1 && dataTitle.length < 100 && true;
+
+	// console.log(isLimitContent);
+
 	return (
 		<div className={styles.form_container}>
 			<form
@@ -235,19 +253,24 @@ const PostCreationForm = () => {
 								}}>
 								<TextArea
 									name='title'
-									onChange={formik.handleChange}
-									onBlur={formik.handleBlur}
+									// onChange={formik.handleChange}
+									// value={formik.values.title}
+									onChange={(e) => {
+										formik.handleChange(e);
+										formik.setFieldValue('title', e.target.value);
+									}}
 									value={formik.values.title}
+									onBlur={formik.handleBlur}
 									minLength='10'
 									placeholder='Заголовок'
 									autoSize={{
 										minRows: 1,
 									}}
-									count={{
-										show: true,
-										min: 2,
-										max: 100,
-									}}
+									// count={{
+									// 	show: true,
+									// 	min: 2,
+									// 	max: 100,
+									// }}
 									style={{
 										height: 62,
 										resize: 'none',
@@ -259,6 +282,14 @@ const PostCreationForm = () => {
 								/>
 							</ConfigProvider>
 						</div>
+						<div className={styles.editor_wrapper_counter}>
+							<div
+								className={styles.counter}
+								style={{ color: !isLimitTitle ? '#B3261E' : '#47474F' }}>
+								{`${dataTitle.length}/100`}
+							</div>
+						</div>
+
 						<div className={styles.input_text}>
 							{/* ================================editor */}
 							<TextEditorN
@@ -269,7 +300,15 @@ const PostCreationForm = () => {
 								onBlur={formik.handleBlur}
 								value={changeHTMLText}
 							/>
+
 							{/* ========================content */}
+						</div>
+						<div className={styles.editor_wrapper_counter}>
+							<div
+								className={styles.counter}
+								style={{ color: !isLimitContent ? '#B3261E' : '#47474F' }}>
+								{`${characters}/10000`}
+							</div>
 						</div>
 					</div>
 					<div className={styles.input_right_col}>
@@ -344,6 +383,7 @@ const PostCreationForm = () => {
 							)}
 						</div>
 						<div className={styles.image_wrapper}>
+							<span className={styles.image_title}>Фото</span>
 							{!previewImage ? (
 								<ImageUploader
 									additionalStyles='container_image'

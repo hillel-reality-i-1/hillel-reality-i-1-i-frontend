@@ -41,7 +41,7 @@ export default function AccountHeader() {
 		navigate('/postCreationPage');
 	};
 
-	if (isLoading || typeof data === 'undefined') {
+	if (isLoading) {
 		return (
 			<div className={styles.container}>
 				<div>Loading...</div>
@@ -69,10 +69,6 @@ export default function AccountHeader() {
 				onClick={handlePostCreation}
 			/>
 
-			{/* <div className={styles.account__notification}>
-        <Bell />
-      </div> */}
-
 			<div className={styles.account__user}>
 				<div className={styles.account__user__avatar}>
 					{data.profile_picture && data.profile_picture.image !== null ? (
@@ -81,8 +77,6 @@ export default function AccountHeader() {
 						<AvatarIcon />
 					)}
 				</div>
-
-				<p className={styles.account__user__name}> {data.full_name} </p>
 
 				<Dropdown
 					className={styles.dropdown}
@@ -108,7 +102,7 @@ export default function AccountHeader() {
 						onClick={(e) => e.preventDefault()}
 						className={styles.flex}>
 						{/* <Space className={styles.flex}> */}
-						<DropDown />
+						<p className={styles.account__user__name}> {data.full_name} </p><DropDown />
 						{/* </Space> */}
 					</a>
 				</Dropdown>
@@ -123,8 +117,8 @@ const items = [
 			<Link
 				to='user'
 				className={styles.dropdown__item}>
-				{' '}
-				<img src={userIcon} /> Мій профіль{' '}
+
+				<img src={userIcon} /> Мій профіль
 			</Link>
 		),
 		key: '0',
@@ -133,8 +127,8 @@ const items = [
 		label: (
 			<Link
 				to='settings'
-				className={styles.dropdown__item}>
-				{' '}
+				className={styles.dropdown__item}
+			>
 				<img src={settingsIcon} />
 				Налаштування
 			</Link>

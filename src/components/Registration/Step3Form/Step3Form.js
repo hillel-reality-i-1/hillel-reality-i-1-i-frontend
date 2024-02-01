@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 import '../../../translations/i18n';
@@ -12,8 +12,11 @@ import flag_pl from '../../../assets/img/icons/icons-SignUp/flag_pl.svg';
 import flag_gb from '../../../assets/img/icons/icons-SignUp/flag_gb.svg';
 import flag_de from '../../../assets/img/icons/icons-SignUp/flag_de.svg';
 import flag_cz from '../../../assets/img/icons/icons-SignUp/flag_cz.svg';
+import error from '../../../assets/img/icons/icons-SignUp/error.svg';
+import axios from '../../../config/axios/axios';
 
 import styles from './Step3Form.module.scss';
+import { URL_USERNAME_OR_PHONE_CHECK_UNIQUE } from '../../../config/API_url';
 
 const phoneUtil = PhoneNumberUtil.getInstance();
 const isPhoneValid = (phone) => {
@@ -73,7 +76,40 @@ const countries = updatedCountries.filter((country) => {
 const Step3Form = ({ onNext, onPhoneChange }) => {
 	const { t } = useTranslation();
 	const [phone, setPhone] = useState('');
+
 	const isValid = isPhoneValid(phone);
+	const [isNotUniqueness, setNotUniqueness] = useState(false);
+	const [errorMessage, setErrorMessage] = useState('');
+
+	useEffect(() => {
+		const checkUniqueness = async () => {
+			try {
+				if (isValid) {
+					const response = await axios.get(URL_USERNAME_OR_PHONE_CHECK_UNIQUE, {
+						params: {
+							phone_number: phone,
+						},
+					});
+					setNotUniqueness(response.phone_exists);
+				}
+			} catch (error) {
+				return error.message;
+			}
+		};
+		checkUniqueness();
+	}, [errorMessage, isNotUniqueness, isValid, phone]);
+
+	useEffect(() => {
+		if (phone.length > 2 && isValid === false) {
+			setErrorMessage('Будь ласка, введіть коректний номер телефону');
+		} else if (isNotUniqueness === true) {
+			setErrorMessage('Цей номер вже використовується. Будь ласка, спробуйте інший');
+		} else {
+			setErrorMessage('');
+		}
+	}, [isNotUniqueness, isValid, phone.length]);
+
+	// console.log(phone);
 
 	return (
 		<>
@@ -95,7 +131,7 @@ const Step3Form = ({ onNext, onPhoneChange }) => {
 							onNext(data);
 							setSubmitting(false);
 						}}>
-						{({ isSubmitting }) => (
+						{({ isSubmitting, touched }) => (
 							<Form className={styles.form}>
 								<label
 									htmlFor='span'
@@ -106,23 +142,41 @@ const Step3Form = ({ onNext, onPhoneChange }) => {
 								<Field
 									name='numberPhone'
 									autoComplete='off'>
-									{({ field }) => (
+									{({ field, touched }) => (
 										<PhoneInput
+											{...field}
 											defaultCountry='ua'
 											value={phone}
 											className={styles.phone_input}
 											onChange={(phone) => setPhone(phone)}
+											onBlur={field.onBlur}
 											countries={countries}
 											flags={customFlags}
 										/>
 									)}
 								</Field>
-								<CustomButton
-									htmlType='submit'
-									type='primary'
-									isDisable={!isValid}>
-									{t('textSignUp.textStep3.getCode')}
-								</CustomButton>
+
+								{touched.numberPhone && (!isValid || isNotUniqueness) && (
+									<div className={styles.error}>
+										<img
+											className={styles.img_er}
+											style={{ width: '24px', height: '24px', marginRight: '8px' }}
+											src={error}
+											alt='error'
+										/>
+										{errorMessage && errorMessage}
+									</div>
+								)}
+
+								<div className={styles.btn_submit_wrapper}>
+									<CustomButton
+										htmlType='submit'
+										type='primary'
+										isDisable={!isValid || isNotUniqueness}>
+										{t('textSignUp.textStep3.getCode')}
+									</CustomButton>
+								</div>
+
 								<div className={styles.skip_link}>
 									<button
 										type='submit'

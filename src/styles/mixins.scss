@@ -32,3 +32,32 @@
     font-style: $font-style;
     font-weight: $font-weight;
 }
+
+
+@mixin heading-styles-settings {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    color: #03091C;
+    font-family: $semiBold;
+    @include customFontStyles(28px, normal, 600);
+    line-height: 130%;
+}
+
+@mixin paragraph-styles-settings {
+    margin-bottom: 24px;
+    color: $color-gray50;
+    font-family: $regular;
+    @include customFontStyles(16px, normal, 400);
+    line-height: 160%;
+}
+
+@mixin label-styles-settings {
+    color: #03091C;
+    font-family: $medium;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 160%;
+}

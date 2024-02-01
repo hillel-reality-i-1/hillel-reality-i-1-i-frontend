@@ -55,6 +55,7 @@ const initialUserData = storedUserData ? JSON.parse(storedUserData) : null;
 const initialState = {
 	user: initialUserData,
 	profile: null,
+	temporaryStorage: null,
 	status: 'loading',
 	error: null,
 };
@@ -62,7 +63,11 @@ const initialState = {
 const authSlice = createSlice({
 	name: 'auth',
 	initialState,
-	reducers: {},
+	reducers: {
+		saveDataUserProfile: (state, action) => {
+			state.temporaryStorage = action.payload;
+		},
+	},
 	extraReducers: (builder) => {
 		// register=========================//
 		builder.addCase(fetchRegisterEmail.pending, (state) => {
@@ -113,4 +118,5 @@ const authSlice = createSlice({
 	},
 });
 
+export const { saveDataUserProfile } = authSlice.actions;
 export const authReducer = authSlice.reducer;

@@ -1,0 +1,48 @@
+@import '../../../styles/constants.scss';
+@import '../../../styles/mixins.scss';
+
+.location {
+    max-width: 410px;
+
+    h4 {
+        @include heading-styles-settings;
+    }
+
+    p {
+        @include paragraph-styles-settings;
+    }
+
+    &__selects {
+        margin-top: 16px
+    }
+
+    label {
+        @include label-styles-settings;
+
+    }
+
+}
+
+.location .ant-select-selector {
+    border-radius: 12px !important;
+}
+
+.button {
+    margin-top: 24px;
+    width: 100%;
+    background-color: #caccd1;
+    cursor: not-allowed;
+
+    &:hover {
+        background-color: #caccd1;
+    }
+
+    &:active {
+        background-color: #caccd1;
+    }
+}
+
+.validButton {
+    margin-top: 24px;
+    width: 100%;
+}

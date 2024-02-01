@@ -7,6 +7,8 @@ import LatestActivityReactions from '../LatestActivityReactions/LatestActivityRe
 import LatestActivitySaved from '../LatestActivitySaved/LatestActivitySaved';
 import LatestActivityContributions from '../LatestActivityContributions/LatestActivityContributions';
 
+
+
 const latestActivity = [
 	{
 		key: '1',

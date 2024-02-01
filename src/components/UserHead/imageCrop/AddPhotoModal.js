@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ReactComponent as Avatar } from '../../../assets/img/icons/add-photo-icon/add-photo-avatar.svg';
 import { ReactComponent as AddPhoto } from '../../../assets/img/icons/add-photo-icon/image-gallery-plus.svg';
 import { ReactComponent as CloseIcon } from '../../../assets/img/icons/icons-signIn/close-signIn-icon.svg';
 import BlueButton from "../../buttons/BlueButton/BlueButton";
@@ -12,26 +12,17 @@ export default function AddPhotoModal({
   togglenModa2,
   onFileChange,
 }) {
-  // const [fileSelected, setFileSelected] = useState(false);
 
   const handleFileChange = (event) => {
     onFileChange(event);
-    // setFileSelected(true);
   };
 
-  // const openSecondModal = () => {
-  //   togglenModa2();
-  //   setFileSelected(false); 
-  // };
-
   const handleUploadButtonClick = () => {
-
     document.getElementById('fileInput').click();
-    
   };
 
   const handleFileInputChange = () => {
-    togglenModa2(); 
+    togglenModa2();
   };
 
   return (
@@ -42,7 +33,7 @@ export default function AddPhotoModal({
       </div>
 
       <div className={styles.modal__main}>
-        <div></div>
+        <div className={styles.modal__main__avatar}><Avatar /></div>
         <p className={styles.modal__main__text}>
           Допустимі типи файлів для завантаження (JPEG, JPG, PNG). Максимальний розмір файлу не повинен перевищувати 5 МБ.
         </p>
@@ -55,8 +46,8 @@ export default function AddPhotoModal({
           accept='.jpg, .jpeg, .png'
           onChange={handleFileChange}
           style={{ display: 'none' }}
-          onClick={(event) => event.target.value = null} 
-          onInput={handleFileInputChange} 
+          onClick={(event) => event.target.value = null}
+          onInput={handleFileInputChange}
         />
         <BlueButton
           text={'Завантажити '}

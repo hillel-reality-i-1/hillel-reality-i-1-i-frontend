@@ -1,106 +1,43 @@
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-import { Button, ConfigProvider, Input, Select } from 'antd';
+import { Button, Checkbox, ConfigProvider, Input, Select } from 'antd';
 import { ReactComponent as IconSearch } from '../../assets/img/icons/icon-search-bar/icon_search.svg';
 import styles from './SearchSection.module.scss';
 import axios from '../../config/axios/axios';
 import { URL_PROF_CATEGORIES } from '../../config/API_url';
 import { useEffect, useState } from 'react';
 
-// const tagRender = (props) => {
-// 	const { countryId, label, value, closable, onClose } = props;
-// 	const onPreventMouseDown = (event) => {
-// 		event.preventDefault();
-// 		event.stopPropagation();
-// 	};
-// 	console.log('countryId', countryId);
-// 	// const countryiesLength = countryId?.length;
-
-// 	// const isLimitLength = !(countryiesLength > 1);
-// 	// console.log(countryiesLength, isLimitLength);
-// 	console.log(label, value);
-
-// 	return (
-// 		<Tag
-// 			// color={value}
-// 			onMouseDown={onPreventMouseDown}
-// 			// closable={closable}
-// 			// onClose={onClose}
-// 			// style={{
-// 			// 	marginRight: 3,
-// 			// }}
-// 		>
-// 			{label}
-// 			{console.log(label)}
-// 			{/* {isLimitLength ? { label } : `${countryId.length} countries`} */}
-// 		</Tag>
-// 	);
-// };
-
 const SearchSection = ({ onSearch }) => {
 	const { t } = useTranslation();
 	const [profCategories, setProfCategories] = useState(null);
 	const [countryId, setCountryId] = useState(null);
 	const [profCategoriesId, setProfCategoriesId] = useState(null);
+	const [selectedLabels, setSelectedLabels] = useState(null);
+	const [categorySelectedLabels, setCategorySelectedLabels] = useState(null);
 
-	// const tagRender = (props) => {
-	// 	const { countryId, label, value } = props;
-	// const onPreventMouseDown = (event) => {
-	// 	event.preventDefault();
-	// 	event.stopPropagation();
-	// };
-	// console.log('countryId', countryId);
-	// const countryiesLength = countryId?.length;
+	const selectAllOption = {
+		label: 'Обрати всі',
+		value: 'all',
+	};
 
-	// const isLimitLength = !(countryiesLength > 1);
-	// console.log(countryiesLength, isLimitLength);
-	// console.log(label, value);
-	// console.log('countryiesLength', countryiesLength);
-
-	// return <Tag style={{ opacity: 1 }}>'Errrrr'</Tag>;
-	// isLimitLength ? (
-	// 	<Tag
-	// 		// color={value}
-	// 		onMouseDown={onPreventMouseDown}
-	// 		// closable={closable}
-	// 		// onClose={onClose}
-	// 		// style={{
-	// 		// 	marginRight: 3,
-	// 		// }}
-	// 	>
-	// 		{label}
-
-	// 		{/* {isLimitLength ? { label } : `${countryId.length} countries`} */}
-	// 	</Tag>
-	// ) : (
-	// <Tag>countryiesLength 'countries'</Tag>
-
-	// );
-	// };
-	const optionsCountry =
-		// : SelectProps['options']
-		[
-			{
-				label: 'Чехія',
-				value: 1,
-			},
-			{
-				label: 'Німеччина',
-				value: 2,
-			},
-			{
-				label: 'Польща',
-				value: 4,
-			},
-			// {
-			// 	label: 'Україна',
-			// 	value: 5,
-			// },
-			{
-				label: 'Велика Британія',
-				value: 3,
-			},
-		];
+	const optionsCountry = [
+		{
+			label: 'Чехія',
+			value: 1,
+		},
+		{
+			label: 'Німеччина',
+			value: 2,
+		},
+		{
+			label: 'Польща',
+			value: 4,
+		},
+		{
+			label: 'Велика Британія',
+			value: 3,
+		},
+	];
 
 	useEffect(() => {
 		const fetchCategories = async () => {
@@ -108,8 +45,7 @@ const SearchSection = ({ onSearch }) => {
 				const data = await axios.get(URL_PROF_CATEGORIES);
 				// changing object keys for use in selects
 				const categoryChangedKeys = data.map(({ id, name }) => ({ value: id, label: name }));
-
-				setProfCategories(categoryChangedKeys);
+				setProfCategories([selectAllOption, ...categoryChangedKeys]);
 			} catch (error) {
 				return error.message;
 			}
@@ -118,22 +54,80 @@ const SearchSection = ({ onSearch }) => {
 		fetchCategories();
 	}, []);
 
-	const handleChangeCountry = (value) => {
-		// console.log(`selected ${value}`);
+	const handleChangeCountry = (value, option) => {
 		setCountryId(value);
-		// onSearch(countryId, profCategoriesId);
-		// optionsCountry.push({
-		// 	label: value,
-		// 	value,
-		// });
+
+		setSelectedLabels(option);
+
+		// console.log(option);
 	};
 
-	// console.log(countryId);
-
-	const handleChangeCategory = (value) => {
-		// console.log(`selectedCategory ${value}`);
+	const handleChangeCategory = (value, option) => {
+		console.log(value, option);
 		setProfCategoriesId(value);
-		// onSearch(countryId, profCategoriesId);
+		setCategorySelectedLabels(option);
+		// if (value.includes('all')) {
+		// 	setProfCategoriesId(profCategories.map((category) => category.value));
+		// 	setCategorySelectedLabels(profCategories);
+		// } else {
+		// 	setProfCategoriesId(value.filter((v) => v !== 'all'));
+		// 	setCategorySelectedLabels(option);
+		// }
+	};
+
+	const optionRenderCategory = (option) => {
+		// if (option.value === 'all') {
+		// 	return (
+		// 		<Checkbox
+		// 			onChange={(e) =>
+		// 				handleChangeCategory(
+		// 					e.target.checked ? profCategories.map((category) => category.value) : []
+		// 				)
+		// 			}>
+		// 			{option.label}
+		// 		</Checkbox>
+		// 	);
+		// }
+		// return (
+		// 	<Checkbox
+		// 		value={option.value}
+		// 		onChange={() => handleChangeCategory([option.value])}>
+		// 		{option.label}
+		// 	</Checkbox>
+		// );
+
+		const onCheckAllChange = (value) => {
+			console.log(value);
+		};
+
+		return (
+			<Checkbox
+			// value={selectAllOption.value}
+			// onChange={onCheckAllChange}
+			// checked={selectAllOption.label}
+			>
+				Обрати всі
+			</Checkbox>
+		);
+	};
+
+	const countryTagRender = () => {
+		console.log(selectedLabels);
+
+		if (selectedLabels.length === 1) {
+			return <div className={styles.selected_value}>{selectedLabels[0].label}</div>;
+		} else {
+			return <div className={styles.selected_value}>{selectedLabels.length} країни</div>;
+		}
+	};
+
+	const categoryTagRender = () => {
+		console.log(selectedLabels);
+		if (categorySelectedLabels?.length === 1) {
+			return <div className={styles.selected_value}>{categorySelectedLabels[0].label}</div>;
+		} else {
+			return <div className={styles.selected_value}>{categorySelectedLabels.length} категорій</div>;
+		}
 	};
 
 	const onSubmit = () => {
@@ -179,7 +173,6 @@ const SearchSection = ({ onSearch }) => {
 								<Select
 									mode='multiple'
 									name='country'
-									// mode='tags'
 									// tagRender={'tagRender'}
 									maxTagCount={1}
 									filterOption={false}
@@ -192,6 +185,7 @@ const SearchSection = ({ onSearch }) => {
 									placeholder='Select country'
 									onChange={handleChangeCountry}
 									options={optionsCountry}
+									tagRender={countryTagRender}
 									// value={countryId}
 								/>
 							</ConfigProvider>
@@ -246,6 +240,8 @@ const SearchSection = ({ onSearch }) => {
 										// defaultValue={['a10', 'c12']}
 										onChange={handleChangeCategory}
 										options={profCategories}
+										tagRender={categoryTagRender}
+										optionRender={optionRenderCategory}
 										// fieldNames={{ label: profCategories?.name, value: profCategories?.id }}
 										// onChange={formik.handleChangeCategory}
 										// onBlur={formik.handleBlur}

@@ -5,30 +5,14 @@
     max-width: 410px;
 
     h4 {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-
-        color: #03091C;
-        font-family: $semiBold;
-        @include customFontStyles(28px, normal, 600);
-        line-height: 130%;
+        @include heading-styles-settings;
 
     }
     p {
-        color: $color-gray50;
-        font-family: $regular;
-        @include customFontStyles(16px, normal, 400);
-        line-height: 160%;
+        @include paragraph-styles-settings;
     }
     label {
-      
-        color:  #03091C;
-        font-family: $medium;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 160%; 
+        @include label-styles-settings;
     }
     input {
         color:  #03091C;
@@ -36,15 +20,55 @@
         font-size: 16px;
         font-style: normal;
         
-        margin: 8px 0 24px 0;
+        margin: 8px 0 0 0;
         padding: 14px;
         width: 100%;
         border-radius: 12px;
         border: 1px solid #A7A7B2;
+
+        &.error {
+            border-color: #B3261E;
+        }
+    }
+    &__inputError {
+        color: #B3261E !important;
+        border-color: #B3261E !important;
+    }
+    &__inputError:focus {
+        outline: 1px solid #B3261E !important;
+    }
+
+    &__error {
+        margin-top: 8px;
+        display: flex;
+        gap: 8px;
+        color: #B3261E;
+   
+        font-family: $regular;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 160%;
+        svg {
+            width: 100%;
+            max-width: 24px;
+        }
     }
 }
 
 .button {
+    margin-top: 24px;
     width: 100%;
     background-color: #CACCD1;
+    cursor: not-allowed;
+    &:hover {
+        background-color: #CACCD1;
+    }
+    &:active {
+        background-color: #CACCD1;
+    }
+}
+.validButton {
+    margin-top: 24px;
+    width: 100%;
 }

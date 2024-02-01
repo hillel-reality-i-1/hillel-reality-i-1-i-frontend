@@ -61,7 +61,7 @@ export default function UserPage() {
 
 
 				<AboutMe data={data} userData={data} userDataPortfolio={userDataPortfolio} expertUserData={expertUserData}/>
-				<LatestActivityLayout />
+				<LatestActivityLayout/>
 			</div>
 
 			<aside className={styles.aside}>

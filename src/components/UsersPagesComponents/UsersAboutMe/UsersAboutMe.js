@@ -23,8 +23,6 @@ const UsersAboutMe = ({ userData }) => {
     const showRightArrow = endIndex - 1 < imagesArray.length;
     const showLeftArrow = startIndex > 0;
 
-    console.log(userData)
-
 
     useEffect(() => {
 

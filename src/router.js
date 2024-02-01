@@ -17,12 +17,14 @@ import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicy';
 import SettingsPage from './pages/SettingsPage/SettingsPage';
 import NicknamePage from './pages/NicknamePage/NicknamePage';
-import FullName from './pages/FullNamePage/FullName';
+import FullNamePage from './pages/FullNamePage/FullNamePage';
 import LocationPage from './pages/LocationPage/LocationPage';
 import PostDetailsPage from './pages/PostDetailsPage/PostDetailsPage';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import PostCreationPage from './pages/PostCreationPage/PostCreationPage';
-import UsersPages from './pages/UsersPages/UsersPages';
+import LinkUsed from './components/Registration/LinkUsed/LinkUsed';
+import LinkExpired from './components/Registration/LinkExpired/LinkExpired';
+import BiographyPage from './pages/Biography/BiographyPage';
 
 const router = createBrowserRouter([
 	{
@@ -44,14 +46,9 @@ const router = createBrowserRouter([
 				),
 			},
 			{
-				path: 'user/:id',
-				element: <UsersPages />
-			},
-			{
 				path: 'settings',
 				element: (
 					<ProtectedRoute>
-						{' '}
 						<Outlet />
 					</ProtectedRoute>
 				),
@@ -65,12 +62,16 @@ const router = createBrowserRouter([
 						element: <NicknamePage />,
 					},
 					{
-						path: 'fullName',
-						element: <FullName />,
+						path: 'fullname',
+						element: <FullNamePage />,
 					},
 					{
 						path: 'location',
 						element: <LocationPage />,
+					},
+					{
+						path: 'biography',
+						element: <BiographyPage />,
 					},
 				],
 			},
@@ -79,8 +80,8 @@ const router = createBrowserRouter([
 				element: <NicknamePage />,
 			},
 			{
-				path: 'settings/fullName',
-				element: <FullName />,
+				path: 'settings/fullname',
+				element: <FullNamePage />,
 			},
 			{
 				path: 'settings/location',
@@ -88,6 +89,14 @@ const router = createBrowserRouter([
 			},
 			{ path: '/privacyPolicy', element: <PrivacyPolicy /> },
 		],
+	},
+	{
+		path: '/linkExpired',
+		element: <LinkExpired />,
+	},
+	{
+		path: '/linkUsed',
+		element: <LinkUsed />,
 	},
 	{
 		path: '/verifyInfo',

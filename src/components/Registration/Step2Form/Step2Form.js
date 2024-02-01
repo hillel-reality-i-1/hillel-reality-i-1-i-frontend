@@ -5,8 +5,8 @@ import { useTranslation } from 'react-i18next';
 import '../../../translations/i18n';
 
 import { Formik, Form, Field } from 'formik';
-import { Button, Spin } from 'antd';
-import location from '../../../assets/img/icons/icons-SignUp/location.svg';
+import { Spin } from 'antd';
+// import location from '../../../assets/img/icons/icons-SignUp/location.svg';
 import { URL_COUNTRY_LIST, URL_CITY_LIST, URL_LANGUAGE } from '../../../config/API_url';
 
 import CustomButton from '../../CustomButton/CustomButton';
@@ -105,7 +105,7 @@ const Step2Form = ({ onNext }) => {
 					<h2 className={styles.title}>{t('textSignUp.textStep2.titleH2')}</h2>
 					<p className={styles.text}>{t('textSignUp.textStep2.description')}</p>
 
-					<Button
+					{/* <Button
 						key='location'
 						size='large'
 						className={styles.button_location}>
@@ -119,7 +119,7 @@ const Step2Form = ({ onNext }) => {
 							{t('textSignUp.textStep2.shareTheLocation')}
 						</div>
 					</Button>
-					<div className={styles.spanOr}>{t('textSignUp.or')}</div>
+					<div className={styles.spanOr}>{t('textSignUp.or')}</div> */}
 					<Formik
 						initialValues={{
 							country: '',

@@ -22,7 +22,7 @@ import { setAuthToken } from '../../../store/slices/signInSlice';
 
 const StepLayout = () => {
 	const { t } = useTranslation();
-	const novigate = useNavigate();
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	const [current, setCurrent] = useState(0);
@@ -38,16 +38,38 @@ const StepLayout = () => {
 					const userToken = await axios.post(URL_CONFIRM_EMAIL, {
 						key: token,
 					});
+
 					localStorage.setItem('authTokenUHelp', userToken?.token);
 					dispatch(setAuthToken(userToken?.token));
+					console.log(userToken?.token);
+					// return;
+					return userToken;
 				} catch (error) {
-					return error.message;
+					const errorMsg = error?.response.data.details;
+					console.log(error);
+					console.log(errorMsg);
+					// return console.log(errorMsg);
+					// if (errorMsg === 'bad signature') {
+					// 	return navigate('/*');
+					// } else if (errorMsg === 'signature expired') {
+					// 	return navigate('/linkExpired');
+					// } else if (errorMsg === 'email address does not exist') {
+					// 	return navigate('/linkUsed');
+
+					// }
+					if (errorMsg.includes('bad signature')) {
+						return navigate('/*');
+					} else if (errorMsg.includes('signature expired')) {
+						return navigate('/linkExpired');
+					} else if (errorMsg.includes('email address does not exist')) {
+						return navigate('/linkUsed');
+					}
 				}
 			}
 		};
 
 		fetchKey();
-	}, [token]);
+	}, [dispatch, navigate, token]);
 
 	const handleForm2Submit = async (data) => {
 		if (data.country_id === 0 && data.city_id === 0) {
@@ -106,18 +128,20 @@ const StepLayout = () => {
 				...formData2,
 				phone_number: phoneData,
 			};
+			// dispatch(saveDataUserProfile(combinedData));
 			await dispatch(fetchAddDataProfile(combinedData));
 
 			if (phoneData.length > 1) {
-				await sendVerificationCode();
-				novigate('/verifyCodeForm');
+				await sendVerificationCode(phoneData);
+				navigate('/verifyCodeForm');
 			} else {
-				novigate('/user');
+				await dispatch(fetchAddDataProfile(combinedData));
+				navigate('/user');
 			}
 		} catch (error) {
 			return error.message;
 		}
-	}, [phone, formData2, dispatch, sendVerificationCode, novigate]);
+	}, [phone, formData2, dispatch, sendVerificationCode, navigate]);
 
 	useEffect(() => {
 		if (phone && current === steps.length - 1) {

@@ -9,12 +9,21 @@ import styles from './Footer.module.scss';
 
 const Footer = () => {
 	const { t } = useTranslation();
+
+	const handleClick = () => {
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth',
+		});
+	};
 	return (
 		<footer className={styles.footer}>
 			<div className={styles.container}>
 				<div className={styles.footer_inner}>
 					<div className={styles.footer_logo_wrapper}>
-						<Link to='/'>
+						<Link
+							to='/'
+							onClick={handleClick}>
 							<img
 								src={footer_logo_1}
 								alt='Logo'

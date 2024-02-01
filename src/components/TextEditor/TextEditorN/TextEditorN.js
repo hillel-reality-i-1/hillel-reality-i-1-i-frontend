@@ -159,6 +159,7 @@ const TextEditorN = ({ onChangeHTMLText, placeholder }) => {
 
 	useEffect(() => {
 		const contentState = editorState.getCurrentContent();
+		console.log(contentState.selectionAfter.anchorOffset);
 		if (!contentState.hasText() && contentState.getBlockMap().first().getType() !== 'unstyled') {
 			editorRef.current.className += ' RichEditor-hidePlaceholder';
 		}
@@ -168,11 +169,13 @@ const TextEditorN = ({ onChangeHTMLText, placeholder }) => {
 	const rawContentState = convertToRaw(contentState);
 	const contentJSON = JSON.stringify(rawContentState);
 
+	const characters = contentState.selectionAfter.anchorOffset;
+
 	// Assuming onChangeHTMLText is a function to send data to the server
 	// contentJSON && onChangeHTMLText(contentJSON);
 	useEffect(() => {
-		onChangeHTMLText(contentJSON);
-	}, [onChangeHTMLText, contentJSON]);
+		onChangeHTMLText(contentJSON, characters);
+	}, [onChangeHTMLText, contentJSON, characters]);
 
 	return (
 		<div className='RichEditor-root'>

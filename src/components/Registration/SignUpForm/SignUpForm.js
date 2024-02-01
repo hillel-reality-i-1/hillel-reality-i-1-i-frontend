@@ -200,8 +200,10 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 							<ConfigProvider
 								theme={{
 									token: {
-										colorTextPlaceholder: `${errors.password && touched.password && '#B3261E'}`,
-										colorText: `${errors.password && touched.password && '#B3261E'}`,
+										// colorTextPlaceholder: `${errors.password && touched.password && '#B3261E'}`,
+										colorTextPlaceholder: '#47474F',
+										colorText: '#0D101D',
+										// colorText: `${errors.password && touched.password && '#B3261E'}`,
 									},
 								}}>
 								<div className={styles.inputWrapper}>
@@ -277,10 +279,11 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 							<ConfigProvider
 								theme={{
 									token: {
-										colorTextPlaceholder: `${
-											errors.confirmPassword ? touched.confirmPassword && '#B3261E' : '#228326'
-										}`,
-										// colorText: '#0D101D',
+										// colorTextPlaceholder: `${
+										// 	errors.confirmPassword ? touched.confirmPassword && '#B3261E' : '#228326'
+										// }`,
+										colorTextPlaceholder: '#47474F',
+										colorText: '#0D101D',
 										// colorText: `${
 										// 	(confirmPasswordError?.error && '#228326') ||
 										// 	(confirmPasswordError?.access && '#B3261E') ||
@@ -392,7 +395,7 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 									<Link
 										to='/'
 										className={styles.link}>
-										The Terms and Conditions
+										Умовами користування
 									</Link>
 								</span>
 							</label>
@@ -400,6 +403,7 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 							<CustomButton
 								htmlType='submit'
 								type='primary'
+								// isDisable={!isValid || !isError || !dirty || isSubmitting}
 								isDisable={!isValid || !dirty || isSubmitting}>
 								{/* {console.log(!isValid)} */}
 								<span className={styles.btn_submit_text}>{t('textSignUp.signUp')}</span>

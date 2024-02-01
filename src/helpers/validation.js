@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import '../translations/i18n';
-// import emailValidationServer from '../api/emailValidationServer';
-// import axios from '../config/axios/axios';
+
+import axios from '../config/axios/axios';
+import { URL_CHECK_EMAIL, URL_USERNAME_OR_PHONE_CHECK_UNIQUE } from '../config/API_url';
 
 export const useValidation = () => {
 	const { t } = useTranslation();
@@ -14,14 +15,24 @@ export const useValidation = () => {
 
 		if (!value) {
 			error = t('textSignUp.error.required');
-		}
-
-		else {
+		} else {
 			const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
 			const maxLength = 50;
 
 			if (!emailRegex.test(value) || !value.length > maxLength) {
 				error = t('textSignUp.error.email');
+			}
+		}
+
+		if (!error) {
+			try {
+				const response = await axios.post(URL_CHECK_EMAIL, { email: value });
+				if (response.exists === true) {
+					error =
+						'Ця пошта вже використовується. Будь ласка, використайте іншу або увійдіть у профіль';
+				}
+			} catch (error) {
+				return error.message;
 			}
 		}
 
@@ -155,19 +166,34 @@ export const useValidation = () => {
 
 	// validate validateUserName==========================//
 
-	const validateUserName = (value) => {
+	const validateUserName = async (value) => {
 		let error;
-		if (!value) {
-			error = t('textSignUp.error.required');
-		}
-		if (value.length < 2 || value.length > 32) {
+		if (!value || value.trim() === '') return (error = t('textSignUp.error.required'));
+		if ((value.length > 0 && value.length < 2) || value.length > 32) {
 			return (error = t('textSignUp.error.lengthUserName'));
 		} else if (/^\d/.test(value)) {
 			return (error = t('textSignUp.error.startWithDigit'));
-		} else if (!/^[a-zA-Z][a-zA-Z0-9_]{0,31}$/u.test(value)) {
+			// } else if (!/^[a-zA-Z][a-zA-Z0-9_]{0,31}$/u.test(value)) {
+		} else if (!/^[a-zA-Z][a-zA-Z0-9]{0,30}(?![a-zA-Z0-9_])$/u.test(value)) {
 			return (error = t('textSignUp.error.otherValidUserName'));
 		} else if (/\s/.test(value)) {
 			return (error = t('textSignUp.error.noSpaces'));
+		}
+
+		if (!error) {
+			try {
+				const response = await axios.get(URL_USERNAME_OR_PHONE_CHECK_UNIQUE, {
+					params: {
+						username: value,
+					},
+				});
+
+				if (response.username_exists === true) {
+					error = 'Цей нікнейм вже використовується. Будь ласка, спробуйте інший';
+				}
+			} catch (error) {
+				return error.message;
+			}
 		}
 
 		return error;
@@ -178,14 +204,16 @@ export const useValidation = () => {
 	const validateFullName = (value) => {
 		let error;
 
-		// if (!value) {
-		// 	error = t('textSignUp.error.required');
-		// }
+		if (!value || value.trim() === '') return (error = t('textSignUp.error.required'));
 
-		if (value.length < 2 || value.length > 50) {
+		if ((value.length > 0 && value.length < 2) || value.length > 50) {
 			return (error = t('textSignUp.error.lengthFullName'));
 		} else if (
-			!/^[а-яА-Яa-zA-ZґҐєЄіІїЇ'][а-яА-Яa-zA-ZґҐєЄіІїЇ'\s-]*[а-яА-Яa-zA-ZґҐєЄіІїЇ']$/u.test(value)
+			// (!/^(?!['" -])[а-яА-Яa-zA-ZґҐєЄіІїЇ'][а-яА-Яa-zA-ZґҐєЄіІїЇ'\s-]*[а-яА-Яa-zA-ZґҐєЄіІїЇ'](?!['" -])(?<!['"])$/u.test(value))
+
+			!/^(?!['" -])[а-яА-Яa-zA-ZґҐєЄіІїЇ'][а-яА-Яa-zA-ZґҐєЄіІїЇ'\s-]*[а-яА-Яa-zA-ZґҐєЄіІїЇ'](?!['" -])(?<!['"])$/u.test(
+				value
+			)
 		) {
 			return (error = t('textSignUp.error.otherValidFullName'));
 		}
@@ -226,13 +254,12 @@ export const validateSignInForm = (values) => {
 
 export const isSignInFormValid = (email, password) => {
 	if (!email || !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
-	  return false; 
+		return false;
 	}
-  
+
 	if (!password || password.length < 8) {
-	  return false; 
+		return false;
 	}
-  
-	return true; 
+
+	return true;
 };
-  

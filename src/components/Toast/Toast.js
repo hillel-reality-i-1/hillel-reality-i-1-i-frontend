@@ -14,7 +14,9 @@ export default function Toast({ message, duration,  }) {
     
       return () => clearTimeout(timer);
     }, [duration]);
-    
+    if(duration === '0') {
+      return
+    }
     return (
         <div className={`${styles.toast} ${isVisible ? styles.show : styles.hide}`}>
           <Success />  {message}

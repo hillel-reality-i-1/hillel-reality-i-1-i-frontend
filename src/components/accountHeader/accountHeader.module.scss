@@ -5,9 +5,11 @@
     align-items: center;
     flex-direction: row;
     gap: 24px;
+
     .modal {
         max-width: 476px;
     }
+
     &__notification {
         display: flex;
         justify-content: center;
@@ -23,19 +25,23 @@
         display: flex;
         align-items: center;
         gap: 8px;
+
         &__name {
             color: $color-gray80;
             font-family: $medium;
             font-size: 16px;
             font-style: normal;
             font-weight: 500;
+            user-select: none;
         }
+
         &__avatar {
             position: relative;
             height: 56px;
             width: 56px;
             border-radius: 50%;
             background-color: $color-gray30;
+
             img {
                 max-width: 56px;
                 border-radius: 50%;
@@ -43,13 +49,16 @@
         }
     }
 }
+
 .flex {
     display: flex;
     align-items: center;
 }
+
 .dropdown {
     cursor: pointer;
 }
+
 .dropdown__item {
     padding: 9px 2px;
     display: flex;
@@ -58,8 +67,9 @@
     font-family: $regular;
     color: $color-gray70 !important;
     font-size: 18px;
-    line-height: 160%; 
+    line-height: 160%;
 }
+
 .dropdown__item__red {
     padding: 9px 2px;
     display: flex;
@@ -68,5 +78,5 @@
     font-family: $regular;
     color: $color-systemError !important;
     font-size: 18px;
-    line-height: 160%; 
+    line-height: 160%;
 }
