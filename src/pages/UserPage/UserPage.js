@@ -7,6 +7,7 @@ import UserHead from '../../components/UserHead/UserHead';
 import AboutMe from '../../components/AboutMe/AboutMe';
 import LatestActivityLayout from '../../components/LatestActivity/LatestActivityLayout/LatestActivityLayout';
 import styles from './userPage.module.scss';
+import AsideSection from '../../components/AsideSection/AsideSection';
 
 export default function UserPage() {
 	const { data, error, isLoading, refetch } = useGetUserDataQuery()
@@ -37,7 +38,6 @@ export default function UserPage() {
 
 			} catch (error) {
 				console.log(error);
-				// navigate('/');
 			}
 		};
 
@@ -59,13 +59,12 @@ export default function UserPage() {
 					<UserHead data={data} />
 				</div>
 
-
 				<AboutMe data={data} userData={data} userDataPortfolio={userDataPortfolio} expertUserData={expertUserData}/>
 				<LatestActivityLayout/>
 			</div>
 
 			<aside className={styles.aside}>
-				<p>Calendar of events</p>
+				<AsideSection />
 			</aside>
 		</div>
 	);

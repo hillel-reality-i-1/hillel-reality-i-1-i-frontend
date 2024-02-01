@@ -60,7 +60,7 @@
             width: 100%;
             display: flex;
             justify-content: center;
-            
+
 
 
             .сontainer_content_wrapper {
@@ -153,24 +153,21 @@ $common-styles: (
 
     .tubs {
         width: 797px;
+    }
+}
 
-        .tubs_button {
-            display: flex;
-            padding: 8px;
-            align-items: center;
-            gap: 4px;
-            cursor: pointer;
-            
+.my_summary_block {
+    display: flex;
+    align-items: flex-start;
+    align-self: stretch;
 
-            .tubs_text {
-                color: #126FE1;
-                font-family: $medium;
-                font-size: 16px;
-                font-style: normal;
-                font-weight: 500;
-                line-height: 160%;
-            }
-        }
+    .my_summary_text {
+        color: #0D101D;
+        font-family: $regular;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 160%;
     }
 }
 
@@ -328,7 +325,6 @@ $common-styles: (
         display: flex;
         width: 100%;
         gap: 16px;
-     
 
         .my_portfolio_item_wrapper {
             width: 146px;
@@ -348,7 +344,7 @@ $common-styles: (
                 height: 100%;
                 border-radius: 12px;
                 position: absolute;
-                
+
                 &:hover {
                     background: url('../../assets/img/icons/icons-AboutMe/trash.svg') no-repeat;
                     background-position: center;
@@ -357,8 +353,6 @@ $common-styles: (
                 }
             }
         }
-
-
 
         .my_portfolio_button {
             display: flex;
@@ -410,5 +404,38 @@ $common-styles: (
             }
 
         }
+    }
+}
+
+.no_content_block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .no_content_text {
+        color: #47474F;
+        font-family: $regular;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 160%;
+    }
+}
+
+.no_content_button {
+    display: flex;
+    padding: 4px 0px;
+    margin: 8px 0px;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+
+    .no_content_text {
+        color: #126FE1;
+        font-family: $medium;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 160%;
     }
 }

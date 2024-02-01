@@ -35,7 +35,6 @@ const AboutMe = ({ userData, expertUserData }) => {
     const showRightArrow = endIndex - 1 < imagesArray.length;
     const showLeftArrow = startIndex > 0;
 
-
     useEffect(() => {
 
         const addPhotoFunction = () => {
@@ -48,8 +47,6 @@ const AboutMe = ({ userData, expertUserData }) => {
 
         addPhotoFunction()
     }, [expertUserData.portfolio]);
-
-
 
     const deletePhoto = (item) => {
         console.log(item.id)
@@ -91,10 +88,10 @@ const AboutMe = ({ userData, expertUserData }) => {
             } else {
                 setCheckedExpert(false);
             }
-    
+
             if (!e) {
                 await deleteUserProfile(expertUserData.id);
-                
+
             } else {
                 const updatedExpertUserData = await registrationUserProfile();
                 setCheckedExpert(updatedExpertUserData);
@@ -105,8 +102,6 @@ const AboutMe = ({ userData, expertUserData }) => {
             window.location.reload();
         }
     };
-
-    
 
     const handleTabChange = (key) => {
         setTubKey(key)
@@ -317,7 +312,13 @@ const AboutMe = ({ userData, expertUserData }) => {
             label: 'Біографія',
             children: (
                 <div className={styles.my_summary_block}>
-                    <p>{userData.about_my_self ? userData.about_my_self : defaultTextSummary}</p>
+                    {
+                        userData.about_my_self ?
+                            <p className={styles.my_summary_text}>
+                                {userData.about_my_self}
+                            </p>
+                            : null
+                    }
 
                 </div>
 
@@ -452,45 +453,70 @@ const AboutMe = ({ userData, expertUserData }) => {
                     </div>
 
                     {!userData.phone_number && tubKey === '1' && (
-                        <button className={styles.tubs_button} onClick={() => { console.log('Add Phone') }}>
+
+                        <button className={styles.no_content_button} onClick={() => { console.log('Додати телефон') }}>
                             <img src={addIcon} alt='add icon' />
-                            <span className={styles.tubs_text}>
-                                Add Phone
+                            <span className={styles.no_content_text}>
+                                Додати телефон
                             </span>
                         </button>
+
                     )}
                     {!(userData.linkedin || userFacebookValue || userInstagramValue) && tubKey === '1' && (
-                        <button className={styles.tubs_button} onClick={() => { console.log('Add Social Media') }}>
+
+                        <button className={styles.no_content_button} onClick={() => { console.log('Додати соціальну мережу') }}>
                             <img src={addIcon} alt='add icon' />
-                            <span className={styles.tubs_text}>
-                                Add Social Media
+                            <span className={styles.no_content_text}>
+                                Додати соціальну мережу
                             </span>
                         </button>
+
                     )}
                     {!userData.about_my_self && tubKey === '2' && (
-                        <button className={styles.tubs_button} onClick={() => { console.log('Add Summary') }}>
-                            <img src={addIcon} alt='add icon' />
-                            <span className={styles.tubs_text}>
-                                Add Summary
-                            </span>
-                        </button>
+
+                        <div className={styles.no_content_block}>
+                            <p className={styles.no_content_text}>
+                                Будь ласка, розскажіть нам про себе. Поділіться вашою історією, досвідом роботи, інтересами, та більше.
+                            </p>
+                            <button className={styles.no_content_button} onClick={() => { console.log('Додати біографію') }}>
+                                <img src={addIcon} alt='add icon' />
+                                <span className={styles.no_content_text}>
+                                    Додати біографію
+                                </span>
+                            </button>
+                        </div>
+
                     )}
-                    {!expertUserData.profession && tubKey === '3' && (
-                        <button className={styles.tubs_button} onClick={() => { console.log('Add Expertise') }}>
-                            <img src={addIcon} alt='add icon' />
-                            <span className={styles.tubs_text}>
-                                Add Expertise
-                            </span>
-                        </button>
-                    )}
-                    {!expertUserData.service && tubKey === '4' && (
-                        <button className={styles.tubs_button} onClick={() => { console.log('Add Service') }}>
-                            <img src={addIcon} alt='add icon' />
-                            <span className={styles.tubs_text} >
-                                Add Service
-                            </span>
-                        </button>
-                    )}
+                    {(!expertUserData.profession?.length && tubKey === '3') ? (
+
+                        <div className={styles.no_content_block}>
+                            <p className={styles.no_content_text}>
+                                Будь ласка, додайте свою професію, щоб інші користувачі могли здобути більш повне уявлення про ваш фаховий досвід та сферу діяльності.
+                            </p>
+                            <button className={styles.no_content_button} onClick={() => { console.log('Додати професію') }}>
+                                <img src={addIcon} alt='add icon' />
+                                <span className={styles.no_content_text}>
+                                    Додати професію
+                                </span>
+                            </button>
+                        </div>
+
+                    ) : null}
+                    {!expertUserData.service?.length && tubKey === '4' ? (
+
+                        <div className={styles.no_content_block}>
+                            <p className={styles.no_content_text}>
+                                Будь ласка, додайте інформацію про ваші послуги, щоб інші користувачі могли ознайомитися з вашою діяльністю.
+                            </p>
+                            <button className={styles.no_content_button} onClick={() => { console.log('Додати послугу') }}>
+                                <img src={addIcon} alt='add icon' />
+                                <span className={styles.no_content_text}>
+                                    Додати послугу
+                                </span>
+                            </button>
+                        </div>
+
+                    ) : null}
 
                 </div>
             </div>

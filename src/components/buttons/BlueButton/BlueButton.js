@@ -1,10 +1,10 @@
 import styles from './blueButton.module.scss'
 
-export default function BlueButton({text, additionalStyles, onClick, children }) {
+export default function BlueButton({text, additionalStyles, onClick, children, disabled = false }) {
 
   return (
     <>
-      <button className={`${styles.button} ${additionalStyles}`} onClick={onClick}>
+      <button disabled={disabled} className={`${styles.button} ${additionalStyles}`} onClick={onClick}>
         {children}
         {text}
       </button>

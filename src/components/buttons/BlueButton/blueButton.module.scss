@@ -26,5 +26,9 @@
     &:active {
         background: #094DA0; 
     }
+    &:disabled {
+        background: #CACCD1;
+        cursor: not-allowed;
+    }
 }
 
