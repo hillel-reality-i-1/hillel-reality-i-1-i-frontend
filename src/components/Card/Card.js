@@ -16,8 +16,8 @@ import { Link } from 'react-router-dom';
 import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 
-const Card = ({ posts }) => {
-	const [isExpanded, setIsExpanded] = useState(false);
+const Card = ({ posts, bgColor }) => {
+	// const [isExpanded, setIsExpanded] = useState(false);
 	const [postData, setPostData] = useState(null);
 	const [user, setUser] = useState(null);
 	const [editorState, setEditorState] = useState(EditorState.createEmpty());
@@ -77,9 +77,9 @@ const Card = ({ posts }) => {
 		getEditorStateFromPostData();
 	}, [postData]);
 
-	const handleReadMoreClick = () => {
-		setIsExpanded(!isExpanded);
-	};
+	// const handleReadMoreClick = () => {
+	// 	setIsExpanded(!isExpanded);
+	// };
 
 	const timeForRead = postData && calculateReadTime(postData?.content);
 	const timeElapsed = postData && formatTimeElapsed(postData?.creation_date);
@@ -87,11 +87,16 @@ const Card = ({ posts }) => {
 
 	const rawContentState = draftToHtml(convertToRaw(editorState.getCurrentContent()));
 
-	const isImage = true;
-
+	const isImage = postData?.image_to_post;
+	// console.log('user', user);
+	// console.log(postData?.image_to_post);
 	return (
-		<div className={`${styles.container} ${styles.card_wrapper}`}>
-			<div className={styles.content_wrapper}>
+		<div
+			style={bgColor}
+			className={`${styles.container} ${styles.card_wrapper}`}>
+			<div
+				className={styles.content_wrapper}
+				style={{ maxWidth: isImage ? '580px' : '' }}>
 				<div className={styles.content_header}>
 					<div className={styles.user}>
 						{user?.user_profile?.profile_picture ? (
@@ -137,25 +142,13 @@ const Card = ({ posts }) => {
 				<Link to={`/postDetailsPage/${postData?.id}`}>
 					<article className={styles.content}>
 						<h5 className={styles.content_title}>{postData?.title}</h5>
-						<div className={`${styles.content_post} ${isExpanded && styles.expanded}`}>
+						<div className={`${styles.content_post}`}>
 							<div
 								className={styles.content_style}
 								dangerouslySetInnerHTML={rawContentState && { __html: rawContentState }}
 							/>
 						</div>
-						{!isExpanded ? (
-							<div
-								className={styles.btn_read_more}
-								onClick={handleReadMoreClick}>
-								Read more...
-							</div>
-						) : (
-							<div
-								className={styles.btn_read_more}
-								onClick={handleReadMoreClick}>
-								Hide...
-							</div>
-						)}
+						<div className={styles.btn_read_more}>Read more...</div>
 					</article>
 				</Link>
 				<div className={styles.content_footer}>
@@ -192,13 +185,19 @@ const Card = ({ posts }) => {
 					</div>
 				</div>
 			</div>
-			<figure className={`${styles.content_img_wrapper} ${isImage && styles.visibility}`}>
-				<img
-					src={img_card}
-					alt='Зображення к допису'
-					style={{ width: '100%', height: '100%', display: 'block' }}
-				/>
-			</figure>
+			{postData?.image_to_post && (
+				<figure
+					className={`${styles.content_img_wrapper}
+				 
+				 `}>
+					<img
+						className={styles.image_post}
+						src={`${process.env.REACT_APP_API_BASE_URL}${postData?.image_to_post}`}
+						alt='Зображення к допису'
+						// style={{ width: '192px', height: '100%', display: 'block' }}
+					/>
+				</figure>
+			)}
 		</div>
 	);
 };

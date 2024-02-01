@@ -142,7 +142,18 @@ const Post = () => {
 				</div>
 				<div className={styles.post}>
 					<h2 className={styles.post_title}>{post?.title}</h2>
+
 					<div className={styles.post_content}>
+						{post?.image_to_post && (
+							<figure className={`${styles.content_img_wrapper}`}>
+								<img
+									className={styles.image_post}
+									src={`${process.env.REACT_APP_API_BASE_URL}${post?.image_to_post}`}
+									alt='Зображення к допису'
+									// style={{ width: '192px', height: '100%', display: 'block' }}
+								/>
+							</figure>
+						)}
 						{/* <img src={} className={styles.post_content_img} /> */}
 						<div
 							className={styles.post_content_text}

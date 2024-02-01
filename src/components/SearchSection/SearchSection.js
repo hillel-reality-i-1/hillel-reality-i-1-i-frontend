@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-import { Button, Checkbox, ConfigProvider, Input, Select } from 'antd';
+import { Button, Checkbox, ConfigProvider, Input, Select, Tooltip } from 'antd';
 import { ReactComponent as IconSearch } from '../../assets/img/icons/icon-search-bar/icon_search.svg';
 import styles from './SearchSection.module.scss';
 import axios from '../../config/axios/axios';
@@ -12,8 +12,9 @@ const SearchSection = ({ onSearch }) => {
 	const [profCategories, setProfCategories] = useState(null);
 	const [countryId, setCountryId] = useState(null);
 	const [profCategoriesId, setProfCategoriesId] = useState(null);
-	const [selectedLabels, setSelectedLabels] = useState(null);
-	const [categorySelectedLabels, setCategorySelectedLabels] = useState(null);
+	const [selectedLabels, setSelectedLabels] = useState([]);
+	const [categorySelectedLabels, setCategorySelectedLabels] = useState([]);
+	const [selectAllChecked, setSelectAllChecked] = useState(false);
 
 	const selectAllOption = {
 		label: 'Обрати всі',
@@ -45,7 +46,8 @@ const SearchSection = ({ onSearch }) => {
 				const data = await axios.get(URL_PROF_CATEGORIES);
 				// changing object keys for use in selects
 				const categoryChangedKeys = data.map(({ id, name }) => ({ value: id, label: name }));
-				setProfCategories([selectAllOption, ...categoryChangedKeys]);
+				// setProfCategories([selectAllOption, ...categoryChangedKeys]);
+				setProfCategories(categoryChangedKeys);
 			} catch (error) {
 				return error.message;
 			}
@@ -62,57 +64,94 @@ const SearchSection = ({ onSearch }) => {
 		// console.log(option);
 	};
 
+	// const handleChangeCategory = (value, option) => {
+	// 	setProfCategoriesId(value);
+	// 	// setCategorySelectedLabels(option);
+	// 	setCategorySelectedLabels(option.filter((opt) => opt.value !== 'all'));
+	// 	// ================================================
+	// 	// if (value.includes('all')) {
+	// 	// 	setSelectAllChecked(!selectAllChecked);
+	// 	// }
+
+	// 	if (value.includes('all')) {
+	// 		setSelectAllChecked(!selectAllChecked);
+	// 		// if (selectAllChecked) {
+	// 		// 	setProfCategoriesId([]);
+	// 		// 	setCategorySelectedLabels([]);
+	// 		// } else {
+	// 		// 	setProfCategoriesId(profCategories.map((category) => category.value));
+	// 		// 	setCategorySelectedLabels(profCategories.slice(1)); // Exclude "Select All" option
+	// 		// }
+	// 	} else {
+	// 		setProfCategoriesId(value);
+	// 		setCategorySelectedLabels(option);
+	// 	}
+	// };
+
 	const handleChangeCategory = (value, option) => {
-		console.log(value, option);
-		setProfCategoriesId(value);
-		setCategorySelectedLabels(option);
-		// if (value.includes('all')) {
-		// 	setProfCategoriesId(profCategories.map((category) => category.value));
-		// 	setCategorySelectedLabels(profCategories);
-		// } else {
-		// 	setProfCategoriesId(value.filter((v) => v !== 'all'));
-		// 	setCategorySelectedLabels(option);
-		// }
+		if (value.includes('all')) {
+			setSelectAllChecked(!selectAllChecked);
+
+			if (selectAllChecked) {
+				setProfCategoriesId([]);
+				setCategorySelectedLabels([]);
+			} else {
+				setProfCategoriesId(profCategories.map((category) => category.value));
+				setCategorySelectedLabels(profCategories.slice(1)); // Exclude "Select All" option
+			}
+		} else {
+			setProfCategoriesId(value);
+			setCategorySelectedLabels(option.filter((opt) => opt.value !== 'all'));
+		}
 	};
 
+	// console.log('selectAllChecked', selectAllChecked);
+
+	// console.log('profCategoriesId', profCategoriesId);
+
+	// console.log('profCategories', profCategories);
+	// console.log('categorySelectedLabels', categorySelectedLabels);
+
 	const optionRenderCategory = (option) => {
-		// if (option.value === 'all') {
-		// 	return (
-		// 		<Checkbox
-		// 			onChange={(e) =>
-		// 				handleChangeCategory(
-		// 					e.target.checked ? profCategories.map((category) => category.value) : []
-		// 				)
-		// 			}>
-		// 			{option.label}
-		// 		</Checkbox>
-		// 	);
-		// }
-		// return (
-		// 	<Checkbox
-		// 		value={option.value}
-		// 		onChange={() => handleChangeCategory([option.value])}>
-		// 		{option.label}
-		// 	</Checkbox>
+		// console.log(profCategories);
+
+		// return option.value === 'all' ? (
+		// 	<div checked={selectAllChecked}>{option.label}</div>
+		// ) : (
+		// 	<div>{option.label}</div>
 		// );
-
-		const onCheckAllChange = (value) => {
-			console.log(value);
-		};
-
-		return (
-			<Checkbox
-			// value={selectAllOption.value}
-			// onChange={onCheckAllChange}
-			// checked={selectAllOption.label}
-			>
-				Обрати всі
-			</Checkbox>
+		return option.value === 'all' ? (
+			<div
+				onClick={() => handleChangeCategory([option.value], [option])}
+				checked={selectAllChecked}>
+				{option.label}
+			</div>
+		) : (
+			<div
+				className={styles.list_item}
+				onClick={() => handleChangeCategory([option.value], [option])}>
+				{option.label}
+			</div>
 		);
 	};
 
+	// const selectAllChecked = (value) => {
+	// 	console.log(value);
+	// };
+
+	// const dropdownRenderCategory = (value, option) => {
+	// 	return (
+	// 		<div>
+	// 			<Checkbox>RRRRRRRR</Checkbox>
+	// 			console.log(value,option)
+	// 			{/* {menu} */}
+	// 			<div style={{ padding: '8px', cursor: 'pointer' }}></div>
+	// 		</div>
+	// 	);
+	// };
+
 	const countryTagRender = () => {
-		console.log(selectedLabels);
+		// console.log(selectedLabels);
 
 		if (selectedLabels.length === 1) {
 			return <div className={styles.selected_value}>{selectedLabels[0].label}</div>;
@@ -122,7 +161,7 @@ const SearchSection = ({ onSearch }) => {
 	};
 
 	const categoryTagRender = () => {
-		console.log(selectedLabels);
+		// console.log(selectedLabels);
 		if (categorySelectedLabels?.length === 1) {
 			return <div className={styles.selected_value}>{categorySelectedLabels[0].label}</div>;
 		} else {
@@ -196,10 +235,14 @@ const SearchSection = ({ onSearch }) => {
 						<ConfigProvider
 							theme={{
 								components: {
-									// Select: { optionPadding: 20px 30px },
+									Tooltip: {},
 								},
 								token: {
 									borderRadius: 0,
+									colorTextPlaceholder: '#47474F',
+									colorText: '#47474F',
+									fontSize: 16,
+									lineHeight: '160%',
 								},
 							}}>
 							<Input
@@ -208,11 +251,14 @@ const SearchSection = ({ onSearch }) => {
 								bordered={false}
 								placeholder='Search by word, author’s name, username…'
 								maxLength='100'
+								arrow='false'
 								onChange={formik.handleChange}
 								onBlur={formik.handleBlur}
 								value={formik.values.query}
+								className={styles.input_search}
 							/>
 						</ConfigProvider>
+
 						<div className={styles.search_wrapper_right}>
 							{/* select category============================================/ */}
 
@@ -221,6 +267,7 @@ const SearchSection = ({ onSearch }) => {
 									theme={{
 										components: {
 											// Select: { optionPadding: 20px 30px },
+											Tooltip: { color: 'red' },
 										},
 										token: {
 											borderRadius: 0,
@@ -231,6 +278,9 @@ const SearchSection = ({ onSearch }) => {
 										mode='multiple'
 										maxTagCount={1}
 										bordered={false}
+										filterOption={false}
+										placement='bottomRight'
+										// open={true}
 										style={{
 											width: '200px',
 											height: '100%',
@@ -242,6 +292,7 @@ const SearchSection = ({ onSearch }) => {
 										options={profCategories}
 										tagRender={categoryTagRender}
 										optionRender={optionRenderCategory}
+										// dropdownRender={dropdownRenderCategory}
 										// fieldNames={{ label: profCategories?.name, value: profCategories?.id }}
 										// onChange={formik.handleChangeCategory}
 										// onBlur={formik.handleBlur}

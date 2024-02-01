@@ -81,7 +81,7 @@ export const TRANSLATIONS_UK = {
 			titleH2: 'Підтвердіть ваш номер телефону',
 			weSentCode: 'Ми надіслали 4-х значний код на номер ',
 			enterCode: '. Введіть цей код нижче:',
-			confirmNumber: 'Підтвертити номер',
+			confirmNumber: 'Підтвердити номер',
 			didntReceiveCode: 'Не отримали код?',
 			sendAgain: 'Відправити ще раз',
 		},

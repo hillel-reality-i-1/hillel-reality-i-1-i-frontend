@@ -12,6 +12,7 @@
 		padding: 6px 0;
 		border: 1px solid $color-gray30;
 		background-color: $color-gray;
+		margin-top: 10px;
 
 		.ant-select-item {
 			color: $color-gray70;
@@ -20,6 +21,7 @@
 			line-height: 160%;
 			padding: 8px 14px;
 			border-radius: 0;
+			// padding-right: 14px;
 		}
 	}
 
@@ -33,6 +35,8 @@
 		line-height: 160%;
 		background-color: #f4f9ff;
 		border-radius: 0;
+		overflow: hidden;
+		text-overflow: ellipsis;
 
 		&::after {
 			content: '';
@@ -125,6 +129,36 @@
 		.ant-select-selector {
 		cursor: pointer;
 	}
+
+	.ant-select-show-search:where(.css-dev-only-do-not-override-1eiypl0).ant-select:not(
+			.ant-select-customize-input
+		)
+	// 	.ant-select-selector {
+	// 	cursor: pointer;
+	// }
+
+	.ant-select-dropdown .ant-select-item-option-content {
+		margin-right: 8px;
+	}
+	// .ant-select-dropdown {
+	// 	width: 300px;
+	// }
+
+	.ant-select-show-search:where(.css-dev-only-do-not-override-y5fgwk).ant-select:not(
+			.ant-select-customize-input
+		)
+		.ant-select-selector {
+		cursor: pointer;
+	}
+
+	.anticon svg {
+		margin-left: 10px;
+	}
+
+	.ant-tooltip-inner {
+		background-color: green !important;
+	}
+	color: red !important;
 }
 
 .search {
@@ -259,6 +293,9 @@
 		align-items: center;
 
 		.select_category {
+			.list_item {
+				width: 200px;
+			}
 			&::before {
 				content: '';
 				position: absolute;
@@ -301,6 +338,22 @@
 
 	.selected_value {
 		color: $color-gray50;
+		font-family: $font-ns-regular;
+		font-size: 16px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 160%;
+		margin-right: 8px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		max-width: 130px;
+	}
+
+	.input_search {
+		padding: 14px;
+		color: $color-gray50;
+
 		font-family: $font-ns-regular;
 		font-size: 16px;
 		font-style: normal;

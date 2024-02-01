@@ -50,7 +50,8 @@ const PostCreationForm = () => {
 		setChangeHTMLText(text);
 		setCharacters(characters);
 	};
-
+	// console.log('selectedFile', selectedFile);
+	// console.log('previewImage', previewImage);
 	// console.log(characters);
 
 	useEffect(() => {
@@ -162,7 +163,6 @@ const PostCreationForm = () => {
 	const handleFileChange = (event) => {
 		const file = event.target.files[0]; // Select the first file from the list of files
 		setSelectedFile(file);
-
 		// Create a FileReader object to read the contents of a file
 		const reader = new FileReader();
 		reader.onloadend = () => {
@@ -183,14 +183,29 @@ const PostCreationForm = () => {
 		}
 	}, [changeHTMLText.length, selectedCategory.length, selectedCountries.length]);
 
+	// console.log('selectedFile', selectedFile);
+
 	const handleSubmit = async (values) => {
 		try {
-			await axios.post(URL_POST_CREATE, {
-				title: values.title,
-				category: values.category,
-				country: values.country,
-				content: changeHTMLText && changeHTMLText,
-			});
+			const formData = new FormData();
+			selectedFile && formData.append('post_image', selectedFile);
+
+			const config = {
+				headers: {
+					'Content-Type': 'multipart/form-data',
+				},
+			};
+			await axios.post(
+				URL_POST_CREATE,
+				{
+					title: values.title,
+					category: `${values.category}`,
+					country: `${values.country}`,
+					content: changeHTMLText && changeHTMLText,
+					post_image: selectedFile ? selectedFile : null,
+				},
+				config
+			);
 			navigate(-1);
 		} catch (error) {
 			return error.message;
@@ -203,7 +218,7 @@ const PostCreationForm = () => {
 			category: null,
 			country: null,
 			content: '',
-			// images: null,
+			images: '',
 		},
 
 		onSubmit: handleSubmit,
@@ -225,7 +240,9 @@ const PostCreationForm = () => {
 		<div className={styles.form_container}>
 			<form
 				className={styles.form}
-				onSubmit={formik.handleSubmit}>
+				onSubmit={formik.handleSubmit}
+				// encType='multipart/form-data'
+			>
 				<div className={styles.input_wrapper}>
 					<div className={styles.input_left_col}>
 						<div className={styles.input_title}>
@@ -382,6 +399,8 @@ const PostCreationForm = () => {
 								</div>
 							)}
 						</div>
+
+						{/* ======image add======================================== */}
 						<div className={styles.image_wrapper}>
 							<span className={styles.image_title}>Фото</span>
 							{!previewImage ? (

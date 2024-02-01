@@ -44,7 +44,7 @@ const VerifyCodeForm = () => {
 	const navigate = useNavigate();
 	// const dispatch = useDispatch();
 
-	// const { phone_number } = useSelector((state) => state.auth?.profile);
+	const { phone_number } = useSelector((state) => state.auth?.profile);
 	// const combinedData = useSelector((state) => state.auth?.temporaryStorage);
 	const [value1, setValue1] = useState('');
 	const [value2, setValue2] = useState('');
@@ -55,7 +55,7 @@ const VerifyCodeForm = () => {
 	const [error, setError] = useState(null);
 
 	const { validateInputRequired } = useValidation();
-	// combinedData && console.log(combinedData);
+	// phone_number && console.log(phone_number);
 	// combinedData && console.log(combinedData.phone_number);
 
 	// const phone_number = combinedData && combinedData.phone_number;
@@ -133,7 +133,7 @@ const VerifyCodeForm = () => {
 						<div className={styles.description}>
 							<span className={styles.text}>{t('textSignUp.textVerifyCode.weSentCode')}</span>
 							<div className={styles.description_bottom}>
-								{/* <span className={styles.text_link}>{phone_number}</span> */}
+								<span className={styles.text_link}>{phone_number}</span>
 								<span className={styles.text}>{t('textSignUp.textVerifyCode.enterCode')}</span>
 							</div>
 						</div>

@@ -159,7 +159,7 @@ const TextEditorN = ({ onChangeHTMLText, placeholder }) => {
 
 	useEffect(() => {
 		const contentState = editorState.getCurrentContent();
-		console.log(contentState.selectionAfter.anchorOffset);
+		// console.log(contentState.selectionAfter.anchorOffset);
 		if (!contentState.hasText() && contentState.getBlockMap().first().getType() !== 'unstyled') {
 			editorRef.current.className += ' RichEditor-hidePlaceholder';
 		}

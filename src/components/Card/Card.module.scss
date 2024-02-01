@@ -4,8 +4,8 @@
 	width: 100%;
 	// ============!!!!!!!!!!!!!!!!!!!
 	max-width: 845px;
-	// height: 100%;
-	// max-height: 297px;
+	height: 296px;
+
 	padding: 24px;
 	border-radius: 24px;
 	background-color: $color-gray10;
@@ -25,8 +25,20 @@
 
 .content_img_wrapper {
 	// width: 100%;
-	max-width: 192px;
+	width: 192px;
 	margin-left: 24px;
+
+	.image_post {
+		// img {
+		width: 100%;
+		min-width: 192px;
+		height: 100%;
+		display: block;
+		border-radius: 12px;
+		object-fit: cover;
+
+		// }
+	}
 }
 
 .visibility {
