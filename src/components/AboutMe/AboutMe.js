@@ -21,12 +21,11 @@ import styles from './AboutMe.module.scss'
 import axios from 'axios';
 
 const AboutMe = ({ userData, expertUserData }) => {
-    const [checkedExpert, setCheckedExpert] = useState(expertUserData);
+    const [checkedExpert, setCheckedExpert] = useState('');
     const [tubKey, setTubKey] = useState('1');
     const [imagesArray, setImagesArray] = useState([]);
     const [userInstagramValue] = useState('')
     const [userFacebookValue] = useState('')
-    const defaultTextSummary = 'You can share more about yourself: your history, work experience, interests, and more';
     const [isModalOpen, setModalOpen] = useState(false);
     const [startIndex, setStartIndex] = useState(0);
 
@@ -34,6 +33,10 @@ const AboutMe = ({ userData, expertUserData }) => {
     const visibleImages = imagesArray.slice(startIndex, endIndex);
     const showRightArrow = endIndex - 1 < imagesArray.length;
     const showLeftArrow = startIndex > 0;
+
+    useEffect(() => {
+        setCheckedExpert(expertUserData)
+    }, [expertUserData])
 
     useEffect(() => {
 

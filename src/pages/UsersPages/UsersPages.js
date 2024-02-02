@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import UsersHead from '../../components/UsersPagesComponents/UsersHead/UsersHead';
 import UsersAboutMe from '../../components/UsersPagesComponents/UsersAboutMe/UsersAboutMe';
 import UsersLatestActivityTabs from '../../components/UsersPagesComponents/UsersLatestActivity/UsersLatestActivityTabs/UsersLatestActivityTabs';
+import AsideSection from '../../components/AsideSection/AsideSection';
 
 import styles from './usersPages.module.scss';
 
@@ -40,13 +41,17 @@ export default function UsersPages() {
                 <div className={styles.user__head}>
                     <UsersHead data={dataUser} />
                 </div>
-                <UsersAboutMe userData={dataUser}/>
-                <UsersLatestActivityTabs userData={dataUser}/>
+                <div className={styles.user__about}>
+                    <UsersAboutMe userData={dataUser}/>
+                </div>
+                <div className={styles.user__activity}>
+                    <UsersLatestActivityTabs userData={dataUser}/>
+                </div>
             </div>
 
             <aside className={styles.aside}>
-                <p>Calendar of events</p>
-            </aside>
+				<AsideSection />
+			</aside>
         </div>
     );
 }

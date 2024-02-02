@@ -1,12 +1,11 @@
 @import '../../../styles/constants.scss';
 
-.test {
-	color: var(--Primary, #126FE1);
-	font-family: $medium;
-	font-size: 18px;
-	font-style: normal;
-	font-weight: 500;
-	line-height: 160%;
+$backgroundCardColor: #FDFEFF !default;
+
+.post_block {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
 }
 
 .activity_posts_container {
@@ -18,37 +17,33 @@
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-}
 
-.posts_description {
-	width: 100%;
-	max-width: 465px;
-	text-align: center;
-	font-family: $font-ns-regular;
-	font-size: 18px;
-	line-height: 160%;
-	color: $color-gray50;
-}
-
-.btn_activity_posts {
-	width: 100%;
-	max-width: 142px;
-	height: 56px;
-	padding: 14px 16px;
-	margin-top: 16px;
-	border-radius: 48px;
-	background-color: $color-primary30base;
-
-	.btn_inner {
-		font-family: $font-ns-medium;
+	.posts_description {
+		width: 100%;
+		max-width: 465px;
+		text-align: center;
+		font-family: $font-ns-regular;
 		font-size: 18px;
 		line-height: 160%;
-		color: $color-gray;
+		color: $color-gray50;
+	}
+
+	.posts_button {
+		padding: 14px 16px;
+		margin-top: 16px;
 	}
 }
 
-.button {
-	padding: 14px 16px;
-	margin-top: 16px;
+.button_see_more {
+	margin: 14px;
+	color: #126FE1;
+	font-family: $medium;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 160%;
 }
 
+:export {
+	backgroundCardColor: $backgroundCardColor;
+  }

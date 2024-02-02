@@ -1,31 +1,44 @@
-import { Button, ConfigProvider } from 'antd';
-
+import { useEffect, useState } from 'react';
+import { useGetUserDataQuery } from '../../../store/services/userApi';
+import Card from '../../Card/Card';
 import styles from './LatestActivitySaved.module.scss';
 
 const LatestActivitySaved = () => {
-	return (
-		<div className={styles.activity_saved_container}>
-			<p className={styles.saved_description}>
-				You haven’t saved anything yet. You can discover loads of interesting posts on the Main
-				page.
-			</p>
+  const [postDetails, setPostDetails] = useState([]);
+  const [visiblePosts, setVisiblePosts] = useState(5); // Установите начальное значение видимых постов
+  const { data, error, isLoading, refetch } = useGetUserDataQuery();
 
-			<ConfigProvider
-				theme={{
-					token: {
-						// colorBgContainerDisabled: '#caccd1',
-					},
-				}}>
-				<Button
-					// type='secondary'
-					htmlType='button'
-					// disable='true'
-					className={styles.btn_activity_saved}>
-					<span className={styles.btn_inner}>Go to Main</span>
-				</Button>
-			</ConfigProvider>
-		</div>
-	);
+  useEffect(() => {
+    if (data && data.saved_posts) {
+      // Ограничьте массив сохраненных постов видимыми постами
+      setPostDetails(data.saved_posts.slice(0, visiblePosts));
+    }
+  }, [data, visiblePosts]);
+
+  const handleNextPage = () => {
+    // Увеличьте количество видимых постов на 5
+    setVisiblePosts(prevVisiblePosts => prevVisiblePosts + 5);
+  };
+
+  console.log(postDetails);
+
+  return (
+    <div className={styles.activity_saved_container}>
+      {postDetails.length > 0 ? (
+        postDetails.map((posts, index) => (
+          <Card key={index} posts={posts} bgColor={{ backgroundColor: styles.backgroundCardColor }} />
+        ))
+      ) : null}
+      <div className={styles.button_see_more_wrapper}>
+        {postDetails.length === visiblePosts && (
+          <button className={styles.button_see_more} onClick={handleNextPage}>
+            Дивитися більше
+          </button>
+        )}
+      </div>
+
+    </div>
+  );
 };
 
 export default LatestActivitySaved;

@@ -50,19 +50,27 @@ const LatestActivityPosts = () => {
 
   const handleVerify = () => {
     navigate('/verifyCodeForm')
-  };
+  }; 
+
+  console.log(shownPosts)
 
   return (
     <>
-      {data.phone_verified === true &&
-        shownPosts.map((posts, index) => (
-          <div key={index}>
-            <Card posts={posts} />
-          </div>
-        ))}
+      {
+        <div className={styles.post_block}>
+          {
+            data.phone_verified === true &&
+            shownPosts.map((posts, index) => (
+              <div key={index}>
+                <Card posts={posts} bgColor={{ backgroundColor: styles.backgroundCardColor }} />
+              </div>
+            ))
+          }
+        </div>
+      }
 
       {visiblePosts < postDetails.length && (
-        <button className={styles.test} onClick={handleNextPage}>
+        <button className={styles.button_see_more} onClick={handleNextPage}>
           Дивитися більше
         </button>
       )}
@@ -72,7 +80,7 @@ const LatestActivityPosts = () => {
           <p className={styles.posts_description}>
             Створювати дописи можуть тільки верифіковані користувачі. Будь ласка, верифікуйте свій профіль, щоб ділитися досвідом та знаннями.
           </p>
-          <BlueButton text={'Верифікувати профіль'} onClick={handleVerify} additionalStyles={styles.button} />
+          <BlueButton text={'Верифікувати профіль'} onClick={handleVerify} additionalStyles={styles.posts_button} />
         </div>
       )}
 
@@ -81,7 +89,7 @@ const LatestActivityPosts = () => {
           <p className={styles.posts_description}>
             У вас ще немає жодного допису. Поділіться знаннями та досвідом з іншими користувачами.
           </p>
-          <BlueButton text={'Створити допис'} onClick={handlePostCreation} additionalStyles={styles.button} />
+          <BlueButton text={'Створити допис'} onClick={handlePostCreation} additionalStyles={styles.posts_button} />
         </div>
       )}
     </>

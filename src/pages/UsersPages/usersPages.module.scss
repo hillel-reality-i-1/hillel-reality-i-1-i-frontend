@@ -1,9 +1,9 @@
 @import '../../styles/constants.scss';
 
 $common-styles: (
-  padding: 24px,
-  background-color: $color-gray10,
-  border-radius: 24px,
+    padding: 24px,
+    background-color: $color-gray10,
+    border-radius: 24px,
 );
 
 @mixin commonStyles () {
@@ -13,41 +13,64 @@ $common-styles: (
 }
 
 .container {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    column-gap: 24px;
-    max-width: 1290px;
-    margin: 0 auto;
-    padding: 0 5px; 
+    width: 1280px;
+    margin: auto;
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    outline: 1px solid red;
 }
 
 .user {
-    display: grid;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 24px;
+    outline: 1px solid green;
+
     &__head {
         @include commonStyles;
+        width: 100%;
         display: flex;
-        flex-direction: row;
+        align-items: center;
         gap: 16px;
+        align-self: stretch;
+        outline: 1px solid red;
+
         &__avatar {
             height: 64px;
             width: 64px;
             border-radius: 50%;
             background-color: $color-gray30;
         }
-        &__edit {
-            margin-left: auto;
-        }
     }
+
     &__about {
-        @include commonStyles;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        align-self: stretch;
+        outline: 1px solid red;
     }
+
     &__activity {
         @include commonStyles;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        align-self: stretch;
+        outline: 1px solid red;
     }
 }
 
 .aside {
-    @include commonStyles;
-
+    display: flex;
+    width: 411px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    outline: 1px solid green;
 }
