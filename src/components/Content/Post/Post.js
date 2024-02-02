@@ -19,6 +19,7 @@ import SortingPanel from '../SortingPanel/SortingPanel';
 import styles from './Post.module.scss';
 import { useParams } from 'react-router-dom';
 import TextArea from 'antd/es/input/TextArea';
+import ButtonPostSave from '../ButtonPostSave/ButtonPostSave';
 
 const Post = () => {
 	const { id } = useParams();
@@ -26,7 +27,7 @@ const Post = () => {
 	const [user, setUser] = useState(null);
 	const [editorState, setEditorState] = useState(EditorState.createEmpty());
 	const userId = post && post?.author;
-
+	const postId = post && post.id;
 	const langUK = 'uk/';
 
 	useEffect(() => {
@@ -182,9 +183,10 @@ const Post = () => {
 						</div>
 						<div className={styles.post_footer_bottom}>
 							<div className={styles.post_footer_bottom_left_col}>
-								<img
-									src={icon_save}
-									alt='Save'
+								<ButtonPostSave
+									postId={postId}
+									// isSaved={isPostSaved}
+									// onSave={handleSavePost}
 								/>
 								<span className={styles.time_read}>{timeForRead} min read</span>
 							</div>

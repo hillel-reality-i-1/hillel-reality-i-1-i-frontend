@@ -1,0 +1,16 @@
+@import '../../../styles/constants.scss';
+
+.ant-tooltip {
+	color: $color-gray;
+	font-family: $font-ns-regular;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 160%;
+	inset-block-end: 452px;
+	border-radius: 2px;
+}
+
+.ant-tooltip-placement-topLeft .ant-tooltip-arrow {
+	left: 5px;
+}

@@ -168,17 +168,22 @@ export const useValidation = () => {
 
 	const validateUserName = async (value) => {
 		let error;
+		value = value.trim();
 		if (!value || value.trim() === '') return (error = t('textSignUp.error.required'));
 		if ((value.length > 0 && value.length < 2) || value.length > 32) {
 			return (error = t('textSignUp.error.lengthUserName'));
-		} else if (/^\d/.test(value)) {
+		} else if (!/^[a-zA-Z0-9_]+$/.test(value)) {
+			return (error = t('textSignUp.error.otherValidUserName'));
+		} else if (!/^[a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9]$/.test(value)) {
 			return (error = t('textSignUp.error.startWithDigit'));
 			// } else if (!/^[a-zA-Z][a-zA-Z0-9_]{0,31}$/u.test(value)) {
-		} else if (!/^[a-zA-Z][a-zA-Z0-9]{0,30}(?![a-zA-Z0-9_])$/u.test(value)) {
-			return (error = t('textSignUp.error.otherValidUserName'));
-		} else if (/\s/.test(value)) {
-			return (error = t('textSignUp.error.noSpaces'));
+
+			//  else if (!/^[a-zA-Z][a-zA-Z0-9]{0,30}(?![a-zA-Z0-9_])$/u.test(value)) {
+			// 	return (error = t('textSignUp.error.otherValidUserName'));
 		}
+		// else if (/\s/.test(value)) {
+		// 	return (error = t('textSignUp.error.noSpaces'));
+		// }
 
 		if (!error) {
 			try {

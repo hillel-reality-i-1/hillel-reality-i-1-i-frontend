@@ -1,0 +1,12 @@
+@import '../../../styles/constants.scss';
+
+.btn_save_active svg path {
+	stroke: $color-primary30base;
+	fill: $color-primary30base;
+}
+
+.btn_save svg {
+	&:hover path {
+		stroke: $color-primary30base;
+	}
+}

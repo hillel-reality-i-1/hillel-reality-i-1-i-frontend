@@ -4,7 +4,7 @@ import axios from '../../config/axios/axios';
 import img_card from '../../assets/img/img_card/img_card.png';
 import Avatar from '../../assets/img/icons/user-profile/Avatar.svg';
 import icon_expert from '../../assets/img/icons/post/icon_expert.svg';
-import icon_save from '../../assets/img/icons/post/icon_save.svg';
+
 import icon_like from '../../assets/img/icons/post/icon_like.svg';
 import icon_comments from '../../assets/img/icons/post/icon_comments.svg';
 import { calculateReadTime } from '../../helpers/calculateReadTime';
@@ -15,15 +15,14 @@ import styles from './Card.module.scss';
 import { Link } from 'react-router-dom';
 import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
+import ButtonPostSave from '../Content/ButtonPostSave/ButtonPostSave';
 
 const Card = ({ posts, bgColor }) => {
-	// const [isExpanded, setIsExpanded] = useState(false);
 	const [postData, setPostData] = useState(null);
 	const [user, setUser] = useState(null);
 	const [editorState, setEditorState] = useState(EditorState.createEmpty());
-
 	const userId = postData && postData?.author;
-
+	const postId = postData && postData?.id;
 	const langUK = 'uk/';
 
 	useEffect(() => {
@@ -77,8 +76,24 @@ const Card = ({ posts, bgColor }) => {
 		getEditorStateFromPostData();
 	}, [postData]);
 
-	// const handleReadMoreClick = () => {
-	// 	setIsExpanded(!isExpanded);
+	// const handleSaveClick = async () => {
+	// 	try {
+	// 		const response = postId && (await axios.post(`/api/v1/content/post/${postId}/save-remove/`));
+	// 		console.log(response);
+
+	// 		if (response.status === 200 && response.message === 'Допис успішно додано в обране.') {
+	// 			setIsSaved(true);
+	// 		} else if (
+	// 			response.status === 200 &&
+	// 			response.detail === 'Допіс успишно видалено з обраного'
+	// 		) {
+	// 			setIsSaved(false);
+	// 		} else {
+	// 			return;
+	// 		}
+	// 	} catch (error) {
+	// 		return error.message;
+	// 	}
 	// };
 
 	const timeForRead = postData && calculateReadTime(postData?.content);
@@ -88,8 +103,9 @@ const Card = ({ posts, bgColor }) => {
 	const rawContentState = draftToHtml(convertToRaw(editorState.getCurrentContent()));
 
 	const isImage = postData?.image_to_post;
+	// console.log('isSaved', isSaved);
 	// console.log('user', user);
-	// console.log(postData?.image_to_post);
+	// console.log('postData', postData);
 	return (
 		<div
 			style={bgColor}
@@ -122,9 +138,11 @@ const Card = ({ posts, bgColor }) => {
 											src={icon_expert}
 											alt='icon expert'
 										/>
-										<span className={styles.expert_badge}>
-											{user?.user_profile_extended?.profession[0]}
-										</span>
+										{user?.user_profile_extended?.profession[0] && (
+											<span className={styles.expert_badge}>
+												{user?.user_profile_extended?.profession[0]}
+											</span>
+										)}
 									</div>
 								)}
 							</div>
@@ -155,9 +173,11 @@ const Card = ({ posts, bgColor }) => {
 					<div className={styles.content_footer_left_col}>
 						<span className={styles.post_user}>{postData?.country[0]}</span>
 						<span className={styles.post_category}>{postData?.category[0]}</span>
-						<img
-							src={icon_save}
-							alt='Save'
+
+						<ButtonPostSave
+							postId={postId}
+							// isSaved={isPostSaved}
+							// onSave={handleSavePost}
 						/>
 						<span className={styles.time_read}>{timeForRead} min read</span>
 					</div>

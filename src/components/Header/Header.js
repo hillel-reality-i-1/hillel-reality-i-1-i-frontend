@@ -13,10 +13,8 @@ export default function Header() {
 	return (
 		<div className={styles.header}>
 			<div className={styles.header_wrapper}>
-				<div
-					className={styles.header_logo_wrapper}
-				>
-					<Link to="./">
+				<div className={styles.header_logo_wrapper}>
+					<Link to='./'>
 						<img
 							src={logo}
 							alt='header logo'
