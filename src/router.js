@@ -26,6 +26,7 @@ import LinkUsed from './components/Registration/LinkUsed/LinkUsed';
 import LinkExpired from './components/Registration/LinkExpired/LinkExpired';
 import BiographyPage from './pages/Biography/BiographyPage';
 import UsersPages from './pages/UsersPages/UsersPages';
+import SocialPage from './pages/SocialPage/SocialPage';
 
 const router = createBrowserRouter([
 	{
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
 						path: 'biography',
 						element: <BiographyPage />,
 					},
+					{
+						path: 'socials',
+						element: <SocialPage />
+					}
 				],
 			},
 			{

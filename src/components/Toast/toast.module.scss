@@ -17,7 +17,7 @@
     border-radius: 12px;
     opacity: 0;
     transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-  
+    z-index: 1001;
     display: flex;
     align-items: center;
     gap: 4px;
@@ -25,13 +25,14 @@
     @include customFontStyles(18px, normal, 500);
     font-family: $medium;
     line-height: 160%;
+    white-space: nowrap;
 }
-  
+
 .toast.show {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
 }
-  
+
 .toast.hide {
     opacity: 0;
     transform: translateX(-50%) translateY(-20px);

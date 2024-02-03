@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Select, Space } from 'antd';
+import { Select } from 'antd';
 import axios from '../../../config/axios/axios';
 import { useGetUserDataQuery } from '../../../store/services/userApi';
 import BlueButton from '../../buttons/BlueButton/BlueButton';
@@ -17,11 +17,10 @@ export default function Location() {
   const [countries, setCountries] = useState([]);
   const [cities, setCities] = useState([]);
   const [citiesChosen, setChosen] = useState([]);
-  const [selectedCountry, setSelectedCountry] = useState(null);
+  const [selectedCountry, setSelectedCountry] = useState(true);
   const [selectedCity, setSelectedCity] = useState(null);
   const [showSuccessToast, setShowSuccessToast] = useState(false);
   useEffect(() => {
-    console.log(data);
     const getAllCountries = async () => {
       try {
         const data = await axios.get(URL_COUNTRY_LIST);
@@ -30,9 +29,7 @@ export default function Location() {
           value: country.name,
           label: country.name,
         }));
-
         setCountries(formattedCountries);
-        console.log(formattedCountries);
         return data;
       } catch (error) {
         return error.message;
@@ -63,23 +60,20 @@ export default function Location() {
   const onChangeCountry = (value) => {
     console.log(`selected ${value}`);
     const matchingCountry = countries.find((i) => i.value === value);
-    setSelectedCountry(matchingCountry);
-    console.log('matchingCountry', matchingCountry);
-
+    setSelectedCountry(false);
     const matchingCities = cities.filter(
       (city) => city.country === matchingCountry.id
     );
     setChosen(matchingCities);
-    console.log(matchingCities);
   };
   const onChangeCity = (value) => {
-    console.log(`selected city ${value}`);
+
     const matchingCity = citiesChosen.find((city) => city.value === value);
     setSelectedCity(matchingCity);
-    console.log('matchingCity', matchingCity);
+
   };
-  const handleSave = async (value) => {
-    if (selectedCountry && selectedCity) {
+  const handleSaveCountry = async () => {
+    if (selectedCity) {
       try {
         const userProfileUrl = `${process.env.REACT_APP_API_BASE_URL}/api/v1/users/user_profile/${data.id}/`;
         const headers = {
@@ -124,7 +118,7 @@ export default function Location() {
               height: '56px',
             }}
             onChange={onChangeCountry}
-            placeholder={data.country.name ?? ' Оберіть країну'}
+            placeholder={data?.country?.name ?? ' Оберіть країну'}
           >
             {countries.map((i) => (
               <Select.Option key={i.value + i.id} value={i.value}>
@@ -135,6 +129,7 @@ export default function Location() {
         </div>
       </div>
       <div className={styles.location__selects}>
+        
         <label>Місто</label>
         <div className='location-page'>
           <Select
@@ -143,8 +138,8 @@ export default function Location() {
               width: '100%',
               height: '56px',
             }}
-            placeholder={data.city.name ?? 'Оберіть місто '}
-            disabled={!data.city.name || !selectedCountry}
+            disabled={selectedCountry}
+            placeholder={data?.city?.name ?? 'Оберіть місто '}
             onChange={onChangeCity}
           >
             {citiesChosen.map((i) => (
@@ -159,7 +154,7 @@ export default function Location() {
       <BlueButton
         text={'Зберегти'}
         additionalStyles={!selectedCity ? styles.button : styles.validButton}
-        onClick={handleSave}
+        onClick={handleSaveCountry}
       />
       {showSuccessToast && (
         <Toast

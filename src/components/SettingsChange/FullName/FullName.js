@@ -26,8 +26,19 @@ export default function FullName() {
       return 'Поле має містити від 2 до 50 символів. Будь ласка, заповніть його';
     }
 
+    const invalidCharsRegex = /[^a-zA-Zа-яА-Я'-]/u;
+    if (invalidCharsRegex.test(value)) {
+      return 'Ім\'я може містити лише кириличні або латинські літери, символи апострофа (’) або дефісу (-). Будь ласка, введіть коректне ім\'я';
+    }
+
+    const startsOrEndsWithInvalidChars = /^['-]|['-]$/;
+    if (startsOrEndsWithInvalidChars.test(value)) {
+      return 'Ім\'я не може починатися або закінчуватися символами апострофа (’) або дефісу (-). Будь ласка, введіть коректне ім\'я';
+    }
+
     return '';
   };
+
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
     setFullName(inputValue);

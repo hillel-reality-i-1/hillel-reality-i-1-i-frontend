@@ -19,11 +19,11 @@ export default function PersonalInfo({ data }) {
         </div>
         <div className={styles.info}>
           <p className={styles.info__type}>Повне ім’я</p>
-          <Link className={styles.info__link} to='fullName'>{data?.full_name} <Arrow /> </Link>
+          <Link className={styles.info__link} to='fullName'>{data?.full_name} <span className={styles.info__link__arrow} ><Arrow /> </span> </Link>
         </div>
-        <div className={styles.info}><p className={styles.info__type}>Локація</p> <Link className={styles.info__link} to='location'>{data.city?.name},{data.country?.name}<Arrow /> </Link> </div>
-        <div className={styles.info}><p className={styles.info__type}>Біографія</p> <Link className={styles.info__link} to='biography'>Hello! I am a UX/UI... {data.about_my_self}<Arrow /> </Link> </div>
-        <div className={styles.info}><p className={styles.info__type}>Соціальні мережі</p> <Link className={styles.info__link}> <Arrow /> </Link> </div>
+        <div className={styles.info}><p className={styles.info__type}>Локація</p> <Link className={styles.info__link} to='location'> {`${data.city?.name},`}{data.country?.name} <Arrow /> </Link> </div>
+        <div className={styles.info}><p className={styles.info__type}>Біографія</p> <Link className={styles.info__link} to='biography'><span>{data.about_my_self}</span><Arrow /> </Link> </div>
+        <div className={styles.info}><p className={styles.info__type}>Соціальні мережі</p> <Link className={styles.info__link} to='socials'> <Arrow /> </Link> </div>
       </div>
     </>
   )

@@ -1,0 +1,118 @@
+@import '../../../styles/constants.scss';
+@import '../../../styles/mixins.scss';
+
+.socials {
+    max-width: 410px;
+
+    h4 {
+        @include heading-styles-settings;
+    }
+
+    p {
+        @include paragraph-styles-settings;
+        margin-bottom: 24px;
+    }
+
+    input {
+        // color: #03091c;
+        // font-family: $medium;
+        // font-size: 16px;
+        // font-style: normal;
+        // margin: 8px 0 0 0;
+        // padding: 14px;
+        // width: 100%;
+        // border-radius: 12px;
+        // border: 1px solid #a7a7b2;
+
+        &.error {
+            border-color: #b3261e;
+        }
+    }
+
+    .ant-input-affix-wrapper {
+        height: 56px;
+    }
+
+    &__inputError {
+        color: #b3261e !important;
+        border-color: #b3261e !important;
+    }
+
+    &__inputError:focus {
+        outline: 1px solid #b3261e !important;
+    }
+
+    &__error {
+        margin-bottom: 16px;
+        display: flex;
+        gap: 8px;
+        color: #B3261E;
+
+        font-family: $regular;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 160%;
+
+        svg {
+            width: 100%;
+            max-width: 24px;
+        }
+    }
+    &__switcher {
+        display: flex;
+        align-items: center;
+        margin: 8px 0 24px 0;
+        p {
+            margin: 0 0 0 8px;
+        }
+    }
+}
+
+.custom__input {
+    margin: 20px 0;
+    position: relative;
+    display: flex;
+
+    &__icon {
+        margin: 16px 0 16px 14px;
+        position: absolute;
+    }
+
+    input {
+        color: #03091c;
+        font-family: $medium;
+        font-size: 16px;
+        font-style: normal;
+        height: 56px;
+        padding: 14px 14px 14px 46px;
+        width: 100%;
+        border-radius: 12px;
+        border: 1px solid #a7a7b2;
+    }
+
+    input:focus {
+        outline: 1px solid #3989EC;
+        border: 1px solid #3989EC;
+    }
+}
+
+.button {
+    margin-top: 24px;
+    width: 100%;
+    background-color: #CACCD1;
+    cursor: not-allowed;
+
+    &:hover {
+        background-color: #CACCD1;
+    }
+
+    &:active {
+        background-color: #CACCD1;
+    }
+}
+
+.validButton {
+    margin-top: 24px;
+    width: 100%;
+}

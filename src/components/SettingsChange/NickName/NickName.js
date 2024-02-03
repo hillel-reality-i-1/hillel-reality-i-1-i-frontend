@@ -12,7 +12,7 @@ import styles from './nick-name.module.scss';
 
 const NickName = () => {
   const { state } = useLocation();
-  const { data, isLoading, refetch,  } = useGetUserDataQuery();
+  const { data, isLoading, refetch, } = useGetUserDataQuery();
   const authToken = useSelector((state) => state.signIn.authTokenUHelp);
   const usernameRef = useRef('');
   const [username, setUsername] = useState('');
@@ -22,6 +22,14 @@ const NickName = () => {
   const validateUsername = (value) => {
     if (!/^[A-Za-z0-9_]+$/.test(value)) {
       return 'Поле може містити лише латинські літери (A-Z), цифри (0-9) та символ підкреслення (“_”)';
+    }
+
+    if (!/^[A-Za-z]/.test(value)) {
+      return 'Нікнейм має починатися з літери і не може закінчуватися символом підкреслення («_»). Будь ласка, введіть коректний нікнейм.';
+    }
+
+    if (/_$/.test(value)) {
+      return 'Нікнейм має починатися з літери і не може закінчуватися символом підкреслення («_»). Будь ласка, введіть коректний нікнейм.';
     }
 
     if (value.length < 2 || value.length > 32) {
@@ -66,16 +74,16 @@ const NickName = () => {
         setShowSuccessToast(false);
       }, 3500);
 
-      
+
     } catch (error) {
       console.error('Error updating username:', error);
       console.log(error.response.data.username[0]);
-      if (error.response.data.username[0] === 'User з таким username вже існує.'){
+      if (error.response.data.username[0] === 'User з таким username вже існує.') {
         setError('Цей нікнейм вже використовується. Будь ласка, оберіть інший')
       }
     }
   };
-  if (isLoading ) { return <> Loading </> }
+  if (isLoading) return <> Loading </>
   return (
     <div className={styles.nickName}>
       <h4>
@@ -90,17 +98,17 @@ const NickName = () => {
         placeholder={data.username}
         onChange={handleInputChange}
       />
-      {error && <div  className={styles.nickName__error}><ErrorIcon /> {error}</div>}
+      {error && <div className={styles.nickName__error}><ErrorIcon /> {error}</div>}
       {showSuccessToast && (
-          <Toast
-            message='Ваші зміни були успішно збережені'
-            duration={3000}
-          />
+        <Toast
+          message='Ваші зміни були успішно збережені'
+          duration={3000}
+        />
       )}
-      <BlueButton 
-        text={'Зберегти'} 
+      <BlueButton
+        text={'Зберегти'}
         additionalStyles={(error || usernameRef.current === '') ? styles.button : styles.validButton}
-        onClick={handleSaveUsername} 
+        onClick={handleSaveUsername}
       />
     </div>
   );
