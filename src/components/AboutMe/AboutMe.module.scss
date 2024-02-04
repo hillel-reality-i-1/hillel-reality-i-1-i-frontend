@@ -337,6 +337,7 @@ $common-styles: (
                 height: 100%;
                 border-radius: 12px;
                 position: absolute;
+                object-fit: cover;
             }
 
             .my_portfolio_item_delete {

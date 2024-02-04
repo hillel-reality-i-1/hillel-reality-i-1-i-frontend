@@ -1,28 +1,61 @@
 import { Button, ConfigProvider } from 'antd';
 import styles from './LatestActivityComments.module.scss';
+import { useEffect, useState } from 'react';
+import CommentCard from '../../Content/CommentCard/CommentCard';
+import axios from 'axios';
+import { useGetUserDataQuery } from '../../../store/services/userApi';
 
 const LatestActivityComments = () => {
-	return (
-		<div className={styles.activity_comments_container}>
-			<p className={styles.comments_description}>
-				You haven’t made any comments yet. You can discover loads of interesting posts on the main
-				page.
-			</p>
+	const [visiblePosts, setVisiblePosts] = useState(5);
+	const [postDetails, setPostDetails] = useState([]);
+	const [shownPosts, setShownPosts] = useState([]);
+	const { data, error, isLoading, refetch } = useGetUserDataQuery();
 
-			<ConfigProvider
-				theme={{
-					token: {
-						// colorBgContainerDisabled: '#caccd1',
-					},
-				}}>
-				<Button
-					// type='secondary'
-					htmlType='button'
-					// disable='true'
-					className={styles.btn_activity_comments}>
-					<span className={styles.btn_inner}>Go to Main</span>
-				</Button>
-			</ConfigProvider>
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const requests = data.last_comments.map((number) =>
+					axios.get(`http://dmytromigirov.space/api/v1/content/comment/${number}`, {
+						headers: {
+							'Authorization': `Token ${localStorage.getItem('authTokenUHelp')}`,
+						},
+					})
+				);
+
+				const responses = await Promise.all(requests);
+				const sortedPostDetails = responses.map((response) => response.data).sort((a, b) => b.id - a.id);
+
+				setPostDetails(sortedPostDetails);
+				setShownPosts(sortedPostDetails.slice(0, visiblePosts));
+			} catch (error) {
+				console.error('Error fetching post details:', error);
+			}
+		};
+
+		fetchData();
+	}, [data.last_posts, visiblePosts]);
+
+	const handleNextPage = () => {
+		const nextVisiblePosts = visiblePosts + 5;
+		setShownPosts(postDetails.slice(0, nextVisiblePosts));
+		setVisiblePosts(nextVisiblePosts);
+	};
+
+	return (
+		<div className={styles.comments_block}>
+			{
+
+				postDetails.length > 0 ? (shownPosts.map((comment, index) => (
+					<div key={index}>
+						<CommentCard comment={comment} bgColor={{ backgroundColor: styles.backgroundCardColor }} />
+					</div>)
+				)) : null
+			}
+			{visiblePosts < postDetails.length && (
+				<button onClick={handleNextPage}>
+					Дивитися більше
+				</button>
+			)}
 		</div>
 	);
 };

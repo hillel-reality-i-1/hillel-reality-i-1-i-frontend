@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Tabs, Switch, Tooltip } from 'antd';
+import { Tabs, Switch, Tooltip, Alert, Space } from 'antd';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import ModalInfoAboutExpertProfile from '../AboutMe/ModalInfoAboutExpertProfile/ModalInfoAboutExpertProfile';
@@ -16,6 +16,7 @@ import addIcon from '../../assets/img/icons/icons-AboutMe/add_icon.svg'
 import exclamationIcon from '../../assets/img/icons/icons-AboutMe/exclamation.svg'
 import arrowLeftIcon from '../../assets/img/icons/icons-AboutMe/arrowLeft.svg'
 import arrowRightIcon from '../../assets/img/icons/icons-AboutMe/arrowRight.svg'
+import Toast from '../Toast/Toast'
 
 import styles from './AboutMe.module.scss'
 import axios from 'axios';
@@ -119,8 +120,13 @@ const AboutMe = ({ userData, expertUserData }) => {
     };
 
     const handleFileChange = (e) => {
+        const file = e.target.files[0];
 
-        console.log(e.target.files)
+        if (file.size < 3000 || file.size > 5000000) {
+            
+            return null;
+        }
+
         const API_ENDPOINT = 'http://dmytromigirov.space/api/v1/users/upload_portfolio/';
         const authTokenUHelp = localStorage.getItem('authTokenUHelp');
 
@@ -132,19 +138,20 @@ const AboutMe = ({ userData, expertUserData }) => {
         };
 
         const formData = new FormData();
-        formData.append('file', e.target.files[0]);
+        formData.append('file', file);
 
         axios.post(API_ENDPOINT, formData, config)
             .then(response => {
-
                 if (response.status === 201) {
-                    console.log(response.data)
-
+                    console.log(response.data);
                     setImagesArray(prevImages => [...prevImages, response.data]);
-
                 }
             })
+            .catch(error => {
+                console.error('Ошибка при загрузке фотографии:', error);
+            });
     };
+
 
     const items = [
         {

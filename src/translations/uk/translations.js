@@ -114,10 +114,10 @@ export const TRANSLATIONS_UK = {
 	textForgotYourPassword: {
 		forgotYourPassword: 'Забули ваш пароль?',
 		createNewPasswordDescription:
-			'Введіть вашу пошту, і ми надішлемо вам посилання для відновлення пароля',
+			'Вкажіть вашу пошту, і ми надішлемо вам посилання для відновлення пароля',
 		email: 'Пошта:',
 		recieveTheLink: 'Отримати посилання',
-		dontHaveAnAccount: 'Немає акаунту?',
+		dontHaveAnAccount: 'Ще не маєте профілю?',
 		signUp: 'Зареєструватися',
 		backToSignIn: 'Повернутся до Входу',
 		warningEmail: 'Ця пошта не використовується. Будь ласка, використайте іншу або зареєструйтеся',
@@ -125,29 +125,29 @@ export const TRANSLATIONS_UK = {
 	textEmailOnTheWay: {
 		emailOnTheWay: 'Лист вже відправлено!',
 		sentYouPassword: 'Ми надіслали вам посилання для зміни пароля на ',
-		clickTheLink: 'Натисніть посилання всередині, щоб розпочати!',
+		clickTheLink: 'Перейдіть за посиланням у повідомленні, щоб розпочати!',
 		nothingHasBeenReceived: 'Нічого не прийшло?',
-		resendLink: 'Відправити ще раз',
+		resendLink: 'Відправити ще раз через',
 		backToSignIn: 'Повернутся до Входу',
 		resendIn: 'Відправити ще раз через',
 		seconds: 'сек',
 	},
 	textCreateNewPassword: {
 		createNewPassword: 'Створення нового паролю',
-		almostDone: 'Майже зроблено. Введіть свій новий пароль',
+		almostDone: 'Майже зроблено. Вкажіть ваш новий пароль',
 		password: 'Пароль',
 		confirmPassword: 'Підтвердіть пароль',
 		savePassword: 'Зберігти пароль',
 		mustBeAtLeast8Numbers: 'Має містити від 8 до 16 символів',
 		mustHaveAtLeastOneSymbolOrNumber: 'Має містити хоча б 1 цифру та символ',
 		mustHaveUpperAndLowerCases: 'Має містити літери верхнього та нижнього регістрів',
-		passwordsDontMatch: 'Паролі не збігаються. Спробуйте ще раз',
+		passwordsDontMatch: 'Різні паролі. Будь ласка, спробуйте ще раз',
 		greatJob: 'Чудовий пароль!',
 	},
 	textPasswordUpdated: {
 		success: 'Успішно!',
 		yourPasswordHasBeenUpdated:
-			'Ваш пароль було успішно змінено! Ви можете перейти до сторінки Профілю',
+			'Ваш пароль було успішно змінено! Ви можете перейти до сторінки «Профіль»',
 		returnToSignIn: 'Перейти у Профіль',
 	},
 };
