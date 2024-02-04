@@ -29,15 +29,12 @@
 	margin-left: 24px;
 
 	.image_post {
-		// img {
 		width: 100%;
 		min-width: 192px;
 		height: 100%;
 		display: block;
 		border-radius: 12px;
-		// object-fit: cover;
-
-		// }
+		object-fit: cover;
 	}
 }
 

@@ -16,10 +16,6 @@ const ButtonPostSave = ({ postId }) => {
 		}
 	}, [postId, savedPosts]);
 
-	// useEffect(() => {
-	// 	data && console.log(data?.saved_posts);
-	// }, [data, data?.saved_posts]);
-
 	const text = isSaved ? 'Збережено' : 'Зберегти';
 
 	const handleSaveClick = async () => {

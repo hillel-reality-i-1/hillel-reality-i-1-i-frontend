@@ -166,7 +166,7 @@ const Card = ({ posts, bgColor }) => {
 								dangerouslySetInnerHTML={rawContentState && { __html: rawContentState }}
 							/>
 						</div>
-						<div className={styles.btn_read_more}>Read more...</div>
+						<span className={styles.btn_read_more}>Read more...</span>
 					</article>
 				</Link>
 				<div className={styles.content_footer}>
@@ -193,14 +193,14 @@ const Card = ({ posts, bgColor }) => {
 							<span>64k</span>
 						</div>
 						<div className={styles.comments_wrapper}>
-							<button className={styles.btn_comments}>
-								<img
-									src={icon_comments}
-									alt='Comments'
-									className={styles.img_comments}
-								/>
-							</button>
-							<span>4.5k</span>
+							{/* <button className={styles.btn_comments}> */}
+							<img
+								src={icon_comments}
+								alt='Comments'
+								className={styles.img_comments}
+							/>
+							{/* </button> */}
+							<span>{postData?.comments?.length}</span>
 						</div>
 					</div>
 				</div>

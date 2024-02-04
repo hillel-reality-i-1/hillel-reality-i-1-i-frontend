@@ -1,1 +1,27 @@
 @import '../../../styles/constants.scss';
+
+.creation_comment {
+	margin-top: 24px;
+	&_input_wrapper {
+		display: flex;
+		width: 100%;
+	}
+
+	&_btn_wrapper {
+		width: 100%;
+		max-width: 218px;
+		margin-left: auto;
+		margin-top: 12px;
+	}
+}
+
+.form {
+	margin-bottom: 24px;
+}
+
+.comments_wrapper {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 24px;
+}

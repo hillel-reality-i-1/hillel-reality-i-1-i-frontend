@@ -23,7 +23,7 @@ const PostDetailsPage = () => {
 				<div className={styles.post_details_wrapper}>
 					<div className={styles.main_content}>
 						<Post />
-						<Comments />
+						{/* <Comments /> */}
 					</div>
 					<Contributions />
 				</div>

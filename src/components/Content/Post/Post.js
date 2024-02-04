@@ -20,6 +20,7 @@ import styles from './Post.module.scss';
 import { useParams } from 'react-router-dom';
 import TextArea from 'antd/es/input/TextArea';
 import ButtonPostSave from '../ButtonPostSave/ButtonPostSave';
+import Comments from '../Comments/Comments';
 
 const Post = () => {
 	const { id } = useParams();
@@ -29,6 +30,8 @@ const Post = () => {
 	const userId = post && post?.author;
 	const postId = post && post.id;
 	const langUK = 'uk/';
+
+	console.log(postId);
 
 	useEffect(() => {
 		const fetchLanguage = async () => {
@@ -124,9 +127,11 @@ const Post = () => {
 											src={icon_expert}
 											alt='icon expert'
 										/>
-										<span className={styles.expert_badge}>
-											{user?.user_profile_extended?.profession}
-										</span>
+										{user?.user_profile_extended?.profession[0] && (
+											<span className={styles.expert_badge}>
+												{user?.user_profile_extended?.profession}
+											</span>
+										)}
 									</div>
 								)}
 							</div>
@@ -203,9 +208,8 @@ const Post = () => {
 				</div>
 			</div>
 			<div className={styles.comments}>
-				{' '}
-				<SortingPanel nameResult='коментарів' />
-				<div className={styles.creation_comment}>
+				{/* <SortingPanel nameResult='коментарів' /> */}
+				{/* <div className={styles.creation_comment}>
 					<div className={styles.creation_comment_input_wrapper}>
 						<img
 							src={Avatar}
@@ -215,7 +219,7 @@ const Post = () => {
 						<TextArea
 							rows={4}
 							placeholder='Розскажіть свою думку тут.'
-							maxLength={6}
+							// maxLength={6}
 						/>
 					</div>
 				</div>
@@ -226,7 +230,8 @@ const Post = () => {
 						isDisable={true}>
 						Залишити коментар
 					</CustomButton>
-				</div>
+				</div> */}
+				<Comments postId={postId} />
 			</div>
 		</>
 	);
