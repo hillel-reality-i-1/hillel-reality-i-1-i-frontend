@@ -43,7 +43,7 @@ export default function CreateNewPassword() {
 
                 if (errorMessage === 'token already has been used' || errorMessage === 'token expired') {
                     console.log(errorMessage)
-                    navigate('/test', { state: { message: errorMessage } });
+                    navigate('/confirmation-status', { state: { message: errorMessage } });
                 } else {
                     navigate('/404');
                 }

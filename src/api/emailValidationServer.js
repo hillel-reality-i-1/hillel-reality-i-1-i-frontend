@@ -6,12 +6,12 @@ const emailValidationServer = async (values) => {
 	const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
   
 	if (!values.email.trim() || values.email.length <= 2 || !emailRegex.test(values.email)) {
-		console.log('1');
 	  	return 1;
 	}
   
 	try {
 	  const response = await axios.post(URL_CHECK_EMAIL, values);
+	  console.log(response.data.exists)
 	  return response.data.exists;
 	} catch (error) {
 	  return false;

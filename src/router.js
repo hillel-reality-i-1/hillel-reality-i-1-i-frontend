@@ -147,7 +147,7 @@ const router = createBrowserRouter([
 		element: <PasswordUpdated />,
 	},
 	{
-		path: '/test',
+		path: '/confirmation-status',
 		element: <StatusInformation />,
 	},
 	{
