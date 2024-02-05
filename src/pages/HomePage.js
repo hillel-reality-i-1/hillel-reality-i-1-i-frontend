@@ -84,16 +84,19 @@ export default function HomePage() {
 	};
 
 	return (
-		<>
-			<SearchSection onSearch={handleSearch} />
-			<MainSection
-				posts={posts}
-				onNextPage={handleNextPage}
-				countPosts={countPosts}
-				isSearch={isSearch}
-				isLoading={isLoading}
-			/>
+		<div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+			<div style={{ flex: '1 0 auto' }}>
+				<SearchSection onSearch={handleSearch} />
+				<MainSection
+					posts={posts}
+					onNextPage={handleNextPage}
+					countPosts={countPosts}
+					isSearch={isSearch}
+					isLoading={isLoading}
+				/>
+			</div>
+
 			<Footer />
-		</>
+		</div>
 	);
 }

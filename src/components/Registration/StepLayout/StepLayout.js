@@ -33,7 +33,7 @@ const StepLayout = () => {
 	useEffect(() => {
 		const fetchKey = async () => {
 			// console.log('test1');
-			// const storedToken = localStorage.getItem('authTokenUHelp');
+			const storedToken = localStorage.getItem('authTokenUHelp');
 			// if (!storedToken) {
 			try {
 				// console.log('test2');
@@ -42,10 +42,13 @@ const StepLayout = () => {
 					(await axios.post(URL_CONFIRM_EMAIL, {
 						key: token,
 					}));
+				console.log('storedToken', storedToken);
+				if (!storedToken) {
+					localStorage.setItem('authTokenUHelp', userToken?.token);
+					dispatch(setAuthToken(userToken?.token));
+					console.log('testResponse', userToken);
+				}
 
-				localStorage.setItem('authTokenUHelp', userToken?.token);
-				dispatch(setAuthToken(userToken?.token));
-				console.log('testResponse', userToken);
 				// return;
 				// return userToken;
 			} catch (error) {
