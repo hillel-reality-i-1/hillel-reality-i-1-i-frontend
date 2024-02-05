@@ -4,18 +4,18 @@ import { Switch } from 'antd';
 import registrationUserProfile from '../../api/registrationUserProfile';
 import deleteUserProfile from '../../api/deleteUserProfile';
 
-const UserProfileSwitcher = ({ disabled, checked, onChange, userData, expertUserData, setCheckedExpert }) => {
+const UserProfileSwitcher = ({ verified, idExpertProfile, setCheckedExpert }) => {
 
   const handleChange = async (e) => {
     try {
-      if (userData.phone_verified === true) {
+      if (verified === true) {
         setCheckedExpert(e);
       } else {
         setCheckedExpert(false);
       }
 
       if (!e) {
-        await deleteUserProfile(expertUserData.id);
+        await deleteUserProfile(idExpertProfile);
 
       } else {
         const updatedExpertUserData = await registrationUserProfile();
@@ -30,8 +30,8 @@ const UserProfileSwitcher = ({ disabled, checked, onChange, userData, expertUser
 
   return (
     <Switch
-      disabled={disabled}
-      checked={checked}
+      disabled={!verified}
+      checked={idExpertProfile}
       onChange={handleChange}
     />
   );

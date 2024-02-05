@@ -37,6 +37,8 @@ const AboutMe = ({ userData, expertUserData }) => {
         setCheckedExpert(expertUserData)
     }, [expertUserData])
 
+    console.log(expertUserData.id)
+
     useEffect(() => {
 
         const addPhotoFunction = () => {
@@ -395,11 +397,8 @@ const AboutMe = ({ userData, expertUserData }) => {
                     </h4>
                     <div className={styles.title_switcher}>
                         <UserProfileSwitcher
-                            disabled={!userData.phone_verified}
-                            checked={checkedExpert}
-                            onChange={(e) => setCheckedExpert(e)}
-                            userData={userData}
-                            expertUserData={expertUserData}
+                            verified={userData.phone_verified}
+                            idExpertProfile={expertUserData.id}
                             setCheckedExpert={setCheckedExpert}
                         />
                         {checkedExpert
