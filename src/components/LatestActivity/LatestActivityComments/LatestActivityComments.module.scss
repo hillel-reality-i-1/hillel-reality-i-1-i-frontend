@@ -53,6 +53,16 @@ $backgroundCardColor: #FDFEFF !default;
 	}
 }
 
+.button_see_more {
+	margin: 14px;
+	color: #126FE1;
+	font-family: $medium;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 160%;
+}
+
 :export {
 	backgroundCardColor: $backgroundCardColor;
   }

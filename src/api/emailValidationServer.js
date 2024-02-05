@@ -11,7 +11,6 @@ const emailValidationServer = async (values) => {
   
 	try {
 	  const response = await axios.post(URL_CHECK_EMAIL, values);
-	  console.log(response.data.exists)
 	  return response.data.exists;
 	} catch (error) {
 	  return false;

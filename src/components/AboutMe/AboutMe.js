@@ -5,6 +5,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import ModalInfoAboutExpertProfile from '../AboutMe/ModalInfoAboutExpertProfile/ModalInfoAboutExpertProfile';
 import UserProfileSwitcher from '../UserProfileSwitcher/UserProfileSwitcher'
 import ImageUploader from '../ImageUploader/ImageUploader';
+import { UPLOAD_PORTFOLIO, PORTFOLIO_LIST } from '../../config/API_url';
 
 import facebookIcon from '../../assets/img/icons/icons-AboutMe/facebook_icon.svg'
 import instagramIcon from '../../assets/img/icons/icons-AboutMe/insta_icon.svg'
@@ -37,8 +38,6 @@ const AboutMe = ({ userData, expertUserData }) => {
         setCheckedExpert(expertUserData)
     }, [expertUserData])
 
-    console.log(expertUserData.id)
-
     useEffect(() => {
 
         const addPhotoFunction = () => {
@@ -53,9 +52,8 @@ const AboutMe = ({ userData, expertUserData }) => {
     }, [expertUserData.portfolio]);
 
     const deletePhoto = (item) => {
-        console.log(item.id)
 
-        const API_ENDPOINT = `http://dmytromigirov.space/api/v1/files/portfolio_list/${item.id}/`;
+        const API_ENDPOINT = `${PORTFOLIO_LIST}${item.id}/`;
         const authTokenUHelp = localStorage.getItem('authTokenUHelp');
 
         const config = {
@@ -105,7 +103,6 @@ const AboutMe = ({ userData, expertUserData }) => {
             return null;
         }
 
-        const API_ENDPOINT = 'http://dmytromigirov.space/api/v1/users/upload_portfolio/';
         const authTokenUHelp = localStorage.getItem('authTokenUHelp');
 
         const config = {
@@ -118,10 +115,9 @@ const AboutMe = ({ userData, expertUserData }) => {
         const formData = new FormData();
         formData.append('file', file);
 
-        axios.post(API_ENDPOINT, formData, config)
+        axios.post(UPLOAD_PORTFOLIO, formData, config)
             .then(response => {
                 if (response.status === 201) {
-                    console.log(response.data);
                     setImagesArray(prevImages => [...prevImages, response.data]);
                 }
             })

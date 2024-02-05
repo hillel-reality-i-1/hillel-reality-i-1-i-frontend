@@ -42,21 +42,24 @@ const LatestActivityComments = () => {
 	};
 
 	return (
-		<div className={styles.comments_block}>
-			{
+		<>
+			<div className={styles.comments_block}>
+				{
 
-				postDetails.length > 0 ? (shownPosts.map((comment, index) => (
-					<div key={index}>
-						<CommentCard comment={comment} bgColor={{ backgroundColor: styles.backgroundCardColor }} />
-					</div>)
-				)) : null
-			}
+					postDetails.length > 0 ? (shownPosts.map((comment, index) => (
+						<div key={index}>
+							<CommentCard comment={comment} bgColor={{ backgroundColor: styles.backgroundCardColor }} />
+						</div>)
+					)) : null
+				}
+
+			</div>
 			{visiblePosts < postDetails.length && (
-				<button onClick={handleNextPage}>
+				<button className={styles.button_see_more} onClick={handleNextPage}>
 					Дивитися більше
 				</button>
 			)}
-		</div>
+		</>
 	);
 };
 
