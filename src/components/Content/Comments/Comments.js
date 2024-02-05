@@ -8,26 +8,37 @@ import TextArea from 'antd/es/input/TextArea';
 import SortingPanel from '../SortingPanel/SortingPanel';
 import { useFormik } from 'formik';
 import CommentCard from '../CommentCard/CommentCard';
+import { useGetUserDataQuery } from '../../../store/services/userApi';
+import { ConfigProvider } from 'antd';
 // http://dmytromigirov.space/api/v1/content/post/{id}/comment/create
 
 // const postId = 304;
 
 const Comments = ({ postId }) => {
+	const { data, error, isLoading } = useGetUserDataQuery();
 	// const [comment, setComment] = useState([]);
 	const [comments, setComments] = useState([]);
+	const [page, setPage] = useState(1);
+	const [countComments, setCountComments] = useState(0);
 
 	useEffect(() => {
 		const fetchGetPosts = async () => {
 			try {
-				const response = postId && (await axios.get(`/api/v1/content/post/${postId}/comments`));
-				setComments(response);
+				const response =
+					postId &&
+					(await axios.get(`/api/v1/content/post/${postId}/comments`, {
+						params: { page: page, page_size: 5 },
+					}));
+				// console.log('response', response);
+				response.count && setCountComments(response.count);
+				response?.results && setComments((prevComments) => [...prevComments, ...response?.results]);
 			} catch (error) {
 				return error.message;
 			}
 		};
 
 		fetchGetPosts();
-	}, [postId]);
+	}, [page, postId]);
 
 	const fetchCreateComments = async (values) => {
 		try {
@@ -36,12 +47,15 @@ const Comments = ({ postId }) => {
 				(await axios.post(`/api/v1/content/post/${postId}/comment/create`, {
 					text: values.comment,
 				}));
-			setComments([response, ...comments]);
 
-			// console.log(response);
+			setComments([response, ...comments]);
 		} catch (error) {
 			return error.message;
 		}
+	};
+
+	const handleNextPage = () => {
+		setPage((prevPage) => prevPage + 1);
 	};
 
 	const handleSubmit = async (values) => {
@@ -51,7 +65,7 @@ const Comments = ({ postId }) => {
 		formik.resetForm();
 	};
 
-	// console.log('comments', comments);
+	// comments && console.log('comments', comments);
 
 	const formik = useFormik({
 		initialValues: {
@@ -63,8 +77,10 @@ const Comments = ({ postId }) => {
 
 	return (
 		<div className={styles.comments}>
-			{' '}
-			<SortingPanel nameResult='коментарів' />
+			<SortingPanel
+				nameResult='коментарів'
+				count={countComments}
+			/>
 			<form
 				className={styles.form}
 				onSubmit={formik.handleSubmit}
@@ -72,25 +88,56 @@ const Comments = ({ postId }) => {
 			>
 				<div className={styles.creation_comment}>
 					<div className={styles.creation_comment_input_wrapper}>
-						<img
-							src={Avatar}
-							alt='Avatar'
-							style={{ width: '56px', height: '56px', marginRight: '16px' }}
-						/>
-						<TextArea
-							name='comment'
-							rows={4}
-							placeholder='Розскажіть свою думку тут.'
-							// maxLength={6}
-							// onChange={(e) => {
-							// 	formik.handleChange(e);
-							// 	formik.setFieldValue('title', e.target.value);
-							// }}
-							onChange={formik.handleChange}
-							value={formik.values.comment}
-							onBlur={formik.handleBlur}
-							// minLength='10'
-						/>
+						{data?.profile_picture?.image ? (
+							<img
+								src={`${process.env.REACT_APP_API_BASE_URL}${data.profile_picture.image}`}
+								alt='Avatar'
+								style={{ width: '56px', height: '56px', borderRadius: '56px', marginRight: '16px' }}
+							/>
+						) : (
+							<img
+								src={Avatar}
+								alt='Avatar'
+								style={{ width: '56px', height: '56px', marginRight: '16px' }}
+							/>
+						)}
+						<ConfigProvider
+							theme={{
+								token: {
+									fontFamily: 'NotoSans Regular',
+									colorTextQuaternary: '#A7A7B2',
+									borderRadius: 12,
+									colorBorder: '#DBDBDD',
+									colorText: '#0D101D',
+									colorTextPlaceholder: '#47474F',
+									fontSize: 16,
+									lineHeight: '160%',
+								},
+								components: {
+									Input: {
+										activeShadow: 'none',
+										hoverBorderColor: 'none',
+										activeBorderColor: 'none',
+										paddingBlock: 14,
+										paddingInline: 14,
+									},
+								},
+							}}>
+							<TextArea
+								name='comment'
+								rows={4}
+								placeholder='Розскажіть свою думку тут.'
+								// maxLength={6}
+								// onChange={(e) => {
+								// 	formik.handleChange(e);
+								// 	formik.setFieldValue('title', e.target.value);
+								// }}
+								onChange={formik.handleChange}
+								value={formik.values.comment}
+								onBlur={formik.handleBlur}
+								// minLength='10'
+							/>
+						</ConfigProvider>
 					</div>
 				</div>
 				<div className={styles.creation_comment_btn_wrapper}>
@@ -105,12 +152,20 @@ const Comments = ({ postId }) => {
 			</form>
 			<div className={styles.comments_wrapper}>
 				{comments &&
-					comments?.map((comment) => (
+					comments.map((comment) => (
 						<CommentCard
 							key={comment.id}
 							comment={comment}
 						/>
 					))}
+
+				{countComments > comments?.length && (
+					<button
+						className={styles.btn_see_more}
+						onClick={handleNextPage}>
+						See more
+					</button>
+				)}
 			</div>
 		</div>
 	);

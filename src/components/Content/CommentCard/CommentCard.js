@@ -122,13 +122,13 @@ const CommentCard = ({ comment, bgColor }) => {
 							src={icon_useful}
 							alt='Useful'
 						/>
-					</button>{' '}
+					</button>
 					<span className={styles.text_useful}>Корисно 0</span>
 					<button className={styles.btn_useful}>
 						<img
 							src={icon_not_useful}
 							alt='Not useful'
-						/>{' '}
+						/>
 					</button>
 				</div>
 			</div>

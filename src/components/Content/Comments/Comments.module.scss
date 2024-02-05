@@ -25,3 +25,13 @@
 	flex-wrap: wrap;
 	gap: 24px;
 }
+
+.btn_see_more {
+	font-family: $font-ns-medium;
+	font-size: 18px;
+	line-height: 160%;
+	color: $color-primary30base;
+	width: 100%;
+	max-width: 82px;
+	margin-top: 46px;
+}

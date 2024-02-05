@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Dropdown, Space } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { useGetUserDataQuery } from '../../store/services/userApi';
 import { clearAuthToken } from '../../store/slices/signInSlice';
@@ -18,6 +18,7 @@ import CustomModal from '../modals/CustomModal/CustomModal';
 import SignOutModalContent from './SignOutContent/SignOutModalContent';
 
 import styles from './accountHeader.module.scss';
+import ModalInfo from '../ModalInfo/ModalInfo';
 
 export default function AccountHeader() {
 	const { data, error, isLoading } = useGetUserDataQuery();
@@ -27,6 +28,10 @@ export default function AccountHeader() {
 	const dispatch = useDispatch();
 
 	const navigate = useNavigate();
+
+	const { pathname } = useLocation();
+	const [isOpen, setModalOpen] = useState(false);
+	const [targetLink, setTargetLink] = useState(null);
 
 	const toggleModal = () => {
 		setIsModalOpen(!isModalOpen);
@@ -52,6 +57,57 @@ export default function AccountHeader() {
 	if (error) {
 		return <div>Error: {error.message}</div>;
 	}
+
+	const handleLinkClick = (e) => {
+		console.log(e);
+		if (pathname === '/postCreationPage') {
+			setTargetLink(e.currentTarget.pathname);
+			setModalOpen(true);
+			e.preventDefault();
+		}
+	};
+	const handleContinueClick = () => {
+		setModalOpen(false);
+		if (targetLink) {
+			navigate(targetLink);
+		}
+	};
+	const closeModal = () => {
+		setModalOpen(false);
+	};
+
+	const items = [
+		{
+			label: (
+				<Link
+					to='user'
+					className={styles.dropdown__item}
+					onClick={handleLinkClick}>
+					<img src={userIcon} /> Мій профіль
+				</Link>
+			),
+			key: '0',
+		},
+		{
+			label: (
+				<Link
+					to='settings'
+					className={styles.dropdown__item}
+					onClick={handleLinkClick}>
+					<img src={settingsIcon} />
+					Налаштування
+				</Link>
+			),
+			key: '1',
+		},
+		// {
+		//   label: <a className={styles.dropdown__item}><img src={questionMark} />  Help </a>,
+		//   key: '3',
+		// },
+		{
+			type: 'divider',
+		},
+	];
 
 	return (
 		<div className={styles.account}>
@@ -102,44 +158,18 @@ export default function AccountHeader() {
 						onClick={(e) => e.preventDefault()}
 						className={styles.flex}>
 						{/* <Space className={styles.flex}> */}
-						<p className={styles.account__user__name}> {data.full_name} </p><DropDown />
+						<p className={styles.account__user__name}> {data.full_name} </p>
+						<DropDown />
 						{/* </Space> */}
 					</a>
 				</Dropdown>
 			</div>
+			{isOpen && (
+				<ModalInfo
+					onClose={closeModal}
+					onContinue={handleContinueClick}
+				/>
+			)}
 		</div>
 	);
 }
-
-const items = [
-	{
-		label: (
-			<Link
-				to='user'
-				className={styles.dropdown__item}>
-
-				<img src={userIcon} /> Мій профіль
-			</Link>
-		),
-		key: '0',
-	},
-	{
-		label: (
-			<Link
-				to='settings'
-				className={styles.dropdown__item}
-			>
-				<img src={settingsIcon} />
-				Налаштування
-			</Link>
-		),
-		key: '1',
-	},
-	// {
-	//   label: <a className={styles.dropdown__item}><img src={questionMark} />  Help </a>,
-	//   key: '3',
-	// },
-	{
-		type: 'divider',
-	},
-];

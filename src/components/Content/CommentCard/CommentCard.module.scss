@@ -4,7 +4,7 @@
 	width: 100%;
 	max-width: 845px;
 	height: 100%;
-	min-height: 258px;
+	// min-height: 258px;
 
 	padding: 24px;
 	border-radius: 24px;
@@ -92,7 +92,7 @@
 		max-height: 76px;
 		overflow: hidden;
 		word-wrap: break-word;
-		display: inline;
+		// display: inline;
 		// text-overflow: ellipsis;
 	}
 
@@ -103,7 +103,7 @@
 		line-height: 160%;
 		font-size: 16px;
 		color: $color-primary30base;
-		margin-left: 10px;
+		// margin-left: 10px;
 	}
 
 	.expanded {

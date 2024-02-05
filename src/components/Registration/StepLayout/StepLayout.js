@@ -32,40 +32,48 @@ const StepLayout = () => {
 
 	useEffect(() => {
 		const fetchKey = async () => {
+			// console.log('test1');
 			const storedToken = localStorage.getItem('authTokenUHelp');
-			if (!storedToken) {
-				try {
-					const userToken = await axios.post(URL_CONFIRM_EMAIL, {
+			// if (!storedToken) {
+			try {
+				// console.log('test2');
+				const userToken =
+					token &&
+					(await axios.post(URL_CONFIRM_EMAIL, {
 						key: token,
-					});
-
+					}));
+				console.log('storedToken', storedToken);
+				if (!storedToken) {
 					localStorage.setItem('authTokenUHelp', userToken?.token);
 					dispatch(setAuthToken(userToken?.token));
-					console.log(userToken?.token);
-					// return;
-					return userToken;
-				} catch (error) {
-					const errorMsg = error?.response.data.details;
-					console.log(error);
-					console.log(errorMsg);
-					// return console.log(errorMsg);
-					// if (errorMsg === 'bad signature') {
-					// 	return navigate('/*');
-					// } else if (errorMsg === 'signature expired') {
-					// 	return navigate('/linkExpired');
-					// } else if (errorMsg === 'email address does not exist') {
-					// 	return navigate('/linkUsed');
+					console.log('testResponse', userToken);
+				}
 
-					// }
-					if (errorMsg.includes('bad signature')) {
-						return navigate('/*');
-					} else if (errorMsg.includes('signature expired')) {
-						return navigate('/linkExpired');
-					} else if (errorMsg.includes('email address does not exist')) {
-						return navigate('/linkUsed');
-					}
+				// return;
+				// return userToken;
+			} catch (error) {
+				const errorMsg = error?.response.data.details;
+				// console.log(error);
+				// console.log(errorMsg);
+				// console.log('errorTest');
+				// return console.log(errorMsg);
+				// if (errorMsg === 'bad signature') {
+				// 	return navigate('/*');
+				// } else if (errorMsg === 'signature expired') {
+				// 	return navigate('/linkExpired');
+				// } else if (errorMsg === 'email address does not exist') {
+				// 	return navigate('/linkUsed');
+
+				// }
+				if (errorMsg.includes('bad signature')) {
+					return navigate('/*');
+				} else if (errorMsg.includes('signature expired')) {
+					return navigate('/linkExpired');
+				} else if (errorMsg.includes('email address does not exist')) {
+					return navigate('/linkUsed');
 				}
 			}
+			// }
 		};
 
 		fetchKey();

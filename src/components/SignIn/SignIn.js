@@ -112,9 +112,9 @@ export default function SignIn({
 						</div>
 
 						<div className={styles.signIn__wrapper}>
-							<h3 className={styles.signIn__title}>Увійти в акаунт</h3>
+							<h3 className={styles.signIn__title}>Увійти у профіль</h3>
 							<p className={styles.signIn__description}>
-								Будь ласка, введіть дані для входу в акаунт
+								Будь ласка, введіть дані для входу у профіль
 							</p>
 
 							<GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
@@ -122,7 +122,7 @@ export default function SignIn({
 									<img
 										src={googleIcon}
 										alt='google logo'
-									/>{' '}
+									/>
 									<GoogleSignIn changeGoogleAuthToken={changeGoogleAuthToken} />
 								</div>
 							</GoogleOAuthProvider>
@@ -136,7 +136,7 @@ export default function SignIn({
 							/>
 
 							<div className={styles.noAccount}>
-								<p className={styles.noAccount__text}>Немає акаунту?</p>
+								<p className={styles.noAccount__text}>Ще не маєте профілю?</p>
 								<p
 									className={styles.noAccount__signUp}
 									onClick={openSignUp}>

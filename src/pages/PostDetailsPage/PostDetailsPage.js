@@ -8,7 +8,7 @@ import Contributions from '../../components/Content/Contributions/Contributions'
 
 const PostDetailsPage = () => {
 	return (
-		<>
+		<div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
 			<div className={styles.container}>
 				<ButtonBack customClassButton={styles.customClassButton}>
 					<span className={styles.btn_inner}>
@@ -29,7 +29,7 @@ const PostDetailsPage = () => {
 				</div>
 			</div>
 			<Footer />
-		</>
+		</div>
 	);
 };
 
