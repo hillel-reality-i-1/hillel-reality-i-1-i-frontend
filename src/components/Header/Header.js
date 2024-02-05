@@ -1,20 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import '../../translations/i18n';
 import logo from '../../assets/img/icons/logo/header_logo.svg';
 import AuthenticationWrapper from '../AuthenticationWrapper/AuthenticationWrapper';
 
 import styles from './Header.module.scss';
+import ModalInfo from '../ModalInfo/ModalInfo';
 
 export default function Header() {
 	const { t } = useTranslation();
+	const navigate = useNavigate();
+	const { pathname } = useLocation();
+	const [isModalOpen, setModalOpen] = useState(false);
+	const [targetLink, setTargetLink] = useState(null);
+	console.log(pathname);
+
+	const handleLinkClick = (e) => {
+		console.log(e);
+		if (pathname === '/postCreationPage') {
+			setTargetLink(e.currentTarget.pathname);
+			setModalOpen(true);
+			e.preventDefault();
+		}
+	};
+	const handleContinueClick = () => {
+		setModalOpen(false);
+		if (targetLink) {
+			navigate(targetLink);
+		}
+	};
+	const closeModal = () => {
+		setModalOpen(false);
+	};
 	return (
 		<div className={styles.header}>
 			<div className={styles.header_wrapper}>
 				<div className={styles.header_logo_wrapper}>
-					<Link to='./'>
+					<Link
+						to='/'
+						onClick={handleLinkClick}>
 						<img
 							src={logo}
 							alt='header logo'
@@ -25,25 +51,28 @@ export default function Header() {
 				<nav className={styles.header_navigation}>
 					<ul className={styles.navigation_menu}>
 						<li className={styles.menu_item}>
-							<a
+							<Link
 								className={styles.item_link}
-								href='/main'>
+								to='/main'
+								onClick={handleLinkClick}>
 								{t('textHeader.main')}
-							</a>
+							</Link>
 						</li>
 						<li className={styles.menu_item}>
-							<a
+							<Link
 								className={styles.item_link}
-								href='/map'>
+								to='/map'
+								onClick={handleLinkClick}>
 								{t('textHeader.map')}
-							</a>
+							</Link>
 						</li>
 						<li className={styles.menu_item}>
-							<a
+							<Link
 								className={styles.item_link}
-								href='/events'>
+								to='/events'
+								onClick={handleLinkClick}>
 								{t('textHeader.events')}
-							</a>
+							</Link>
 						</li>
 					</ul>
 					<div className={styles.navigation_button}>
@@ -53,6 +82,12 @@ export default function Header() {
 					</div>
 				</nav>
 			</div>
+			{isModalOpen && (
+				<ModalInfo
+					onClose={closeModal}
+					onContinue={handleContinueClick}
+				/>
+			)}
 		</div>
 	);
 }

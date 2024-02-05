@@ -12,12 +12,16 @@ import './PostCreationForm.scss';
 import 'draft-js/dist/Draft.css';
 
 import TextEditorN from '../../TextEditor/TextEditorN/TextEditorN';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import ImageUploader from '../../ImageUploader/ImageUploader';
+import ModalInfo from '../../ModalInfo/ModalInfo';
 
 const PostCreationForm = () => {
 	const { TextArea } = Input;
 	const navigate = useNavigate();
+	const location = useLocation();
+	// console.log('location', location);
+	const [isModalOpen, setModalOpen] = useState(false);
 
 	const [selectedCategory, setSelectedCategory] = useState([]);
 	const [profCategories, setProfCategories] = useState(null);
@@ -44,6 +48,27 @@ const PostCreationForm = () => {
 	const [dataTitle, setDataTitle] = useState('');
 
 	const isLimitCategories = selectedCategory.length < 3;
+
+	useEffect(() => {
+		// const handleBeforeUnload = (e) => {
+		// 	e.preventDefault();
+		// 	e.returnValue = '';
+		// };
+		const handleBeforeUnload = (e) => {
+			// if (location.pathname === '/postCreationPage') {
+			// setModalOpen(true);
+			e.preventDefault();
+			e.returnValue = ''; // Это сообщение не будет показано в современных браузерах, но нужно для старых браузеров
+		};
+		// };
+
+		// window.addEventListener('beforeunload', handleBeforeUnload);
+		window.addEventListener('beforeunload', handleBeforeUnload);
+
+		return () => {
+			window.removeEventListener('beforeunload', handleBeforeUnload);
+		};
+	}, [location.pathname]);
 
 	const onChangeHTMLText = async (text, characters) => {
 		// console.log(text);
@@ -171,6 +196,11 @@ const PostCreationForm = () => {
 		reader.readAsDataURL(file); // Reading the contents of the file in Data URL format
 	};
 
+	const deletePhoto = () => {
+		setSelectedFile(null);
+		setPreviewImage(null);
+	};
+
 	useEffect(() => {
 		if (
 			selectedCategory.length >= 1 &&
@@ -184,6 +214,14 @@ const PostCreationForm = () => {
 	}, [changeHTMLText.length, selectedCategory.length, selectedCountries.length]);
 
 	// console.log('selectedFile', selectedFile);
+
+	const openModal = () => {
+		setModalOpen(true);
+	};
+
+	const closeModal = () => {
+		setModalOpen(false);
+	};
 
 	const handleSubmit = async (values) => {
 		try {
@@ -206,6 +244,7 @@ const PostCreationForm = () => {
 				},
 				config
 			);
+			// openModal();
 			navigate(-1);
 		} catch (error) {
 			return error.message;
@@ -409,11 +448,17 @@ const PostCreationForm = () => {
 									handleFileChange={handleFileChange}
 								/>
 							) : (
-								<img
-									src={previewImage}
-									alt='Preview'
-									style={{ width: '100%', height: '100%', maxWidth: '410px', maxHeight: '248px' }}
-								/>
+								<div
+									className={styles.image_post}
+									onClick={deletePhoto}>
+									<img
+										className={styles.img}
+										src={previewImage}
+										alt='Preview'
+										style={{ width: '100%', height: '100%', maxWidth: '410px', maxHeight: '248px' }}
+									/>
+									<div className={styles.img_delete}></div>
+								</div>
 							)}
 						</div>
 					</div>
@@ -427,6 +472,7 @@ const PostCreationForm = () => {
 					</CustomButton>
 				</div>
 			</form>
+			{isModalOpen && <ModalInfo onClose={closeModal} />}
 		</div>
 	);
 };

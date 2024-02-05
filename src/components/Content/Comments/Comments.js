@@ -8,11 +8,14 @@ import TextArea from 'antd/es/input/TextArea';
 import SortingPanel from '../SortingPanel/SortingPanel';
 import { useFormik } from 'formik';
 import CommentCard from '../CommentCard/CommentCard';
+import { useGetUserDataQuery } from '../../../store/services/userApi';
+import { ConfigProvider } from 'antd';
 // http://dmytromigirov.space/api/v1/content/post/{id}/comment/create
 
 // const postId = 304;
 
 const Comments = ({ postId }) => {
+	const { data, error, isLoading } = useGetUserDataQuery();
 	// const [comment, setComment] = useState([]);
 	const [comments, setComments] = useState([]);
 
@@ -63,8 +66,10 @@ const Comments = ({ postId }) => {
 
 	return (
 		<div className={styles.comments}>
-			{' '}
-			<SortingPanel nameResult='коментарів' />
+			<SortingPanel
+				nameResult='коментарів'
+				count={comments?.length}
+			/>
 			<form
 				className={styles.form}
 				onSubmit={formik.handleSubmit}
@@ -72,25 +77,56 @@ const Comments = ({ postId }) => {
 			>
 				<div className={styles.creation_comment}>
 					<div className={styles.creation_comment_input_wrapper}>
-						<img
-							src={Avatar}
-							alt='Avatar'
-							style={{ width: '56px', height: '56px', marginRight: '16px' }}
-						/>
-						<TextArea
-							name='comment'
-							rows={4}
-							placeholder='Розскажіть свою думку тут.'
-							// maxLength={6}
-							// onChange={(e) => {
-							// 	formik.handleChange(e);
-							// 	formik.setFieldValue('title', e.target.value);
-							// }}
-							onChange={formik.handleChange}
-							value={formik.values.comment}
-							onBlur={formik.handleBlur}
-							// minLength='10'
-						/>
+						{data?.profile_picture?.image ? (
+							<img
+								src={`${process.env.REACT_APP_API_BASE_URL}${data.profile_picture.image}`}
+								alt='Avatar'
+								style={{ width: '56px', height: '56px', borderRadius: '56px', marginRight: '16px' }}
+							/>
+						) : (
+							<img
+								src={Avatar}
+								alt='Avatar'
+								style={{ width: '56px', height: '56px', marginRight: '16px' }}
+							/>
+						)}
+						<ConfigProvider
+							theme={{
+								token: {
+									fontFamily: 'NotoSans Regular',
+									colorTextQuaternary: '#A7A7B2',
+									borderRadius: 12,
+									colorBorder: '#DBDBDD',
+									colorText: '#0D101D',
+									colorTextPlaceholder: '#47474F',
+									fontSize: 16,
+									lineHeight: '160%',
+								},
+								components: {
+									Input: {
+										activeShadow: 'none',
+										hoverBorderColor: 'none',
+										activeBorderColor: 'none',
+										paddingBlock: 14,
+										paddingInline: 14,
+									},
+								},
+							}}>
+							<TextArea
+								name='comment'
+								rows={4}
+								placeholder='Розскажіть свою думку тут.'
+								// maxLength={6}
+								// onChange={(e) => {
+								// 	formik.handleChange(e);
+								// 	formik.setFieldValue('title', e.target.value);
+								// }}
+								onChange={formik.handleChange}
+								value={formik.values.comment}
+								onBlur={formik.handleBlur}
+								// minLength='10'
+							/>
+						</ConfigProvider>
 					</div>
 				</div>
 				<div className={styles.creation_comment_btn_wrapper}>
