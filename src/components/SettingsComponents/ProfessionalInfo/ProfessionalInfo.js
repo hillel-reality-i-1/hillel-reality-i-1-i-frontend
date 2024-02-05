@@ -26,7 +26,7 @@ export default function ProfessionalInfo() {
       
       <div className={styles.wrapper}>
         <div className={styles.info}><p className={styles.info__type}>Професії</p> <Link className={styles.info__link} to='professions'> <Arrow /> </Link> </div>
-        <div className={styles.info}><p className={styles.info__type}>Послуги</p> <Link className={styles.info__link}>UX/UI Design... <Arrow /> </Link> </div>
+        <div className={styles.info}><p className={styles.info__type}>Послуги</p> <Link className={styles.info__link} to='services'><Arrow /> </Link> </div>
       </div>
 
     </>

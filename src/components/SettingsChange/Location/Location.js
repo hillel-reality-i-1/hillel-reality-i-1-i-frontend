@@ -110,7 +110,7 @@ export default function Location() {
       </p>
       <div>
         <label>Країна</label>
-        <div className='location-page'>
+        <div className='settings-page-input'>
           <Select
             showSearch
             style={{
@@ -131,7 +131,7 @@ export default function Location() {
       <div className={styles.location__selects}>
         
         <label>Місто</label>
-        <div className='location-page'>
+        <div className='settings-page-input'>
           <Select
             showSearch
             style={{

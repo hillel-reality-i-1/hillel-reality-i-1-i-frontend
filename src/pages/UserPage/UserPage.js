@@ -33,7 +33,7 @@ export default function UserPage() {
 				const expertUserProfileData = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/v1/users/expert_user_profile_by_user_id/${userResponse.data.pk}/`,
 					config);
 
-				console.log(expertUserProfileData)
+				console.log("expert", expertUserProfileData)
 
 
 				setUserDataPortfolio(expertUserProfileData.data.portfolio)
@@ -48,7 +48,7 @@ export default function UserPage() {
 		fetchData();
 	}, [navigate]);
 
-	if (isLoading || typeof data === 'undefined') {
+	if (isLoading ) {
     
 		return (
 		  <div className={styles.container}>
