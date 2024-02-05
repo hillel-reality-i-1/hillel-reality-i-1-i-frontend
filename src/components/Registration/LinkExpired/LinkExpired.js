@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import step_logo from '../../../assets/img/icons/logo/step_logo.svg';
+import icon_logo_page_link from '../../../assets/img/icons/logo/icon_logo_page_link.svg';
 import envelope from '../../../assets/img/icons/icons-SignUp/envelope.svg';
 import arrow_back from '../../../assets/img/icons/icons-SignUp/arrow_back.svg';
 import { URL_RESEND_EMAIL } from '../../../config/API_url';
@@ -38,7 +38,7 @@ const LinkExpired = () => {
 					to='/'
 					className={styles.verify_info_main_logo}>
 					<img
-						src={step_logo}
+						src={icon_logo_page_link}
 						alt='Logo'
 					/>
 				</Link>
