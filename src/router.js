@@ -27,6 +27,7 @@ import LinkExpired from './components/Registration/LinkExpired/LinkExpired';
 import BiographyPage from './pages/Biography/BiographyPage';
 import UsersPages from './pages/UsersPages/UsersPages';
 import SocialPage from './pages/SocialPage/SocialPage';
+import ProfessionsPage from './pages/ProfessionsPage/ProfessionsPage';
 
 const router = createBrowserRouter([
 	{
@@ -82,6 +83,10 @@ const router = createBrowserRouter([
 					{
 						path: 'socials',
 						element: <SocialPage />
+					},
+					{
+						path: 'professions',
+						element: <ProfessionsPage />
 					}
 				],
 			},

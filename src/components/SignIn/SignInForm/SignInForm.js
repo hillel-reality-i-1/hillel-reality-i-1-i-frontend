@@ -72,7 +72,7 @@ const SignInForm = ({ formik, loginError, styles }) => (
 		<Link
 			to={'/forgotYourPasswordForm'}
 			className={styles.form__forgotPassword}>
-			Я не пам’ятаю пароль
+			Забули пароль?
 		</Link>
 
 		<button
