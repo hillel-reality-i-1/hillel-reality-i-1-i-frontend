@@ -31,7 +31,7 @@ const Post = () => {
 	const postId = post && post.id;
 	const langUK = 'uk/';
 
-	console.log(postId);
+	// console.log(postId);
 
 	useEffect(() => {
 		const fetchLanguage = async () => {

@@ -18,19 +18,27 @@ const Comments = ({ postId }) => {
 	const { data, error, isLoading } = useGetUserDataQuery();
 	// const [comment, setComment] = useState([]);
 	const [comments, setComments] = useState([]);
+	const [page, setPage] = useState(1);
+	const [countComments, setCountComments] = useState(0);
 
 	useEffect(() => {
 		const fetchGetPosts = async () => {
 			try {
-				const response = postId && (await axios.get(`/api/v1/content/post/${postId}/comments`));
-				setComments(response);
+				const response =
+					postId &&
+					(await axios.get(`/api/v1/content/post/${postId}/comments`, {
+						params: { page: page, page_size: 5 },
+					}));
+				// console.log('response', response);
+				response.count && setCountComments(response.count);
+				response?.results && setComments((prevComments) => [...prevComments, ...response?.results]);
 			} catch (error) {
 				return error.message;
 			}
 		};
 
 		fetchGetPosts();
-	}, [postId]);
+	}, [page, postId]);
 
 	const fetchCreateComments = async (values) => {
 		try {
@@ -39,12 +47,15 @@ const Comments = ({ postId }) => {
 				(await axios.post(`/api/v1/content/post/${postId}/comment/create`, {
 					text: values.comment,
 				}));
-			setComments([response, ...comments]);
 
-			// console.log(response);
+			setComments([response, ...comments]);
 		} catch (error) {
 			return error.message;
 		}
+	};
+
+	const handleNextPage = () => {
+		setPage((prevPage) => prevPage + 1);
 	};
 
 	const handleSubmit = async (values) => {
@@ -54,7 +65,7 @@ const Comments = ({ postId }) => {
 		formik.resetForm();
 	};
 
-	// console.log('comments', comments);
+	// comments && console.log('comments', comments);
 
 	const formik = useFormik({
 		initialValues: {
@@ -68,7 +79,7 @@ const Comments = ({ postId }) => {
 		<div className={styles.comments}>
 			<SortingPanel
 				nameResult='коментарів'
-				count={comments?.length}
+				count={countComments}
 			/>
 			<form
 				className={styles.form}
@@ -141,12 +152,20 @@ const Comments = ({ postId }) => {
 			</form>
 			<div className={styles.comments_wrapper}>
 				{comments &&
-					comments?.map((comment) => (
+					comments.map((comment) => (
 						<CommentCard
 							key={comment.id}
 							comment={comment}
 						/>
 					))}
+
+				{countComments > comments?.length && (
+					<button
+						className={styles.btn_see_more}
+						onClick={handleNextPage}>
+						See more
+					</button>
+				)}
 			</div>
 		</div>
 	);

@@ -15,10 +15,8 @@ export default function Header() {
 	const { pathname } = useLocation();
 	const [isModalOpen, setModalOpen] = useState(false);
 	const [targetLink, setTargetLink] = useState(null);
-	console.log(pathname);
 
 	const handleLinkClick = (e) => {
-		console.log(e);
 		if (pathname === '/postCreationPage') {
 			setTargetLink(e.currentTarget.pathname);
 			setModalOpen(true);
