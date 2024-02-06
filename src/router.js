@@ -28,6 +28,9 @@ import BiographyPage from './pages/Biography/BiographyPage';
 import UsersPages from './pages/UsersPages/UsersPages';
 import SocialPage from './pages/SocialPage/SocialPage';
 import ProfessionsPage from './pages/ProfessionsPage/ProfessionsPage';
+import ServicesPage from './pages/ServicesPage/ServicesPage';
+import MailPage from './pages/MailPage/MailPage';
+import PhonePage from './pages/PhonePage/PhonePage';
 
 const router = createBrowserRouter([
 	{
@@ -87,6 +90,18 @@ const router = createBrowserRouter([
 					{
 						path: 'professions',
 						element: <ProfessionsPage />
+					},
+					{
+						path: 'services',
+						element: <ServicesPage />
+					},
+					{
+						path: 'mail',
+						element: <MailPage />
+					},
+					{
+						path: 'phone',
+						element: <PhonePage />
 					}
 				],
 			},
@@ -152,7 +167,7 @@ const router = createBrowserRouter([
 		element: <PasswordUpdated />,
 	},
 	{
-		path: '/test',
+		path: '/confirmation-status',
 		element: <StatusInformation />,
 	},
 	{

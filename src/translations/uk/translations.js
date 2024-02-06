@@ -115,7 +115,7 @@ export const TRANSLATIONS_UK = {
 		forgotYourPassword: 'Забули ваш пароль?',
 		createNewPasswordDescription:
 			'Вкажіть вашу пошту, і ми надішлемо вам посилання для відновлення пароля',
-		email: 'Пошта:',
+		email: 'Пошта',
 		recieveTheLink: 'Отримати посилання',
 		dontHaveAnAccount: 'Ще не маєте профілю?',
 		signUp: 'Зареєструватися',

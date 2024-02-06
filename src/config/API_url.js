@@ -28,3 +28,5 @@ export const URL_CHECK_EMAIL = `${process.env.REACT_APP_API_BASE_URL}/api/v1/acc
 export const URL_PASSWORD_RESET_CHECK_API = `${process.env.REACT_APP_API_BASE_URL}/api/v1/auth/password/reset/check-link/`;
 export const REGISTRATION_USER_PROFILE_EXT = `${process.env.REACT_APP_API_BASE_URL}/api/v1/auth/registration_user_profile_ext/`;
 export const DELETE_USER_PROFILE_EXTENDED = `${process.env.REACT_APP_API_BASE_URL}/api/v1/users/user_profile_extended/`;
+export const UPLOAD_PORTFOLIO = `${process.env.REACT_APP_API_BASE_URL}/api/v1/users/upload_portfolio/`;
+export const PORTFOLIO_LIST = `${process.env.REACT_APP_API_BASE_URL}/api/v1/files/portfolio_list/`;

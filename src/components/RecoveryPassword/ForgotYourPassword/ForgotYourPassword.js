@@ -34,8 +34,9 @@ export default function ForgotYourPassword() {
             setInvalidEmail(false)
         } else {
             isValid && setEmailValue(values);
-            setInvalidEmail(false)
+            setInvalidEmail(false);
             setActiveButton(true);
+            setErrorEmail(false)
         }
         
     };
@@ -68,6 +69,7 @@ export default function ForgotYourPassword() {
                         }}
                         validate={(values) => {
                             someOtherFunction(values);
+                            console.log(errorEmail)
                         }}
                         onSubmit={() => {
                             navigate(activeButton
