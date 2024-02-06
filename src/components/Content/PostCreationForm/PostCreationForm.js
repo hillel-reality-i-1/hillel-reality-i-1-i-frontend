@@ -48,6 +48,7 @@ const PostCreationForm = () => {
 	const [dataTitle, setDataTitle] = useState('');
 
 	const isLimitCategories = selectedCategory.length < 3;
+	const isChoiceOther = selectedCategory[0]?.id === 11;
 
 	useEffect(() => {
 		// const handleBeforeUnload = (e) => {
@@ -58,7 +59,7 @@ const PostCreationForm = () => {
 			// if (location.pathname === '/postCreationPage') {
 			// setModalOpen(true);
 			e.preventDefault();
-			e.returnValue = ''; // Это сообщение не будет показано в современных браузерах, но нужно для старых браузеров
+			e.returnValue = '';
 		};
 		// };
 
@@ -215,9 +216,9 @@ const PostCreationForm = () => {
 
 	// console.log('selectedFile', selectedFile);
 
-	const openModal = () => {
-		setModalOpen(true);
-	};
+	// const openModal = () => {
+	// 	setModalOpen(true);
+	// };
 
 	const closeModal = () => {
 		setModalOpen(false);
@@ -427,7 +428,9 @@ const PostCreationForm = () => {
 								<div className={styles.select_category_available}>
 									{profCategories.map((category) => (
 										<div
-											className={`${styles.tag} ${!isLimitCategories && styles.tag_disabled}`}
+											className={`${styles.tag} ${
+												(!isLimitCategories || isChoiceOther) && styles.tag_disabled
+											}`}
 											key={category.id}
 											onClick={(event) => {
 												isLimitCategories && handleCategoryClick(category, event);

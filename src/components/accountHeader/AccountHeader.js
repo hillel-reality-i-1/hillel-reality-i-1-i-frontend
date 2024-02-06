@@ -59,7 +59,6 @@ export default function AccountHeader() {
 	}
 
 	const handleLinkClick = (e) => {
-		console.log(e);
 		if (pathname === '/postCreationPage') {
 			setTargetLink(e.currentTarget.pathname);
 			setModalOpen(true);
@@ -136,6 +135,7 @@ export default function AccountHeader() {
 
 				<Dropdown
 					className={styles.dropdown}
+					overlayStyle={{ paddingTop: '14px' }}
 					menu={{
 						items: [
 							...items,

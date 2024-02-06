@@ -6,7 +6,10 @@ import Avatar from '../../../assets/img/icons/user-profile/Avatar.svg';
 import icon_expert from '../../../assets/img/icons/post/icon_expert.svg';
 import icon_save from '../../../assets/img/icons/post/icon_save.svg';
 import icon_like from '../../../assets/img/icons/post/icon_like.svg';
+import icon_dot_menu from '../../../assets/img/icons/post/icon_dot_menu.svg';
 // import icon_comments from '../../../assets/img/icons/post/icon_comments.svg';
+import icon_delete from '../../../assets/img/icons/post/icon_delete.svg';
+import icon_pencil from '../../../assets/img/icons/post/icon_pencil.svg';
 import { calculateReadTime } from '../../../helpers/calculateReadTime';
 import { formatTimeElapsed } from '../../../helpers/formatTimeElapsed';
 import { URL_GET_POST_DETAILS, URL_LANGUAGE, URL_USER_INFO_USER_ID } from '../../../config/API_url';
@@ -17,12 +20,14 @@ import draftToHtml from 'draftjs-to-html';
 import SortingPanel from '../SortingPanel/SortingPanel';
 
 import styles from './Post.module.scss';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import TextArea from 'antd/es/input/TextArea';
 import ButtonPostSave from '../ButtonPostSave/ButtonPostSave';
 import Comments from '../Comments/Comments';
+import { ConfigProvider, Dropdown } from 'antd';
 
 const Post = () => {
+	const navigate = useNavigate();
 	const { id } = useParams();
 	const [post, setPost] = useState(null);
 	const [user, setUser] = useState(null);
@@ -31,7 +36,7 @@ const Post = () => {
 	const postId = post && post.id;
 	const langUK = 'uk/';
 
-	// console.log(postId);
+	// console.log(post);
 
 	useEffect(() => {
 		const fetchLanguage = async () => {
@@ -93,6 +98,15 @@ const Post = () => {
 		getEditorStateFromPostData();
 	}, [post]);
 
+	const handlerDelete = async () => {
+		try {
+			postId && (await axios.delete(`/api/v1/content/post/${postId}/delete`));
+			navigate('/');
+		} catch (error) {
+			return error.message;
+		}
+	};
+
 	const timeForRead = post && calculateReadTime(post?.content);
 	const timeElapsed = post && formatTimeElapsed(post?.creation_date);
 	const userCity = user?.user_profile?.city && user?.user_profile?.city.split(',')[0];
@@ -144,7 +158,58 @@ const Post = () => {
 							</div>
 						</div>
 					</div>
-					<span className={styles.time_of_creation}>{timeElapsed}</span>
+					<div className={styles.right_col}>
+						<span className={styles.time_of_creation}>{timeElapsed}</span>
+						<div className={styles.post_menu}>
+							<Dropdown
+								overlayStyle={{ width: '138px' }}
+								menu={{
+									items: [
+										{
+											key: '1',
+											label: (
+												<button
+													className={styles.btn_menu}
+													rel='noopener noreferrer'
+													href='https://www.antgroup.com'>
+													<img
+														src={icon_pencil}
+														alt='pencil'
+														style={{ marginRight: '8px' }}
+													/>
+													Редагувати
+												</button>
+											),
+										},
+										{
+											key: '2',
+											label: (
+												<button
+													className={styles.btn_menu}
+													onClick={handlerDelete}>
+													<img
+														style={{ marginRight: '8px' }}
+														src={icon_delete}
+														alt='delete'
+													/>
+													Видалити
+												</button>
+											),
+										},
+									],
+								}}
+								className={styles.customMenu}
+								placement='bottomRight'
+								trigger={['click']}>
+								<img
+									className={styles.post_menu_img}
+									src={icon_dot_menu}
+									alt='Menu'
+									onClick={(e) => e.preventDefault()}
+								/>
+							</Dropdown>
+						</div>
+					</div>
 				</div>
 				<div className={styles.post}>
 					<h2 className={styles.post_title}>{post?.title}</h2>
