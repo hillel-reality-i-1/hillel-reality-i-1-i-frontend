@@ -28,6 +28,7 @@ export default function Professions() {
                     value: i.name,
                     label: i.name,
                 }));
+                console.log(response.data);
                 setProffesions(formatProffesions);
             } catch (err) {
                 console.error(err.toJSON());
@@ -39,7 +40,6 @@ export default function Professions() {
 
     const onChange = (value) => {
         console.log(`selected ${value}`);
-        // Handle the selected professions
         setSelectedProfessions(value);
     };
 
@@ -98,11 +98,11 @@ export default function Professions() {
                   duration={3000}
               />
           )} */}
-            {/* <BlueButton
+            <BlueButton
               text={'Зберегти'}
-              additionalStyles={(error || usernameRef.current === '') ? styles.button : styles.validButton}
-              onClick={handleSaveUsername}
-          /> */}
+            //   additionalStyles={(error || usernameRef.current === '') ? styles.button : styles.validButton}
+              onClick={''}
+          />
         </div>
     )
 }

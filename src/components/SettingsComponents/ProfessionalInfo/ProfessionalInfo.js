@@ -1,3 +1,6 @@
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
 import { Switch } from 'antd';
 import { Link } from 'react-router-dom';
 
@@ -7,7 +10,30 @@ import { ReactComponent as InfoIcon } from '../../../assets/img/icons/settings-i
 
 import styles from './professionalInfo.module.scss';
 
-export default function ProfessionalInfo() {
+
+export default function ProfessionalInfo({data}) {
+  const [checked, setChecked] = useState(false);
+  const authToken = useSelector((state) => state.signIn.authTokenUHelp);
+  
+  console.log(data);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const config = {
+          headers: {
+            'Authorization': `Token ${authToken}`,
+          },
+        };
+        const expertUserProfileData = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/v1/users/expert_user_profile_by_user_id/${data.user}/`,
+        config)
+        console.log('expert', expertUserProfileData)
+      } catch (error) {
+        console.info(error)
+      }
+    };
+    fetchData();
+  }, [])
+  
   const onChange = (checked) => {
     console.log(`switch to ${checked}`);
   };
@@ -16,7 +42,7 @@ export default function ProfessionalInfo() {
       <div className={styles.professional}>
         <h2 className={styles.title}><Briefcase /> Сфера діяльності</h2>  
         <div className={styles.professional__switcher}>
-          <Switch defaultChecked onChange={onChange} />
+          <Switch checked={checked} onChange={onChange} />
           <p>Експертний Профіль</p>
           <InfoIcon />
         </div>
