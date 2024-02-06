@@ -4,7 +4,7 @@ import axios from '../../../config/axios/axios';
 // import img_card from '../../assets/img/img_card/img_card.png';
 import Avatar from '../../../assets/img/icons/user-profile/Avatar.svg';
 import icon_expert from '../../../assets/img/icons/post/icon_expert.svg';
-import icon_save from '../../../assets/img/icons/post/icon_save.svg';
+// import icon_save from '../../../assets/img/icons/post/icon_save.svg';
 import icon_like from '../../../assets/img/icons/post/icon_like.svg';
 import icon_dot_menu from '../../../assets/img/icons/post/icon_dot_menu.svg';
 // import icon_comments from '../../../assets/img/icons/post/icon_comments.svg';
@@ -13,18 +13,18 @@ import icon_pencil from '../../../assets/img/icons/post/icon_pencil.svg';
 import { calculateReadTime } from '../../../helpers/calculateReadTime';
 import { formatTimeElapsed } from '../../../helpers/formatTimeElapsed';
 import { URL_GET_POST_DETAILS, URL_LANGUAGE, URL_USER_INFO_USER_ID } from '../../../config/API_url';
-import CustomButton from '../../CustomButton/CustomButton';
+// import CustomButton from '../../CustomButton/CustomButton';
 import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 
-import SortingPanel from '../SortingPanel/SortingPanel';
+// import SortingPanel from '../SortingPanel/SortingPanel';
 
 import styles from './Post.module.scss';
 import { useNavigate, useParams } from 'react-router-dom';
-import TextArea from 'antd/es/input/TextArea';
+// import TextArea from 'antd/es/input/TextArea';
 import ButtonPostSave from '../ButtonPostSave/ButtonPostSave';
 import Comments from '../Comments/Comments';
-import { ConfigProvider, Dropdown } from 'antd';
+import { Dropdown } from 'antd';
 
 const Post = () => {
 	const navigate = useNavigate();
