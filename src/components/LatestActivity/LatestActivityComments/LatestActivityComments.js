@@ -1,6 +1,6 @@
-import { Button, ConfigProvider } from 'antd';
 import styles from './LatestActivityComments.module.scss';
 import { useEffect, useState } from 'react';
+import TubInfo from '../TubInfo/TubInfo';
 import CommentCard from '../../Content/CommentCard/CommentCard';
 import axios from 'axios';
 import { useGetUserDataQuery } from '../../../store/services/userApi';
@@ -59,6 +59,14 @@ const LatestActivityComments = () => {
 					Дивитися більше
 				</button>
 			)}
+
+			{
+				postDetails.length === 0
+					? <TubInfo
+						text={'У вас ще немає жодного коментаря. Будь ласка, взаємодійте з дописами на Головній сторінці.'}
+					/>
+					: null
+			}
 		</>
 	);
 };

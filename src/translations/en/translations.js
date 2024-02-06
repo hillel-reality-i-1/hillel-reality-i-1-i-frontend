@@ -1,7 +1,7 @@
 export const TRANSLATIONS_EN = {
 	heading: 'Explore advice, ideas, and insights',
 	textHeader: {
-		main: 'Menu',
+		main: 'Main',
 		map: 'Map',
 		events: 'Events',
 		faq: 'FAQ',

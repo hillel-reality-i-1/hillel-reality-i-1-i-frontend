@@ -32,7 +32,6 @@ const LatestActivityLayout = () => {
 					}}>
 					<BlueButton
 						text={'Створити допис'}
-						disabled={data.phone_verified ? false : true}
 						onClick={handlePostCreation}
 						additionalStyles={styles.button}
 					/>

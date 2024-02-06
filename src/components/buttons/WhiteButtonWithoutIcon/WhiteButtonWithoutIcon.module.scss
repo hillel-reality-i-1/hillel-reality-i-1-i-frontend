@@ -1,0 +1,32 @@
+@import '../../../styles/constants.scss';
+
+.WhiteButtonWithoutIcon_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    border-radius: 48px;
+
+    .WhiteButtonWithoutIcon {
+        padding: 14px 16px;
+        border-radius: 48px;
+        color: #126FE1;
+        font-family: $medium;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 160%;
+        border: 1px solid #126FE1;
+
+        &:hover {
+            color: #3989EC;
+            border: 1px solid #3989EC;
+        }
+
+        &:active {
+            color: #094DA0;
+            border: 1px solid #094DA0;
+        }
+    }
+}

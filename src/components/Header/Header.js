@@ -51,7 +51,7 @@ export default function Header() {
 						<li className={styles.menu_item}>
 							<Link
 								className={styles.item_link}
-								to='/main'
+								to='/'
 								onClick={handleLinkClick}>
 								{t('textHeader.main')}
 							</Link>

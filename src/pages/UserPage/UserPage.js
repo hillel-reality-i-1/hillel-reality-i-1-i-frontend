@@ -56,6 +56,7 @@ export default function UserPage() {
 		  </div>
 		)
 	}
+	
 	return (
 		<div className={styles.container}>
 			<div className={styles.user}>

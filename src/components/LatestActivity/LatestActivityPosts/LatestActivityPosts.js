@@ -7,11 +7,11 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import BlueButton from '../../buttons/BlueButton/BlueButton';
 
-const LatestActivityPosts = () => {
+const LatestActivityPosts = ({data}) => {
   const [visiblePosts, setVisiblePosts] = useState(5);
   const [postDetails, setPostDetails] = useState([]);
   const [shownPosts, setShownPosts] = useState([]);
-  const { data, error, isLoading, refetch } = useGetUserDataQuery();
+
   const navigate = useNavigate();
 
   const handlePostCreation = () => {
@@ -59,7 +59,6 @@ const LatestActivityPosts = () => {
       {
         <div className={styles.post_block}>
           {
-            data.phone_verified === true &&
             shownPosts.map((posts, index) => (
               <div key={index}>
                 <Card posts={posts} bgColor={{ backgroundColor: styles.backgroundCardColor }} />
@@ -75,23 +74,23 @@ const LatestActivityPosts = () => {
         </button>
       )}
 
-      {data.phone_verified === false && (
+      {/* {data.phone_verified === false && (
         <div className={styles.activity_posts_container}>
           <p className={styles.posts_description}>
             Створювати дописи можуть тільки верифіковані користувачі. Будь ласка, верифікуйте свій профіль, щоб ділитися досвідом та знаннями.
           </p>
           <BlueButton text={'Верифікувати профіль'} onClick={handleVerify} additionalStyles={styles.posts_button} />
         </div>
-      )}
+      )} */}
 
-      {data.phone_verified === true && postDetails.length === 0 && (
+      {postDetails.length === 0 ? (
         <div className={styles.activity_posts_container}>
           <p className={styles.posts_description}>
             У вас ще немає жодного допису. Поділіться знаннями та досвідом з іншими користувачами.
           </p>
           <BlueButton text={'Створити допис'} onClick={handlePostCreation} additionalStyles={styles.posts_button} />
         </div>
-      )}
+      ) : null}
     </>
   );
 };

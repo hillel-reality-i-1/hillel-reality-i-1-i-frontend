@@ -1,7 +1,7 @@
 export const TRANSLATIONS_UK = {
 	heading: 'Explore advice, ideas, and insights',
 	textHeader: {
-		main: 'Меню',
+		main: 'Головна',
 		map: 'Карта',
 		events: 'Події',
 		faq: 'FAQ',

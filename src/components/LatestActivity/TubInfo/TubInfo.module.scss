@@ -1,0 +1,22 @@
+@import '../../../styles/constants.scss';
+
+.TubInfo_block {
+    display: flex;
+    padding: 48px 0px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    align-self: stretch;
+
+    .TubInfo_text {
+        width: 465px;
+        color: #47474F;
+        text-align: center;
+        font-family: $regular;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 160%;
+    }
+}
