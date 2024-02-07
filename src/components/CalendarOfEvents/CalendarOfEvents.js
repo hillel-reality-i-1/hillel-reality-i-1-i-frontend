@@ -14,13 +14,13 @@ const CalendarOfEvents = () => {
 
 	return (
 		<div className={styles.container}>
-			<h4 className={styles.calendar_title}>Calendar of events</h4>
+			<h4 className={styles.calendar_title}>Календар подій</h4>
 			<Calendar
 				className='Calendar'
 				tileClassName='Calendar-DayTile'
 				onChange={onChange}
 				value={value}
-				locale='en'
+				locale='uk'
 				nextLabel={<ArrowRight />}
 				prevLabel={<ArrowLeft />}
 			/>

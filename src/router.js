@@ -43,6 +43,7 @@ const router = createBrowserRouter([
 			},
 			{ path: '/postDetailsPage/:id', element: <PostDetailsPage /> },
 			{ path: '/postCreationPage', element: <PostCreationPage /> },
+			{ path: '/postEditing/:id', element: <PostCreationPage /> },
 			{
 				path: 'user',
 				element: (
@@ -53,7 +54,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'user/:id',
-				element: <UsersPages />
+				element: <UsersPages />,
 			},
 			{
 				path: 'settings',
@@ -85,24 +86,24 @@ const router = createBrowserRouter([
 					},
 					{
 						path: 'socials',
-						element: <SocialPage />
+						element: <SocialPage />,
 					},
 					{
 						path: 'professions',
-						element: <ProfessionsPage />
+						element: <ProfessionsPage />,
 					},
 					{
 						path: 'services',
-						element: <ServicesPage />
+						element: <ServicesPage />,
 					},
 					{
 						path: 'mail',
-						element: <MailPage />
+						element: <MailPage />,
 					},
 					{
 						path: 'phone',
-						element: <PhonePage />
-					}
+						element: <PhonePage />,
+					},
 				],
 			},
 			{

@@ -11,12 +11,12 @@ export const formatTimeElapsed = (createdDate) => {
 	if (days >= 7) {
 		return postDate.toLocaleDateString('uk-UK');
 	} else if (days >= 1) {
-		return `${days} days ago`;
+		return `${days} днів тому`;
 	} else if (hours >= 1) {
-		return `${hours} hours ago`;
+		return `${hours} годин  тому`;
 	} else if (minutes >= 1) {
-		return `${minutes} min ago`;
+		return `${minutes} хв  тому`;
 	} else {
-		return 'less than a minute ago';
+		return 'менше хвилини тому';
 	}
 };

@@ -1,5 +1,5 @@
 export const TRANSLATIONS_UK = {
-	heading: 'Explore advice, ideas, and insights',
+	heading: 'Ділимося досвідом. Українці тут для підтримки',
 	textHeader: {
 		main: 'Головна',
 		map: 'Карта',

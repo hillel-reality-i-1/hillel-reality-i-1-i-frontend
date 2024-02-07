@@ -20,17 +20,17 @@ import draftToHtml from 'draftjs-to-html';
 // import SortingPanel from '../SortingPanel/SortingPanel';
 
 import styles from './Post.module.scss';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 // import TextArea from 'antd/es/input/TextArea';
 import ButtonPostSave from '../ButtonPostSave/ButtonPostSave';
 import Comments from '../Comments/Comments';
 import { Dropdown } from 'antd';
 
-const Post = () => {
+const Post = ({ post, user }) => {
 	const navigate = useNavigate();
 	const { id } = useParams();
-	const [post, setPost] = useState(null);
-	const [user, setUser] = useState(null);
+	// const [post, setPost] = useState(null);
+	// const [user, setUser] = useState(null);
 	const [editorState, setEditorState] = useState(EditorState.createEmpty());
 	const userId = post && post?.author;
 	const postId = post && post.id;
@@ -50,32 +50,32 @@ const Post = () => {
 		fetchLanguage();
 	}, []);
 
-	useEffect(() => {
-		const fetchPost = async () => {
-			try {
-				const data = await axios.get(`${URL_GET_POST_DETAILS}${id}`);
+	// useEffect(() => {
+	// 	const fetchPost = async () => {
+	// 		try {
+	// 			const data = await axios.get(`${URL_GET_POST_DETAILS}${id}`);
 
-				setPost(data);
-			} catch (error) {
-				return error.message;
-			}
-		};
+	// 			setPost(data);
+	// 		} catch (error) {
+	// 			return error.message;
+	// 		}
+	// 	};
 
-		fetchPost();
-	}, [id]);
+	// 	fetchPost();
+	// }, [id]);
 
-	useEffect(() => {
-		const fetchUserInfo = async () => {
-			try {
-				const data = userId && (await axios.get(`${URL_USER_INFO_USER_ID}${userId}`));
-				setUser(data);
-			} catch (error) {
-				return error.message;
-			}
-		};
+	// useEffect(() => {
+	// 	const fetchUserInfo = async () => {
+	// 		try {
+	// 			const data = userId && (await axios.get(`${URL_USER_INFO_USER_ID}${userId}`));
+	// 			setUser(data);
+	// 		} catch (error) {
+	// 			return error.message;
+	// 		}
+	// 	};
 
-		fetchUserInfo();
-	}, [userId]);
+	// 	fetchUserInfo();
+	// }, [userId]);
 
 	// function for converting data from the server to EditorState
 	useEffect(() => {
@@ -107,6 +107,10 @@ const Post = () => {
 		}
 	};
 
+	const handlerPostEditing = () => {
+		navigate(`/postEditing/${id}`, { replace: true });
+	};
+
 	const timeForRead = post && calculateReadTime(post?.content);
 	const timeElapsed = post && formatTimeElapsed(post?.creation_date);
 	const userCity = user?.user_profile?.city && user?.user_profile?.city.split(',')[0];
@@ -117,7 +121,9 @@ const Post = () => {
 		<>
 			<div className={styles.post_wrapper}>
 				<div className={styles.content_header}>
-					<div className={styles.user}>
+					<Link
+						to={`user/${userId}`}
+						className={styles.user}>
 						{user?.user_profile?.profile_picture ? (
 							<img
 								src={user?.user_profile?.profile_picture}
@@ -157,7 +163,7 @@ const Post = () => {
 								</span>
 							</div>
 						</div>
-					</div>
+					</Link>
 					<div className={styles.right_col}>
 						<span className={styles.time_of_creation}>{timeElapsed}</span>
 						<div className={styles.post_menu}>
@@ -170,8 +176,7 @@ const Post = () => {
 											label: (
 												<button
 													className={styles.btn_menu}
-													rel='noopener noreferrer'
-													href='https://www.antgroup.com'>
+													onClick={handlerPostEditing}>
 													<img
 														src={icon_pencil}
 														alt='pencil'

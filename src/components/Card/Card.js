@@ -114,7 +114,9 @@ const Card = ({ posts, bgColor }) => {
 				className={styles.content_wrapper}
 				style={{ maxWidth: isImage ? '580px' : '' }}>
 				<div className={styles.content_header}>
-					<div className={styles.user}>
+					<Link
+						to={`user/${userId}`}
+						className={styles.user}>
 						{user?.user_profile?.profile_picture ? (
 							<img
 								src={user?.user_profile?.profile_picture}
@@ -154,7 +156,7 @@ const Card = ({ posts, bgColor }) => {
 								</span>
 							</div>
 						</div>
-					</div>
+					</Link>
 					<span className={styles.time_of_creation}>{timeElapsed}</span>
 				</div>
 				<Link to={`/postDetailsPage/${postData?.id}`}>
@@ -166,7 +168,7 @@ const Card = ({ posts, bgColor }) => {
 								dangerouslySetInnerHTML={rawContentState && { __html: rawContentState }}
 							/>
 						</div>
-						<span className={styles.btn_read_more}>Read more...</span>
+						<span className={styles.btn_read_more}>Читати більше…</span>
 					</article>
 				</Link>
 				<div className={styles.content_footer}>
@@ -179,7 +181,7 @@ const Card = ({ posts, bgColor }) => {
 							// isSaved={isPostSaved}
 							// onSave={handleSavePost}
 						/>
-						<span className={styles.time_read}>{timeForRead} min read</span>
+						<span className={styles.time_read}>{timeForRead} хв читати</span>
 					</div>
 					<div className={styles.content_footer_right_col}>
 						<div className={styles.like_wrapper}>
@@ -190,7 +192,7 @@ const Card = ({ posts, bgColor }) => {
 									className={styles.img_like}
 								/>
 							</button>
-							<span>64k</span>
+							<span>0</span>
 						</div>
 						<div className={styles.comments_wrapper}>
 							{/* <button className={styles.btn_comments}> */}

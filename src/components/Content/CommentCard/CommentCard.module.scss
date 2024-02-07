@@ -114,21 +114,4 @@
 .content_footer {
 	width: 100%;
 	display: flex;
-
-	.block_useful {
-		color: $color-gray50;
-		font-family: $font-ns-medium;
-		font-size: 16px;
-		font-style: normal;
-		font-weight: 500;
-		line-height: 160%;
-		height: 40px;
-		display: flex;
-		padding: 4px 12px;
-		border-radius: 12px;
-
-		.text_useful {
-			margin: 0 8px;
-		}
-	}
 }

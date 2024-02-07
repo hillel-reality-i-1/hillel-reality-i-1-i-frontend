@@ -2,19 +2,32 @@ import axios from '../../../config/axios/axios';
 
 import icon_expert from '../../../assets/img/icons/post/icon_expert.svg';
 import Avatar from '../../../assets/img/icons/user-profile/Avatar.svg';
-import icon_useful from '../../../assets/img/icons/icons-comments/icon_useful.svg';
-import icon_not_useful from '../../../assets/img/icons/icons-comments/icon_not_useful.svg';
+// import icon_useful from '../../../assets/img/icons/icons-comments/icon_useful.svg';
+// import icon_not_useful from '../../../assets/img/icons/icons-comments/icon_not_useful.svg';
 
 import { URL_LANGUAGE, URL_USER_INFO_USER_ID } from '../../../config/API_url';
 import styles from './CommentCard.module.scss';
 import { useEffect, useState } from 'react';
 import { formatTimeElapsed } from '../../../helpers/formatTimeElapsed';
+import PanelUseful from '../PanelUseful/PanelUseful';
+import { Link } from 'react-router-dom';
 
-const CommentCard = ({ comment, bgColor }) => {
+const CommentCard = ({ comment, bgColor, userId }) => {
 	const { text, author, creation_date } = comment;
 	const [user, setUser] = useState(null);
 	const [isExpanded, setIsExpanded] = useState(false);
+	// const [counterUseful, setCounterUseful] = useState(0);
+
 	const langUK = 'uk/';
+
+	// const helpful_count = comment?.helpful_count && comment?.helpful_count;
+	// const not_helpful_count = comment?.not_helpful_count && comment?.not_helpful_count;
+
+	// useEffect(() => {
+	// 	const counter = helpful_count - not_helpful_count;
+	// 	setCounterUseful(counter);
+	// }, [helpful_count, not_helpful_count]);
+	// console.log('counter', counterUseful);
 
 	useEffect(() => {
 		const fetchLanguage = async () => {
@@ -49,7 +62,7 @@ const CommentCard = ({ comment, bgColor }) => {
 	};
 
 	// user && console.log('userComent', user);
-
+	// console.log('commentC', comment);
 	const timeElapsed = creation_date && formatTimeElapsed(creation_date);
 	const userCity = user?.user_profile?.city && user?.user_profile?.city.split(',')[0];
 	return (
@@ -61,7 +74,10 @@ const CommentCard = ({ comment, bgColor }) => {
 				// style={{ maxWidth: isImage ? '580px' : '' }}
 			> */}
 			<div className={styles.content_header}>
-				<div className={styles.user}>
+				<Link
+					to={`/user/${author}`}
+					replace={true}
+					className={styles.user}>
 					{user?.user_profile?.profile_picture ? (
 						<img
 							src={user?.user_profile?.profile_picture}
@@ -101,7 +117,7 @@ const CommentCard = ({ comment, bgColor }) => {
 							</span>
 						</div>
 					</div>
-				</div>
+				</Link>
 				<span className={styles.time_of_creation}>{timeElapsed}</span>
 			</div>
 			{/* <div> */}
@@ -116,21 +132,11 @@ const CommentCard = ({ comment, bgColor }) => {
 			</article>
 			{/* </div> */}
 			<div className={styles.content_footer}>
-				<div className={styles.block_useful}>
-					<button className={styles.btn_useful}>
-						<img
-							src={icon_useful}
-							alt='Useful'
-						/>
-					</button>
-					<span className={styles.text_useful}>Корисно 0</span>
-					<button className={styles.btn_useful}>
-						<img
-							src={icon_not_useful}
-							alt='Not useful'
-						/>
-					</button>
-				</div>
+				<PanelUseful
+					comment={comment}
+					// counterUseful={counterUseful}
+					userId={userId}
+				/>
 			</div>
 		</div>
 	);

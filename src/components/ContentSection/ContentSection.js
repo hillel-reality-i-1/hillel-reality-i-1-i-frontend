@@ -39,7 +39,7 @@ const ContentSection = ({ posts, onNextPage, countPosts, isSearch, isLoading }) 
 				<button
 					className={styles.btn_see_more}
 					onClick={onNextPage}>
-					See more
+					Дивитися більше
 				</button>
 			)}
 		</section>

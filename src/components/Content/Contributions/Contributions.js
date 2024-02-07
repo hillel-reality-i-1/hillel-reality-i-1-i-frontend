@@ -1,7 +1,30 @@
 import SortingPanel from '../SortingPanel/SortingPanel';
 import styles from './Contributions.module.scss';
 
-const Contributions = () => {
+import axios from '../../../config/axios/axios';
+import { useEffect, useState } from 'react';
+
+const Contributions = ({ postId }) => {
+	const [page, setPage] = useState(1);
+	// const postId = post && post.id;
+	useEffect(() => {
+		const fetchGetContributions = async () => {
+			try {
+				const response =
+					postId &&
+					(await axios.get(`/api/v1/content/post/${postId}/contributions/`, {
+						params: { page: page, page_size: 3 },
+					}));
+				// console.log('Contribushin', response);
+				// response.count && setCountComments(response.count);
+				// response?.results && setComments((prevComments) => [...prevComments, ...response?.results]);
+			} catch (error) {
+				return error.message;
+			}
+		};
+
+		fetchGetContributions();
+	}, [page, postId]);
 	return (
 		<aside className={styles.container}>
 			<h4 className={styles.title_contributions}>Внески</h4>

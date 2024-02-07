@@ -221,7 +221,7 @@ const SearchSection = ({ onSearch }) => {
 										height: '100%',
 									}}
 									className={styles.select_country}
-									placeholder='Select country'
+									placeholder='Обрати країну'
 									onChange={handleChangeCountry}
 									options={optionsCountry}
 									tagRender={countryTagRender}
@@ -249,7 +249,7 @@ const SearchSection = ({ onSearch }) => {
 								type='text'
 								name='query'
 								bordered={false}
-								placeholder='Search by word, author’s name, username…'
+								placeholder='Шукати за словом, іменем чи нікнеймом…'
 								maxLength='100'
 								arrow='false'
 								onChange={formik.handleChange}
@@ -286,7 +286,7 @@ const SearchSection = ({ onSearch }) => {
 											height: '100%',
 										}}
 										className={styles.select_category}
-										placeholder='Select category'
+										placeholder='Обрати категорію'
 										// defaultValue={['a10', 'c12']}
 										onChange={handleChangeCategory}
 										options={profCategories}

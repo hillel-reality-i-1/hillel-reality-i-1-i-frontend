@@ -10,17 +10,22 @@ import { useFormik } from 'formik';
 import CommentCard from '../CommentCard/CommentCard';
 import { useGetUserDataQuery } from '../../../store/services/userApi';
 import { ConfigProvider } from 'antd';
+// import { useSelector } from 'react-redux';
 // http://dmytromigirov.space/api/v1/content/post/{id}/comment/create
 
 // const postId = 304;
 
 const Comments = ({ postId }) => {
 	const { data, error, isLoading } = useGetUserDataQuery();
+	// const { useful, notUseful } = useSelector((state) => state.comments);
 	// const [comment, setComment] = useState([]);
 	const [comments, setComments] = useState([]);
 	const [page, setPage] = useState(1);
 	const [countComments, setCountComments] = useState(0);
+	const userId = data && data.user;
+	// console.log(userId);
 
+	// console.log('page', page);
 	useEffect(() => {
 		const fetchGetPosts = async () => {
 			try {
@@ -30,8 +35,10 @@ const Comments = ({ postId }) => {
 						params: { page: page, page_size: 5 },
 					}));
 				// console.log('response', response);
-				response.count && setCountComments(response.count);
+
 				response?.results && setComments((prevComments) => [...prevComments, ...response?.results]);
+				// response?.results && setComments((prevComments) => [...response?.results, ...prevComments]);
+				response.count && setCountComments(response.count);
 			} catch (error) {
 				return error.message;
 			}
@@ -39,6 +46,7 @@ const Comments = ({ postId }) => {
 
 		fetchGetPosts();
 	}, [page, postId]);
+	// }, [page, postId]);
 
 	const fetchCreateComments = async (values) => {
 		try {
@@ -57,6 +65,12 @@ const Comments = ({ postId }) => {
 	const handleNextPage = () => {
 		setPage((prevPage) => prevPage + 1);
 	};
+
+	// const handleReactionChange = () => {
+
+	// 	setPage(1);
+	// 	setComments([]);
+	// };
 
 	const handleSubmit = async (values) => {
 		// console.log(values);
@@ -155,7 +169,9 @@ const Comments = ({ postId }) => {
 					comments.map((comment) => (
 						<CommentCard
 							key={comment.id}
+							// onhandleReactionChange={handleReactionChange}
 							comment={comment}
+							userId={userId}
 						/>
 					))}
 
@@ -163,7 +179,7 @@ const Comments = ({ postId }) => {
 					<button
 						className={styles.btn_see_more}
 						onClick={handleNextPage}>
-						See more
+						Дивитися більше
 					</button>
 				)}
 			</div>

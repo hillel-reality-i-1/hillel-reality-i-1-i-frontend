@@ -4,7 +4,11 @@ import axios from '../../../config/axios/axios';
 import { useFormik } from 'formik';
 import CustomButton from '../../CustomButton/CustomButton';
 import { useEffect, useRef, useState } from 'react';
-import { URL_POST_CREATE, URL_PROF_CATEGORIES } from '../../../config/API_url';
+import {
+	URL_GET_POST_DETAILS,
+	URL_POST_CREATE,
+	URL_PROF_CATEGORIES,
+} from '../../../config/API_url';
 import { ReactComponent as TagDel } from '../../../assets/img/icons/icon-create-post/icon_tag_del.svg';
 
 import styles from './PostCreationForm.module.scss';
@@ -12,15 +16,16 @@ import './PostCreationForm.scss';
 import 'draft-js/dist/Draft.css';
 
 import TextEditorN from '../../TextEditor/TextEditorN/TextEditorN';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import ImageUploader from '../../ImageUploader/ImageUploader';
 import ModalInfo from '../../ModalInfo/ModalInfo';
 
 const PostCreationForm = () => {
+	const { id } = useParams();
 	const { TextArea } = Input;
 	const navigate = useNavigate();
 	const location = useLocation();
-	// console.log('location', location);
+	// console.log('location', id);
 	const [isModalOpen, setModalOpen] = useState(false);
 
 	const [selectedCategory, setSelectedCategory] = useState([]);
@@ -47,8 +52,52 @@ const PostCreationForm = () => {
 	const [isValid, setIsValid] = useState(false);
 	const [dataTitle, setDataTitle] = useState('');
 
+	// ==============================//
+
+	// const [prevCountry, setPrevCountry] = useEffect(null);
+	// const [prevCountry,setPrevCountry]=useEffect(null)
+	// const [prevCountry,setPrevCountry]=useEffect(null)
+	// const [prevCountry,setPrevCountry]=useEffect(null)
+	// const [prevCountry,setPrevCountry]=useEffect(null)
+	// ================================//
+
 	const isLimitCategories = selectedCategory.length < 3;
 	const isChoiceOther = selectedCategory[0]?.id === 11;
+
+	console.log('selectedCountries', selectedCountries);
+	console.log('selectedCategory', selectedCategory);
+	console.log('profCategories', profCategories);
+	console.log('changeHTMLText', changeHTMLText);
+
+	// filling out fields when editing a post
+	useEffect(() => {
+		const fetchPost = async () => {
+			try {
+				const data = await axios.get(`${URL_GET_POST_DETAILS}${id}`);
+				console.log('pstPut', data);
+
+				// const categories = [];
+
+				// profCategories.forEach((category) => {
+				// 	if (data.category.includes(category.name)) {
+				// 		categories.push(category);
+				// 	}
+				// });
+				// setSelectedCategory(categories);
+				formik.setFieldValue('title', data.title);
+
+				// formik.setFieldValue('content', data.content);
+
+				// setSelectedCategory(data.category);
+
+				// setSelectedCountries(data.country);
+			} catch (error) {
+				return error.message;
+			}
+		};
+
+		id && fetchPost();
+	}, [id]);
 
 	useEffect(() => {
 		// const handleBeforeUnload = (e) => {
