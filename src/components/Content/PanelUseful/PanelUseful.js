@@ -7,11 +7,11 @@ import { useDispatch } from 'react-redux';
 const PanelUseful = ({ comment, userId }) => {
 	// const dispatch = useDispatch();
 
-	const useful = comment && comment.vote_helpful_state;
-	const notUseful = comment && comment.vote_not_helpful_state;
+	// const useful = comment && comment.vote_helpful_state;
+	// const notUseful = comment && comment.vote_not_helpful_state;
 
-	const [isUsefulActive, setUsefulActive] = useState(useful);
-	const [isNotUsefulActive, setNotUsefulActive] = useState(notUseful);
+	const [isUsefulActive, setUsefulActive] = useState(false);
+	const [isNotUsefulActive, setNotUsefulActive] = useState(false);
 	const [commentInfo, setCommentInfo] = useState(null);
 	// const [counter, setCounter] = useState(0);
 	const commentId = comment && comment.id;
