@@ -18,8 +18,6 @@ export default function HomePage() {
 		setPage(1); //Resetting the page number when changing the search query
 	};
 
-	console.log('countpost', countPosts);
-
 	useEffect(() => {
 		const fetcFilterPosts = async () => {
 			try {

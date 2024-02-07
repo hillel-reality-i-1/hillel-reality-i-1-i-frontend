@@ -3,7 +3,7 @@ import styles from './PostDetailsPage.module.scss';
 import arrow_back from '../../assets/img/icons/icons-SignUp/arrow_back.svg';
 import ButtonBack from '../../components/ButtonBack/ButtonBack';
 import Post from '../../components/Content/Post/Post';
-import Comments from '../../components/Content/Comments/Comments';
+// import Comments from '../../components/Content/Comments/Comments';
 import Contributions from '../../components/Content/Contributions/Contributions';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -81,7 +81,7 @@ const PostDetailsPage = () => {
 						/>
 						{/* <Comments /> */}
 					</div>
-					<Contributions post={postId} />
+					<Contributions postId={postId} />
 				</div>
 			</div>
 			<Footer />

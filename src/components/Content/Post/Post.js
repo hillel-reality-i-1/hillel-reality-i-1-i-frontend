@@ -25,18 +25,20 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import ButtonPostSave from '../ButtonPostSave/ButtonPostSave';
 import Comments from '../Comments/Comments';
 import { Dropdown } from 'antd';
+import { useGetUserDataQuery } from '../../../store/services/userApi';
 
 const Post = ({ post, user }) => {
 	const navigate = useNavigate();
 	const { id } = useParams();
-	// const [post, setPost] = useState(null);
+	const { data } = useGetUserDataQuery();
+	// const [isMyPost, setMyPost] = useState(false);
 	// const [user, setUser] = useState(null);
 	const [editorState, setEditorState] = useState(EditorState.createEmpty());
 	const userId = post && post?.author;
 	const postId = post && post.id;
 	const langUK = 'uk/';
 
-	// console.log(post);
+	const isMyPost = data?.user === userId;
 
 	useEffect(() => {
 		const fetchLanguage = async () => {
@@ -166,26 +168,27 @@ const Post = ({ post, user }) => {
 					</Link>
 					<div className={styles.right_col}>
 						<span className={styles.time_of_creation}>{timeElapsed}</span>
-						<div className={styles.post_menu}>
+
+						<div className={`${styles.post_menu} ${!isMyPost && styles.post_menu_visible}`}>
 							<Dropdown
 								overlayStyle={{ width: '138px' }}
 								menu={{
 									items: [
-										{
-											key: '1',
-											label: (
-												<button
-													className={styles.btn_menu}
-													onClick={handlerPostEditing}>
-													<img
-														src={icon_pencil}
-														alt='pencil'
-														style={{ marginRight: '8px' }}
-													/>
-													Редагувати
-												</button>
-											),
-										},
+										// {
+										// 	key: '1',
+										// 	label: (
+										// 		<button
+										// 			className={styles.btn_menu}
+										// 			onClick={handlerPostEditing}>
+										// 			<img
+										// 				src={icon_pencil}
+										// 				alt='pencil'
+										// 				style={{ marginRight: '8px' }}
+										// 			/>
+										// 			Редагувати
+										// 		</button>
+										// 	),
+										// },
 										{
 											key: '2',
 											label: (

@@ -134,6 +134,7 @@
 			font-size: 14px;
 			color: $color-gray50;
 		}
+
 		.post_menu {
 			display: flex;
 
@@ -145,6 +146,10 @@
 					cursor: pointer;
 				}
 			}
+		}
+
+		.post_menu_visible {
+			display: none;
 		}
 	}
 }
