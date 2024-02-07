@@ -48,14 +48,17 @@ const LatestActivityPosts = ({data}) => {
     setVisiblePosts(nextVisiblePosts);
   };
 
-  const handleVerify = () => {
-    navigate('/verifyCodeForm')
-  }; 
+  // const handleVerify = () => {
+  //   navigate('/verifyCodeForm')
+  // }; 
 
   console.log(shownPosts)
 
   return (
     <>
+      {
+        console.log(data.last_posts.length)
+      }
       {
         <div className={styles.post_block}>
           {
@@ -83,7 +86,9 @@ const LatestActivityPosts = ({data}) => {
         </div>
       )} */}
 
-      {postDetails.length === 0 ? (
+      
+
+      {data.last_posts.length === 0 ? (
         <div className={styles.activity_posts_container}>
           <p className={styles.posts_description}>
             У вас ще немає жодного допису. Поділіться знаннями та досвідом з іншими користувачами.

@@ -61,10 +61,10 @@ const LatestActivityComments = () => {
 			)}
 
 			{
-				postDetails.length === 0
-					? <TubInfo
+				data.last_comments.length === 0
+					? (<TubInfo
 						text={'У вас ще немає жодного коментаря. Будь ласка, взаємодійте з дописами на Головній сторінці.'}
-					/>
+					/>)
 					: null
 			}
 		</>

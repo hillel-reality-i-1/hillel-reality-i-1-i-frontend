@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Tabs, Switch, Tooltip, Alert, Space } from 'antd';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-
 import ModalInfoAboutExpertProfile from '../AboutMe/ModalInfoAboutExpertProfile/ModalInfoAboutExpertProfile';
 import UserProfileSwitcher from '../UserProfileSwitcher/UserProfileSwitcher'
 import ImageUploader from '../ImageUploader/ImageUploader';
 import { UPLOAD_PORTFOLIO, PORTFOLIO_LIST } from '../../config/API_url';
+import ErrorNotification from '../ErrorNotification/ErrorNotification';
 
 import facebookIcon from '../../assets/img/icons/icons-AboutMe/facebook_icon.svg'
 import instagramIcon from '../../assets/img/icons/icons-AboutMe/insta_icon.svg'
@@ -28,11 +28,24 @@ const AboutMe = ({ userData, expertUserData }) => {
     const [userFacebookValue] = useState('')
     const [isModalOpen, setModalOpen] = useState(false);
     const [startIndex, setStartIndex] = useState(0);
+    const [ErrorMassagePortfolio, SetErrorMassagePortfolio] = useState(false);
+
+    const [rightArrow, setRightArrow] = useState(true);
 
     const endIndex = startIndex + 5;
     const visibleImages = imagesArray.slice(startIndex, endIndex);
     const showRightArrow = endIndex - 1 < imagesArray.length;
     const showLeftArrow = startIndex > 0;
+
+    useEffect(() => {
+        if (ErrorMassagePortfolio) {
+            const timer = setTimeout(() => {
+                SetErrorMassagePortfolio(false);
+            }, 3000);
+            
+            return () => clearTimeout(timer);
+        }
+    }, [ErrorMassagePortfolio]);
 
     useEffect(() => {
         setCheckedExpert(expertUserData)
@@ -88,19 +101,22 @@ const AboutMe = ({ userData, expertUserData }) => {
     };
 
     const handleNext = () => {
-        setStartIndex(prev => Math.min(prev + 1, imagesArray.length - 1));
+        setRightArrow(false)
+        setStartIndex(prev => Math.min(prev + 5, imagesArray.length));
     };
 
     const handlePrev = () => {
-        setStartIndex(prev => Math.max(prev - 1, 0));
+        setRightArrow(true)
+        console.log(visibleImages)
+        setStartIndex(prev => Math.max(prev - 5, 0));
     };
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
 
         if (file.size < 3000 || file.size > 5000000) {
-
-            return null;
+            SetErrorMassagePortfolio(true)
+            return
         }
 
         const authTokenUHelp = localStorage.getItem('authTokenUHelp');
@@ -373,7 +389,7 @@ const AboutMe = ({ userData, expertUserData }) => {
 
                         {!showRightArrow && imagesArray.length < 10 && <ImageUploader handleFileChange={handleFileChange} />}
 
-                        {showRightArrow && (
+                        {rightArrow && showRightArrow && (
                             <button onClick={handleNext} className={styles.my_portfolio_rightButton_wrapper}>
                                 <img className={styles.my_portfolio_rightButton} src={arrowRightIcon} alt='arrow right' />
                             </button>
@@ -386,6 +402,12 @@ const AboutMe = ({ userData, expertUserData }) => {
 
     return (
         <>
+            {
+                ErrorMassagePortfolio ? <ErrorNotification
+                text={'Розмір фото має бути від 3 кб до 5 Мб. Будь ласка, оберіть інше'}
+            /> : null
+            }
+          
             <div className={styles.user_about}>
                 <div className={styles.user_title}>
                     <h4 className={styles.title_text}>
