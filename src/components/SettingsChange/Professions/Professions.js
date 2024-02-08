@@ -8,28 +8,34 @@ import BlueButton from '../../buttons/BlueButton/BlueButton';
 
 import { ReactComponent as Briefcase } from '../../../assets/img/icons/settings-icons/briefcase.svg';
 import { ReactComponent as ErrorIcon } from '../../../assets/img/icons/settings-icons/error-icon.svg';
+import { ReactComponent as BluePlus } from '../../../assets/img/icons/settings-icons/Blue__Plus.svg';
 import Toast from '../../Toast/Toast';
 
 import styles from './professions.module.scss';
 
 export default function Professions() {
-    const { data, isLoading, refetch } = useGetUserDataQuery();
+    // const { data, isLoading, refetch } = useGetUserDataQuery();
+    const { state } = useLocation();
     const authToken = useSelector((state) => state.signIn.authTokenUHelp);
     const [showSuccessToast, setShowSuccessToast] = useState(false);
     const [proffesions, setProffesions] = useState([]);
-    const [additionalInputs, setAdditionalInputs] = useState(1); // Initialize with 1 input
+    const [additionalInputs, setAdditionalInputs] = useState(1);
     const [selectedProfessions, setSelectedProfessions] = useState([]);
-
+    const [isModified, setIsModified] = useState(false);
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/v1/prof_service/professions/`);
-                const formatProffesions = response.data.map((i) => ({
+                const formatProffesions = response.data.map((i, index) => ({
                     value: i.name,
                     label: i.name,
+                    index: index
                 }));
+
                 console.log(response.data);
                 setProffesions(formatProffesions);
+                state.user.profession.length === 0 ? setSelectedProfessions(['', ...state.user.profession]) : setSelectedProfessions(state.user.profession)
+                
             } catch (err) {
                 console.error(err.toJSON());
             }
@@ -38,23 +44,52 @@ export default function Professions() {
         fetchData();
     }, []);
 
-    const onChange = (value) => {
-        console.log(`selected ${value}`);
-        setSelectedProfessions(value);
+    const onChange = (value, index) => {
+        setSelectedProfessions(prev => {
+            const updatedProfessions = [...prev];
+            updatedProfessions[index] = value;
+            setIsModified(true)
+            return updatedProfessions;
+        });
     };
 
-    const onSearch = (value) => {
-        console.log('search:', value);
-    };
-
-    const filterOption = (input, option) =>
-        (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
 
     const addAdditionalInput = () => {
+        setSelectedProfessions(prev => [...prev, '']);
         if (additionalInputs < 5) {
             setAdditionalInputs((prevInputs) => prevInputs + 1);
         }
     };
+
+    const addProffesions = async () => {
+        const url = `${process.env.REACT_APP_API_BASE_URL}/api/v1/users/user_profile_extended/${state.user.id}/`;
+        const headers = {
+            headers: {
+                Authorization: `Token ${authToken}`,
+            },
+        };
+        const proffesionsToSendIndexes = proffesions.reduce((acc, profession, index) => {
+            if (selectedProfessions.includes(profession.value)) {
+                console.log('index', index++);
+                acc.push(index)
+            }
+            return acc;
+        }, []);
+        console.log(proffesionsToSendIndexes);
+        try {
+            const response = await axios.patch(url, {
+                'profession': proffesionsToSendIndexes
+            }, headers)
+            setShowSuccessToast(true);
+            setTimeout(() => {
+                setShowSuccessToast(false);
+            }, 3500);
+
+            console.log(response.data) 
+        } catch (err) {
+            console.error(err.toJSON())
+        }
+    }
 
     return (
         <div className={styles.professions}>
@@ -63,46 +98,44 @@ export default function Professions() {
                 Професії
             </h4>
             <p>Розширте ваш Профіль, додавши до 5 професій. Це допоможе надати більш повну картину вашої професійної експертизи.</p>
-            <div className='settings-page-input'>
-                {Array.from({ length: additionalInputs }, (_, index) => (
-                    <Select
-                        key={index}
-                        showSearch
-                        style={{
-                            width: '100%',
-                            height: '56px',
-                            marginBottom: '16px', 
-                        }}
-                        placeholder="Select a profession"
-                        optionFilterProp="children"
-                        onChange={onChange}
-                        onSearch={onSearch}
-                        filterOption={filterOption}
-                        value={selectedProfessions[index] || undefined}
-                    >
-                        {proffesions.map((i) => (
-                            <Select.Option key={i.value + i.id} value={i.value}>
-                                {i.label}
-                            </Select.Option>
-                        ))}
-                    </Select>
-                ))}
-            </div>
-            <p>Ця професія буде зазначена біля вашого імені.</p>
-            {additionalInputs < 5 && <p onClick={addAdditionalInput}>+ Додати ще</p>}
+            {
+                selectedProfessions.map((i, index) => (
+                    <div key={index} className='settings-page-input' style={{ marginTop: '0' }}>
+                        <Select
+                            showSearch
+                            style={{
+                                width: '100%',
+                                height: '56px',
+                                marginBottom: '16px',
+                            }}
+                            onChange={(value) => onChange(value, index)}
+                            placeholder={!i ? 'Select a profession' : i }
+                        >
+                            {proffesions.map((i, idx) => (
+                                <Select.Option key={i.value + i.id} value={i.value}>
+                                    {i.label}
+                                </Select.Option>
+                            ))}
+                        </Select>
+                        {index === 0 ? <p>Ця професія буде зазначена біля вашого імені.</p> : ''}
+                    </div>
+                ))
+            }
+           
+            {selectedProfessions.length < 5 && <p className={styles.add} onClick={addAdditionalInput}><BluePlus /> Додати ще</p>}
+        
+            <BlueButton
+                text={'Зберегти'}
+                additionalStyles={!isModified ? styles.button : styles.validButton}
+                onClick={addProffesions}
+            />
 
-            {/* {error && <div className={styles.nickName__error}><ErrorIcon /> {error}</div>} */}
-            {/* {showSuccessToast && (
+            {showSuccessToast && (
               <Toast
                   message='Ваші зміни були успішно збережені'
                   duration={3000}
               />
-          )} */}
-            <BlueButton
-              text={'Зберегти'}
-            //   additionalStyles={(error || usernameRef.current === '') ? styles.button : styles.validButton}
-              onClick={''}
-          />
+          )}
         </div>
     )
-}
+} 

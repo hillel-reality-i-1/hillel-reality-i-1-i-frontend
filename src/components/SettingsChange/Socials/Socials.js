@@ -60,12 +60,20 @@ export default function Socials() {
         getSocialsStatus()
     }, [])
     const validateUsername = (key, value) => {
-        const regex = /^[A-Za-z0-9_@]+$/;
+        let regex;
+        if (key === 'facebook' || key === 'linkedin') {
+           
+             regex = /^[^\s]+$/;
+        } else {
+            
+            regex = /^[A-Za-z0-9_@]+$/;
+        }
         setIsValidUsername((prev) => ({
             ...prev,
             [key]: regex.test(value),
         }));
     };
+
 
     const handleInputChange = (key, value) => {
         setUsernames((prev) => ({
@@ -128,7 +136,7 @@ export default function Socials() {
         <div className={styles.socials}>
             <h4>
                 <UserSettings />
-                Нікнейм
+                Соціальні мережі
             </h4>
             <p>Будь ласка, за бажанням поділіться вашими соціальними мережами.</p>
             <div>

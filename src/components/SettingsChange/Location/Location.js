@@ -58,7 +58,7 @@ export default function Location() {
   }, []);
 
   const onChangeCountry = (value) => {
-    console.log(`selected ${value}`);
+    // console.log(`selected ${value}`);
     const matchingCountry = countries.find((i) => i.value === value);
     setSelectedCountry(false);
     const matchingCities = cities.filter(
@@ -77,15 +77,13 @@ export default function Location() {
       try {
         const userProfileUrl = `${process.env.REACT_APP_API_BASE_URL}/api/v1/users/user_profile/${data.id}/`;
         const headers = {
-          headers: {
-            Authorization: `Token ${authToken}`,
-          },
+          Authorization: `Token ${authToken}`,
         };
-        const patchData = {
+        const new_countries = {
           country_id: selectedCity.country,
           city_id: selectedCity.id,
         };
-        const response = await axios.patch(userProfileUrl, patchData, headers);
+        const response = await axios.patch(userProfileUrl, new_countries, {headers});
         setShowSuccessToast(true);
         refetch();
         setTimeout(() => {

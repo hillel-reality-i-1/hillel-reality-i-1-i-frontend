@@ -48,11 +48,3 @@ export const userApi = createApi({
 });
 
 export const { useGetUserDataQuery } = userApi;
-
-
-
-
-
-
-
-

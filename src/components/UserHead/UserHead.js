@@ -30,7 +30,8 @@ export default function UserHead({ data }) {
             <Location /> {data?.city?.name} {data?.country?.name}
           </p>
           :
-          <p className={styles.location}><Plus /> Додати місцезнаходження </p>
+          <Link to='/settings'> <p className={styles.location}><Plus /> Додати місцезнаходження </p></Link>
+         
         }
       </div>
       <div className={styles.user__head__edit}>

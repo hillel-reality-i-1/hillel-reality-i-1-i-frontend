@@ -31,6 +31,7 @@ import ProfessionsPage from './pages/ProfessionsPage/ProfessionsPage';
 import ServicesPage from './pages/ServicesPage/ServicesPage';
 import MailPage from './pages/MailPage/MailPage';
 import PhonePage from './pages/PhonePage/PhonePage';
+import PasswordPage from './pages/PasswordPage/PasswordPage';
 
 const router = createBrowserRouter([
 	{
@@ -103,6 +104,10 @@ const router = createBrowserRouter([
 					{
 						path: 'phone',
 						element: <PhonePage />,
+					},
+					{
+						path: 'password',
+						element: <PasswordPage />,
 					},
 				],
 			},

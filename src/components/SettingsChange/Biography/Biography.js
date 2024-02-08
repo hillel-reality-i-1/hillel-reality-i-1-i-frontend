@@ -65,9 +65,11 @@ export default function Biography() {
                 count={{
                     // minRows: 2,
                     show: true,
-                    max: 500,
+                    // max: 500,
                 }}
-                showCount maxLength={500} allowClear status={status} placeholder={placeholderValue} defaultValue={data?.about_my_self}
+                showCount
+                maxLength={500}
+                allowClear status={status} placeholder={placeholderValue} defaultValue={data?.about_my_self}
             />
 
             <BlueButton

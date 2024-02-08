@@ -16,7 +16,18 @@
     label {
         @include label-styles-settings;
     }
+    .add {
+        display: flex;
+        gap: 4px;
+        align-items: center;
 
+        font-family: $medium;
+        color: #126FE1;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 160%;
+    }
     input {
         color: #03091C;
         font-family: $medium;
@@ -64,6 +75,7 @@
 
 .button {
     margin-top: 24px;
+    margin-bottom: 24px;
     width: 100%;
     background-color: #CACCD1;
     cursor: not-allowed;
@@ -79,5 +91,6 @@
 
 .validButton {
     margin-top: 24px;
+    margin-bottom: 24px;
     width: 100%;
 }
