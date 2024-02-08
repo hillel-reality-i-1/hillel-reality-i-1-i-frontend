@@ -30,3 +30,7 @@ export const REGISTRATION_USER_PROFILE_EXT = `${process.env.REACT_APP_API_BASE_U
 export const DELETE_USER_PROFILE_EXTENDED = `${process.env.REACT_APP_API_BASE_URL}/api/v1/users/user_profile_extended/`;
 export const UPLOAD_PORTFOLIO = `${process.env.REACT_APP_API_BASE_URL}/api/v1/users/upload_portfolio/`;
 export const PORTFOLIO_LIST = `${process.env.REACT_APP_API_BASE_URL}/api/v1/files/portfolio_list/`;
+export const USER_OPEN_INFO = `${process.env.REACT_APP_API_BASE_URL}/api/v1/users/user_open_info/`;
+export const URL_COMMENT_ID = `${process.env.REACT_APP_API_BASE_URL}/api/v1/content/comment/`;
+export const URL_GET_POST = `${process.env.REACT_APP_API_BASE_URL}/api/v1/content/post/`;
+

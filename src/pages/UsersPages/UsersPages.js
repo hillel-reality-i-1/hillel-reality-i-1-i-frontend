@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { USER_OPEN_INFO } from '../../config/API_url';
 
 import UsersHead from '../../components/UsersPagesComponents/UsersHead/UsersHead';
 import UsersAboutMe from '../../components/UsersPagesComponents/UsersAboutMe/UsersAboutMe';
@@ -20,7 +21,7 @@ export default function UsersPages() {
             'Authorization': `Token ${localStorage.getItem('authTokenUHelp')}`,
             'Content-Type': 'application/json',
         };
-        axios.get(`${'http://dmytromigirov.space/api/v1/users/user_open_info/'}${id}/`, { headers })
+        axios.get(`${USER_OPEN_INFO}${id}/`, { headers })
             .then(response => {
                 setDatUser(response.data);
             })

@@ -3,6 +3,7 @@ import styles from './UsersLatestActivityPosts.module.scss';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { URL_USER_PROFILE_BY_USER_ID } from '../../../../config/API_url';
 import Card from '../../../Card/Card';
 
 
@@ -19,7 +20,7 @@ const LatestActivityPosts = ({userData}) => {
             'Authorization': `Token ${localStorage.getItem('authTokenUHelp')}`,
             'Content-Type': 'application/json',
         };
-        axios.get(`${'http://dmytromigirov.space/api/v1/users/user_profile_by_user_id/'}${id}/`, { headers })
+        axios.get(`${URL_USER_PROFILE_BY_USER_ID}${id}/`, { headers })
             .then(response => {
 				setPostDetails(response.data.id)
                 // setDatUser(response.data);

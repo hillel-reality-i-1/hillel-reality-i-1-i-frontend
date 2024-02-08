@@ -2,6 +2,7 @@ import { Button } from 'antd';
 import Card from '../../Card/Card';
 import styles from './LatestActivityPosts.module.scss';
 import { useEffect, useState } from 'react';
+import { URL_GET_POST } from '../../../config/API_url';
 import { useGetUserDataQuery } from '../../../store/services/userApi';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -22,7 +23,7 @@ const LatestActivityPosts = ({data}) => {
     const fetchData = async () => {
       try {
         const requests = data.last_posts.map((number) =>
-          axios.get(`http://dmytromigirov.space/api/v1/content/post/${number}`, {
+          axios.get(`${URL_GET_POST}${number}`, {
             headers: {
               'Authorization': `Token ${localStorage.getItem('authTokenUHelp')}`,
             },

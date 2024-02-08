@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import TubInfo from '../TubInfo/TubInfo';
 import CommentCard from '../../Content/CommentCard/CommentCard';
 import axios from 'axios';
+import { URL_COMMENT_ID } from '../../../config/API_url';
 import { useGetUserDataQuery } from '../../../store/services/userApi';
 
 const LatestActivityComments = () => {
@@ -15,7 +16,7 @@ const LatestActivityComments = () => {
 		const fetchData = async () => {
 			try {
 				const requests = data.last_comments.map((number) =>
-					axios.get(`http://dmytromigirov.space/api/v1/content/comment/${number}`, {
+					axios.get(`${URL_COMMENT_ID}${number}`, {
 						headers: {
 							'Authorization': `Token ${localStorage.getItem('authTokenUHelp')}`,
 						},
