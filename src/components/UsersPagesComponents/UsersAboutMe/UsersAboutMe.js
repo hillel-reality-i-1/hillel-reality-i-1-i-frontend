@@ -15,7 +15,6 @@ import styles from './UsersAboutMe.module.scss'
 
 const UsersAboutMe = ({ userData }) => {
     const [imagesArray, setImagesArray] = useState([]);
-    const [userFacebookValue] = useState('')
     const defaultTextSummary = 'На жаль, тут немає інформації.';
     const [startIndex, setStartIndex] = useState(0);
 
@@ -23,9 +22,6 @@ const UsersAboutMe = ({ userData }) => {
     const visibleImages = imagesArray.slice(startIndex, endIndex);
     const showRightArrow = endIndex - 1 < imagesArray.length;
     const showLeftArrow = startIndex > 0;
-
-    console.log(userData.portfolio.length)
-    console.log(userData.user_profile_extended)
 
     useEffect(() => {
 

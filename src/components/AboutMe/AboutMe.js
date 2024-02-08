@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Tabs, Switch, Tooltip, Alert, Space } from 'antd';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import ModalInfoAboutExpertProfile from '../AboutMe/ModalInfoAboutExpertProfile/ModalInfoAboutExpertProfile';
@@ -21,6 +22,7 @@ import styles from './AboutMe.module.scss'
 import axios from 'axios';
 
 const AboutMe = ({ userData, expertUserData }) => {
+    const navigate = useNavigate();
     const [checkedExpert, setCheckedExpert] = useState('');
     const [tubKey, setTubKey] = useState('1');
     const [imagesArray, setImagesArray] = useState([]);
@@ -87,6 +89,22 @@ const AboutMe = ({ userData, expertUserData }) => {
                 console.error('Ошибка при удалении фотографии:', error);
             });
     };
+
+    const NavigateToBiographyEdit = () => {
+        navigate('/settings/biography')
+    }
+
+    const NavigateToServicesEdit = () => {
+        navigate('/settings/services')
+    }
+
+    const NavigateToProfessionsEdit = () => {
+        navigate('/settings/professions')
+    }
+
+    const NavigateToSocialsEdit = () => {
+        navigate('/settings/socials')
+    }
 
     const openModal = () => {
         setModalOpen(true);
@@ -161,7 +179,7 @@ const AboutMe = ({ userData, expertUserData }) => {
                                 </div>
                                 <div className={styles.item_text}>
                                     <p className={styles.text_title}>
-                                        Пошта (приховано)
+                                        Пошта 
                                     </p>
                                     <CopyToClipboard text={userData.email}>
                                         <Tooltip overlayInnerStyle={{ width: '97px', whiteSpace: 'nowrap' }} arrow={{ pointAtCenter: true }} color={'rgba(3, 9, 28, 0.75'} placement="top" title={'Скопіювати'} >
@@ -186,7 +204,7 @@ const AboutMe = ({ userData, expertUserData }) => {
                                 </div>
                                 <div className={styles.item_text}>
                                     <p className={styles.text_title}>
-                                        Телефон (приховано)
+                                        Телефон 
                                     </p>
                                     <CopyToClipboard text={userData.phone_number}>
                                         <Tooltip overlayInnerStyle={{ width: '97px', whiteSpace: 'nowrap' }} arrow={{ pointAtCenter: true }} color={'rgba(3, 9, 28, 0.75'} placement="top" title={'Скопіювати'} >
@@ -470,7 +488,7 @@ const AboutMe = ({ userData, expertUserData }) => {
                     )}
                     {!(userData.linkedin || userFacebookValue || userInstagramValue) && tubKey === '1' && (
 
-                        <button className={styles.no_content_button} onClick={() => { console.log('Додати соціальну мережу') }}>
+                        <button className={styles.no_content_button} onClick={() => NavigateToSocialsEdit()}>
                             <img src={addIcon} alt='add icon' />
                             <span className={styles.no_content_text}>
                                 Додати соціальну мережу
@@ -484,7 +502,7 @@ const AboutMe = ({ userData, expertUserData }) => {
                             <p className={styles.no_content_text}>
                                 Будь ласка, розскажіть нам про себе. Поділіться вашою історією, досвідом роботи, інтересами, та більше.
                             </p>
-                            <button className={styles.no_content_button} onClick={() => { console.log('Додати біографію') }}>
+                            <button className={styles.no_content_button} onClick={() => NavigateToBiographyEdit()}>
                                 <img src={addIcon} alt='add icon' />
                                 <span className={styles.no_content_text}>
                                     Додати біографію
@@ -499,7 +517,7 @@ const AboutMe = ({ userData, expertUserData }) => {
                             <p className={styles.no_content_text}>
                                 Будь ласка, додайте свою професію, щоб інші користувачі могли здобути більш повне уявлення про ваш фаховий досвід та сферу діяльності.
                             </p>
-                            <button className={styles.no_content_button} onClick={() => { console.log('Додати професію') }}>
+                            <button className={styles.no_content_button} onClick={() => NavigateToProfessionsEdit()}>
                                 <img src={addIcon} alt='add icon' />
                                 <span className={styles.no_content_text}>
                                     Додати професію
@@ -514,7 +532,7 @@ const AboutMe = ({ userData, expertUserData }) => {
                             <p className={styles.no_content_text}>
                                 Будь ласка, додайте інформацію про ваші послуги, щоб інші користувачі могли ознайомитися з вашою діяльністю.
                             </p>
-                            <button className={styles.no_content_button} onClick={() => { console.log('Додати послугу') }}>
+                            <button className={styles.no_content_button} onClick={() => NavigateToServicesEdit()}>
                                 <img src={addIcon} alt='add icon' />
                                 <span className={styles.no_content_text}>
                                     Додати послугу

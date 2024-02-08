@@ -69,7 +69,6 @@ export default function ForgotYourPassword() {
                         }}
                         validate={(values) => {
                             someOtherFunction(values);
-                            console.log(errorEmail)
                         }}
                         onSubmit={() => {
                             navigate(activeButton

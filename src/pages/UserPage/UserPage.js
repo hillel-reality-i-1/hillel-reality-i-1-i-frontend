@@ -46,7 +46,7 @@ export default function UserPage() {
 		};
 
 		fetchData();
-	}, [navigate]);
+	}, [navigate, data]);
 
 	if (isLoading ) {
     
