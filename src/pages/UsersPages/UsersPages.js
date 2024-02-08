@@ -44,9 +44,9 @@ export default function UsersPages() {
                 <div className={styles.user__about}>
                     <UsersAboutMe userData={dataUser}/>
                 </div>
-                <div className={styles.user__activity}>
+                {/* <div className={styles.user__activity}>
                     <UsersLatestActivityTabs userData={dataUser}/>
-                </div>
+                </div> */}
             </div>
 
             <aside className={styles.aside}>
