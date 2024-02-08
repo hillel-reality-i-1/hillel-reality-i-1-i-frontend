@@ -9,6 +9,7 @@ import emailIcon from '../../../assets/img/icons/icons-AboutMe/email_icon.svg'
 import callIcon from '../../../assets/img/icons/icons-AboutMe/call_icon.svg'
 import arrowLeftIcon from '../../../assets/img/icons/icons-AboutMe/arrowLeft.svg'
 import arrowRightIcon from '../../../assets/img/icons/icons-AboutMe/arrowRight.svg'
+import LinkedIn from '../../../assets/img/icons/icons-AboutMe/linkedIn.svg'
 
 import styles from './UsersAboutMe.module.scss'
 
@@ -23,6 +24,8 @@ const UsersAboutMe = ({ userData }) => {
     const showRightArrow = endIndex - 1 < imagesArray.length;
     const showLeftArrow = startIndex > 0;
 
+    console.log(userData.portfolio.length)
+    console.log(userData.user_profile_extended)
 
     useEffect(() => {
 
@@ -52,8 +55,8 @@ const UsersAboutMe = ({ userData }) => {
             children: (
                 <div className={styles.my_contacts_block}>
                     <div className={styles.block_message}>
-                        {/* {
-                            userData.email ? <div className={styles.message_item}>
+                        {
+                            <div className={styles.message_item}>
                                 <div className={styles.item_icon_wrapper}>
                                     <img
                                         className={styles.item_icon}
@@ -63,22 +66,31 @@ const UsersAboutMe = ({ userData }) => {
                                 </div>
                                 <div className={styles.item_text}>
                                     <p className={styles.text_title}>
-                                        Пошта (приховано)
+                                        Пошта
                                     </p>
-                                    <CopyToClipboard text={userData.email}>
-                                        <Tooltip overlayInnerStyle={{ width: '97px', whiteSpace: 'nowrap' }} arrow={{ pointAtCenter: true }} color={'rgba(3, 9, 28, 0.75'} placement="top" title={'Скопіювати'} >
-                                            <p className={styles.text_value}>
-                                                {
-                                                    userData.email
-                                                }
-                                            </p>
-                                        </Tooltip>
-                                    </CopyToClipboard>
+                                    {
+                                        userData.user.email ? <CopyToClipboard text={userData.user.email}>
+                                            <Tooltip overlayInnerStyle={{ width: '97px', whiteSpace: 'nowrap' }} arrow={{ pointAtCenter: true }} color={'rgba(3, 9, 28, 0.75'} placement="top" title={'Скопіювати'} >
+                                                <p className={styles.text_value}>
+                                                    {
+                                                        userData.user.email
+                                                    }
+                                                </p>
+                                            </Tooltip>
+                                        </CopyToClipboard> : null
+                                    }
+                                    {
+                                        userData.user.email === null || userData.user.email === undefined ?
+                                            <p className={styles.text_value_noInfo}>
+                                                інформація відсутня
+                                            </p> : null
+                                    }
                                 </div>
-                            </div> : null
-                        } */}
-                        {/* {
-                            userData.phone_number ? <div className={styles.message_item}>
+                            </div>
+                        }
+
+                        {
+                            <div className={styles.message_item}>
                                 <div className={styles.item_icon_wrapper}>
                                     <img
                                         className={styles.item_icon}
@@ -88,20 +100,51 @@ const UsersAboutMe = ({ userData }) => {
                                 </div>
                                 <div className={styles.item_text}>
                                     <p className={styles.text_title}>
-                                        Телефон (приховано)
+                                        Телефон
                                     </p>
-                                    <CopyToClipboard text={userData.phone_number}>
-                                        <Tooltip overlayInnerStyle={{ width: '97px', whiteSpace: 'nowrap' }} arrow={{ pointAtCenter: true }} color={'rgba(3, 9, 28, 0.75'} placement="top" title={'Скопіювати'} >
-                                            <p className={styles.text_value}>
-                                                {
-                                                    userData.phone_number
-                                                }
-                                            </p>
-                                        </Tooltip>
-                                    </CopyToClipboard>
+                                    {
+                                        userData.user_profile.phone_number ? <CopyToClipboard text={userData.user_profile.phone_number}>
+                                            <Tooltip overlayInnerStyle={{ width: '97px', whiteSpace: 'nowrap' }} arrow={{ pointAtCenter: true }} color={'rgba(3, 9, 28, 0.75'} placement="top" title={'Скопіювати'} >
+                                                <p className={styles.text_value}>
+                                                    {
+                                                        userData.user_profile.phone_number
+                                                    }
+                                                </p>
+                                            </Tooltip>
+                                        </CopyToClipboard> : null
+                                    }
+                                    {
+                                        userData.user_profile.phone_number === null || userData.user_profile.phone_number === undefined ?
+                                            <p className={styles.text_value_noInfo}>
+                                                інформація відсутня
+                                            </p> : null
+                                    }
                                 </div>
-                            </div> : null
-                        } */}
+                            </div>
+                        }
+
+                        {
+                            (!userData.user_profile.facebook && !userData.user_profile.instagram && !userData.user_profile.linkedin && !userData.user_profile.telegram) && (
+                                <div className={styles.message_item}>
+                                    <div className={styles.item_icon_wrapper}>
+                                        <img
+                                            className={styles.item_icon}
+                                            src={facebookIcon}
+                                            alt="no info icon"
+                                        />
+                                    </div>
+                                    <div className={styles.item_text}>
+                                        <p className={styles.text_title}>
+                                            Соціальна мережа
+                                        </p>
+                                        <p className={styles.text_value_noInfo}>
+                                            інформація відсутня
+                                        </p>
+                                    </div>
+                                </div>
+                            )
+                        }
+
                         {
                             userData.user_profile.telegram ? <div className={styles.message_item}>
                                 <div className={styles.item_icon_wrapper}>
@@ -115,7 +158,7 @@ const UsersAboutMe = ({ userData }) => {
                                     <p className={styles.text_title}>
                                         Telegram
                                     </p>
-                                    <CopyToClipboard text={userData.telegram}>
+                                    <CopyToClipboard text={userData.user_profile.telegram}>
                                         <Tooltip overlayInnerStyle={{ width: '97px', whiteSpace: 'nowrap' }} arrow={{ pointAtCenter: true }} color={'rgba(3, 9, 28, 0.75'} placement="top" title={'Скопіювати'} >
                                             <p className={styles.text_value}>
                                                 {
@@ -129,6 +172,7 @@ const UsersAboutMe = ({ userData }) => {
                             </div> : null
                         }
                     </div>
+
                     <div className={styles.block_socialMedia}>
                         {
                             userData.user_profile.instagram ? <div className={styles.socialMedia_item}>
@@ -156,23 +200,23 @@ const UsersAboutMe = ({ userData }) => {
                             </div> : null
                         }
                         {
-                            userFacebookValue ? <div className={styles.socialMedia_item}>
+                            userData.user_profile.facebook ? <div className={styles.socialMedia_item}>
                                 <div className={styles.item_icon_wrapper}>
                                     <img
                                         className={styles.item_icon}
                                         src={facebookIcon}
-                                        alt="Grapefruit slice atop a pile of other slices"
+                                        alt="facebook icon"
                                     />
                                 </div>
                                 <div className={styles.item_text}>
                                     <p className={styles.text_title}>
                                         Facebook
                                     </p>
-                                    <CopyToClipboard text={userData.linkedin}>
+                                    <CopyToClipboard text={userData.user_profile.facebook}>
                                         <Tooltip overlayInnerStyle={{ width: '97px', whiteSpace: 'nowrap' }} arrow={{ pointAtCenter: true }} color={'rgba(3, 9, 28, 0.75'} placement="top" title={'Скопіювати'} >
                                             <p className={styles.text_value}>
                                                 {
-                                                    userFacebookValue
+                                                    userData.user_profile.facebook
                                                 }
                                             </p>
                                         </Tooltip>
@@ -185,15 +229,15 @@ const UsersAboutMe = ({ userData }) => {
                                 <div className={styles.item_icon_wrapper}>
                                     <img
                                         className={styles.item_icon}
-                                        src={facebookIcon}
-                                        alt="Grapefruit slice atop a pile of other slices"
+                                        src={LinkedIn}
+                                        alt="linkedin icon"
                                     />
                                 </div>
                                 <div className={styles.item_text}>
                                     <p className={styles.text_title}>
                                         LinkedIn
                                     </p>
-                                    <CopyToClipboard text={userData.linkedin}>
+                                    <CopyToClipboard text={userData.user_profile.linkedin}>
                                         <Tooltip overlayInnerStyle={{ width: '97px', whiteSpace: 'nowrap' }} arrow={{ pointAtCenter: true }} color={'rgba(3, 9, 28, 0.75'} placement="top" title={'Скопіювати'} >
                                             <p className={styles.text_value}>
                                                 {
@@ -228,76 +272,87 @@ const UsersAboutMe = ({ userData }) => {
         },
         {
             key: '3',
-            label: 'Професії', // Ukrainian for 'Professions'
-            children: userData.user_profile_extended ? (
-                <div className={styles.my_expertise_block}>
-                    <ul className={styles.my_expertise_list}>
-                        {userData.user_profile_extended.profession ? (
-                            userData.user_profile_extended.profession.map((el, index) => (
-                                <li key={index} className={styles.my_expertise_list_item}>
-                                    {el}
-                                </li>
-                            ))
-                        ) : null}
-                    </ul>
-                </div>
-            ) : (
-                <li className={styles.my_expertise_list_item}>На жаль, тут немає інформації.</li>
+            label: 'Професії',
+            children: (
+                userData.user_profile_extended && userData.user_profile_extended.profession.length > 1
+                    ? (
+                        <div className={styles.my_expertise_block}>
+                            <ul className={styles.my_expertise_list}>
+                                {userData.user_profile_extended.profession ? (
+                                    userData.user_profile_extended.profession.map((el, index) => (
+                                        <li key={index} className={styles.my_expertise_list_item}>
+                                            {el}
+                                        </li>
+                                    ))
+                                ) : null}
+                            </ul>
+                        </div>
+                    ) : (
+                        <div className={styles.my_summary_block_no_info}>
+                            <p className={styles.my_summary_block_no_info_text}>{defaultTextSummary}</p>
+                        </div>
+                    )
             )
         },
         {
             key: '4',
-            label: 'Послуги', // Ukrainian for 'Services'
-            children: userData.user_profile_extended ? (
-                <div className={styles.my_services_block}>
-                    <ul className={styles.my_services_list}>
-                        {userData.user_profile_extended.service ? (
-                            userData.user_profile_extended.service.map((el, index) => (
-                                <li key={index} className={styles.my_services_list_item}>
-                                    {el}
-                                </li>
-                            ))
-                        ) : (
-                            <li className={styles.my_services_list_item}>No services available</li>
-                        )}
-                    </ul>
-                </div>
-            ) : (
-                <li className={styles.my_services_list_item}>На жаль, тут немає інформації.</li>
-            )
+            label: 'Послуги',
+            children: userData.user_profile_extended && userData.user_profile_extended.service.length > 1
+                ? (
+                    <div className={styles.my_services_block}>
+                        <ul className={styles.my_services_list}>
+                            {userData.user_profile_extended.service ? (
+                                userData.user_profile_extended.service.map((el, index) => (
+                                    <li key={index} className={styles.my_services_list_item}>
+                                        {el}
+                                    </li>
+                                ))
+                            ) : (
+                                <li className={styles.my_services_list_item}>No services available</li>
+                            )}
+                        </ul>
+                    </div>
+                ) : (
+                    <div className={styles.my_summary_block_no_info}>
+                        <p className={styles.my_summary_block_no_info_text}>{defaultTextSummary}</p>
+                    </div>
+                )
         },
         {
             key: '5',
             label: 'Портфоліо',
             children: (
-                <div className={styles.my_portfolio_block}>
-                    <div className={styles.my_portfolio_block_wrapper}>
-
-                        {showLeftArrow && (
-                            <button onClick={handlePrev} className={styles.my_portfolio_leftButton_wrapper}>
-                                <img className={styles.my_portfolio_leftButton} src={arrowLeftIcon} alt='arrow left' />
-                            </button>
-                        )}
-
-                        {visibleImages.map((item, index) => (
-
-                            <div className={styles.my_portfolio_item_wrapper} key={`${index}`}>
-                                <img key={index}
-                                    src={item.file_url}
-                                    alt={`Description-${startIndex + index}`}
-                                    className={styles.my_portfolio_item}
-                                />
-                            </div>
-                        ))}
-
-                        {showRightArrow && (
-                            <button onClick={handleNext} className={styles.my_portfolio_rightButton_wrapper}>
-                                <img className={styles.my_portfolio_rightButton} src={arrowRightIcon} alt='arrow right' />
-                            </button>
-                        )}
+                userData.user_profile_extended && userData.portfolio && userData.portfolio.length > 0 ? (
+                    <div className={styles.my_portfolio_block}>
+                        <div className={styles.my_portfolio_block_wrapper}>
+                            {showLeftArrow && (
+                                <button onClick={handlePrev} className={styles.my_portfolio_leftButton_wrapper}>
+                                    <img className={styles.my_portfolio_leftButton} src={arrowLeftIcon} alt='arrow left' />
+                                </button>
+                            )}
+                            {visibleImages.map((item, index) => (
+                                <div className={styles.my_portfolio_item_wrapper} key={`${index}`}>
+                                    <img
+                                        key={index}
+                                        src={item.file_url}
+                                        alt={`Description-${startIndex + index}`}
+                                        className={styles.my_portfolio_item}
+                                    />
+                                </div>
+                            ))}
+                            {showRightArrow && (
+                                <button onClick={handleNext} className={styles.my_portfolio_rightButton_wrapper}>
+                                    <img className={styles.my_portfolio_rightButton} src={arrowRightIcon} alt='arrow right' />
+                                </button>
+                            )}
+                        </div>
                     </div>
-                </div>
-            ),
+                ) : (
+                    <div className={styles.my_summary_block_no_info}>
+                        <p className={styles.my_summary_block_no_info_text}>{defaultTextSummary}</p>
+                    </div>
+                )
+            )            
         },
     ];
 
@@ -312,11 +367,17 @@ const UsersAboutMe = ({ userData }) => {
                 <div className={styles.tubs}>
                     <div className={styles.tubs_wrapper}>
                         <Tabs defaultActiveKey='1'
-                            items={items.map((el) => {
-                                return el
-                            })}
+                            items={userData.user_profile_extended
+                                ? items
+                                : items.map((el) => {
+                                    if (el.label === 'Мої контакти' || el.label === 'Біографія') {
+                                        return el;
+                                    }
+                                    return null;
+                                })}
                             tabBarGutter={24}
                         />
+
                     </div>
                 </div>
             </div>

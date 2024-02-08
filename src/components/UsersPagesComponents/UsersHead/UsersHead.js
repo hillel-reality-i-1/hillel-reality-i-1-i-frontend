@@ -11,16 +11,12 @@ export default function UsersHead({ data }) {
   if (data === '') {
     return <div>Loading...</div>;
   }
-
-  console.log(data)
-
-
   return (
     <>
       {
         data.user_profile.profile_picture ? <div className={styles.avatar_svg_wrapper}>
-        <img className={styles.avatar_svg} alt={'user avatar'} src={data.user_profile.profile_picture} />
-      </div> : <Avatar className={styles.avatar_svg}/>
+          <img className={styles.avatar_svg} alt={'user avatar'} src={data.user_profile.profile_picture} />
+        </div> : <Avatar className={styles.avatar_svg} />
       }
       <div className={styles.user__head__info}>
         <p className={styles.name}>
@@ -36,10 +32,14 @@ export default function UsersHead({ data }) {
         <p className={styles.nick__name}>
           @{data.user.username}
         </p>
-        {data.user_profile.country ?
+        {data.user_profile.country
+          ?
           <p className={styles.location__grey}>
             <Location /> {data.user_profile.city} {data.user_profile.country}
-          </p> : null
+          </p>
+          : <p className={styles.location__grey}>
+            <Location /> інформація відсутня
+          </p>
         }
       </div>
     </>

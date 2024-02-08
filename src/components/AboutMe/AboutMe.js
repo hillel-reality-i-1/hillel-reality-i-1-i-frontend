@@ -42,7 +42,7 @@ const AboutMe = ({ userData, expertUserData }) => {
             const timer = setTimeout(() => {
                 SetErrorMassagePortfolio(false);
             }, 3000);
-            
+
             return () => clearTimeout(timer);
         }
     }, [ErrorMassagePortfolio]);
@@ -404,10 +404,10 @@ const AboutMe = ({ userData, expertUserData }) => {
         <>
             {
                 ErrorMassagePortfolio ? <ErrorNotification
-                text={'Розмір фото має бути від 3 кб до 5 Мб. Будь ласка, оберіть інше'}
-            /> : null
+                    text={'Розмір фото має бути від 3 кб до 5 Мб. Будь ласка, оберіть інше'}
+                /> : null
             }
-          
+
             <div className={styles.user_about}>
                 <div className={styles.user_title}>
                     <h4 className={styles.title_text}>

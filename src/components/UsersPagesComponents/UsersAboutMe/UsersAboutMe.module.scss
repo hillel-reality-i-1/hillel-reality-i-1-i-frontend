@@ -147,7 +147,7 @@ $common-styles: (
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
-                    color: #0D101D;
+                    color: #1d180d;
                     font-family: $medium;
                     font-size: 16px;
                     font-style: normal;
@@ -156,6 +156,8 @@ $common-styles: (
                     user-select: all;
                     cursor: pointer;
                 }
+
+                
             }
         }
     }
@@ -322,4 +324,19 @@ $common-styles: (
         font-weight: 400;
         line-height: 160%;
     }
+}
+
+.text_value_noInfo {
+    max-width: 346px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color:#0D101D;
+    font-family: $regular;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 160%;
+    user-select: all;
+    cursor: pointer;
 }
