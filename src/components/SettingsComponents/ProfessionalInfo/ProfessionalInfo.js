@@ -29,18 +29,19 @@ export default function ProfessionalInfo({ data }) {
           'Authorization': `Token ${authToken}`,
         },
       };
-      console.log(data.user);
+      // console.log(data.user);
       const expertUserProfileData = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/v1/users/expert_user_profile_by_user_id/${data.user}/`,
         config)
       setExpertUSer(expertUserProfileData.data)
-      console.log('expert', expertUserProfileData)
+      // console.log('expert', expertUserProfileData)
     } catch (error) {
       console.info(error)
     }
   };
 
-  console.log('datadata', data );
-  console.log('expertUser', expertUser);
+  // console.log('datadata', data );
+  // console.log('expertUser', expertUser);
+  // console.log('expertUserPROFESION', expertUser);
   return (
     <>
       <div className={styles.professional}>
@@ -55,8 +56,14 @@ export default function ProfessionalInfo({ data }) {
         </div>
       </div>
       <div className={styles.wrapper}>
-        <div className={styles.info}><p className={styles.info__type}>Професії</p> <Link className={styles.info__link} to='professions' state={{ user: expertUser }}> <Arrow /> </Link> </div>
-        <div className={styles.info}><p className={styles.info__type}>Послуги</p> <Link className={styles.info__link} to='services' state={{ user: expertUser }}><Arrow /> </Link> </div>
+        <div className={styles.info}>
+          <p className={styles.info__type}>Професії</p>
+          <Link className={styles.info__link} to='professions' state={{ user: expertUser }}>{expertUser?.profession[0]} <Arrow /> </Link>
+        </div>
+        <div className={styles.info}>
+          <p className={styles.info__type}>Послуги</p>
+          <Link className={styles.info__link} to='services' state={{ user: expertUser }}>{expertUser?.service[0]}<Arrow /> </Link>
+        </div>
       </div>
     </>
   )
