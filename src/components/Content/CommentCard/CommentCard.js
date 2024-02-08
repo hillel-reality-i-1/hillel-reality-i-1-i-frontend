@@ -7,7 +7,7 @@ import Avatar from '../../../assets/img/icons/user-profile/Avatar.svg';
 
 import { URL_LANGUAGE, URL_USER_INFO_USER_ID } from '../../../config/API_url';
 import styles from './CommentCard.module.scss';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { formatTimeElapsed } from '../../../helpers/formatTimeElapsed';
 import PanelUseful from '../PanelUseful/PanelUseful';
 import { Link } from 'react-router-dom';
@@ -16,9 +16,22 @@ const CommentCard = ({ comment, bgColor, userId }) => {
 	const { text, author, creation_date } = comment;
 	const [user, setUser] = useState(null);
 	const [isExpanded, setIsExpanded] = useState(false);
+	const [showButton, setShowButton] = useState(false);
 	// const [counterUseful, setCounterUseful] = useState(0);
 
 	const langUK = 'uk/';
+
+	const blockRef = useRef();
+
+	useEffect(() => {
+		const blockHeight = blockRef.current.clientHeight;
+
+		if (blockHeight > 74) {
+			setShowButton(true);
+		} else {
+			setShowButton(false);
+		}
+	}, []);
 
 	// const helpful_count = comment?.helpful_count && comment?.helpful_count;
 	// const not_helpful_count = comment?.not_helpful_count && comment?.not_helpful_count;
@@ -121,14 +134,18 @@ const CommentCard = ({ comment, bgColor, userId }) => {
 				<span className={styles.time_of_creation}>{timeElapsed}</span>
 			</div>
 			{/* <div> */}
-			<article className={styles.content}>
+			<article
+				className={styles.content}
+				ref={blockRef}>
 				<p className={`${styles.content_text} ${isExpanded && styles.expanded}`}>{text}</p>
 
-				<span
-					className={styles.btn_read_more}
-					onClick={handleReadMoreClick}>
-					{isExpanded ? 'Hide...' : 'Read more...'}
-				</span>
+				{showButton && (
+					<span
+						className={styles.btn_read_more}
+						onClick={handleReadMoreClick}>
+						{isExpanded ? 'Приховати' : 'Читати більше...'}
+					</span>
+				)}
 			</article>
 			{/* </div> */}
 			<div className={styles.content_footer}>

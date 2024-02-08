@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import axios from '../../config/axios/axios';
 import img_card from '../../assets/img/img_card/img_card.png';
@@ -21,6 +21,7 @@ const Card = ({ posts, bgColor }) => {
 	const [postData, setPostData] = useState(null);
 	const [user, setUser] = useState(null);
 	const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
 	const userId = postData && postData?.author;
 	const postId = postData && postData?.id;
 	const langUK = 'uk/';

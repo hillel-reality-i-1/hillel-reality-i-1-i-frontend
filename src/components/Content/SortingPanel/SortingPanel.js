@@ -8,7 +8,7 @@ const SortingPanel = ({ nameResult, count }) => {
 			<p className={styles.left_col}>
 				{count} {nameResult}
 			</p>
-			<div className={styles.right_col}>
+			{/* <div className={styles.right_col}>
 				Сортувати за
 				<div className={styles.select_sort}>
 					<span className={styles.blue_text}>Спершу нові</span>
@@ -17,7 +17,7 @@ const SortingPanel = ({ nameResult, count }) => {
 						alt='Arrow'
 					/>
 				</div>
-			</div>
+			</div> */}
 		</div>
 	);
 };

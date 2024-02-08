@@ -1,0 +1,122 @@
+@import '../../../styles/constants.scss';
+
+.container {
+	width: 100%;
+	max-width: 845px;
+	height: 100%;
+	// min-height: 258px;
+
+	padding: 16px;
+	border-radius: 24px;
+	background-color: $color-gray;
+
+	&.card_wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+
+		// .content_wrapper {
+		// 	width: 100%;
+		// }
+	}
+}
+
+.content_header {
+	display: flex;
+	justify-content: space-between;
+	height: 100%;
+	max-height: 48px;
+
+	.user {
+		display: flex;
+		// width: 100%;
+
+		.user_data_wrapper {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			margin-left: 8px;
+
+			.user_info_top_wrapper {
+				display: flex;
+
+				.full_name {
+					font-family: $font-ns-medium;
+					color: $color-gray80;
+					font-size: 16px;
+					font-style: normal;
+					font-weight: 500;
+					line-height: 160%;
+				}
+
+				// .label_vr_exp_wrapper {
+				// 	display: flex;
+				// 	margin-left: 8px;
+
+				// 	.expert_badge {
+				// 		font-family: $font-ns-regular;
+				// 		line-height: 160%;
+				// 		font-size: 14px;
+				// 		color: $color-primary30base;
+				// 		border-radius: 24px;
+				// 		padding: 4px 8px;
+				// 		background-color: #e1ebf8;
+				// 		margin-left: 8px;
+				// 	}
+			}
+		}
+
+		.user_info_bottom_wrapper {
+			font-family: $font-ns-regular;
+			color: $color-gray50;
+			margin-top: 4px;
+			font-size: 14px;
+			font-style: normal;
+			font-weight: 400;
+			line-height: 160%;
+		}
+	}
+
+	// .time_of_creation {
+	// 	font-family: $font-ns-regular;
+	// 	line-height: 160%;
+	// 	font-size: 14px;
+	// 	color: $color-gray50;
+	// }
+}
+
+.content {
+	&_text {
+		color: $color-gray70;
+		font-family: $font-ns-regular;
+		font-size: 14px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 160%;
+
+		max-height: 70px;
+		overflow: hidden;
+		word-wrap: break-word;
+		// display: inline;
+		// text-overflow: ellipsis;
+	}
+
+	.btn_read_more {
+		cursor: pointer;
+		max-width: 128px;
+		font-family: $font-ns-medium;
+		line-height: 160%;
+		font-size: 14px;
+		color: $color-primary30base;
+		// margin-left: 10px;
+	}
+
+	.expanded {
+		max-height: none;
+	}
+}
+
+.content_footer {
+	width: 100%;
+	display: flex;
+}

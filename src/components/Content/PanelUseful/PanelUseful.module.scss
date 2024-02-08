@@ -11,6 +11,8 @@
 	display: flex;
 	padding: 4px 12px;
 	border-radius: 12px;
+	box-shadow: 0px 2px 8px 0px rgba(167, 167, 178, 0.2);
+	background-color: $color-gray;
 
 	.btn_useful_active {
 		svg path {
