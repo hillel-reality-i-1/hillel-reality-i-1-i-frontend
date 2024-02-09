@@ -127,7 +127,7 @@ export default function AccountHeader() {
 			<div className={styles.account__user}>
 				<div className={styles.account__user__avatar}>
 					{data.profile_picture && data.profile_picture.image !== null ? (
-						<img src={`${process.env.REACT_APP_API_BASE_URL}${data.profile_picture.image}`} />
+						<Link to='user'><img src={`${process.env.REACT_APP_API_BASE_URL}${data.profile_picture.image}`} /></Link>	
 					) : (
 						<AvatarIcon />
 					)}
