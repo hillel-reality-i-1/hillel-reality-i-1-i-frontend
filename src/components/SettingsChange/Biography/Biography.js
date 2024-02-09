@@ -56,7 +56,7 @@ export default function Biography() {
         <div className={styles.biography}>
             <h4>
                 <UserSettings />
-                Біографія
+                Інфо
             </h4>
             <p>Будемо раді дізнатися більше про вас! Поділіться своєю історією, досвідом, інтересами та чимось, що вас вражає.</p>
             <TextArea
