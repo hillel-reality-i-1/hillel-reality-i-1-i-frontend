@@ -1,5 +1,6 @@
 import { ConfigProvider, Input } from 'antd';
 import axios from '../../../config/axios/axios';
+// import qs from 'qs';
 
 import { useFormik } from 'formik';
 import CustomButton from '../../CustomButton/CustomButton';
@@ -64,10 +65,10 @@ const PostCreationForm = () => {
 	const isLimitCategories = selectedCategory.length < 3;
 	const isChoiceOther = selectedCategory[0]?.id === 11;
 
-	console.log('selectedCountries', selectedCountries);
-	console.log('selectedCategory', selectedCategory);
-	console.log('profCategories', profCategories);
-	console.log('changeHTMLText', changeHTMLText);
+	// console.log('selectedCountries', selectedCountries);
+	// console.log('selectedCategory', selectedCategory);
+	// console.log('profCategories', profCategories);
+	// console.log('changeHTMLText', changeHTMLText);
 
 	// filling out fields when editing a post
 	useEffect(() => {
@@ -275,25 +276,29 @@ const PostCreationForm = () => {
 
 	const handleSubmit = async (values) => {
 		try {
+			// console.log(values.category);
+
 			const formData = new FormData();
+
+			values?.category.forEach((category) => {
+				formData.append('category', category);
+			});
+
+			values?.country.forEach((country) => {
+				formData.append('country', country);
+			});
+
 			selectedFile && formData.append('post_image', selectedFile);
+
+			formData.append('title', values.title);
+			formData.append('content', changeHTMLText || '');
 
 			const config = {
 				headers: {
 					'Content-Type': 'multipart/form-data',
 				},
 			};
-			await axios.post(
-				URL_POST_CREATE,
-				{
-					title: values.title,
-					category: `${values.category}`,
-					country: `${values.country}`,
-					content: changeHTMLText && changeHTMLText,
-					post_image: selectedFile ? selectedFile : null,
-				},
-				config
-			);
+			await axios.post(URL_POST_CREATE, formData, config);
 			// openModal();
 			navigate(-1);
 		} catch (error) {

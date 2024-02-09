@@ -117,6 +117,7 @@ const Card = ({ posts, bgColor }) => {
 				<div className={styles.content_header}>
 					<Link
 						to={`user/${userId}`}
+						replace={true}
 						className={styles.user}>
 						{user?.user_profile?.profile_picture ? (
 							<img

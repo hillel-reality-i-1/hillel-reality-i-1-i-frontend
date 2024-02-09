@@ -22,7 +22,7 @@ const Contributions = ({ postId }) => {
 				const response =
 					postId &&
 					(await axios.get(`/api/v1/content/post/${postId}/contributions/`, {
-						params: { page: page, page_size: 1 },
+						params: { page: page, page_size: 3 },
 					}));
 				response.count && setCountContributions(response.count);
 				response?.results &&
