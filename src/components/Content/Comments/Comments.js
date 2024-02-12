@@ -22,6 +22,9 @@ const Comments = ({ postId }) => {
 	const [comments, setComments] = useState([]);
 	const [page, setPage] = useState(1);
 	const [countComments, setCountComments] = useState(0);
+	const [textAreaValue, setTextAreaValue] = useState('');
+	const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+
 	const userId = data && data.user;
 	// console.log(userId);
 
@@ -72,8 +75,19 @@ const Comments = ({ postId }) => {
 	// 	setComments([]);
 	// };
 
-	const handleSubmit = async (values) => {
-		// console.log(values);
+	const handleTextAreaChange = (e) => {
+		const value = e.target.value;
+		setTextAreaValue(value);
+
+		if (value.length < 2 || value.length > 2000) {
+			setIsSubmitDisabled(true);
+		} else {
+			setIsSubmitDisabled(false);
+		}
+	};
+
+	const handleSubmit = async () => {
+		const values = { comment: textAreaValue };
 
 		values?.comment && fetchCreateComments(values);
 		formik.resetForm();
@@ -85,7 +99,7 @@ const Comments = ({ postId }) => {
 		initialValues: {
 			comment: '',
 		},
-
+		// validate: validateComment,
 		onSubmit: handleSubmit,
 	});
 
@@ -141,15 +155,17 @@ const Comments = ({ postId }) => {
 								name='comment'
 								rows={4}
 								placeholder='Розскажіть свою думку тут.'
-								// maxLength={6}
+								maxLength={2000}
 								// onChange={(e) => {
 								// 	formik.handleChange(e);
 								// 	formik.setFieldValue('title', e.target.value);
 								// }}
-								onChange={formik.handleChange}
-								value={formik.values.comment}
+								onChange={handleTextAreaChange}
+								// onChange={formik.handleChange}
+								// value={formik.values.comment}
+								value={textAreaValue}
 								onBlur={formik.handleBlur}
-								// minLength='10'
+								// minLength='2'
 							/>
 						</ConfigProvider>
 					</div>
@@ -158,8 +174,7 @@ const Comments = ({ postId }) => {
 					<CustomButton
 						htmlType='submit'
 						type='primary'
-						// isDisable={true}
-					>
+						isDisable={isSubmitDisabled}>
 						Залишити коментар
 					</CustomButton>
 				</div>
