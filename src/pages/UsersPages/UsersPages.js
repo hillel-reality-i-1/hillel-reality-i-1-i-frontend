@@ -18,7 +18,6 @@ export default function UsersPages() {
     useEffect(() => {
 
         const headers = {
-            'Authorization': `Token ${localStorage.getItem('authTokenUHelp')}`,
             'Content-Type': 'application/json',
         };
         axios.get(`${USER_OPEN_INFO}${id}/`, { headers })
