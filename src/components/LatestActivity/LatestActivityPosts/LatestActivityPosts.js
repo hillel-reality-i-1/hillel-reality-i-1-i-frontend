@@ -65,9 +65,9 @@ const LatestActivityPosts = ({ data }) => {
       </div>
 
       {visiblePosts < postDetails.length && (
-        <Button className={styles.button_see_more} onClick={handleNextPage}>
+        <button className={styles.button_see_more} onClick={handleNextPage}>
           Дивитися більше
-        </Button>
+        </button>
       )}
 
       {data?.last_posts.length === 0 ? (

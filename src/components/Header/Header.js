@@ -59,7 +59,7 @@ export default function Header() {
 						<li className={styles.menu_item}>
 							<Link
 								className={styles.item_link}
-								to='/map'
+								to='/privacyPolicy'
 								onClick={handleLinkClick}>
 								{t('textHeader.map')}
 							</Link>
@@ -67,7 +67,7 @@ export default function Header() {
 						<li className={styles.menu_item}>
 							<Link
 								className={styles.item_link}
-								to='/events'
+								to='/privacyPolicy'
 								onClick={handleLinkClick}>
 								{t('textHeader.events')}
 							</Link>

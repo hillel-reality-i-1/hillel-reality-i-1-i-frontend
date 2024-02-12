@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGetUserDataQuery } from '../../store/services/userApi';
-
+import Footer from '../../components/Footer/Footer'
 import UserHead from '../../components/UserHead/UserHead';
 import AboutMe from '../../components/AboutMe/AboutMe';
 import LatestActivityLayout from '../../components/LatestActivity/LatestActivityLayout/LatestActivityLayout';
@@ -48,29 +48,32 @@ export default function UserPage() {
 		fetchData();
 	}, [navigate, data]);
 
-	if (isLoading ) {
-    
+	if (isLoading) {
+
 		return (
-		  <div className={styles.container}>
-			<div>Loading...</div>
-		  </div>
+			<div className={styles.container}>
+				<div>Loading...</div>
+			</div>
 		)
 	}
-	
+
 	return (
-		<div className={styles.container}>
-			<div className={styles.user}>
-				<div className={styles.user__head}>
-					<UserHead data={data} />
+		<>
+			<div className={styles.container}>
+				<div className={styles.user}>
+					<div className={styles.user__head}>
+						<UserHead data={data} />
+					</div>
+
+					<AboutMe data={data} userData={data} userDataPortfolio={userDataPortfolio} expertUserData={expertUserData} />
+					<LatestActivityLayout />
 				</div>
 
-				<AboutMe data={data} userData={data} userDataPortfolio={userDataPortfolio} expertUserData={expertUserData}/>
-				<LatestActivityLayout/>
+				<aside className={styles.aside}>
+					<AsideSection />
+				</aside>
 			</div>
-
-			<aside className={styles.aside}>
-				<AsideSection />
-			</aside>
-		</div>
+			<Footer />
+		</>
 	);
 }

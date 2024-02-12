@@ -9,6 +9,7 @@ import { UPLOAD_PORTFOLIO, PORTFOLIO_LIST } from '../../config/API_url';
 import ErrorNotification from '../ErrorNotification/ErrorNotification';
 
 import facebookIcon from '../../assets/img/icons/icons-AboutMe/facebook_icon.svg'
+import linkedinIcon from '../../assets/img/icons/icons-AboutMe/linkedIn.svg'
 import instagramIcon from '../../assets/img/icons/icons-AboutMe/insta_icon.svg'
 import telegramIcon from '../../assets/img/icons/icons-AboutMe/telegram_icon.svg'
 import emailIcon from '../../assets/img/icons/icons-AboutMe/email_icon.svg'
@@ -26,12 +27,9 @@ const AboutMe = ({ userData, expertUserData }) => {
     const [checkedExpert, setCheckedExpert] = useState('');
     const [tubKey, setTubKey] = useState('1');
     const [imagesArray, setImagesArray] = useState([]);
-    const [userInstagramValue] = useState('')
-    const [userFacebookValue] = useState('')
     const [isModalOpen, setModalOpen] = useState(false);
     const [startIndex, setStartIndex] = useState(0);
     const [ErrorMassagePortfolio, SetErrorMassagePortfolio] = useState(false);
-
     const [rightArrow, setRightArrow] = useState(true);
 
     const endIndex = startIndex + 5;
@@ -272,7 +270,7 @@ const AboutMe = ({ userData, expertUserData }) => {
                             </div> : null
                         }
                         {
-                            userFacebookValue ? <div className={styles.socialMedia_item}>
+                            userData.facebook ? <div className={styles.socialMedia_item}>
                                 <div className={styles.item_icon_wrapper}>
                                     <img
                                         className={styles.item_icon}
@@ -288,7 +286,7 @@ const AboutMe = ({ userData, expertUserData }) => {
                                         <Tooltip overlayInnerStyle={{ width: '97px', whiteSpace: 'nowrap' }} arrow={{ pointAtCenter: true }} color={'rgba(3, 9, 28, 0.75'} placement="top" title={'Скопіювати'} >
                                             <p className={styles.text_value}>
                                                 {
-                                                    userFacebookValue
+                                                    userData.facebook
                                                 }
                                             </p>
                                         </Tooltip>
@@ -301,7 +299,7 @@ const AboutMe = ({ userData, expertUserData }) => {
                                 <div className={styles.item_icon_wrapper}>
                                     <img
                                         className={styles.item_icon}
-                                        src={facebookIcon}
+                                        src={linkedinIcon}
                                         alt="Grapefruit slice atop a pile of other slices"
                                     />
                                 </div>
@@ -486,7 +484,7 @@ const AboutMe = ({ userData, expertUserData }) => {
                         </button>
 
                     )}
-                    {!(userData.linkedin || userFacebookValue || userInstagramValue) && tubKey === '1' && (
+                    {!(userData.linkedin || userData.facebook || userData.instagram) && tubKey === '1' && (
 
                         <button className={styles.no_content_button} onClick={() => NavigateToSocialsEdit()}>
                             <img src={addIcon} alt='add icon' />
