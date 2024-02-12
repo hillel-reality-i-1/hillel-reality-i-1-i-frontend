@@ -393,7 +393,8 @@ const SignUpForm = ({ signUpFormModalOpen, toggleSignUpFormModal, toggleSignInMo
 								<span className={styles.shecked_text}>
 									{t('textSignUp.agree')}{' '}
 									<Link
-										to='/'
+										to='/privacyPolicy'
+										onClick={toggleSignUpFormModal}
 										className={styles.link}>
 										Умовами користування
 									</Link>

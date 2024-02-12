@@ -6,7 +6,9 @@ import styles from './ContentSection.module.scss';
 const ContentSection = ({ posts, onNextPage, countPosts, isSearch, isLoading }) => {
 	return (
 		<section className={styles.container}>
-			{isSearch && <span className={styles.count_posts}>{countPosts} results for your search</span>}
+			{isSearch && (
+				<span className={styles.count_posts}>{countPosts} результатів за вашим пошуком</span>
+			)}
 			{!isLoading && countPosts === 0 && (
 				<div className={styles.empty_search_results}>
 					<img
@@ -15,8 +17,8 @@ const ContentSection = ({ posts, onNextPage, countPosts, isSearch, isLoading }) 
 						alt='Cat'
 					/>
 					<p className={styles.empty_search_results_text}>
-						We're sorry, but it seems that your search didn't yield any results. Please check your
-						spelling, try different keywords, countries, or explore related categories.
+						Нам прикро про це повідомляти, але схоже, що ваш пошук не дав результатів… Можливо,
+						варто перевірити написання або спробувати інші ключові слова?
 					</p>
 				</div>
 			)}

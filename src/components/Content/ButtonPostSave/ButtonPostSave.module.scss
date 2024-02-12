@@ -6,6 +6,8 @@
 }
 
 .btn_save svg {
+	display: block;
+
 	&:hover path {
 		stroke: $color-primary30base;
 	}

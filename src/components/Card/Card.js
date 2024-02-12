@@ -186,7 +186,7 @@ const Card = ({ posts, bgColor }) => {
 						<span className={styles.time_read}>{timeForRead} хв читати</span>
 					</div>
 					<div className={styles.content_footer_right_col}>
-						<div className={styles.like_wrapper}>
+						{/* <div className={styles.like_wrapper}>
 							<button className={styles.btn_like}>
 								<img
 									src={icon_like}
@@ -195,7 +195,7 @@ const Card = ({ posts, bgColor }) => {
 								/>
 							</button>
 							<span>0</span>
-						</div>
+						</div> */}
 						<div className={styles.comments_wrapper}>
 							{/* <button className={styles.btn_comments}> */}
 							<img
