@@ -2,24 +2,34 @@ import axios from '../../../config/axios/axios';
 
 import icon_expert from '../../../assets/img/icons/post/icon_expert.svg';
 import Avatar from '../../../assets/img/icons/user-profile/Avatar.svg';
+import icon_dot_menu from '../../../assets/img/icons/post/icon_dot_menu.svg';
+import icon_delete from '../../../assets/img/icons/post/icon_delete.svg';
 // import icon_useful from '../../../assets/img/icons/icons-comments/icon_useful.svg';
 // import icon_not_useful from '../../../assets/img/icons/icons-comments/icon_not_useful.svg';
 
-import { URL_LANGUAGE, URL_USER_INFO_USER_ID } from '../../../config/API_url';
+import { URL_USER_INFO_USER_ID } from '../../../config/API_url';
 import styles from './CommentCard.module.scss';
 import { useEffect, useRef, useState } from 'react';
 import { formatTimeElapsed } from '../../../helpers/formatTimeElapsed';
 import PanelUseful from '../PanelUseful/PanelUseful';
 import { Link } from 'react-router-dom';
+import { Dropdown } from 'antd';
+import { useGetUserDataQuery } from '../../../store/services/userApi';
 
-const CommentCard = ({ comment, bgColor, userId }) => {
-	const { text, author, creation_date } = comment;
+const CommentCard = ({ comment, bgColor, userId, onDelete }) => {
+	const { text, author, id, creation_date } = comment;
+	// const navigate = useNavigate();
+	const { data } = useGetUserDataQuery();
 	const [user, setUser] = useState(null);
 	const [isExpanded, setIsExpanded] = useState(false);
 	const [showButton, setShowButton] = useState(false);
 	// const [counterUseful, setCounterUseful] = useState(0);
 
-	const langUK = 'uk/';
+	// console.log(comment, data);
+
+	const isMyComment = data?.user === comment?.author;
+
+	// const langUK = 'uk/';
 
 	const blockRef = useRef();
 
@@ -42,18 +52,18 @@ const CommentCard = ({ comment, bgColor, userId }) => {
 	// }, [helpful_count, not_helpful_count]);
 	// console.log('counter', counterUseful);
 
-	useEffect(() => {
-		const fetchLanguage = async () => {
-			try {
-				const data = await axios.get(`${URL_LANGUAGE}${langUK}`);
-				return data;
-			} catch (error) {
-				return error.message;
-			}
-		};
+	// useEffect(() => {
+	// 	const fetchLanguage = async () => {
+	// 		try {
+	// 			const data = await axios.get(`${URL_LANGUAGE}${langUK}`);
+	// 			return data;
+	// 		} catch (error) {
+	// 			return error.message;
+	// 		}
+	// 	};
 
-		fetchLanguage();
-	}, []);
+	// 	fetchLanguage();
+	// }, []);
 
 	useEffect(() => {
 		const fetchInfoUser = async () => {
@@ -72,6 +82,23 @@ const CommentCard = ({ comment, bgColor, userId }) => {
 
 	const handleReadMoreClick = () => {
 		setIsExpanded(!isExpanded);
+	};
+
+	// const handlerDelete = async () => {
+	// 	try {
+	// 		author && (await axios.delete(`/api/v1/content/comment/${id}/delete`));
+	// 		// navigate('/');
+	// 	} catch (error) {
+	// 		return error.message;
+	// 	}
+	// };
+
+	const handlerDelete = async () => {
+		try {
+			await onDelete(comment.id); // Вызываем функцию удаления из пропсов
+		} catch (error) {
+			return error.message;
+		}
 	};
 
 	// user && console.log('userComent', user);
@@ -131,7 +158,57 @@ const CommentCard = ({ comment, bgColor, userId }) => {
 						</div>
 					</div>
 				</Link>
-				<span className={styles.time_of_creation}>{timeElapsed}</span>
+				<div className={styles.col_right}>
+					<span className={styles.time_of_creation}>{timeElapsed}</span>
+					<div className={`${styles.post_menu} ${!isMyComment && styles.post_menu_visible}`}>
+						<Dropdown
+							overlayStyle={{ width: '138px' }}
+							menu={{
+								items: [
+									// {
+									// 	key: '1',
+									// 	label: (
+									// 		<button
+									// 			className={styles.btn_menu}
+									// 			onClick={handlerPostEditing}>
+									// 			<img
+									// 				src={icon_pencil}
+									// 				alt='pencil'
+									// 				style={{ marginRight: '8px' }}
+									// 			/>
+									// 			Редагувати
+									// 		</button>
+									// 	),
+									// },
+									{
+										key: '2',
+										label: (
+											<button
+												className={styles.btn_menu}
+												onClick={handlerDelete}>
+												<img
+													style={{ marginRight: '8px' }}
+													src={icon_delete}
+													alt='delete'
+												/>
+												Видалити
+											</button>
+										),
+									},
+								],
+							}}
+							className={styles.customMenu}
+							placement='bottomRight'
+							trigger={['click']}>
+							<img
+								className={styles.post_menu_img}
+								src={icon_dot_menu}
+								alt='Menu'
+								onClick={(e) => e.preventDefault()}
+							/>
+						</Dropdown>
+					</div>
+				</div>
 			</div>
 			{/* <div> */}
 			<article

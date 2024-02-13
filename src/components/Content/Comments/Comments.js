@@ -26,7 +26,7 @@ const Comments = ({ postId }) => {
 	const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
 
 	const userId = data && data.user;
-	// console.log(userId);
+	console.log('isSubmitDisabled', isSubmitDisabled);
 
 	// console.log('page', page);
 	useEffect(() => {
@@ -65,6 +65,15 @@ const Comments = ({ postId }) => {
 		}
 	};
 
+	const handlerDelete = async (commentId) => {
+		try {
+			await axios.delete(`/api/v1/content/comment/${commentId}/delete`);
+			setComments(comments.filter((comment) => comment.id !== commentId));
+		} catch (error) {
+			return error.message;
+		}
+	};
+
 	const handleNextPage = () => {
 		setPage((prevPage) => prevPage + 1);
 	};
@@ -90,7 +99,9 @@ const Comments = ({ postId }) => {
 		const values = { comment: textAreaValue };
 
 		values?.comment && fetchCreateComments(values);
+
 		setTextAreaValue('');
+		setIsSubmitDisabled(true);
 		// formik.resetForm();
 	};
 
@@ -186,6 +197,7 @@ const Comments = ({ postId }) => {
 						<CommentCard
 							key={comment.id}
 							// onhandleReactionChange={handleReactionChange}
+							onDelete={handlerDelete}
 							comment={comment}
 							userId={userId}
 						/>
