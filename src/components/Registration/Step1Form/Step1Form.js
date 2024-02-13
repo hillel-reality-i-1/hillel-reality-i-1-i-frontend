@@ -28,7 +28,6 @@ const Step1Form = ({ onNext }) => {
 					<h2 className={styles.title}>{t('textSignUp.textStep1.titleH2')}</h2>
 					<p className={styles.text}>{t('textSignUp.textStep1.description')}</p>
 					<Formik
-						// {const getGoogleFullName = window.localStorage.getItem('full_name')
 						initialValues={{
 							userName: '',
 							fullName: window.localStorage.getItem('fullName') || '',
@@ -124,7 +123,6 @@ const Step1Form = ({ onNext }) => {
 											{errors.fullName}
 										</div>
 									)}
-									{/* <span className={styles.info}>{t('textSignUp.textStep1.infoFullName')}</span> */}
 								</div>
 
 								{/* button submit ---------------------------------------------------------- */}

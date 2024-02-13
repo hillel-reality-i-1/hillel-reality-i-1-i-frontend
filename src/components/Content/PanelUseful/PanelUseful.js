@@ -1,37 +1,21 @@
 import { useEffect, useState } from 'react';
 import axios from '../../../config/axios/axios';
 import styles from './PanelUseful.module.scss';
-import { useDispatch } from 'react-redux';
-// import { changeNotUseful, changeUseful } from '../../../store/slices/commentsSlice';
 
 const PanelUseful = ({ comment, userId }) => {
-	// const dispatch = useDispatch();
-
-	// const useful = comment && comment.vote_helpful_state;
-	// const notUseful = comment && comment.vote_not_helpful_state;
-
 	const [isUsefulActive, setUsefulActive] = useState(false);
 	const [isNotUsefulActive, setNotUsefulActive] = useState(false);
 	const [commentInfo, setCommentInfo] = useState(null);
-	// const [counter, setCounter] = useState(0);
 	const commentId = comment && comment.id;
-	// console.log('commentId', commentId);
-	// console.log('isUsefulActive', useful);
-	// console.log('isNotUsefulActive', isNotUsefulActive);
-	// console.log('!!!!count', counter);
 	const [counterUseful, setCounterUseful] = useState(0);
 
 	const helpful_count = commentInfo?.helpful_count && commentInfo?.helpful_count;
 	const not_helpful_count = commentInfo?.not_helpful_count && commentInfo?.not_helpful_count;
 
-	// console.log('test', helpful_count);
-	// console.log('NotTest', not_helpful_count);
-
 	useEffect(() => {
 		const counter = helpful_count - not_helpful_count;
 		setCounterUseful(counter);
 	}, [helpful_count, not_helpful_count]);
-	// console.log('counter', counterUseful);
 
 	useEffect(() => {
 		const fetchVote = async () => {
@@ -40,8 +24,6 @@ const PanelUseful = ({ comment, userId }) => {
 					commentId &&
 					(await axios.get(`/api/v1/content/user-comment-vote/${userId}/${commentId}/`));
 
-				// console.log('RESPON', response?.helpful);
-
 				if (response?.helpful === true) {
 					setUsefulActive(true);
 					setNotUsefulActive(false);
@@ -49,21 +31,11 @@ const PanelUseful = ({ comment, userId }) => {
 					setNotUsefulActive(true);
 					setUsefulActive(false);
 				}
-				// if (isNotUsefulActive) {
-				// 	setNotUsefulActive(false);
-				// }
-				// setUsefulActive((prevState) => !prevState);
-
-				// dispatch(changeUseful(isUsefulActive));
-				// dispatch(changeNotUseful(isNotUsefulActive));
 			} catch (error) {
 				if (error.response.data.message === 'error.response.data.message') {
 					setUsefulActive(false);
 					setNotUsefulActive(false);
-					// dispatch(changeUseful(isUsefulActive));
-					// dispatch(changeNotUseful(isNotUsefulActive));
 				}
-				// console.log(error.response.data.message);
 				return error.message;
 			}
 		};
@@ -76,7 +48,6 @@ const PanelUseful = ({ comment, userId }) => {
 			try {
 				const response = await axios.get(`/api/v1/content/comment/${commentId}/`);
 				setCommentInfo(response);
-				// console.log('responseONE', response);
 			} catch (error) {
 				return error.message;
 			}
@@ -93,10 +64,6 @@ const PanelUseful = ({ comment, userId }) => {
 				setNotUsefulActive(false);
 			}
 			setUsefulActive((prevState) => !prevState);
-
-			// dispatch(changeUseful(isUsefulActive));
-			// dispatch(changeNotUseful(isNotUsefulActive));
-			// onhandleReactionChange();
 		} catch (error) {
 			return error.message;
 		}
@@ -109,20 +76,10 @@ const PanelUseful = ({ comment, userId }) => {
 				setUsefulActive(false);
 			}
 			setNotUsefulActive((prevState) => !prevState);
-
-			// dispatch(changeUseful(isUsefulActive));
-			// dispatch(changeNotUseful(isNotUsefulActive));
-			// onhandleReactionChange();
 		} catch (error) {
 			return error.message;
 		}
 	};
-
-	// useEffect(() => {
-	// 	setCounter(counterUseful);
-	// }, [counterUseful]);
-
-	// console.log('counterUseful', counterUseful);
 
 	return (
 		<div className={styles.block_useful}>

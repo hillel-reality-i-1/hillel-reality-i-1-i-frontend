@@ -1,36 +1,20 @@
+import { useEffect, useState } from 'react';
+import axios from '../../config/axios/axios';
+import { useParams } from 'react-router-dom';
 import Footer from '../../components/Footer/Footer';
-import styles from './PostDetailsPage.module.scss';
 import arrow_back from '../../assets/img/icons/icons-SignUp/arrow_back.svg';
 import ButtonBack from '../../components/ButtonBack/ButtonBack';
 import Post from '../../components/Content/Post/Post';
-// import Comments from '../../components/Content/Comments/Comments';
 import Contributions from '../../components/Content/Contributions/Contributions';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import axios from '../../config/axios/axios';
 import { URL_GET_POST_DETAILS, URL_USER_INFO_USER_ID } from '../../config/API_url';
+import styles from './PostDetailsPage.module.scss';
 
 const PostDetailsPage = () => {
-	// const navigate = useNavigate();
 	const { id } = useParams();
 	const [post, setPost] = useState(null);
 	const [user, setUser] = useState(null);
-	// const [editorState, setEditorState] = useState(EditorState.createEmpty());
 	const userId = post && post?.author;
 	const postId = post && post.id;
-	// const langUK = 'uk/';
-
-	// useEffect(() => {
-	// 	const fetchLanguage = async () => {
-	// 		try {
-	// 			await axios.get(`${URL_LANGUAGE}${langUK}`);
-	// 		} catch (error) {
-	// 			return error.message;
-	// 		}
-	// 	};
-
-	// 	fetchLanguage();
-	// }, []);
 
 	useEffect(() => {
 		const fetchPost = async () => {
@@ -77,7 +61,6 @@ const PostDetailsPage = () => {
 							post={post}
 							user={user}
 						/>
-						{/* <Comments /> */}
 					</div>
 					<Contributions postId={postId} />
 				</div>

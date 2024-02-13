@@ -8,19 +8,12 @@ import axios from '../../../config/axios/axios';
 import styles from './LinkExpired.module.scss';
 import CustomButton from '../../CustomButton/CustomButton';
 import { ConfigProvider } from 'antd';
-// import { useSelector } from 'react-redux';
 
 const LinkExpired = () => {
 	const navigate = useNavigate();
 
-	// const data = useSelector((state) => state.auth?.user);
-	// console.log(data);
-
 	const user = localStorage.getItem('userData');
-	// console.log('user', user);
 
-	// user && localStorage.setItem('userData', JSON.stringify(user));
-	// console.log(user);
 	const handleResend = async () => {
 		try {
 			const data = await axios.post(URL_RESEND_EMAIL, {
@@ -73,7 +66,6 @@ const LinkExpired = () => {
 							},
 						}}>
 						<CustomButton
-							// type=''
 							block={true}
 							className={styles.btn_home_back}
 							onClick={() => navigate('/')}>
@@ -88,27 +80,6 @@ const LinkExpired = () => {
 						</CustomButton>
 					</ConfigProvider>
 				</div>
-
-				{/* </div> */}
-				{/* <span className={`${styles.text} ${styles.margin_bottom}`}>
-					{t('textSignUp.clickOnTheLink')}
-				</span> */}
-				{/* <div className={styles.text}>
-					<span className={styles.text}>{t('textSignUp.didntNotGetTheEmail')}</span>
-				</div> */}
-
-				{/* <CountdownTimer
-					onTimerEnd={handleTimerEnd}
-					style={{ margin: '0 0 120px 0' }}
-				/> */}
-				{/* {showButton && (
-					<button
-						onClick={handleResend}
-						className={`${styles.text_link} ${styles.link_send}`}>
-						{t('textSignUp.buttonSandAgain')}
-					</button>
-				)} */}
-				{/* <AuthenticationWrapper currentPage={currentPage} /> */}
 			</div>
 		</div>
 	);

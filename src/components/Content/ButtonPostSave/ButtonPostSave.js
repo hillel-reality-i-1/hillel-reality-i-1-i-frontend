@@ -7,7 +7,7 @@ import { useGetUserDataQuery } from '../../../store/services/userApi';
 
 const ButtonPostSave = ({ postId }) => {
 	const [isSaved, setIsSaved] = useState(false);
-	const { data, error, isLoading, refetch } = useGetUserDataQuery();
+	const { data, refetch } = useGetUserDataQuery();
 	const savedPosts = data && data.saved_posts;
 
 	useEffect(() => {
@@ -46,10 +46,7 @@ const ButtonPostSave = ({ postId }) => {
 				placement='topLeft'
 				color={'rgba(3, 9, 28, 0.75'}
 				title={text}
-				overlayClassName='tooltip'
-				// open={true}
-				// arrow={true}
-			>
+				overlayClassName='tooltip'>
 				<svg
 					width='24'
 					height='24'

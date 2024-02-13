@@ -46,11 +46,6 @@ const VerifyInfo = ({ toggleSignUpModal }) => {
 		}
 	};
 
-	// const openModalSignUp = () => {
-	// 	console.log(toggleSignUpModal);
-	// 	toggleSignUpModal();
-	// };
-
 	return (
 		<>
 			<div className={styles.verify_info}>

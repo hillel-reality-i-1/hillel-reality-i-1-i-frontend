@@ -1,10 +1,10 @@
-import SortingPanel from '../SortingPanel/SortingPanel';
-import styles from './Contributions.module.scss';
-
 import axios from '../../../config/axios/axios';
 import { useEffect, useState } from 'react';
+import SortingPanel from '../SortingPanel/SortingPanel';
 import ContributionCard from '../ContributionCard/ContributionCard';
 import { useGetUserDataQuery } from '../../../store/services/userApi';
+
+import styles from './Contributions.module.scss';
 
 const Contributions = ({ postId }) => {
 	const { data } = useGetUserDataQuery();
@@ -12,10 +12,7 @@ const Contributions = ({ postId }) => {
 	const [contributions, setContributions] = useState([]);
 	const [countContributions, setCountContributions] = useState(0);
 	const userId = data && data.user;
-	// const postId = post && post.id;
-	// console.log(countContributions);
-	// console.log(contributions);
-	// console.log('postId', postId);
+
 	useEffect(() => {
 		const fetchGetContributions = async () => {
 			try {

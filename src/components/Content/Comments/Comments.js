@@ -1,24 +1,18 @@
 import { useEffect, useState } from 'react';
 import axios from '../../../config/axios/axios';
+import { useFormik } from 'formik';
+import { ConfigProvider } from 'antd';
 import Avatar from '../../../assets/img/icons/user-profile/Avatar.svg';
-
-import styles from './Comments.module.scss';
+import { useGetUserDataQuery } from '../../../store/services/userApi';
 import CustomButton from '../../CustomButton/CustomButton';
 import TextArea from 'antd/es/input/TextArea';
 import SortingPanel from '../SortingPanel/SortingPanel';
-import { useFormik } from 'formik';
 import CommentCard from '../CommentCard/CommentCard';
-import { useGetUserDataQuery } from '../../../store/services/userApi';
-import { ConfigProvider } from 'antd';
-// import { useSelector } from 'react-redux';
-// http://dmytromigirov.space/api/v1/content/post/{id}/comment/create
 
-// const postId = 304;
+import styles from './Comments.module.scss';
 
 const Comments = ({ postId }) => {
-	const { data, error, isLoading } = useGetUserDataQuery();
-	// const { useful, notUseful } = useSelector((state) => state.comments);
-	// const [comment, setComment] = useState([]);
+	const { data } = useGetUserDataQuery();
 	const [comments, setComments] = useState([]);
 	const [page, setPage] = useState(1);
 	const [countComments, setCountComments] = useState(0);
@@ -26,9 +20,7 @@ const Comments = ({ postId }) => {
 	const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
 
 	const userId = data && data.user;
-	console.log('isSubmitDisabled', isSubmitDisabled);
 
-	// console.log('page', page);
 	useEffect(() => {
 		const fetchGetPosts = async () => {
 			try {
@@ -37,10 +29,8 @@ const Comments = ({ postId }) => {
 					(await axios.get(`/api/v1/content/post/${postId}/comments`, {
 						params: { page: page, page_size: 5 },
 					}));
-				// console.log('response', response);
 
 				response?.results && setComments((prevComments) => [...prevComments, ...response?.results]);
-				// response?.results && setComments((prevComments) => [...response?.results, ...prevComments]);
 				response.count && setCountComments(response.count);
 			} catch (error) {
 				return error.message;
@@ -49,7 +39,6 @@ const Comments = ({ postId }) => {
 
 		fetchGetPosts();
 	}, [page, postId]);
-	// }, [page, postId]);
 
 	const fetchCreateComments = async (values) => {
 		try {
@@ -78,12 +67,6 @@ const Comments = ({ postId }) => {
 		setPage((prevPage) => prevPage + 1);
 	};
 
-	// const handleReactionChange = () => {
-
-	// 	setPage(1);
-	// 	setComments([]);
-	// };
-
 	const handleTextAreaChange = (e) => {
 		const value = e.target.value;
 		setTextAreaValue(value);
@@ -99,19 +82,14 @@ const Comments = ({ postId }) => {
 		const values = { comment: textAreaValue };
 
 		values?.comment && fetchCreateComments(values);
-
 		setTextAreaValue('');
 		setIsSubmitDisabled(true);
-		// formik.resetForm();
 	};
-
-	// comments && console.log('comments', comments);
 
 	const formik = useFormik({
 		initialValues: {
 			comment: '',
 		},
-		// validate: validateComment,
 		onSubmit: handleSubmit,
 	});
 
@@ -123,9 +101,7 @@ const Comments = ({ postId }) => {
 			/>
 			<form
 				className={styles.form}
-				onSubmit={formik.handleSubmit}
-				// encType='multipart/form-data'
-			>
+				onSubmit={formik.handleSubmit}>
 				<div className={styles.creation_comment}>
 					<div className={styles.creation_comment_input_wrapper}>
 						{data?.profile_picture?.image ? (
@@ -168,16 +144,9 @@ const Comments = ({ postId }) => {
 								rows={4}
 								placeholder='Розскажіть свою думку тут.'
 								maxLength={2000}
-								// onChange={(e) => {
-								// 	formik.handleChange(e);
-								// 	formik.setFieldValue('title', e.target.value);
-								// }}
 								onChange={handleTextAreaChange}
-								// onChange={formik.handleChange}
-								// value={formik.values.comment}
 								value={textAreaValue}
 								onBlur={formik.handleBlur}
-								// minLength='2'
 							/>
 						</ConfigProvider>
 					</div>
@@ -196,7 +165,6 @@ const Comments = ({ postId }) => {
 					comments.map((comment) => (
 						<CommentCard
 							key={comment.id}
-							// onhandleReactionChange={handleReactionChange}
 							onDelete={handlerDelete}
 							comment={comment}
 							userId={userId}

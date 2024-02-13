@@ -16,9 +16,8 @@ import StepForm1 from '../Step1Form/Step1Form';
 import StepForm2 from '../Step2Form/Step2Form';
 import StepForm3 from '../Step3Form/Step3Form';
 import { URL_CONFIRM_EMAIL, URL_SEND_VERIFICATION_CODE } from '../../../config/API_url';
-
-import styles from './StepLayout.module.scss';
 import { setAuthToken } from '../../../store/slices/signInSlice';
+import styles from './StepLayout.module.scss';
 
 const StepLayout = () => {
 	const { t } = useTranslation();
@@ -32,11 +31,9 @@ const StepLayout = () => {
 
 	useEffect(() => {
 		const fetchKey = async () => {
-			// console.log('test1');
 			const storedToken = localStorage.getItem('authTokenUHelp');
-			// if (!storedToken) {
+
 			try {
-				// console.log('test2');
 				const userToken =
 					token &&
 					(await axios.post(URL_CONFIRM_EMAIL, {
@@ -48,23 +45,9 @@ const StepLayout = () => {
 					dispatch(setAuthToken(userToken?.token));
 					console.log('testResponse', userToken);
 				}
-
-				// return;
-				// return userToken;
 			} catch (error) {
 				const errorMsg = error?.response.data.details;
-				// console.log(error);
-				// console.log(errorMsg);
-				// console.log('errorTest');
-				// return console.log(errorMsg);
-				// if (errorMsg === 'bad signature') {
-				// 	return navigate('/*');
-				// } else if (errorMsg === 'signature expired') {
-				// 	return navigate('/linkExpired');
-				// } else if (errorMsg === 'email address does not exist') {
-				// 	return navigate('/linkUsed');
 
-				// }
 				if (errorMsg.includes('bad signature')) {
 					return navigate('/*');
 				} else if (errorMsg.includes('signature expired')) {
@@ -73,7 +56,6 @@ const StepLayout = () => {
 					return navigate('/linkUsed');
 				}
 			}
-			// }
 		};
 
 		fetchKey();
@@ -136,7 +118,6 @@ const StepLayout = () => {
 				...formData2,
 				phone_number: phoneData,
 			};
-			// dispatch(saveDataUserProfile(combinedData));
 			await dispatch(fetchAddDataProfile(combinedData));
 
 			if (phoneData.length > 1) {

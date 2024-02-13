@@ -22,10 +22,6 @@ const ModalFooter = ({ toggleSignUpModal, toggleSignInModal, toggleSignUpFormMod
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	// const changeAuthToken = (authToken) => {
-	// 	dispatch(setAuthToken(authToken));
-	// };
-
 	const changeGoogleAuthToken = (authToken) => {
 		dispatch(setGoogleAuthToken(authToken));
 		toggleSignUpModal();

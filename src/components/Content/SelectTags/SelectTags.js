@@ -1,5 +1,3 @@
-// CountrySelect.js
-
 import React, { useEffect, useRef, useState } from 'react';
 import { ReactComponent as TagDel } from '../../../assets/img/icons/icon-create-post/icon_tag_del.svg';
 import styles from './PostCreationForm.module.scss';

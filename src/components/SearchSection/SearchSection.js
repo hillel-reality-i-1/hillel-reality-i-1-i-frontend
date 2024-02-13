@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-import { Button, Checkbox, ConfigProvider, Input, Select, Tooltip } from 'antd';
+import { Button, ConfigProvider, Input, Select } from 'antd';
 import { ReactComponent as IconSearch } from '../../assets/img/icons/icon-search-bar/icon_search.svg';
 import styles from './SearchSection.module.scss';
 import axios from '../../config/axios/axios';
@@ -16,10 +16,10 @@ const SearchSection = ({ onSearch }) => {
 	const [categorySelectedLabels, setCategorySelectedLabels] = useState([]);
 	const [selectAllChecked, setSelectAllChecked] = useState(false);
 
-	const selectAllOption = {
-		label: 'Обрати всі',
-		value: 'all',
-	};
+	// const selectAllOption = {
+	// 	label: 'Обрати всі',
+	// 	value: 'all',
+	// };
 
 	const optionsCountry = [
 		{
@@ -58,35 +58,8 @@ const SearchSection = ({ onSearch }) => {
 
 	const handleChangeCountry = (value, option) => {
 		setCountryId(value);
-
 		setSelectedLabels(option);
-
-		// console.log(option);
 	};
-
-	// const handleChangeCategory = (value, option) => {
-	// 	setProfCategoriesId(value);
-	// 	// setCategorySelectedLabels(option);
-	// 	setCategorySelectedLabels(option.filter((opt) => opt.value !== 'all'));
-	// 	// ================================================
-	// 	// if (value.includes('all')) {
-	// 	// 	setSelectAllChecked(!selectAllChecked);
-	// 	// }
-
-	// 	if (value.includes('all')) {
-	// 		setSelectAllChecked(!selectAllChecked);
-	// 		// if (selectAllChecked) {
-	// 		// 	setProfCategoriesId([]);
-	// 		// 	setCategorySelectedLabels([]);
-	// 		// } else {
-	// 		// 	setProfCategoriesId(profCategories.map((category) => category.value));
-	// 		// 	setCategorySelectedLabels(profCategories.slice(1)); // Exclude "Select All" option
-	// 		// }
-	// 	} else {
-	// 		setProfCategoriesId(value);
-	// 		setCategorySelectedLabels(option);
-	// 	}
-	// };
 
 	const handleChangeCategory = (value, option) => {
 		if (value.includes('all')) {
@@ -105,21 +78,7 @@ const SearchSection = ({ onSearch }) => {
 		}
 	};
 
-	// console.log('selectAllChecked', selectAllChecked);
-
-	// console.log('profCategoriesId', profCategoriesId);
-
-	// console.log('profCategories', profCategories);
-	// console.log('categorySelectedLabels', categorySelectedLabels);
-
 	const optionRenderCategory = (option) => {
-		// console.log(profCategories);
-
-		// return option.value === 'all' ? (
-		// 	<div checked={selectAllChecked}>{option.label}</div>
-		// ) : (
-		// 	<div>{option.label}</div>
-		// );
 		return option.value === 'all' ? (
 			<div
 				onClick={() => handleChangeCategory([option.value], [option])}
@@ -135,24 +94,7 @@ const SearchSection = ({ onSearch }) => {
 		);
 	};
 
-	// const selectAllChecked = (value) => {
-	// 	console.log(value);
-	// };
-
-	// const dropdownRenderCategory = (value, option) => {
-	// 	return (
-	// 		<div>
-	// 			<Checkbox>RRRRRRRR</Checkbox>
-	// 			console.log(value,option)
-	// 			{/* {menu} */}
-	// 			<div style={{ padding: '8px', cursor: 'pointer' }}></div>
-	// 		</div>
-	// 	);
-	// };
-
 	const countryTagRender = () => {
-		// console.log(selectedLabels);
-
 		if (selectedLabels.length === 1) {
 			return <div className={styles.selected_value}>{selectedLabels[0].label}</div>;
 		} else {
@@ -161,7 +103,6 @@ const SearchSection = ({ onSearch }) => {
 	};
 
 	const categoryTagRender = () => {
-		// console.log(selectedLabels);
 		if (categorySelectedLabels?.length === 1) {
 			return <div className={styles.selected_value}>{categorySelectedLabels[0].label}</div>;
 		} else {
@@ -212,7 +153,6 @@ const SearchSection = ({ onSearch }) => {
 								<Select
 									mode='multiple'
 									name='country'
-									// tagRender={'tagRender'}
 									maxTagCount={1}
 									filterOption={false}
 									bordered={false}
@@ -225,7 +165,6 @@ const SearchSection = ({ onSearch }) => {
 									onChange={handleChangeCountry}
 									options={optionsCountry}
 									tagRender={countryTagRender}
-									// value={countryId}
 								/>
 							</ConfigProvider>
 						</div>
@@ -280,23 +219,16 @@ const SearchSection = ({ onSearch }) => {
 										bordered={false}
 										filterOption={false}
 										placement='bottomRight'
-										// open={true}
 										style={{
 											width: '200px',
 											height: '100%',
 										}}
 										className={styles.select_category}
 										placeholder='Обрати категорію'
-										// defaultValue={['a10', 'c12']}
 										onChange={handleChangeCategory}
 										options={profCategories}
 										tagRender={categoryTagRender}
 										optionRender={optionRenderCategory}
-										// dropdownRender={dropdownRenderCategory}
-										// fieldNames={{ label: profCategories?.name, value: profCategories?.id }}
-										// onChange={formik.handleChangeCategory}
-										// onBlur={formik.handleBlur}
-										// value={profCategoriesId}
 									/>
 								</ConfigProvider>
 							</div>

@@ -1,10 +1,8 @@
 import { ConfigProvider, Input } from 'antd';
 import axios from '../../../config/axios/axios';
-// import qs from 'qs';
-
 import { useFormik } from 'formik';
 import CustomButton from '../../CustomButton/CustomButton';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
 	URL_GET_POST_DETAILS,
 	URL_POST_CREATE,
@@ -25,12 +23,10 @@ const PostCreationForm = () => {
 	const { TextArea } = Input;
 	const navigate = useNavigate();
 	const location = useLocation();
-	// console.log('location', id);
 	const [isModalOpen, setModalOpen] = useState(false);
 
 	const [selectedCategory, setSelectedCategory] = useState([]);
 	const [profCategories, setProfCategories] = useState(null);
-	// const [newPost, setNewPost] = useState(null);
 
 	const [changeHTMLText, setChangeHTMLText] = useState('');
 	const [characters, setCharacters] = useState(0);
@@ -60,45 +56,15 @@ const PostCreationForm = () => {
 	const [isValid, setIsValid] = useState(false);
 	const [dataTitle, setDataTitle] = useState('');
 
-	// ==============================//
-
-	// const [prevCountry, setPrevCountry] = useEffect(null);
-	// const [prevCountry,setPrevCountry]=useEffect(null)
-	// const [prevCountry,setPrevCountry]=useEffect(null)
-	// const [prevCountry,setPrevCountry]=useEffect(null)
-	// const [prevCountry,setPrevCountry]=useEffect(null)
-	// ================================//
-
 	const isLimitCategories = selectedCategory.length < 3;
 	const isChoiceOther = selectedCategory[0]?.id === 11;
-
-	// console.log('selectedCountries', selectedCountries);
-	// console.log('selectedCategory', selectedCategory);
-	// console.log('profCategories', profCategories);
-	// console.log('changeHTMLText', changeHTMLText);
 
 	// filling out fields when editing a post
 	useEffect(() => {
 		const fetchPost = async () => {
 			try {
 				const data = await axios.get(`${URL_GET_POST_DETAILS}${id}`);
-				// console.log('pstPut', data);
-
-				// const categories = [];
-
-				// profCategories.forEach((category) => {
-				// 	if (data.category.includes(category.name)) {
-				// 		categories.push(category);
-				// 	}
-				// });
-				// setSelectedCategory(categories);
 				formik.setFieldValue('title', data.title);
-
-				// formik.setFieldValue('content', data.content);
-
-				// setSelectedCategory(data.category);
-
-				// setSelectedCountries(data.country);
 			} catch (error) {
 				return error.message;
 			}
@@ -108,19 +74,10 @@ const PostCreationForm = () => {
 	}, [id]);
 
 	useEffect(() => {
-		// const handleBeforeUnload = (e) => {
-		// 	e.preventDefault();
-		// 	e.returnValue = '';
-		// };
 		const handleBeforeUnload = (e) => {
-			// if (location.pathname === '/postCreationPage') {
-			// setModalOpen(true);
 			e.preventDefault();
 			e.returnValue = '';
 		};
-		// };
-
-		// window.addEventListener('beforeunload', handleBeforeUnload);
 		window.addEventListener('beforeunload', handleBeforeUnload);
 
 		return () => {
@@ -129,14 +86,9 @@ const PostCreationForm = () => {
 	}, [location.pathname]);
 
 	const onChangeHTMLText = async (text, characters) => {
-		// console.log('text', text);
-		// console.log('characters', characters);
 		setChangeHTMLText(text);
 		setCharacters(characters);
 	};
-	// console.log('selectedFile', selectedFile);
-	// console.log('previewImage', previewImage);
-	// console.log(characters);
 
 	useEffect(() => {
 		const fetchCategories = async () => {
@@ -215,10 +167,7 @@ const PostCreationForm = () => {
 			const categorySelect = selectCategoryRef.current;
 
 			if (countrySelect && !countrySelect.contains(event.target)) {
-				// console.log('!!!', isCountryLength);
-				// console.log('isOnBlure', isOnBlure);
 				if (!isCountryLength && isOnBlure) {
-					console.log('@@@@@@Список стран закрыт');
 					setErrorMsgCountry(true);
 				} else {
 					setErrorMsgCountry(false);
@@ -323,8 +272,6 @@ const PostCreationForm = () => {
 
 	const handleSubmit = async (values) => {
 		try {
-			// console.log(values.category);
-
 			const formData = new FormData();
 
 			values?.category.forEach((category) => {
@@ -346,7 +293,6 @@ const PostCreationForm = () => {
 				},
 			};
 			await axios.post(URL_POST_CREATE, formData, config);
-			// openModal();
 			navigate(-1);
 		} catch (error) {
 			return error.message;
@@ -369,21 +315,14 @@ const PostCreationForm = () => {
 		setDataTitle(formik.values.title);
 	}, [formik.values.title]);
 
-	// setDataTitle(formik.values.title);
-	// console.log(dataTitle);
-
 	const isLimitContent = characters > 99 && characters < 10000 && true;
 	const isLimitTitle = dataTitle.length > 1 && dataTitle.length < 100 && true;
-
-	// console.log(isLimitContent);
 
 	return (
 		<div className={styles.form_container}>
 			<form
 				className={styles.form}
-				onSubmit={formik.handleSubmit}
-				// encType='multipart/form-data'
-			>
+				onSubmit={formik.handleSubmit}>
 				<div className={styles.input_wrapper}>
 					<div className={styles.input_left_col}>
 						<div className={styles.input_title}>
@@ -411,8 +350,6 @@ const PostCreationForm = () => {
 								}}>
 								<TextArea
 									name='title'
-									// onChange={formik.handleChange}
-									// value={formik.values.title}
 									onChange={(e) => {
 										formik.handleChange(e);
 										formik.setFieldValue('title', e.target.value);
@@ -424,11 +361,6 @@ const PostCreationForm = () => {
 									autoSize={{
 										minRows: 1,
 									}}
-									// count={{
-									// 	show: true,
-									// 	min: 2,
-									// 	max: 100,
-									// }}
 									style={{
 										height: 62,
 										resize: 'none',
@@ -454,7 +386,6 @@ const PostCreationForm = () => {
 								onChangeHTMLText={onChangeHTMLText}
 								name='content'
 								placeholder='Почніть писати текст... '
-								// onChange={formik.handleChangeContent}
 								onBlur={formik.handleBlur}
 								value={changeHTMLText}
 							/>

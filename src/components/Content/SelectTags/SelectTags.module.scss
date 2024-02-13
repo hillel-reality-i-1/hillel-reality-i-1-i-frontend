@@ -1,9 +1,5 @@
 @import '../../../styles/constants.scss';
 
-// .input_right_col {
-//   width: 100%;
-//   max-width: 410px;
-
 .select_title {
 	display: inline-block;
 	color: $color-gray80;
@@ -185,7 +181,6 @@
 		}
 	}
 }
-// }
 
 .select_country {
 	&_selected_active {

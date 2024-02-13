@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from 'react';
-
 import axios from '../../../config/axios/axios';
 import { useTranslation } from 'react-i18next';
 import '../../../translations/i18n';
-
 import { Formik, Form, Field } from 'formik';
 import { Spin } from 'antd';
-// import location from '../../../assets/img/icons/icons-SignUp/location.svg';
 import { URL_COUNTRY_LIST, URL_CITY_LIST, URL_LANGUAGE } from '../../../config/API_url';
-
 import CustomButton from '../../CustomButton/CustomButton';
 import styles from './Step2Form.module.scss';
 

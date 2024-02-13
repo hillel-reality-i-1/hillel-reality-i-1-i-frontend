@@ -4,8 +4,6 @@
 	width: 100%;
 	max-width: 845px;
 	height: 100%;
-	// min-height: 258px;
-
 	padding: 16px;
 	border-radius: 24px;
 	background-color: $color-gray;
@@ -14,10 +12,6 @@
 		display: flex;
 		flex-direction: column;
 		gap: 8px;
-
-		// .content_wrapper {
-		// 	width: 100%;
-		// }
 	}
 }
 
@@ -29,7 +23,6 @@
 
 	.user {
 		display: flex;
-		// width: 100%;
 
 		.user_data_wrapper {
 			display: flex;
@@ -48,21 +41,6 @@
 					font-weight: 500;
 					line-height: 160%;
 				}
-
-				// .label_vr_exp_wrapper {
-				// 	display: flex;
-				// 	margin-left: 8px;
-
-				// 	.expert_badge {
-				// 		font-family: $font-ns-regular;
-				// 		line-height: 160%;
-				// 		font-size: 14px;
-				// 		color: $color-primary30base;
-				// 		border-radius: 24px;
-				// 		padding: 4px 8px;
-				// 		background-color: #e1ebf8;
-				// 		margin-left: 8px;
-				// 	}
 			}
 		}
 
@@ -76,13 +54,6 @@
 			line-height: 160%;
 		}
 	}
-
-	// .time_of_creation {
-	// 	font-family: $font-ns-regular;
-	// 	line-height: 160%;
-	// 	font-size: 14px;
-	// 	color: $color-gray50;
-	// }
 }
 
 .content {
@@ -97,8 +68,6 @@
 		max-height: 70px;
 		overflow: hidden;
 		word-wrap: break-word;
-		// display: inline;
-		// text-overflow: ellipsis;
 	}
 
 	.btn_read_more {
@@ -108,7 +77,6 @@
 		line-height: 160%;
 		font-size: 14px;
 		color: $color-primary30base;
-		// margin-left: 10px;
 	}
 
 	.expanded {

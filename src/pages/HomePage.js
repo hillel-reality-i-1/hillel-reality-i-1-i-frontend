@@ -63,8 +63,7 @@ export default function HomePage() {
 							page: page,
 						},
 					});
-					// setCountPosts(0);
-					// setPosts([]);
+
 					setCountPosts(data.count);
 					setIsSearch(false);
 					setIsLoading(false);

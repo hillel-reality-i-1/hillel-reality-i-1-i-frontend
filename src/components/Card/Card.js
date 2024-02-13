@@ -1,16 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
-
+import { useEffect, useState } from 'react';
 import axios from '../../config/axios/axios';
-import img_card from '../../assets/img/img_card/img_card.png';
 import Avatar from '../../assets/img/icons/user-profile/Avatar.svg';
 import icon_expert from '../../assets/img/icons/post/icon_expert.svg';
-
-import icon_like from '../../assets/img/icons/post/icon_like.svg';
 import icon_comments from '../../assets/img/icons/post/icon_comments.svg';
 import { calculateReadTime } from '../../helpers/calculateReadTime';
 import { formatTimeElapsed } from '../../helpers/formatTimeElapsed';
 import { URL_LANGUAGE, URL_USER_INFO_USER_ID } from '../../config/API_url';
-// import icon_active_dropdown from '../../assets/img/icons/icon-search-bar/icon_active_dropdown.svg';
 import styles from './Card.module.scss';
 import { Link } from 'react-router-dom';
 import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
@@ -77,36 +72,12 @@ const Card = ({ posts, bgColor }) => {
 		getEditorStateFromPostData();
 	}, [postData]);
 
-	// const handleSaveClick = async () => {
-	// 	try {
-	// 		const response = postId && (await axios.post(`/api/v1/content/post/${postId}/save-remove/`));
-	// 		console.log(response);
-
-	// 		if (response.status === 200 && response.message === 'Допис успішно додано в обране.') {
-	// 			setIsSaved(true);
-	// 		} else if (
-	// 			response.status === 200 &&
-	// 			response.detail === 'Допіс успишно видалено з обраного'
-	// 		) {
-	// 			setIsSaved(false);
-	// 		} else {
-	// 			return;
-	// 		}
-	// 	} catch (error) {
-	// 		return error.message;
-	// 	}
-	// };
-
 	const timeForRead = postData && calculateReadTime(postData?.content);
 	const timeElapsed = postData && formatTimeElapsed(postData?.creation_date);
 	const userCity = user?.user_profile?.city && user?.user_profile?.city.split(',')[0];
-
 	const rawContentState = draftToHtml(convertToRaw(editorState.getCurrentContent()));
-
 	const isImage = postData?.image_to_post;
-	// console.log('isSaved', isSaved);
-	// console.log('user', user);
-	// console.log('postData', postData);
+
 	return (
 		<div
 			style={bgColor}
@@ -178,11 +149,7 @@ const Card = ({ posts, bgColor }) => {
 						<span className={styles.post_user}>{postData?.country[0]}</span>
 						<span className={styles.post_category}>{postData?.category[0]}</span>
 
-						<ButtonPostSave
-							postId={postId}
-							// isSaved={isPostSaved}
-							// onSave={handleSavePost}
-						/>
+						<ButtonPostSave postId={postId} />
 						<span className={styles.time_read}>{timeForRead} хв читати</span>
 					</div>
 					<div className={styles.content_footer_right_col}>
@@ -197,13 +164,11 @@ const Card = ({ posts, bgColor }) => {
 							<span>0</span>
 						</div> */}
 						<div className={styles.comments_wrapper}>
-							{/* <button className={styles.btn_comments}> */}
 							<img
 								src={icon_comments}
 								alt='Comments'
 								className={styles.img_comments}
 							/>
-							{/* </button> */}
 							<span>{postData?.comments?.length}</span>
 						</div>
 					</div>
@@ -218,7 +183,6 @@ const Card = ({ posts, bgColor }) => {
 						className={styles.image_post}
 						src={`${process.env.REACT_APP_API_BASE_URL}${postData?.image_to_post}`}
 						alt='Зображення к допису'
-						// style={{ width: '192px', height: '100%', display: 'block' }}
 					/>
 				</figure>
 			)}

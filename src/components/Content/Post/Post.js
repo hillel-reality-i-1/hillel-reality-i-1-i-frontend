@@ -1,43 +1,30 @@
 import { useEffect, useState } from 'react';
-
+import { Link, useNavigate } from 'react-router-dom';
 import axios from '../../../config/axios/axios';
-// import img_card from '../../assets/img/img_card/img_card.png';
 import Avatar from '../../../assets/img/icons/user-profile/Avatar.svg';
 import icon_expert from '../../../assets/img/icons/post/icon_expert.svg';
-// import icon_save from '../../../assets/img/icons/post/icon_save.svg';
 import icon_like from '../../../assets/img/icons/post/icon_like.svg';
 import icon_dot_menu from '../../../assets/img/icons/post/icon_dot_menu.svg';
-// import icon_comments from '../../../assets/img/icons/post/icon_comments.svg';
 import icon_delete from '../../../assets/img/icons/post/icon_delete.svg';
-import icon_pencil from '../../../assets/img/icons/post/icon_pencil.svg';
 import { calculateReadTime } from '../../../helpers/calculateReadTime';
 import { formatTimeElapsed } from '../../../helpers/formatTimeElapsed';
-import { URL_GET_POST_DETAILS, URL_LANGUAGE, URL_USER_INFO_USER_ID } from '../../../config/API_url';
-// import CustomButton from '../../CustomButton/CustomButton';
+import { URL_LANGUAGE } from '../../../config/API_url';
 import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
-
-// import SortingPanel from '../SortingPanel/SortingPanel';
-
-import styles from './Post.module.scss';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-// import TextArea from 'antd/es/input/TextArea';
 import ButtonPostSave from '../ButtonPostSave/ButtonPostSave';
 import Comments from '../Comments/Comments';
 import { Dropdown } from 'antd';
 import { useGetUserDataQuery } from '../../../store/services/userApi';
 
+import styles from './Post.module.scss';
+
 const Post = ({ post, user }) => {
 	const navigate = useNavigate();
-	const { id } = useParams();
 	const { data } = useGetUserDataQuery();
-	// const [isMyPost, setMyPost] = useState(false);
-	// const [user, setUser] = useState(null);
 	const [editorState, setEditorState] = useState(EditorState.createEmpty());
 	const userId = post && post?.author;
 	const postId = post && post.id;
 	const langUK = 'uk/';
-
 	const isMyPost = data?.user === userId;
 
 	useEffect(() => {
@@ -51,33 +38,6 @@ const Post = ({ post, user }) => {
 
 		fetchLanguage();
 	}, []);
-
-	// useEffect(() => {
-	// 	const fetchPost = async () => {
-	// 		try {
-	// 			const data = await axios.get(`${URL_GET_POST_DETAILS}${id}`);
-
-	// 			setPost(data);
-	// 		} catch (error) {
-	// 			return error.message;
-	// 		}
-	// 	};
-
-	// 	fetchPost();
-	// }, [id]);
-
-	// useEffect(() => {
-	// 	const fetchUserInfo = async () => {
-	// 		try {
-	// 			const data = userId && (await axios.get(`${URL_USER_INFO_USER_ID}${userId}`));
-	// 			setUser(data);
-	// 		} catch (error) {
-	// 			return error.message;
-	// 		}
-	// 	};
-
-	// 	fetchUserInfo();
-	// }, [userId]);
 
 	// function for converting data from the server to EditorState
 	useEffect(() => {
@@ -109,9 +69,9 @@ const Post = ({ post, user }) => {
 		}
 	};
 
-	const handlerPostEditing = () => {
-		navigate(`/postEditing/${id}`, { replace: true });
-	};
+	// const handlerPostEditing = () => {
+	// 	navigate(`/postEditing/${id}`, { replace: true });
+	// };
 
 	const timeForRead = post && calculateReadTime(post?.content);
 	const timeElapsed = post && formatTimeElapsed(post?.creation_date);
@@ -230,11 +190,9 @@ const Post = ({ post, user }) => {
 									className={styles.image_post}
 									src={`${process.env.REACT_APP_API_BASE_URL}${post?.image_to_post}`}
 									alt='Зображення к допису'
-									// style={{ width: '192px', height: '100%', display: 'block' }}
 								/>
 							</figure>
 						)}
-						{/* <img src={} className={styles.post_content_img} /> */}
 						<div
 							className={styles.post_content_text}
 							dangerouslySetInnerHTML={rawContentState && { __html: rawContentState }}
@@ -258,15 +216,10 @@ const Post = ({ post, user }) => {
 										{item}
 									</span>
 								))}
-							{/* <span className={styles.post_footer_tags_label}>{post?.category}</span> */}
 						</div>
 						<div className={styles.post_footer_bottom}>
 							<div className={styles.post_footer_bottom_left_col}>
-								<ButtonPostSave
-									postId={postId}
-									// isSaved={isPostSaved}
-									// onSave={handleSavePost}
-								/>
+								<ButtonPostSave postId={postId} />
 								<span className={styles.time_read}>{timeForRead} min read</span>
 							</div>
 
@@ -282,29 +235,6 @@ const Post = ({ post, user }) => {
 				</div>
 			</div>
 			<div className={styles.comments}>
-				{/* <SortingPanel nameResult='коментарів' /> */}
-				{/* <div className={styles.creation_comment}>
-					<div className={styles.creation_comment_input_wrapper}>
-						<img
-							src={Avatar}
-							alt='Avatar'
-							style={{ width: '56px', height: '56px', marginRight: '16px' }}
-						/>
-						<TextArea
-							rows={4}
-							placeholder='Розскажіть свою думку тут.'
-							// maxLength={6}
-						/>
-					</div>
-				</div>
-				<div className={styles.creation_comment_btn_wrapper}>
-					<CustomButton
-						htmlType='submit'
-						type='primary'
-						isDisable={true}>
-						Залишити коментар
-					</CustomButton>
-				</div> */}
 				<Comments postId={postId} />
 			</div>
 		</>

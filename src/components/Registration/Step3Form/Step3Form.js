@@ -14,9 +14,8 @@ import flag_de from '../../../assets/img/icons/icons-SignUp/flag_de.svg';
 import flag_cz from '../../../assets/img/icons/icons-SignUp/flag_cz.svg';
 import error from '../../../assets/img/icons/icons-SignUp/error.svg';
 import axios from '../../../config/axios/axios';
-
-import styles from './Step3Form.module.scss';
 import { URL_USERNAME_OR_PHONE_CHECK_UNIQUE } from '../../../config/API_url';
+import styles from './Step3Form.module.scss';
 
 const phoneUtil = PhoneNumberUtil.getInstance();
 const isPhoneValid = (phone) => {
@@ -108,8 +107,6 @@ const Step3Form = ({ onNext, onPhoneChange }) => {
 			setErrorMessage('');
 		}
 	}, [isNotUniqueness, isValid, phone.length]);
-
-	// console.log(phone);
 
 	return (
 		<>
