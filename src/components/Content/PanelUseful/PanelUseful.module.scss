@@ -1,6 +1,8 @@
 @import '../../../styles/constants.scss';
 
 .block_useful {
+	display: flex;
+	align-items: center;
 	color: $color-gray50;
 	font-family: $font-ns-medium;
 	font-size: 16px;
@@ -8,7 +10,6 @@
 	font-weight: 500;
 	line-height: 160%;
 	height: 40px;
-	display: flex;
 	padding: 4px 12px;
 	border-radius: 12px;
 	box-shadow: 0px 2px 8px 0px rgba(167, 167, 178, 0.2);
@@ -26,5 +27,13 @@
 
 	.text_useful {
 		margin: 0 8px;
+	}
+}
+
+.btn_useful {
+	display: flex;
+	align-items: center;
+	svg {
+		display: block;
 	}
 }

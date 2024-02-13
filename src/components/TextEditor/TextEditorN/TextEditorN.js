@@ -168,8 +168,11 @@ const TextEditorN = ({ onChangeHTMLText, placeholder }) => {
 	const contentState = editorState.getCurrentContent();
 	const rawContentState = convertToRaw(contentState);
 	const contentJSON = JSON.stringify(rawContentState);
+	const textClear = contentState.getPlainText('');
 
-	const characters = contentState.selectionAfter.anchorOffset;
+	// console.log('contentState', contentState);
+
+	const characters = textClear.length;
 
 	// Assuming onChangeHTMLText is a function to send data to the server
 	// contentJSON && onChangeHTMLText(contentJSON);

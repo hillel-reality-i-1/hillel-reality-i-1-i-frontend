@@ -52,8 +52,6 @@ const Post = ({ post, user }) => {
 		fetchLanguage();
 	}, []);
 
-	console.log('user', user);
-
 	// useEffect(() => {
 	// 	const fetchPost = async () => {
 	// 		try {

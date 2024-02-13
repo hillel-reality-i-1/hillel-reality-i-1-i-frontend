@@ -20,8 +20,6 @@ const PostDetailsPage = () => {
 	const postId = post && post.id;
 	// const langUK = 'uk/';
 
-	console.log(user);
-
 	// useEffect(() => {
 	// 	const fetchLanguage = async () => {
 	// 		try {

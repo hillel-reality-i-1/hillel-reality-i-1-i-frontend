@@ -324,3 +324,15 @@
 		margin-top: 36px;
 	}
 }
+
+.error {
+	font-family: $font-ns-regular;
+	display: flex;
+	align-items: center;
+	color: $color-systemError;
+	font-size: 14px;
+	margin-top: 8px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 160%;
+}

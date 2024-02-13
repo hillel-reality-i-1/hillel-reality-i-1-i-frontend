@@ -4,22 +4,21 @@ import axios from '../../../config/axios/axios';
 
 import { useFormik } from 'formik';
 import CustomButton from '../../CustomButton/CustomButton';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import {
 	URL_GET_POST_DETAILS,
 	URL_POST_CREATE,
 	URL_PROF_CATEGORIES,
 } from '../../../config/API_url';
 import { ReactComponent as TagDel } from '../../../assets/img/icons/icon-create-post/icon_tag_del.svg';
-
-import styles from './PostCreationForm.module.scss';
-import './PostCreationForm.scss';
-import 'draft-js/dist/Draft.css';
-
+import error from '../../../assets/img/icons/icons-SignUp/error.svg';
 import TextEditorN from '../../TextEditor/TextEditorN/TextEditorN';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import ImageUploader from '../../ImageUploader/ImageUploader';
 import ModalInfo from '../../ModalInfo/ModalInfo';
+import styles from './PostCreationForm.module.scss';
+import './PostCreationForm.scss';
+import 'draft-js/dist/Draft.css';
 
 const PostCreationForm = () => {
 	const { id } = useParams();
@@ -43,6 +42,14 @@ const PostCreationForm = () => {
 		{ id: 3, name: 'Велика Британія' },
 		{ id: 4, name: 'Польща' },
 	]);
+	// errorMsg==============//
+	const [isCountryLength, setCountryLength] = useState(false);
+	const [isOnBlure, setOnBlur] = useState(false);
+	const [isErrorMsgCountry, setErrorMsgCountry] = useState(false);
+	const [isCategoryLength, setCategoryLength] = useState(false);
+	const [isCategoryOnBlure, setCategoryOnBlur] = useState(false);
+	const [isErrorMsgCategory, setErrorMsgCategory] = useState(false);
+	// errorMsg==============//
 
 	const [isCountryVisible, setCountryVisible] = useState(false);
 	const [isCategoryVisible, setCategoryVisible] = useState(false);
@@ -75,7 +82,7 @@ const PostCreationForm = () => {
 		const fetchPost = async () => {
 			try {
 				const data = await axios.get(`${URL_GET_POST_DETAILS}${id}`);
-				console.log('pstPut', data);
+				// console.log('pstPut', data);
 
 				// const categories = [];
 
@@ -122,7 +129,8 @@ const PostCreationForm = () => {
 	}, [location.pathname]);
 
 	const onChangeHTMLText = async (text, characters) => {
-		// console.log(text);
+		// console.log('text', text);
+		// console.log('characters', characters);
 		setChangeHTMLText(text);
 		setCharacters(characters);
 	};
@@ -207,11 +215,25 @@ const PostCreationForm = () => {
 			const categorySelect = selectCategoryRef.current;
 
 			if (countrySelect && !countrySelect.contains(event.target)) {
+				// console.log('!!!', isCountryLength);
+				// console.log('isOnBlure', isOnBlure);
+				if (!isCountryLength && isOnBlure) {
+					console.log('@@@@@@Список стран закрыт');
+					setErrorMsgCountry(true);
+				} else {
+					setErrorMsgCountry(false);
+				}
 				// Click was outside country select
 				setCountryVisible(false);
 			}
 
 			if (categorySelect && !categorySelect.contains(event.target)) {
+				if (!isCategoryLength && isCategoryOnBlure) {
+					setErrorMsgCategory(true);
+				} else {
+					setErrorMsgCategory(false);
+				}
+
 				// Click was outside category select
 				setCategoryVisible(false);
 			}
@@ -222,7 +244,14 @@ const PostCreationForm = () => {
 		return () => {
 			document.removeEventListener('click', handleDocumentClick);
 		};
-	}, [selectCountryRef, selectCategoryRef]);
+	}, [
+		selectCountryRef,
+		selectCategoryRef,
+		isCountryLength,
+		isOnBlure,
+		isCategoryLength,
+		isCategoryOnBlure,
+	]);
 
 	const toggleCountryVisibility = () => {
 		setCountryVisible(!isCountryVisible);
@@ -253,25 +282,43 @@ const PostCreationForm = () => {
 	};
 
 	useEffect(() => {
+		if (selectedCountries.length >= 1) {
+			setCountryLength(true);
+		} else {
+			setCountryLength(false);
+		}
+
+		if (selectedCategory.length >= 1) {
+			setCategoryLength(true);
+		} else {
+			setCategoryLength(false);
+		}
+
 		if (
+			dataTitle.length >= 2 &&
+			dataTitle.length <= 100 &&
 			selectedCategory.length >= 1 &&
 			selectedCategory.length <= 3 &&
 			selectedCountries.length >= 1 &&
-			changeHTMLText.length > 1 &&
-			changeHTMLText.length < 10000
+			characters > 99 &&
+			characters < 10000
 		) {
 			setIsValid(true);
+		} else {
+			setIsValid(false);
 		}
-	}, [changeHTMLText.length, selectedCategory.length, selectedCountries.length]);
-
-	// console.log('selectedFile', selectedFile);
-
-	// const openModal = () => {
-	// 	setModalOpen(true);
-	// };
+	}, [characters, dataTitle.length, selectedCategory.length, selectedCountries.length]);
 
 	const closeModal = () => {
 		setModalOpen(false);
+	};
+
+	const handleCountrySelectBlur = () => {
+		setOnBlur(true);
+	};
+
+	const handleCategorySelectBlur = () => {
+		setCategoryOnBlur(true);
 	};
 
 	const handleSubmit = async (values) => {
@@ -325,7 +372,7 @@ const PostCreationForm = () => {
 	// setDataTitle(formik.values.title);
 	// console.log(dataTitle);
 
-	const isLimitContent = characters > 1 && characters < 10000 && true;
+	const isLimitContent = characters > 99 && characters < 10000 && true;
 	const isLimitTitle = dataTitle.length > 1 && dataTitle.length < 100 && true;
 
 	// console.log(isLimitContent);
@@ -411,8 +458,6 @@ const PostCreationForm = () => {
 								onBlur={formik.handleBlur}
 								value={changeHTMLText}
 							/>
-
-							{/* ========================content */}
 						</div>
 						<div className={styles.editor_wrapper_counter}>
 							<div
@@ -423,6 +468,7 @@ const PostCreationForm = () => {
 						</div>
 					</div>
 					<div className={styles.input_right_col}>
+						{/* ===============country============== */}
 						<div
 							className={styles.select_country}
 							ref={selectCountryRef}>
@@ -431,6 +477,8 @@ const PostCreationForm = () => {
 								className={`${styles.select_country_selected} ${
 									isCountryVisible && styles.select_country_selected_active
 								}`}
+								tabIndex='0'
+								onBlur={handleCountrySelectBlur}
 								onClick={toggleCountryVisibility}>
 								{selectedCountries.map((country) => (
 									<div
@@ -454,6 +502,17 @@ const PostCreationForm = () => {
 									))}
 								</div>
 							)}
+							{isErrorMsgCountry && (
+								<div className={styles.error}>
+									<img
+										className={styles.img_er}
+										style={{ width: '16px', height: '16px', marginRight: '4px' }}
+										src={error}
+										alt='error'
+									/>
+									Це обов’язкове поле. Будь ласка, заповніть його
+								</div>
+							)}
 						</div>
 
 						{/* ===category==================================== */}
@@ -467,6 +526,8 @@ const PostCreationForm = () => {
 								className={`${styles.select_category_selected} ${
 									isCategoryVisible && styles.select_category_selected_active
 								}`}
+								tabIndex='0'
+								onBlur={handleCategorySelectBlur}
 								onClick={toggleCategoryVisibility}>
 								{selectedCategory.map((category) => (
 									<div
@@ -492,6 +553,17 @@ const PostCreationForm = () => {
 											{category.name}
 										</div>
 									))}
+								</div>
+							)}
+							{isErrorMsgCategory && (
+								<div className={styles.error}>
+									<img
+										className={styles.img_er}
+										style={{ width: '16px', height: '16px', marginRight: '4px' }}
+										src={error}
+										alt='error'
+									/>
+									Це обов’язкове поле. Будь ласка, заповніть його
 								</div>
 							)}
 						</div>

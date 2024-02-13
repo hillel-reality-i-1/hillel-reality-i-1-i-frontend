@@ -90,7 +90,8 @@ const Comments = ({ postId }) => {
 		const values = { comment: textAreaValue };
 
 		values?.comment && fetchCreateComments(values);
-		formik.resetForm();
+		setTextAreaValue('');
+		// formik.resetForm();
 	};
 
 	// comments && console.log('comments', comments);
