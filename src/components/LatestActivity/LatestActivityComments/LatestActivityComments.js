@@ -6,6 +6,7 @@ import axios from 'axios';
 import { URL_COMMENT_ID } from '../../../config/API_url';
 import { useGetUserDataQuery } from '../../../store/services/userApi';
 
+
 const LatestActivityComments = () => {
 	const [visiblePosts, setVisiblePosts] = useState(5);
 	const [postDetails, setPostDetails] = useState([]);
@@ -36,6 +37,22 @@ const LatestActivityComments = () => {
 		fetchData();
 	}, [data.last_posts, visiblePosts]);
 
+	const handlerDelete = async (commentId) => {
+		try {
+			await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/v1/content/comment/${commentId}/delete`, {
+				headers: {
+					'Authorization': `Token ${localStorage.getItem('authTokenUHelp')}`,
+				},
+			});
+
+			const updatedPostDetails = postDetails.filter((comment) => comment.id !== commentId);
+			setPostDetails(updatedPostDetails);
+			setShownPosts(updatedPostDetails.slice(0, visiblePosts));
+		} catch (error) {
+			return error.message;
+		}
+	};
+
 	const handleNextPage = () => {
 		const nextVisiblePosts = visiblePosts + 5;
 		setShownPosts(postDetails.slice(0, nextVisiblePosts));
@@ -49,7 +66,7 @@ const LatestActivityComments = () => {
 
 					postDetails.length > 0 ? (shownPosts.map((comment, index) => (
 						<div key={index}>
-							<CommentCard comment={comment} bgColor={{ backgroundColor: styles.backgroundCardColor }} />
+							<CommentCard onDelete={handlerDelete} comment={comment} bgColor={{ backgroundColor: styles.backgroundCardColor }} />
 						</div>)
 					)) : null
 				}
