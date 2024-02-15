@@ -39,8 +39,6 @@ const LatestActivityContributions = () => {
 		fetchData();
 	}, [data.last_posts, visiblePosts]);
 
-	console.log(postDetails)
-
 	const handleNextPage = () => {
 		const nextVisiblePosts = visiblePosts + 5;
 		setShownPosts(postDetails.slice(0, nextVisiblePosts));

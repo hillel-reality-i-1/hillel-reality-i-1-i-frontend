@@ -16,8 +16,6 @@ export default function StatusInformation() {
     const location = useLocation();
     const message = location.state.message;
 
-    console.log(message)
-
     const onClick = () => {
         navigate('/forgotYourPasswordForm');
     };

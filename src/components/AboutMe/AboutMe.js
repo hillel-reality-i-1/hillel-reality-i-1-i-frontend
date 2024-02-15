@@ -96,14 +96,16 @@ const AboutMe = ({ userData, expertUserData }) => {
         navigate('/settings/services', { state: { user: { ...expertUserData } } });
     }
 
-    console.log(expertUserData)
-
     const NavigateToProfessionsEdit = () => {
         navigate('/settings/professions', { state: { user: { ...expertUserData } } });
     }
 
     const NavigateToSocialsEdit = () => {
         navigate('/settings/socials')
+    }
+
+    const NavigateToNumberEdit = () => {
+        navigate('/settings')
     }
 
     const openModal = () => {
@@ -125,7 +127,6 @@ const AboutMe = ({ userData, expertUserData }) => {
 
     const handlePrev = () => {
         setRightArrow(true)
-        console.log(visibleImages)
         setStartIndex(prev => Math.max(prev - 5, 0));
     };
 
@@ -478,7 +479,7 @@ const AboutMe = ({ userData, expertUserData }) => {
 
                     {!userData.phone_number && tubKey === '1' && (
 
-                        <button className={styles.no_content_button} onClick={() => { console.log('Додати телефон') }}>
+                        <button className={styles.no_content_button} onClick={() => NavigateToNumberEdit()}>
                             <img src={addIcon} alt='add icon' />
                             <span className={styles.no_content_text}>
                                 Додати телефон

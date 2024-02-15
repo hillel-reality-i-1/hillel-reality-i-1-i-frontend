@@ -3,19 +3,21 @@ import { Button } from 'antd';
 import Card from '../../Card/Card';
 import styles from './LatestActivityPosts.module.scss';
 import axios from 'axios';
+import { useGetUserDataQuery } from '../../../store/services/userApi';
 import { URL_GET_POST } from '../../../config/API_url';
 import { useNavigate } from 'react-router-dom';
 import BlueButton from '../../buttons/BlueButton/BlueButton';
 
-const LatestActivityPosts = ({ data }) => {
+const LatestActivityPosts = ( ) => {
   const [visiblePosts, setVisiblePosts] = useState(5);
   const [postDetails, setPostDetails] = useState([]);
   const [shownPosts, setShownPosts] = useState([]);
+  const { data, error, isLoading, refetch } = useGetUserDataQuery();
   const navigate = useNavigate();
 
   useEffect(() => {
     fetchData();
-  }, [data.last_posts, visiblePosts, navigate]);
+  }, [data.last_posts]);
 
   const handlePostCreation = async () => {
     navigate('/postCreationPage');
@@ -25,6 +27,7 @@ const LatestActivityPosts = ({ data }) => {
 
   const fetchData = async () => {
     try {
+      await refetch(); 
       const requests = data?.last_posts.map((number) =>
         axios.get(`${URL_GET_POST}${number}`, {
           headers: {

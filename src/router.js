@@ -127,8 +127,7 @@ const router = createBrowserRouter([
 	},
 	{ 
 		path: '/privacyPolicy', 
-		element: <PrivacyPolicy /> 
-	},
+		element: <PrivacyPolicy /> },
 	{
 		path: '/linkExpired',
 		element: <LinkExpired />,
