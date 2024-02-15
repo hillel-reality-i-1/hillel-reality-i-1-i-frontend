@@ -171,7 +171,7 @@ const Post = ({ post, user }) => {
 						<div className={styles.post_footer_bottom}>
 							<div className={styles.post_footer_bottom_left_col}>
 								<ButtonPostSave postId={postId} />
-								<span className={styles.time_read}>{timeForRead} min read</span>
+								<span className={styles.time_read}>{timeForRead} хв читати</span>
 							</div>
 
 							<div className={styles.post_footer_bottom_right_col}>

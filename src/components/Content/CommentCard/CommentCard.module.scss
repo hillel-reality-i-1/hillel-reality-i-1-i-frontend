@@ -13,6 +13,14 @@
 		flex-direction: column;
 		gap: 16px;
 	}
+
+	@media (max-width: 1060px) {
+		max-width: 100%;
+	}
+
+	@media (max-width: 768px) {
+		padding: 16px;
+	}
 }
 
 .content_header {
@@ -36,6 +44,10 @@
 					line-height: 160%;
 					font-size: 18px;
 					color: $color-gray80;
+
+					@media (max-width: 686px) {
+						font-size: 16px;
+					}
 				}
 
 				.label_vr_exp_wrapper {
@@ -71,6 +83,10 @@
 		font-size: 14px;
 		color: $color-gray50;
 	}
+
+	@media (max-width: 686px) {
+		flex-direction: column-reverse;
+	}
 }
 
 .content {
@@ -81,10 +97,14 @@
 		font-style: normal;
 		font-weight: 400;
 		line-height: 160%;
-
 		max-height: 76px;
 		overflow: hidden;
 		word-wrap: break-word;
+
+		@media (max-width: 686px) {
+			font-size: 14px;
+			max-height: 74px;
+		}
 	}
 
 	.btn_read_more {
@@ -94,6 +114,10 @@
 		line-height: 160%;
 		font-size: 16px;
 		color: $color-primary30base;
+
+		@media (max-width: 686px) {
+			font-size: 14px;
+		}
 	}
 
 	.expanded {
@@ -107,6 +131,11 @@
 	flex-direction: column;
 	align-items: flex-end;
 	gap: 4px;
+
+	@media (max-width: 686px) {
+		align-items: flex-start;
+		margin-bottom: 16px;
+	}
 }
 
 .btn_menu {
@@ -119,6 +148,11 @@
 	line-height: 160%;
 	display: flex;
 	padding: 1px 0;
+}
+
+.user_country_dot::before {
+	content: '•';
+	margin: 0 4px;
 }
 
 .content_footer {
