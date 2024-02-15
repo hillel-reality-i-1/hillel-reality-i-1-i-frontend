@@ -28,12 +28,8 @@ export default function UserPage() {
 
 				const userResponse = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/v1/auth/user/`, config);
 
-				console.log(userResponse)
-
 				const expertUserProfileData = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/v1/users/expert_user_profile_by_user_id/${userResponse.data.pk}/`,
 					config);
-
-				console.log("expert", expertUserProfileData)
 
 
 				setUserDataPortfolio(expertUserProfileData.data.portfolio)
@@ -41,7 +37,7 @@ export default function UserPage() {
 
 
 			} catch (error) {
-				console.log(error);
+				// console.log(error);
 			}
 		};
 

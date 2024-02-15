@@ -24,7 +24,10 @@ const LatestActivityContributions = () => {
 				);
 
 				const responses = await Promise.all(requests);
-				const sortedPostDetails = responses.map((response) => response.data).sort((a, b) => b.helpful_count - a.helpful_count);
+				const sortedPostDetails = responses
+					.map((response) => response.data)
+					.filter((comment) => comment.helpful_count > 0)
+					.sort((a, b) => b.helpful_count - a.helpful_count);
 
 				setPostDetails(sortedPostDetails);
 				setShownPosts(sortedPostDetails.slice(0, visiblePosts));

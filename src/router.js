@@ -123,8 +123,11 @@ const router = createBrowserRouter([
 				path: 'settings/location',
 				element: <LocationPage />,
 			},
-			{ path: '/privacyPolicy', element: <PrivacyPolicy /> },
 		],
+	},
+	{ 
+		path: '/privacyPolicy', 
+		element: <PrivacyPolicy /> 
 	},
 	{
 		path: '/linkExpired',

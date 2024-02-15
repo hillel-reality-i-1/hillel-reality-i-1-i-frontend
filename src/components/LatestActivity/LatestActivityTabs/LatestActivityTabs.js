@@ -4,7 +4,7 @@ import { ConfigProvider, Tabs } from 'antd';
 import { useGetUserDataQuery } from '../../../store/services/userApi';
 import LatestActivityPosts from '../LatestActivityPosts/LatestActivityPosts';
 import LatestActivityComments from '../LatestActivityComments/LatestActivityComments';
-import LatestActivityReactions from '../LatestActivityReactions/LatestActivityReactions';
+// import LatestActivityReactions from '../LatestActivityReactions/LatestActivityReactions';
 import LatestActivitySaved from '../LatestActivitySaved/LatestActivitySaved';
 import LatestActivityContributions from '../LatestActivityContributions/LatestActivityContributions';
 
@@ -27,11 +27,11 @@ const LatestActivityTabs = () => {
 			label: 'Внески',
 			children: <LatestActivityContributions />,
 		},
-		{
-			key: '4',
-			label: 'Реакції',
-			children: <LatestActivityReactions />,
-		},
+		// {
+		// 	key: '4',
+		// 	label: 'Реакції',
+		// 	children: <LatestActivityReactions />,
+		// },
 		{
 			key: '5',
 			label: 'Збережені',
