@@ -93,11 +93,13 @@ const AboutMe = ({ userData, expertUserData }) => {
     }
 
     const NavigateToServicesEdit = () => {
-        navigate('/settings/services')
+        navigate('/settings/services', { state: { user: { ...expertUserData } } });
     }
 
+    console.log(expertUserData)
+
     const NavigateToProfessionsEdit = () => {
-        navigate('/settings/professions')
+        navigate('/settings/professions', { state: { user: { ...expertUserData } } });
     }
 
     const NavigateToSocialsEdit = () => {
