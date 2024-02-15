@@ -2,6 +2,10 @@
 
 .container {
 	margin-top: 24px;
+
+	@media (max-width: 686px) {
+		margin-top: 16px;
+	}
 }
 
 .map_title {
@@ -9,6 +13,10 @@
 	font-size: 28px;
 	line-height: 130%;
 	color: $color-gray80;
+
+	@media (max-width: 686px) {
+		font-size: 24px;
+	}
 }
 
 .map_wrapper {

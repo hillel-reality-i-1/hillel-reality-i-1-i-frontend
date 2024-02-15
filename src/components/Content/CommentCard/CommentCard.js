@@ -112,54 +112,6 @@ const CommentCard = ({ comment, bgColor, userId, onDelete }) => {
 				</Link>
 				<div className={styles.col_right}>
 					<span className={styles.time_of_creation}>{timeElapsed}</span>
-					<div className={`${styles.post_menu} ${!isMyComment && styles.post_menu_visible}`}>
-						<Dropdown
-							overlayStyle={{ width: '138px' }}
-							menu={{
-								items: [
-									// {
-									// 	key: '1',
-									// 	label: (
-									// 		<button
-									// 			className={styles.btn_menu}
-									// 			onClick={handlerPostEditing}>
-									// 			<img
-									// 				src={icon_pencil}
-									// 				alt='pencil'
-									// 				style={{ marginRight: '8px' }}
-									// 			/>
-									// 			Редагувати
-									// 		</button>
-									// 	),
-									// },
-									{
-										key: '2',
-										label: (
-											<button
-												className={styles.btn_menu}
-												onClick={handlerDelete}>
-												<img
-													style={{ marginRight: '8px' }}
-													src={icon_delete}
-													alt='delete'
-												/>
-												Видалити
-											</button>
-										),
-									},
-								],
-							}}
-							className={styles.customMenu}
-							placement='bottomRight'
-							trigger={['click']}>
-							<img
-								className={styles.post_menu_img}
-								src={icon_dot_menu}
-								alt='Menu'
-								onClick={(e) => e.preventDefault()}
-							/>
-						</Dropdown>
-					</div>
 				</div>
 			</div>
 			<article
@@ -180,6 +132,54 @@ const CommentCard = ({ comment, bgColor, userId, onDelete }) => {
 					comment={comment}
 					userId={userId}
 				/>
+				<div className={`${styles.post_menu} ${!isMyComment && styles.post_menu_visible}`}>
+					<Dropdown
+						overlayStyle={{ width: '138px' }}
+						menu={{
+							items: [
+								// {
+								// 	key: '1',
+								// 	label: (
+								// 		<button
+								// 			className={styles.btn_menu}
+								// 			onClick={handlerPostEditing}>
+								// 			<img
+								// 				src={icon_pencil}
+								// 				alt='pencil'
+								// 				style={{ marginRight: '8px' }}
+								// 			/>
+								// 			Редагувати
+								// 		</button>
+								// 	),
+								// },
+								{
+									key: '2',
+									label: (
+										<button
+											className={styles.btn_menu}
+											onClick={handlerDelete}>
+											<img
+												style={{ marginRight: '8px' }}
+												src={icon_delete}
+												alt='delete'
+											/>
+											Видалити
+										</button>
+									),
+								},
+							],
+						}}
+						className={styles.customMenu}
+						placement='bottomRight'
+						trigger={['click']}>
+						<img
+							className={styles.post_menu_img}
+							src={icon_dot_menu}
+							alt='Menu'
+							onClick={(e) => e.preventDefault()}
+						/>
+					</Dropdown>
+				</div>
 			</div>
 		</div>
 	);

@@ -27,6 +27,7 @@ const Footer = () => {
 							<img
 								src={footer_logo_1}
 								alt='Logo'
+								className={styles.footer_logo}
 							/>
 							<img
 								className={styles.footer_logo_text}

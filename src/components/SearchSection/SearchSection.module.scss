@@ -133,7 +133,7 @@
 
 .search {
 	height: 418px;
-	padding: 80px;
+	padding: 80px 0;
 
 	animation: gradient 15s infinite linear;
 
@@ -162,8 +162,9 @@
 
 	&_container_content {
 		margin: 0 auto;
-
-		max-width: 1280px;
+		width: 100%;
+		max-width: 1360px;
+		padding: 0 40px;
 	}
 
 	&_title {
@@ -175,6 +176,10 @@
 		font-style: normal;
 		font-weight: 600;
 		line-height: 120%;
+
+		@media (max-width: 960px) {
+			font-size: 48px;
+		}
 	}
 }
 

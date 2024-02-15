@@ -127,23 +127,6 @@
 			font-size: 14px;
 			color: $color-gray50;
 		}
-
-		.post_menu {
-			display: flex;
-
-			&_img {
-				width: 24px;
-				height: 24px;
-
-				&:hover {
-					cursor: pointer;
-				}
-			}
-		}
-
-		.post_menu_visible {
-			display: none;
-		}
 	}
 }
 
@@ -157,6 +140,7 @@
 	line-height: 160%;
 	display: flex;
 	padding: 1px 0;
+	cursor: pointer;
 }
 
 .post_footer {
@@ -192,6 +176,23 @@
 		&_right_col {
 			display: flex;
 			align-items: center;
+
+			.post_menu {
+				display: flex;
+
+				&_img {
+					width: 24px;
+					height: 24px;
+
+					&:hover {
+						cursor: pointer;
+					}
+				}
+			}
+
+			.post_menu_visible {
+				display: none;
+			}
 		}
 	}
 }

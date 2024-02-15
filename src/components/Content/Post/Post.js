@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from '../../../config/axios/axios';
 import Avatar from '../../../assets/img/icons/user-profile/Avatar.svg';
 import icon_expert from '../../../assets/img/icons/post/icon_expert.svg';
-import icon_like from '../../../assets/img/icons/post/icon_like.svg';
+// import icon_like from '../../../assets/img/icons/post/icon_like.svg';
 import icon_dot_menu from '../../../assets/img/icons/post/icon_dot_menu.svg';
 import icon_delete from '../../../assets/img/icons/post/icon_delete.svg';
 import { calculateReadTime } from '../../../helpers/calculateReadTime';
@@ -129,55 +129,6 @@ const Post = ({ post, user }) => {
 					</Link>
 					<div className={styles.right_col}>
 						<span className={styles.time_of_creation}>{timeElapsed}</span>
-
-						<div className={`${styles.post_menu} ${!isMyPost && styles.post_menu_visible}`}>
-							<Dropdown
-								overlayStyle={{ width: '138px' }}
-								menu={{
-									items: [
-										// {
-										// 	key: '1',
-										// 	label: (
-										// 		<button
-										// 			className={styles.btn_menu}
-										// 			onClick={handlerPostEditing}>
-										// 			<img
-										// 				src={icon_pencil}
-										// 				alt='pencil'
-										// 				style={{ marginRight: '8px' }}
-										// 			/>
-										// 			Редагувати
-										// 		</button>
-										// 	),
-										// },
-										{
-											key: '2',
-											label: (
-												<button
-													className={styles.btn_menu}
-													onClick={handlerDelete}>
-													<img
-														style={{ marginRight: '8px' }}
-														src={icon_delete}
-														alt='delete'
-													/>
-													Видалити
-												</button>
-											),
-										},
-									],
-								}}
-								className={styles.customMenu}
-								placement='bottomRight'
-								trigger={['click']}>
-								<img
-									className={styles.post_menu_img}
-									src={icon_dot_menu}
-									alt='Menu'
-									onClick={(e) => e.preventDefault()}
-								/>
-							</Dropdown>
-						</div>
 					</div>
 				</div>
 				<div className={styles.post}>
@@ -224,11 +175,59 @@ const Post = ({ post, user }) => {
 							</div>
 
 							<div className={styles.post_footer_bottom_right_col}>
-								<img
+								<div className={`${styles.post_menu} ${!isMyPost && styles.post_menu_visible}`}>
+									<Dropdown
+										overlayStyle={{ width: '138px' }}
+										menu={{
+											items: [
+												// {
+												// 	key: '1',
+												// 	label: (
+												// 		<button
+												// 			className={styles.btn_menu}
+												// 			onClick={handlerPostEditing}>
+												// 			<img
+												// 				src={icon_pencil}
+												// 				alt='pencil'
+												// 				style={{ marginRight: '8px' }}
+												// 			/>
+												// 			Редагувати
+												// 		</button>
+												// 	),
+												// },
+												{
+													key: '2',
+													label: (
+														<button
+															className={styles.btn_menu}
+															onClick={handlerDelete}>
+															<img
+																style={{ marginRight: '8px' }}
+																src={icon_delete}
+																alt='delete'
+															/>
+															Видалити
+														</button>
+													),
+												},
+											],
+										}}
+										className={styles.customMenu}
+										placement='bottomRight'
+										trigger={['click']}>
+										<img
+											className={styles.post_menu_img}
+											src={icon_dot_menu}
+											alt='Menu'
+											onClick={(e) => e.preventDefault()}
+										/>
+									</Dropdown>
+								</div>
+								{/* <img
 									src={icon_like}
 									alt='Like'
 								/>
-								<span className={styles.quantity_likes}>2 тис</span>
+								<span className={styles.quantity_likes}>2 тис</span> */}
 							</div>
 						</div>
 					</div>

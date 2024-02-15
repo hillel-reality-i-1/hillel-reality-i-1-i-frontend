@@ -6,10 +6,15 @@ import styles from './Map.module.scss';
 import { defaultTheme } from './Theme';
 
 const containerStyle = {
-	width: '364px',
+	width: '100%',
 	height: '240px',
 	borderRadius: '24px',
 };
+// const containerStyle = {
+// 	width: window.innerWidth <= 768 ? '100%' : '364px',
+// 	height: window.innerWidth <= 768 ? '300px' : '240px',
+// 	borderRadius: window.innerWidth <= 768 ? '0' : '24px',
+// };
 
 const defaultOptions = {
 	panControl: true,

@@ -83,25 +83,31 @@ const Card = ({ posts, bgColor }) => {
 			style={bgColor}
 			className={`${styles.container} ${styles.card_wrapper}`}>
 			<div
-				className={styles.content_wrapper}
-				style={{ maxWidth: isImage ? '580px' : '' }}>
+				className={`${styles.content_wrapper} ${isImage ? styles.content_container : ''}`}
+				// style={{ maxWidth: isImage ? '580px' : '' }}
+			>
 				<div className={styles.content_header}>
 					<Link
 						to={`user/${userId}`}
 						replace={true}
 						className={styles.user}>
 						{user?.user_profile?.profile_picture ? (
-							<img
-								src={user?.user_profile?.profile_picture}
-								alt='Avatar'
-								style={{ width: '56px', height: '56px', borderRadius: '56px' }}
-							/>
+							<div className={styles.img_wrapper}>
+								<img
+									src={user?.user_profile?.profile_picture}
+									alt='Avatar'
+									className={styles.img_avatar}
+									style={{ borderRadius: '56px' }}
+								/>
+							</div>
 						) : (
-							<img
-								src={Avatar}
-								alt='Avatar'
-								style={{ width: '56px', height: '56px' }}
-							/>
+							<div className={styles.img_wrapper}>
+								<img
+									src={Avatar}
+									alt='Avatar'
+									className={styles.img_avatar}
+								/>
+							</div>
 						)}
 						<div className={styles.user_data_wrapper}>
 							<div className={styles.user_info_top_wrapper}>

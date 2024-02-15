@@ -6,4 +6,9 @@
 	line-height: 130%;
 	color: $color-gray80;
 	margin-bottom: 16px;
+
+	@media (max-width: 686px) {
+		font-size: 24px;
+		margin-bottom: 8px;
+	}
 }

@@ -23,6 +23,14 @@
 	width: 100%;
 	max-width: 158px;
 	margin-top: 46px;
+
+	@media (max-width: 768px) {
+		margin-top: 0;
+	}
+
+	@media (max-width: 686px) {
+		font-size: 14px;
+	}
 }
 
 .count_posts {
