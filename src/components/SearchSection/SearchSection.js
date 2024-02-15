@@ -134,10 +134,85 @@ const SearchSection = ({ onSearch }) => {
 		<section className={styles.search}>
 			<div className={styles.search_container_content}>
 				<h1 className={styles.search_title}> {t('heading')} </h1>
-				<div className={styles.search_bar}>
-					<form
-						className={styles.form}
-						onSubmit={formik.handleSubmit}>
+
+				<form
+					className={styles.form}
+					onSubmit={formik.handleSubmit}>
+					<div className={styles.select_container_mobile}>
+						{/* mobile select country============================= */}
+						<div className={styles.select_wrapper_mobile}>
+							<ConfigProvider
+								theme={{
+									components: {
+										// Select: { optionPadding: 20px 30px },
+									},
+									token: {
+										// borderRadius: '48px 0 0 48px',
+										colorTextPlaceholder: '#47474F',
+										colorText: '#47474F',
+										fontSize: 16,
+										lineHeight: '160%',
+									},
+								}}>
+								<Select
+									mode='multiple'
+									name='country'
+									maxTagCount={1}
+									filterOption={false}
+									bordered={false}
+									style={{
+										width: '100%',
+										// height: '100%',
+									}}
+									className={styles.select_country}
+									placeholder='Обрати країну'
+									onChange={handleChangeCountry}
+									options={optionsCountry}
+									tagRender={countryTagRender}
+								/>
+							</ConfigProvider>
+						</div>
+						{/* ============================= */}
+						{/* select mobile category ========================= */}
+						<div className={styles.select_wrapper_mobile}>
+							<ConfigProvider
+								theme={{
+									components: {
+										// Select: { optionPadding: 20px 30px },
+										Tooltip: { color: 'red' },
+									},
+									token: {
+										// borderRadius: '48px 0 0 48px',
+										colorTextPlaceholder: '#47474F',
+										colorText: '#47474F',
+										fontSize: 16,
+										lineHeight: '160%',
+									},
+								}}>
+								<Select
+									name='category'
+									mode='multiple'
+									maxTagCount={1}
+									bordered={false}
+									filterOption={false}
+									placement='bottomRight'
+									style={{
+										width: '100%',
+										// height: '100%',
+									}}
+									className={styles.select_category}
+									placeholder='Обрати категорію'
+									onChange={handleChangeCategory}
+									options={profCategories}
+									tagRender={categoryTagRender}
+									optionRender={optionRenderCategory}
+								/>
+							</ConfigProvider>
+						</div>
+						{/* =============================================== */}
+					</div>
+
+					<div className={styles.search_bar}>
 						{/* select country============================================/ */}
 
 						<div className={styles.select_wrapper}>
@@ -157,7 +232,7 @@ const SearchSection = ({ onSearch }) => {
 									filterOption={false}
 									bordered={false}
 									style={{
-										width: '200px',
+										width: '250px',
 										height: '100%',
 									}}
 									className={styles.select_country}
@@ -240,8 +315,8 @@ const SearchSection = ({ onSearch }) => {
 								icon={<IconSearch />}
 							/>
 						</div>
-					</form>
-				</div>
+					</div>
+				</form>
 			</div>
 		</section>
 	);

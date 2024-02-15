@@ -162,6 +162,8 @@
 
 .content {
 	padding: 16px 0;
+	width: 100%;
+	word-break: break-word;
 
 	@media (max-width: 686px) {
 		padding: 8px 0;

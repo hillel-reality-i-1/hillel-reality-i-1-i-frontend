@@ -56,6 +56,10 @@
 		.ant-select-selector {
 			padding: 14px 38px 14px 24px;
 
+			@media (max-width: 686px) {
+				padding: 10px 38px 10px 22px;
+			}
+
 			.ant-select-selection-placeholder {
 				padding-left: 8px;
 				font-family: $font-ns-regular;
@@ -165,6 +169,10 @@
 		width: 100%;
 		max-width: 1360px;
 		padding: 0 40px;
+
+		@media (max-width: 768px) {
+			padding: 0 20px;
+		}
 	}
 
 	&_title {
@@ -180,10 +188,24 @@
 		@media (max-width: 960px) {
 			font-size: 48px;
 		}
+
+		@media (max-width: 768px) {
+			font-size: 36px;
+		}
+
+		@media (max-width: 686px) {
+			font-size: 32px;
+		}
+	}
+
+	@media (max-width: 768px) {
+		padding: 60px 0;
+		height: 100%;
+		// max-height: 300px;
 	}
 }
 
-.form {
+.search_bar {
 	width: 100%;
 	height: 72px;
 	max-width: 845px;
@@ -193,6 +215,28 @@
 	background-color: $color-gray;
 	border-radius: 48px;
 	border: 1px solid $color-gray30;
+
+	@media (max-width: 940px) {
+		height: 58px;
+	}
+
+	@media (max-width: 686px) {
+		margin-top: 16px;
+		height: 52px;
+	}
+}
+
+.form {
+	// width: 100%;
+	// height: 72px;
+	// max-width: 845px;
+	// display: flex;
+	// justify-content: space-between;
+	// margin-top: 32px;
+	// background-color: $color-gray;
+	// border-radius: 48px;
+	// border: 1px solid $color-gray30;
+
 	.select_wrapper {
 		.select_country {
 			position: relative;
@@ -207,6 +251,10 @@
 				height: 38px;
 				background-color: $color-gray30;
 			}
+		}
+
+		@media (max-width: 940px) {
+			display: none;
 		}
 	}
 
@@ -255,6 +303,16 @@
 				background-color: $color-primary20;
 				border: 1px solid $color-primary20;
 			}
+
+			@media (max-width: 940px) {
+				margin: 0 6px;
+			}
+
+			@media (max-width: 686px) {
+				width: 36px;
+				height: 36px;
+				padding: 6px 0;
+			}
 		}
 	}
 
@@ -275,11 +333,59 @@
 	.input_search {
 		padding: 14px;
 		color: $color-gray50;
-
 		font-family: $font-ns-regular;
 		font-size: 16px;
 		font-style: normal;
 		font-weight: 400;
 		line-height: 160%;
+
+		@media (max-width: 940px) {
+			padding-left: 24px;
+		}
+	}
+
+	// select mobile=====/
+	.select_container_mobile {
+		display: none;
+
+		.select_wrapper_mobile {
+			width: 100%;
+			max-width: 250px;
+
+			.select_country {
+				position: relative;
+				background-color: $color-gray;
+				border-radius: 48px;
+
+				@media (max-width: 686px) {
+					max-height: 52px;
+				}
+			}
+
+			.select_category {
+				position: relative;
+				background-color: $color-gray;
+				border-radius: 48px;
+
+				@media (max-width: 686px) {
+					max-height: 52px;
+				}
+			}
+
+			@media (max-width: 686px) {
+				max-width: 100%;
+			}
+		}
+
+		@media (max-width: 940px) {
+			display: flex;
+			justify-content: center;
+			gap: 16px;
+			margin-top: 32px;
+		}
+
+		@media (max-width: 686px) {
+			flex-direction: column;
+		}
 	}
 }
