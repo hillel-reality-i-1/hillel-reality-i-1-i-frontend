@@ -2,10 +2,14 @@
 
 .container {
 	width: 100%;
-	max-width: 1280px;
+	max-width: 1360px;
 	margin: 0 auto;
-	padding: 14px 0 38px;
+	padding: 14px 40px 38px;
 	flex: 1 0 auto;
+
+	@media (max-width: 768px) {
+		padding: 14px 20px 38px;
+	}
 }
 
 .main_content {
@@ -13,6 +17,10 @@
 	max-width: 845px;
 	overflow: hidden;
 	word-wrap: break-word;
+
+	@media (max-width: 1060px) {
+		max-width: 100%;
+	}
 }
 
 .customClassButton {
@@ -38,11 +46,24 @@
 		height: 24px;
 		margin-right: 4px;
 	}
+
+	@media (max-width: 768px) {
+		font-size: 16px;
+	}
 }
 
 .post_details_wrapper {
 	display: grid;
-	grid-template-columns: 845px 1fr;
+	// grid-template-columns: 845px 1fr;
+	grid-template-columns: 2fr 1fr;
 	column-gap: 24px;
 	margin-top: 14px;
+
+	@media (max-width: 1060px) {
+		grid-template-columns: 1fr;
+	}
+
+	@media (max-width: 460px) {
+		display: block;
+	}
 }

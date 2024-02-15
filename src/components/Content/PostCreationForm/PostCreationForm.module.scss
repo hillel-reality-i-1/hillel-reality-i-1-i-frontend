@@ -10,7 +10,6 @@
 		background-color: #a7a7b2;
 		border-radius: 100px;
 		width: 8px;
-
 		height: 208px;
 	}
 
@@ -33,6 +32,9 @@
 
 .form_container {
 	margin-top: 20px;
+
+	@media (max-width: 686px) {
+	}
 }
 
 .form {
@@ -40,6 +42,10 @@
 		display: grid;
 		grid-template-columns: 2fr 410px;
 		column-gap: 60px;
+
+		@media (max-width: 960px) {
+			grid-template-columns: 1fr;
+		}
 
 		.input_left_col {
 			.editor_wrapper_counter {

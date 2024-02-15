@@ -7,6 +7,15 @@
 	border-radius: 24px;
 	padding: 24px;
 	background-color: $color-gray10;
+
+	@media (max-width: 1060px) {
+		margin-top: 24px;
+	}
+
+	@media (max-width: 686px) {
+		max-width: 100%;
+		padding: 16px;
+	}
 }
 
 .title_contributions {
@@ -16,6 +25,10 @@
 	font-style: normal;
 	font-weight: 600;
 	line-height: 130%;
+
+	@media (max-width: 686px) {
+		font-size: 24px;
+	}
 }
 
 .description_contributions {
@@ -29,7 +42,10 @@
 }
 
 .contributions_wrapper {
+	display: flex;
+	flex-direction: column;
 	margin-top: 24px;
+	gap: 24px;
 
 	&_empty {
 		color: $color-gray50;
@@ -40,6 +56,10 @@
 		font-weight: 400;
 		line-height: 160%;
 		padding: 48px 0;
+	}
+
+	@media (max-width: 686px) {
+		gap: 16px;
 	}
 }
 

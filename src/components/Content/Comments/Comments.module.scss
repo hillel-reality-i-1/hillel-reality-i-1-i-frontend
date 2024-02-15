@@ -12,6 +12,14 @@
 		max-width: 218px;
 		margin-left: auto;
 		margin-top: 12px;
+
+		@media (max-width: 460px) {
+			max-width: 100%;
+		}
+	}
+
+	@media (max-width: 768px) {
+		margin-top: 16px;
 	}
 }
 
@@ -24,6 +32,10 @@
 	display: flex;
 	flex-wrap: wrap;
 	gap: 24px;
+
+	@media (max-width: 686px) {
+		gap: 16px;
+	}
 }
 
 .btn_see_more {
@@ -34,4 +46,12 @@
 	width: 100%;
 	max-width: 158px;
 	margin-top: 46px;
+
+	@media (max-width: 1060px) {
+		margin-top: 0;
+	}
+
+	@media (max-width: 686px) {
+		font-size: 16px;
+	}
 }
