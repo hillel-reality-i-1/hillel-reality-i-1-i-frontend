@@ -26,7 +26,7 @@ const LatestActivityContributions = () => {
 				const responses = await Promise.all(requests);
 				const sortedPostDetails = responses
 					.map((response) => response.data)
-					.filter((comment) => comment.helpful_count > 0)
+					.filter((comment) => comment.helpful_count > 2)
 					.sort((a, b) => b.helpful_count - a.helpful_count);
 
 				setPostDetails(sortedPostDetails);
@@ -67,9 +67,9 @@ const LatestActivityContributions = () => {
 			)}
 
 			{
-				data.last_comments.length === 0
+				data.last_comments.length === 0 || postDetails.length === 0
 					? (<TubInfo
-						text={'У вас ще немає жодного коментаря. Будь ласка, взаємодійте з дописами на Головній сторінці.'}
+						text={'Внески — це коментарі, що отримали найбільше позначок «Корисно», щоб користувачі швидше побачили важливу інформацію в U-Help. Будь ласка, взаємодійте з дописами на Головній сторінці.'}
 					/>)
 					: null
 			}
