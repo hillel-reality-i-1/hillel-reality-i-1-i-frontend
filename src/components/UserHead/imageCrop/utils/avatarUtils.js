@@ -54,7 +54,8 @@ export const onFile = (e, setImage) => {
   if (file) {
     if (file.size > 4.9 * 1024 * 1024) {
       console.error('File size exceeds 5MB limit.');
-      return;
+      throw new Error('File size exceeds 5MB limit.');
+      return 
     }
 
     const reader = new FileReader();

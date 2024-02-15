@@ -44,6 +44,11 @@ $common-styles: (
                 max-width: 72px;
                 border-radius: 50%;
             }
+            .pencil {
+                position: absolute;
+                margin-top: 47px;
+                margin-left: -27px;
+            }
         }
         &__info {
             .name {

@@ -9,11 +9,8 @@ import { ReactComponent as Arrow } from '../../../assets/img/icons/settings-icon
 import { ReactComponent as InfoIcon } from '../../../assets/img/icons/settings-icons/info-icon.svg';
 
 import styles from './professionalInfo.module.scss';
-import UserProfileSwitcher from '../../UserProfileSwitcher/UserProfileSwitcher';
-
 
 export default function ProfessionalInfo({ data }) {
-  const [checkedExpert, setCheckedExpert] = useState('');
 
   const authToken = useSelector((state) => state.signIn.authTokenUHelp);
   const [expertUser, setExpertUSer] = useState(null)
@@ -29,19 +26,14 @@ export default function ProfessionalInfo({ data }) {
           'Authorization': `Token ${authToken}`,
         },
       };
-      // console.log(data.user);
       const expertUserProfileData = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/v1/users/expert_user_profile_by_user_id/${data.user}/`,
         config)
       setExpertUSer(expertUserProfileData.data)
-      // console.log('expert', expertUserProfileData)
     } catch (error) {
       console.info(error)
     }
   };
 
-  // console.log('datadata', data );
-  // console.log('expertUser', expertUser);
-  // console.log('expertUserPROFESION', expertUser);
   return (
     <>
       <div className={styles.professional}>
@@ -52,7 +44,7 @@ export default function ProfessionalInfo({ data }) {
             setCheckedExpert={setCheckedExpert}
           /> */}
           <p>Експертний Профіль</p>
-          <InfoIcon />
+          {/* <InfoIcon /> */}
         </div>
       </div>
       <div className={styles.wrapper}>

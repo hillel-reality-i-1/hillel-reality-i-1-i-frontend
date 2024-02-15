@@ -66,7 +66,7 @@ export default function Socials() {
              regex = /^[^\s]+$/;
         } else {
             
-            regex = /^[A-Za-z0-9_@]+$/;
+            regex = /^[A-Za-z0-9_@.]+$/;
         }
         setIsValidUsername((prev) => ({
             ...prev,
@@ -146,32 +146,35 @@ export default function Socials() {
                         borderColor: isValidUsername.telegram ? '' : 'red',
                     }}
                     size='large'
+                    maxLength={50}
                     prefix={<TelegramIcon />}
                     placeholder='@username'
                     // value={usernames.telegram}
                     defaultValue={data?.telegram}
                     onChange={(e) => handleInputChange('telegram', e.target.value)}
                 />
-                {!isValidUsername.telegram && <div className={styles.socials__error}><ErrorIcon /> 'Поле може містити лише латинські літери (A-Z), цифри (0-9) та символ підкреслення (“_”)' </div>}
+                {!isValidUsername.telegram && <div className={styles.socials__error}><ErrorIcon /> Поле може містити лише латинські літери (A-Z), цифри (0-9) та символ підкреслення (“_”)</div>}
                 <Input
                     style={{
                         ...inputStyle,
                         borderColor: isValidUsername.instagram ? '' : 'red',
                     }}
                     size='large'
+                    maxLength={50}
                     prefix={<InstIcon />}
                     placeholder='@username'
                     // value={usernames.instagram}
                     defaultValue={data?.instagram}
                     onChange={(e) => handleInputChange('instagram', e.target.value)}
                 />
-                {!isValidUsername.instagram && <div className={styles.socials__error}><ErrorIcon /> 'Поле може містити лише латинські літери (A-Z), цифри (0-9) та символ підкреслення (“_”)' </div>}
+                {!isValidUsername.instagram && <div className={styles.socials__error}><ErrorIcon />Поле може містити лише латинські літери (A-Z), цифри (0-9) та символ підкреслення (“_”) </div>}
                 <Input
                     style={{
                         ...inputStyle,
                         borderColor: isValidUsername.facebook ? '' : 'red',
                     }}
                     size='large'
+                    maxLength={100}
                     prefix={<FacebookIcon />}
                     placeholder='https://www.facebook.com/example'
                     // value={usernames.facebook}
@@ -185,6 +188,7 @@ export default function Socials() {
                         borderColor: isValidUsername.linkedin ? '' : 'red',
                     }}
                     size='large'
+                    maxLength={100}
                     prefix={<LinkedinIcon />}
                     placeholder='https://www.linkedin.com/example'
                     // value={usernames.linkedin}

@@ -52,8 +52,7 @@ const NickName = () => {
       setError(validationError);
       return;
     }
-    console.log(state.user);
-    console.log(data);
+    console.log(username);
     try {
       const url = `${process.env.REACT_APP_API_BASE_URL}/api/v1/users/user_list/${data.user}/`;
       const token = authToken;
@@ -77,7 +76,6 @@ const NickName = () => {
 
     } catch (error) {
       console.error('Error updating username:', error);
-      console.log(error.response.data.username[0]);
       if (error.response.data.username[0] === 'User з таким username вже існує.') {
         setError('Цей нікнейм вже використовується. Будь ласка, оберіть інший')
       }

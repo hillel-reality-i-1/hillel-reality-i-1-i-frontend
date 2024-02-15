@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Dropdown, Space } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 import { useGetUserDataQuery } from '../../store/services/userApi';
 import { clearAuthToken } from '../../store/slices/signInSlice';
@@ -89,13 +89,14 @@ export default function AccountHeader() {
 		},
 		{
 			label: (
-				<Link
+				<NavLink
 					to='settings'
+					
 					className={styles.dropdown__item}
 					onClick={handleLinkClick}>
 					<img src={settingsIcon} />
 					Налаштування
-				</Link>
+				</NavLink>
 			),
 			key: '1',
 		},
@@ -126,7 +127,7 @@ export default function AccountHeader() {
 
 			<div className={styles.account__user}>
 				<div className={styles.account__user__avatar}>
-					{data.profile_picture && data.profile_picture.image !== null ? (
+					{data?.profile_picture && data?.profile_picture.image !== null ? (
 						<Link to='user'><img src={`${process.env.REACT_APP_API_BASE_URL}${data.profile_picture.image}`} /></Link>	
 					) : (
 						<AvatarIcon />

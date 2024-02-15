@@ -6,7 +6,7 @@ import { ReactComponent as Plus } from '../../assets/img/icons/user-profile/Plus
 import { ReactComponent as Pen } from '../../assets/img/icons/user-profile/Pen.svg';
 import { ReactComponent as Location } from '../../assets/img/icons/user-profile/location.svg';
 
-import verified_icon from '../../assets/img/icons/user-profile/verified_icon.png';
+import verified_icon from '../../assets/img/icons/user-profile/verifiedIcon.svg';
 
 
 import styles from './userHead.module.scss';
@@ -25,7 +25,7 @@ export default function UserHead({ data }) {
         </p>
         <p className={styles.nick__name}>@{data?.username}</p>
 
-        {data.country ?
+        {data?.country ?
           <p className={styles.location__grey}>
             <Location /> {data?.city?.name} {data?.country?.name}
           </p>

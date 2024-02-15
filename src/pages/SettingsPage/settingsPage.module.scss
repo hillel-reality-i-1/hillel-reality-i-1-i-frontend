@@ -1,5 +1,11 @@
 @import '../../styles/constants.scss';
 
+.wrapper {
+    max-width: 1290px;
+    margin: auto;
+    
+}
+
 .container {
     margin: auto;
     padding: 0 8px;
@@ -12,4 +18,15 @@
     font-style: normal;
     font-weight: 600;
     line-height: 130%;
+}
+@media (max-width: 676px) {
+    .title {
+        font-size: 24px;
+    }
+    .container {
+        margin: auto;
+        padding: 0 14px;
+  
+    }
+
 }

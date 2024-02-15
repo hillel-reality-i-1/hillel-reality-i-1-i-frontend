@@ -14,8 +14,8 @@ export default function UsersHead({ data }) {
   return (
     <>
       {
-        data.user_profile.profile_picture ? <div className={styles.avatar_svg_wrapper}>
-          <img className={styles.avatar_svg} alt={'user avatar'} src={data.user_profile.profile_picture} />
+        data.user_profile?.profile_picture ? <div className={styles.avatar_svg_wrapper}>
+          <img className={styles.avatar_svg} alt={'user avatar'} src={data.user_profile?.profile_picture} />
         </div> : <Avatar className={styles.avatar_svg} />
       }
       <div className={styles.user__head__info}>

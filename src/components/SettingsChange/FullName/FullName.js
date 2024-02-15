@@ -26,7 +26,7 @@ export default function FullName() {
       return 'Поле має містити від 2 до 50 символів. Будь ласка, заповніть його';
     }
 
-    const invalidCharsRegex = /[^a-zA-Zа-яА-ЯІЇҐ'\s-]/u;
+    const invalidCharsRegex = /[^a-zA-Zа-яА-ЯІЇҐєії'\s-]/u;
     if (invalidCharsRegex.test(value)) {
       return 'Ім\'я може містити лише кириличні або латинські літери, символи апострофа (’) або дефісу (-). Будь ласка, введіть коректне ім\'я';
     }
@@ -38,7 +38,6 @@ export default function FullName() {
 
     return '';
   };
-
 
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
@@ -54,7 +53,7 @@ export default function FullName() {
       return;
     }
 
-    console.log(data);
+  
     try {
       const url = `${process.env.REACT_APP_API_BASE_URL}/api/v1/users/user_list/${data.user}/`;
       const token = authToken;

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { ReactComponent as Avatar } from '../../../assets/img/icons/add-photo-icon/add-photo-avatar.svg';
 import { ReactComponent as AddPhoto } from '../../../assets/img/icons/add-photo-icon/image-gallery-plus.svg';
 import { ReactComponent as CloseIcon } from '../../../assets/img/icons/icons-signIn/close-signIn-icon.svg';
@@ -11,10 +12,21 @@ export default function AddPhotoModal({
   toggleModal,
   togglenModa2,
   onFileChange,
+  setShowErrorToast
 }) {
 
   const handleFileChange = (event) => {
-    onFileChange(event);
+    try {
+      onFileChange(event);
+    } catch (error) {
+
+      console.error('addPhotoModal', error.message);
+      togglenModa2();
+      setShowErrorToast(true);
+      setTimeout(() => {
+        setShowErrorToast(false);
+      }, 5000);
+    }
   };
 
   const handleUploadButtonClick = () => {
@@ -22,6 +34,7 @@ export default function AddPhotoModal({
   };
 
   const handleFileInputChange = () => {
+
     togglenModa2();
   };
 

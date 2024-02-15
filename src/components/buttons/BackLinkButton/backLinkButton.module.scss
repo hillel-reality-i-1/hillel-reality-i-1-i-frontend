@@ -33,3 +33,14 @@
       }
   }
 }
+
+@media (max-width: 676px) {
+  .back {
+    font-size: 16px;
+    svg {
+      max-width: 24px;
+    }
+  }
+
+
+}

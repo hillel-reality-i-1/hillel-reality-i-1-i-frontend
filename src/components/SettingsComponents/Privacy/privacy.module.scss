@@ -45,3 +45,53 @@
         line-height: 160%;
     }
 }
+.info:hover {
+    transition: 0.3s ease-in-out;
+
+    p {
+        transition: 0.3s ease-in-out;
+        color: #3989EC;
+
+    }
+
+    a {
+        transition: 0.3s ease-in-out;
+        color: #3989EC;
+    }
+
+    &:hover {
+        transition: 0.3s ease-in-out;
+        color: #3989EC;
+
+        svg path {
+            transition: 0.3s ease-in-out;
+            fill: #3989EC;
+        }
+    }
+
+    &:active {
+        transition: 0.3s ease-in-out;
+        color: #094DA0;
+
+        svg path {
+            transition: 0.3s ease-in-out;
+            fill: #094DA0;
+        }
+    }
+}
+
+.info:active {
+    transition: 0.3s ease-in-out;
+
+    p {
+        transition: 0.3s ease-in-out;
+        color: #094DA0;
+
+    }
+
+    a {
+        transition: 0.3s ease-in-out;
+        color: #094DA0;
+    }
+
+}

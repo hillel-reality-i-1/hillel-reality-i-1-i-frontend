@@ -1,4 +1,5 @@
 import { useGetUserDataQuery } from '../../store/services/userApi';
+import { useSelector } from 'react-redux';
 import PersonalInfo from './PersonalInfo/PersonalInfo';
 import ProfessionalInfo from './ProfessionalInfo/ProfessionalInfo';
 import Privacy from './Privacy/Privacy';
@@ -20,7 +21,7 @@ export default function Settings() {
       <PersonalInfo data={data} />
       <ProfessionalInfo data={data} />
       <Privacy data={data} />
-      <General data={data} />
+      <General data={data}/>
     </>
   );
 }

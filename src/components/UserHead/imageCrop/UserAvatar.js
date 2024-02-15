@@ -8,6 +8,7 @@ import DeleteConfirmation from './DeleteConfirmation';
 import AddPhotoModal from './AddPhotoModal';
 import Toast from '../../Toast/Toast';
 import { ReactComponent as Avatar } from '../../../assets/img/icons/user-profile/Avatar.svg';
+import { ReactComponent as EditPencil } from '../../../assets/img/icons/user-profile/edit_pencil.svg';
 import { useModalToggle } from '../../modals/CustomModal/customModalHook';
 import { onCrop, onFile } from './utils/avatarUtils';
 
@@ -26,11 +27,11 @@ export default function UserAvatar({ data }) {
 
   const [cropDetails, setCropDetails] = useState(null);
   const [showSuccessToast, setShowSuccessToast] = useState(false);
-
-  const [avatarID, setAvatarId] = useState(null ?? data.profile_picture?.id);
+  const [showErrorToast, SetShowErrorToast] = useState(false);
+  const [avatarID, setAvatarId] = useState(null ?? data?.profile_picture?.id);
   const [avatarData, setAvatarData] = useState(
-    data.profile_picture
-      ? `${process.env.REACT_APP_API_BASE_URL}${data.profile_picture.image}`
+    data?.profile_picture
+      ? `${process.env.REACT_APP_API_BASE_URL}${data?.profile_picture.image}`
       : null
   );
 
@@ -39,7 +40,17 @@ export default function UserAvatar({ data }) {
   };
 
   const onFileChange = (e) => {
-    onFile(e, setImage);
+    try {
+      onFile(e, setImage);
+    } catch (error) {
+      setImage(null)
+      console.error('UserAvatar', error.message);
+      togglenModa2();
+      SetShowErrorToast(true);
+      setTimeout(() => {
+        SetShowErrorToast(false);
+      }, 5000);
+    }
   };
 
   const onCropImage = () => {
@@ -48,7 +59,7 @@ export default function UserAvatar({ data }) {
 
   const handleUploadAvatar = (file) => {
     if (!file) {
-      console.error('Выберите изображение для загрузки.');
+      console.error('Оберіть зображення ');
       return;
     }
 
@@ -92,13 +103,20 @@ export default function UserAvatar({ data }) {
             onClick={toggleProfilePhotoModal}
           />
         ) : (
-          <Avatar onClick={toggleModal} className={styles.avatar_svg} />
+          <Avatar  onClick={toggleModal} className={styles.avatar_svg} />
         )}
-
+        <EditPencil onClick={avatarData ? toggleProfilePhotoModal : toggleModal} className={styles.pencil} />
         {showSuccessToast && (
           <Toast
             message='Ваші зміни були успішно збережені'
             duration={3000}
+          />
+        )}
+        {showErrorToast && (
+          <Toast
+            message='Розмір фото має бути від 3 кб до 5 Мб. Будь ласка, оберіть інше'
+            duration={4000}
+            error={'error'}
           />
         )}
         <AddPhotoModal
@@ -107,6 +125,7 @@ export default function UserAvatar({ data }) {
           togglenModa2={togglenModa2}
           onFileChange={onFileChange}
           isModalOpen2={isModalOpen2}
+          setShowErrorToast={SetShowErrorToast}
         />
       </div>
 
@@ -117,6 +136,7 @@ export default function UserAvatar({ data }) {
         onCropImage={onCropImage}
         onCropComplete={onCropComplete}
         onFileChange={onFileChange}
+        setShowErrorToast={SetShowErrorToast}
       />
       <ProfilePhotoModal
         isModalOpen={isProfilePhotoModal}
