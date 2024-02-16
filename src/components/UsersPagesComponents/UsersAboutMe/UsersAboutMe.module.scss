@@ -14,7 +14,6 @@ $common-styles: (
 
 .user_about {
     @include commonStyles;
-    width: 100%;
 
     .user_title {
         display: flex;

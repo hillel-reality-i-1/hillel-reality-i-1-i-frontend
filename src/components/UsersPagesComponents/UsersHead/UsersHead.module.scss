@@ -41,6 +41,7 @@ $common-styles: (
 .user {
     display: grid;
     gap: 24px;
+    
 
     &__head {
         @include commonStyles;
