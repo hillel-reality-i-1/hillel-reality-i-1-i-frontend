@@ -36,7 +36,7 @@ const Password = () => {
     const validatePassword = (password) => {
         const errors = {
             fieldError1: password.length < 8 || password.length > 16,
-            fieldError2: !/\d/.test(password) || !/[!@#$%^&*(),.?":{}|<>]/.test(password),
+            fieldError2: !/\d/.test(password) && !/[!@#$%^&*(),.?":{}|<>]/.test(password),
             fieldError3: !/[a-z]/.test(password) || !/[A-Z]/.test(password),
             fieldErororPassword: password.length < 8 || !/\d/.test(password) || !/[!@#$%^&*(),.?":{}|<>]/.test(password) || !/[a-z]/.test(password) || !/[A-Z]/.test(password)
         };
