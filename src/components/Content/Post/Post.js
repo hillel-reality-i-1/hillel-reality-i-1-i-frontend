@@ -69,6 +69,10 @@ const Post = ({ post, user }) => {
 		}
 	};
 
+	const handleNavigate = () => {
+		navigate(`/user/${userId}`, { replace: true });
+	};
+
 	// const handlerPostEditing = () => {
 	// 	navigate(`/postEditing/${id}`, { replace: true });
 	// };
@@ -84,8 +88,7 @@ const Post = ({ post, user }) => {
 			<div className={styles.post_wrapper}>
 				<div className={styles.content_header}>
 					<Link
-						to={`user/${userId}`}
-						replace={true}
+						onClick={handleNavigate}
 						className={styles.user}>
 						{user?.user_profile?.profile_picture ? (
 							<img
