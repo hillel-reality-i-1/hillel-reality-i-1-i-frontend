@@ -12,16 +12,17 @@ import verified_icon from '../../assets/img/icons/user-profile/verifiedIcon.svg'
 import styles from './userHead.module.scss';
 
 export default function UserHead({ data }) {
-
+  console.log(data);
   return (
     <>
       <UserAvatar data={data} />
       <div className={styles.user__head__info}>
         <p className={styles.name}>
           {data?.full_name}
-          <Tooltip placement='topLeft' title={'Це верифікований користувач'}>
+          {data?.phone_verified ? <Tooltip placement='topLeft' title={'Це верифікований користувач'}>
             <img src={verified_icon} />
-          </Tooltip>
+          </Tooltip> : ''}
+
         </p>
         <p className={styles.nick__name}>@{data?.username}</p>
 
