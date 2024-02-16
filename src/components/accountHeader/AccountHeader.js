@@ -155,7 +155,10 @@ export default function AccountHeader() {
 							/>
 						</Link>
 					) : (
-						<AvatarIcon />
+						<Link to='user'>
+							<AvatarIcon />
+						</Link>
+						
 					)}
 				</div>
 
