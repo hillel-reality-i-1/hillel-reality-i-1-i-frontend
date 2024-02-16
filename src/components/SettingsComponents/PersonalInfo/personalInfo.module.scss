@@ -49,6 +49,7 @@
         line-height: 160%;
         
         span {
+            max-width: 230px;
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
@@ -109,6 +110,7 @@
 
 @media (max-width: 676px) {
     .title {
+        margin: 24px 0 8px 0;
         font-size: 18px;
     }
 
@@ -128,7 +130,7 @@
             font-size: 14px;
 
             span {
-                max-width: 230px;
+                max-width: 130px;
                 overflow: hidden;
                 white-space: nowrap;
                 text-overflow: ellipsis;

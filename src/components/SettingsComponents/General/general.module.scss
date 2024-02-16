@@ -286,3 +286,53 @@
     width: 100%;
     max-width: 188px;
 }
+
+
+
+@media (max-width: 676px) {
+    .general__footer {
+        margin: 20px 0 40px 0;
+    }
+    .modal {
+        &__header {
+            &__title {
+                font-size: 24px;
+            }
+        }
+        &__main {
+            &__text {
+
+                font-size: 16px;
+
+            }
+
+        }
+
+        &__mainDeleted {
+            padding: 24px 40px;
+            border-top: 1px solid #DBDBDD;
+
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            gap: 24px;
+
+
+            &__text {
+                color: $color-gray70;
+                font-family: $regular;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 160%
+            }
+        }
+
+        &__footer {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 24px 40px;
+        }
+    }
+}
