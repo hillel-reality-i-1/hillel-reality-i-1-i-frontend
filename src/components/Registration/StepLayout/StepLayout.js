@@ -164,7 +164,7 @@ const StepLayout = () => {
 							/>
 						</Link>
 						{current > 0 && (
-							<div className={styles.container_novigation}>
+							<div className={`${styles.container_novigation} ${styles.btn_back_desktop}`}>
 								<div className={styles.back}>
 									{' '}
 									<Link
@@ -192,6 +192,23 @@ const StepLayout = () => {
 								labelPlacement='vertical'
 							/>
 						</ConfigProvider>
+						{current > 0 && (
+							<div className={`${styles.container_novigation} ${styles.btn_back_mobile}`}>
+								<div className={styles.back}>
+									{' '}
+									<Link
+										onClick={() => prev()}
+										className={styles.back_link}>
+										<img
+											src={arrowLeft}
+											alt='Arrow left'
+										/>
+
+										<span className={styles.link_text}>{t('textSignUp.back')}</span>
+									</Link>
+								</div>
+							</div>
+						)}
 						<div className={styles.step1_wrapper}>{steps[current].content}</div>
 					</div>
 				</div>

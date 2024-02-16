@@ -133,6 +133,20 @@
 		.ant-select-selector {
 		cursor: pointer;
 	}
+
+	.ant-select-show-search:where(.css-dev-only-do-not-override-1eiypl0).ant-select:not(
+			.ant-select-customize-input
+		)
+		.ant-select-selector {
+		cursor: pointer;
+	}
+
+	.ant-select-show-search:where(.css-dev-only-do-not-override-11zek0b).ant-select:not(
+			.ant-select-customize-input
+		)
+		.ant-select-selector {
+		cursor: pointer;
+	}
 }
 
 .search {

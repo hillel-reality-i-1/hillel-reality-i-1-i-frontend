@@ -79,6 +79,26 @@ export default function AccountHeader() {
 		{
 			label: (
 				<Link
+					to='/'
+					className={`${styles.dropdown__item} ${styles.menu_item_mobile}`}>
+					Головна
+				</Link>
+			),
+			key: '5',
+		},
+		{
+			label: (
+				<Link
+					to='/postCreationPage'
+					className={`${styles.dropdown__item} ${styles.menu_item_mobile}`}>
+					Створити допис
+				</Link>
+			),
+			key: '6',
+		},
+		{
+			label: (
+				<Link
 					to='user'
 					className={styles.dropdown__item}
 					onClick={handleLinkClick}>
@@ -91,7 +111,6 @@ export default function AccountHeader() {
 			label: (
 				<NavLink
 					to='settings'
-					
 					className={styles.dropdown__item}
 					onClick={handleLinkClick}>
 					<img src={settingsIcon} />
@@ -123,12 +142,18 @@ export default function AccountHeader() {
 			<BlueButton
 				text={'Створити допис'}
 				onClick={handlePostCreation}
+				additionalStyles={styles.btn_create_post}
 			/>
 
 			<div className={styles.account__user}>
 				<div className={styles.account__user__avatar}>
 					{data?.profile_picture && data?.profile_picture.image !== null ? (
-						<Link to='user'><img src={`${process.env.REACT_APP_API_BASE_URL}${data.profile_picture.image}`} /></Link>	
+						<Link to='user'>
+							<img
+								src={`${process.env.REACT_APP_API_BASE_URL}${data.profile_picture.image}`}
+								alt='Avatar'
+							/>
+						</Link>
 					) : (
 						<AvatarIcon />
 					)}

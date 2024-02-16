@@ -131,6 +131,10 @@
 						padding: 4px 8px;
 						background-color: #e1ebf8;
 						margin-left: 8px;
+
+						@media (max-width: 686px) {
+							display: none;
+						}
 					}
 				}
 			}
@@ -145,9 +149,19 @@
 		}
 	}
 
+	.user_country_dot {
+		@media (max-width: 686px) {
+			display: none;
+		}
+	}
+
 	.user_country_dot::before {
 		content: '•';
 		margin: 0 4px;
+
+		@media (max-width: 686px) {
+			display: none;
+		}
 	}
 
 	.right_col {

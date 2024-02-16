@@ -68,9 +68,19 @@
 	display: none;
 }
 
+.user_country_dot {
+	@media (max-width: 686px) {
+		display: none;
+	}
+}
+
 .user_country_dot::before {
 	content: '•';
 	margin: 0 4px;
+
+	@media (max-width: 686px) {
+		display: none;
+	}
 }
 
 .content_header {

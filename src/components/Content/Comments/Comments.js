@@ -142,7 +142,7 @@ const Comments = ({ postId }) => {
 							<TextArea
 								name='comment'
 								rows={4}
-								placeholder='Розкажіть свою думку тут. Будь ласка, зареєструйтеся або увійдіть у профіль для того, щоб залишати коментарі.'
+								placeholder='Розкажіть свою думку тут.'
 								maxLength={2000}
 								onChange={handleTextAreaChange}
 								value={textAreaValue}

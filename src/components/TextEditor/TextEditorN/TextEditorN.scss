@@ -59,11 +59,19 @@
 	max-width: 810px;
 	height: 620px;
 
+	@media (max-width: 960px) {
+		height: 450px;
+	}
+
+	@media (max-width: 460px) {
+		height: 350px;
+	}
 	// margin: 16px -15px -15px;
 }
 
 .RichEditor-editor .public-DraftEditor-content {
 	min-height: 100px;
+	word-break: break-word;
 }
 
 .RichEditor-hidePlaceholder .public-DraftEditorPlaceholder-root {

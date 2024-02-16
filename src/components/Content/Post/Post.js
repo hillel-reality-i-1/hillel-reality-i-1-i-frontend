@@ -112,7 +112,7 @@ const Post = ({ post, user }) => {
 										/>
 										{user?.user_profile_extended?.profession[0] && (
 											<span className={styles.expert_badge}>
-												{user?.user_profile_extended?.profession}
+												{user?.user_profile_extended?.profession[0]}
 											</span>
 										)}
 									</div>

@@ -107,6 +107,10 @@
 		line-height: 120%;
 		text-align: center;
 		color: $color-gray80;
+
+		@media (max-width: 560px) {
+			font-size: 32px;
+		}
 	}
 
 	.text {
@@ -116,6 +120,10 @@
 		color: $color-gray70;
 		text-align: center;
 		margin-top: 8px;
+
+		@media (max-width: 560px) {
+			font-size: 16px;
+		}
 	}
 
 	.text_bottom {

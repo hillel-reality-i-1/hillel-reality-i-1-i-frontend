@@ -179,7 +179,7 @@ const SearchSection = ({ onSearch }) => {
 								theme={{
 									components: {
 										// Select: { optionPadding: 20px 30px },
-										Tooltip: { color: 'red' },
+										// Tooltip: { color: 'red' },
 									},
 									token: {
 										// borderRadius: '48px 0 0 48px',
@@ -281,7 +281,7 @@ const SearchSection = ({ onSearch }) => {
 									theme={{
 										components: {
 											// Select: { optionPadding: 20px 30px },
-											Tooltip: { color: 'red' },
+											// Tooltip: { color: 'red' },
 										},
 										token: {
 											borderRadius: 0,
