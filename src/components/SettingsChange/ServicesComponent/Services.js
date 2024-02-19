@@ -33,7 +33,7 @@ export default function Services() {
                     index: index
                 }));
 
-                console.log(response.data);
+         
                 setProffesions(formatProffesions);
 
                 state.user.service.length === 0 ? setSelectedProfessions(['', ...state.user.service]) : setSelectedProfessions(state.user.service)
@@ -71,12 +71,12 @@ export default function Services() {
         };
         const proffesionsToSendIndexes = proffesions.reduce((acc, profession, index) => {
             if (selectedProfessions.includes(profession.value)) {
-                console.log('index', index++);
+              
                 acc.push(index)
             }
             return acc;
         }, []);
-        console.log(proffesionsToSendIndexes);
+       
         try {
             const response = await axios.patch(url, {
                 'service': proffesionsToSendIndexes
@@ -85,8 +85,6 @@ export default function Services() {
             setTimeout(() => {
                 setShowSuccessToast(false);
             }, 3500);
-
-            console.log(response.data)
         } catch (err) {
             console.error(err.toJSON())
         }

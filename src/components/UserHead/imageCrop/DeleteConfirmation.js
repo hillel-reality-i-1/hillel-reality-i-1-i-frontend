@@ -12,14 +12,14 @@ export default function DeleteConfirmation({isModalOpen, toggleModal, avatarID, 
   
   const handleDeleteItem = async (itemId) => {
     try {
-      console.log(avatarID);
+
       const response = await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/v1/files/img_list/${avatarID}/`, {
         headers: {
           Authorization: `Token ${authToken}`,
         },
       });
   
-      console.log('Success:', response.data);
+   
       toggleModal()
       
       setAvatarData(null)

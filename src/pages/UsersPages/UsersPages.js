@@ -33,7 +33,7 @@ export default function UsersPages() {
         return <div>Loading...</div>;
     }
 
-    console.log(dataUser)
+   
 
     return (
         <>

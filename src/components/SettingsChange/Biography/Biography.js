@@ -51,7 +51,7 @@ export default function Biography() {
         }
     };
     const placeholderValue = data?.about_my_self ? data.about_my_self : 'Розкажіть про себе...';
-    console.log(data);
+
     return (
         <div className={styles.biography}>
             <h4>

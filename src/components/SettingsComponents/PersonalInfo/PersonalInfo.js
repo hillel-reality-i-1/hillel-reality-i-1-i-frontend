@@ -9,7 +9,7 @@ import { ReactComponent as TelegramIcon } from '../../../assets/img/icons/settin
 import styles from './personalInfo.module.scss';
 
 export default function PersonalInfo({ data }) {
-  console.log(data);
+
   return (
     <>
       <h2 className={styles.title}><UserSettings /> Особиста інформація </h2>

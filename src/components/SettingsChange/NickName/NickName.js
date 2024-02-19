@@ -52,7 +52,7 @@ const NickName = () => {
       setError(validationError);
       return;
     }
-    console.log(username);
+
     try {
       const url = `${process.env.REACT_APP_API_BASE_URL}/api/v1/users/user_list/${data.user}/`;
       const token = authToken;

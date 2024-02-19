@@ -12,7 +12,7 @@ import verified_icon from '../../assets/img/icons/user-profile/verifiedIcon.svg'
 import styles from './userHead.module.scss';
 
 export default function UserHead({ data }) {
-  console.log(data);
+
   return (
     <>
       <UserAvatar data={data} />

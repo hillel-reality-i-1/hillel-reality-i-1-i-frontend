@@ -58,7 +58,7 @@ export default function Location() {
   }, []);
 
   const onChangeCountry = (value) => {
-    // console.log(`selected ${value}`);
+
     const matchingCountry = countries.find((i) => i.value === value);
     setSelectedCountry(false);
     const matchingCities = cities.filter(
